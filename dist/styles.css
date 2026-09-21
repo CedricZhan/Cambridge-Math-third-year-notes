@@ -45,12 +45,11 @@ a {
 .masthead {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   min-height: 88px;
   border-bottom: 1px solid var(--line);
 }
 
-.wordmark,
 .edition,
 .eyebrow,
 .term-heading p,
@@ -60,19 +59,12 @@ footer {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.wordmark {
-  color: var(--navy);
-  font-size: 0.9rem;
-  font-weight: 750;
-  letter-spacing: 0.16em;
-  text-decoration: none;
-}
-
 .edition {
   margin: 0;
   color: var(--muted);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -92,7 +84,7 @@ footer {
   box-shadow:
     inset 0 0 0 12px var(--paper),
     inset 0 0 0 13px rgba(45, 111, 98, 0.22);
-  content: "III";
+  content: "II";
   display: grid;
   place-items: center;
   color: var(--cambridge-dark);
@@ -152,7 +144,6 @@ h1 {
   grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.8fr);
   gap: clamp(42px, 8vw, 110px);
   padding: 72px 0 88px;
-  border-top: 1px solid var(--ink);
 }
 
 .term-heading {
@@ -239,7 +230,6 @@ h1 {
 }
 
 .course-list a:focus-visible,
-.wordmark:focus-visible,
 footer a:focus-visible {
   outline: 3px solid var(--cambridge);
   outline-offset: 5px;
