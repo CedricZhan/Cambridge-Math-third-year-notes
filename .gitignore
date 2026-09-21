@@ -1,0 +1,12 @@
+tex/*.aux
+tex/*.fdb_latexmk
+tex/*.fls
+tex/*.log
+tex/*.out
+tex/*.toc
+tex/*.synctex.gz
+dist/pdfs/*.aux
+dist/pdfs/*.log
+dist/pdfs/*.out
+*.tmp
+.sites-runtime/
