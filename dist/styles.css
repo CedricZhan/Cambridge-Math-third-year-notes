@@ -149,6 +149,36 @@ h1 {
   outline-offset: 5px;
 }
 
+.course-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.025em;
+}
+
+.course-marker {
+  position: relative;
+  top: -0.35em;
+  margin-left: 0.2em;
+  color: var(--cambridge-dark);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 0.48em;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0;
+}
+
+.course-legend .course-marker {
+  top: -0.2em;
+  margin-left: 0;
+  font-size: 0.8em;
+}
+
 .intro-rule {
   display: grid;
   grid-template-columns: 1fr auto;
