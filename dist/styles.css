@@ -120,6 +120,35 @@ h1 {
   line-height: 1.65;
 }
 
+.intro-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 24px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.intro-links a {
+  color: var(--navy);
+  text-decoration-color: var(--cambridge);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.intro-links a:first-child::after {
+  margin-left: 8px;
+  content: "↗";
+  color: var(--cambridge-dark);
+}
+
+.intro-links a:focus-visible {
+  outline: 3px solid var(--cambridge);
+  outline-offset: 5px;
+}
+
 .intro-rule {
   display: grid;
   grid-template-columns: 1fr auto;
