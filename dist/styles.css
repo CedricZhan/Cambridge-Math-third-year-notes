@@ -120,35 +120,6 @@ h1 {
   line-height: 1.65;
 }
 
-.intro-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
-  margin-top: 24px;
-  font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.intro-links a {
-  color: var(--navy);
-  text-decoration-color: var(--cambridge);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
-}
-
-.intro-links a:first-child::after {
-  margin-left: 8px;
-  content: "↗";
-  color: var(--cambridge-dark);
-}
-
-.intro-links a:focus-visible {
-  outline: 3px solid var(--cambridge);
-  outline-offset: 5px;
-}
-
 .course-legend {
   display: flex;
   flex-wrap: wrap;
@@ -289,9 +260,50 @@ h1 {
 }
 
 .course-list a:focus-visible,
+.remarks a:focus-visible,
 footer a:focus-visible {
   outline: 3px solid var(--cambridge);
   outline-offset: 5px;
+}
+
+.remarks {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.8fr);
+  gap: clamp(42px, 8vw, 110px);
+  padding: 58px 0 76px;
+  border-top: 1px solid var(--line);
+}
+
+.remarks-label {
+  margin: 8px 0 0;
+  color: var(--cambridge-dark);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+}
+
+.remarks h2 {
+  margin: 0 0 20px;
+  color: var(--navy);
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.04;
+}
+
+.remarks p {
+  max-width: 720px;
+  margin: 0;
+  color: #384b58;
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.remarks a {
+  color: var(--navy);
+  text-decoration-color: var(--cambridge);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 footer {
@@ -356,6 +368,12 @@ footer a {
     grid-column: 2;
     width: fit-content;
     min-height: 36px;
+  }
+
+  .remarks {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 44px 0 56px;
   }
 
   footer {
