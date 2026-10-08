@@ -4,5 +4,394 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-% Add lecture notes below this line.
+\section*{Lecture 1}
+
+\noindent\textbf{Pre-requisites}
+\begin{itemize}
+    \item Complex methods / analysis.
+    \item Refer to Section II in Stuart.
+\end{itemize}
+
+\section*{1. Intro \& Motivation}
+
+\begin{itemize}
+    \item Most real problems don't have closed form solutions, or if they do, they are unworkable or difficult to interpret.
+
+    \item Numerical approximations can be useful, but they can be expensive, they may have bad numerical properties, or solutions may be inscrutable.
+
+    \item Taylor series, etc.\ can be limited in applicability.
+
+    \item Asymptotic methods emphasise usefulness, interpretability as well as accuracy.
+\end{itemize}
+
+\noindent\textbf{Examples}
+
+\medskip
+
+\noindent\textbf{e.g. 1)}
+\[
+\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\,dt,
+\qquad \operatorname{Re}(z)>0.
+\]
+
+For $n$ an integer,
+\[
+\Gamma(n+1)=n!
+\sim \sqrt{2\pi}\,n^{n+\frac12}e^{-n}
+\left(
+1+\frac{1}{12n}+\frac{1}{288n^2}+\cdots
+\right)
+\qquad \text{as }n\to\infty.
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 2)}
+\[
+x^2y''+xy'-x^2y=0.
+\]
+
+Exact series solution:
+\[
+I_0(x)=\sum_{n=0}^{\infty}
+\frac{x^{2n}}{2^{2n}(n!)^2}.
+\]
+
+Liouville--Green:
+\[
+\Longrightarrow
+I_0(x)\sim(2\pi x)^{-1/2}e^x
+\qquad \text{as }x\to\infty.
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 3)}
+\[
+y''+k^2e^{-x^2/2}y=0,
+\]
+with
+\[
+y\to y_0 \qquad \text{as }x\to\infty,
+\]
+\[
+y\to \pm y_0 \qquad \text{as }x\to-\infty.
+\]
+
+\[
+k=?,
+\qquad k=k_0,k_1,k_2,\ldots
+\]
+
+\[
+\Longrightarrow
+k_n\sim\frac{\sqrt{\pi}}{2}
+\left(n+\frac12\right)
+\qquad \text{as }n\to\infty.
+\]
+
+\noindent WKBJ.
+
+\medskip
+
+\begin{itemize}
+    \item Convergent methods typically give arbitrarily accurate approximations with more \& more terms/iterations.
+
+    \item Asymptotic methods give arbitrarily accurate approximations as some variable approaches a limit. Thus they always come with a qualifier, e.g.\ $z\to0$ or $n\to\infty$.
+\end{itemize}
+
+
+\section*{2. Asymptotic Expansions}
+
+\subsection*{2.1 Definitions \& Notation}
+
+\subsubsection*{(a) Asymptotic Equality/Equivalence}
+
+For 2 functions $f(x)$ and $g(x)$, we have
+\[
+f(x)\sim g(x)
+\qquad \text{about }x=x_0
+\]
+if
+\[
+\boxed{
+\lim_{x\to x_0}\frac{f(x)}{g(x)}=1.
+}
+\]
+
+\noindent\textbf{Remarks:}
+
+\begin{itemize}
+    \item Usually we want to approximate $f$ with $g$.
+
+    \item We can write
+    \[
+    f(x)=
+    \underbrace{g(x)}_{\text{dominant}}
+    +
+    \underbrace{[f(x)-g(x)]}_{\text{subdominant}}.
+    \]
+
+    \item Note $\sim$ is an equivalence relation
+    (that is reflexive, transitive, symmetric).
+
+    \item It respects products:
+    \[
+    f_1\sim g_1,\qquad f_2\sim g_2
+    \]
+    \[
+    \Longrightarrow f_1f_2\sim g_1g_2.
+    \]
+
+    \item It is linear:
+    \[
+    \alpha f_1+\beta f_2
+    \sim \alpha g_1+\beta g_2,
+    \]
+    where $\alpha,\beta$ are constants.
+
+    \item Definition has problems when dealing with oscillatory functions that go through $0$ as $x\to x_0$.
+\end{itemize}
+
+
+\subsubsection*{(b) ``Little $o$''}
+
+Suppose $f$ \& $g$ are real functions.
+
+We write
+\[
+\boxed{
+f(x)=o(g(x))
+\qquad \text{as }x\to x_0
+}
+\]
+if
+\[
+\boxed{
+\lim_{x\to x_0}\frac{f(x)}{g(x)}=0.
+}
+\]
+
+\noindent\textbf{Remark:}
+
+\[
+f(x)=o(g(x))
+\]
+can also be written as
+\[
+f(x)\ll g(x)
+\qquad \text{as }x\to x_0.
+\]
+
+\begin{itemize}
+    \item Can be framed in inequalities, e.g.\ $x_0=\infty$ and let $g>0$.
+
+    Then $f=o(g)$ as $x\to\infty$ is equivalent to
+    \[
+    \forall\varepsilon>0,\quad
+    \exists a
+    \quad\text{s.t. when }x>a,
+    \]
+    \[
+    \boxed{|f|\leq\varepsilon g.}
+    \]
+\end{itemize}
+
+
+\subsubsection*{(c) ``Big $O$''}
+
+We write
+\[
+f(x)=O(g(x))
+\qquad \text{as }x\to x_0
+\]
+for $g>0$, if
+\[
+\exists C>0
+\quad\text{s.t.}
+\]
+\[
+\boxed{
+|f(x)|\leq Cg(x)
+}
+\]
+for $x$ sufficiently close to $x_0$.
+
+\medskip
+
+\noindent\textbf{Warning:}
+
+In some areas of physics people use big-$O$ and $\sim$ interchangeably.
+
+
+\subsubsection*{Little Exercises: Show That}
+
+\noindent\textbf{(a)}
+\[
+f(x)\sim g(x)
+\iff
+f-g=o(g)
+\qquad \text{as }x\to x_0.
+\]
+
+\medskip
+
+\noindent\textbf{(b)}
+\[
+\sin x\ll x^2
+\qquad \text{as }x\to\infty.
+\]
+
+\medskip
+
+\noindent\textbf{(c)}
+\[
+12x^5+6x^3+x=O(x^5)
+\qquad \text{as }x\to\infty.
+\]
+
+\medskip
+
+\noindent\textbf{(d)}
+\[
+e^{ax}\ll e^{bx}
+\qquad \text{as }x\to\infty,
+\]
+if $b>a>0$.
+
+\medskip
+
+\noindent\textbf{(e)}
+\[
+e^x\gg x^N
+\qquad \text{as }x\to\infty,
+\]
+\[
+\forall N\in\mathbb{Z}^+.
+\]
+
+
+\subsection*{2.2 Asymptotic Expansions}
+
+\begin{itemize}
+    \item Have unworkable/unknown $f(x)$.
+
+    \item Want to know its behaviour in a limit.
+
+    \item Want to find a simpler/known $g(x)$ so that
+    \[
+    f\sim g.
+    \]
+
+    \item Also want to break up $g$ into a hierarchy of approximations, s.t.
+    \[
+    g(x)=\sum_{k=0}^{N}a_k\phi_k(x),
+    \]
+    where $a_k$ are coefficients, $\phi_k$ are known \& workable, and where adding more terms gives a better approximation that can be estimated.
+\end{itemize}
+
+
+\subsubsection*{(a) Asymptotic Sequence}
+
+A sequence of functions
+\[
+\{\phi_0(x),\phi_1(x),\ldots\}
+\]
+is an ``asymptotic sequence'' as $x\to x_0$ if
+\[
+\boxed{
+\phi_{k+1}(x)\ll\phi_k(x)
+\qquad \text{as }x\to x_0,
+\quad \forall k.
+}
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 1)}
+\[
+\phi_k=(x-a)^k
+\qquad \text{around }x=a.
+\]
+
+Check:
+\[
+\frac{\phi_{k+1}}{\phi_k}
+=x-a\to0
+\qquad \text{as }x\to a.
+\quad \checkmark
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 2)}
+\[
+\phi_k=e^{-kx}x^k
+\qquad \text{as }x\to\infty
+\text{ or }x\to-\infty.
+\]
+
+Check:
+\[
+\frac{\phi_{k+1}}{\phi_k}
+=e^{-x}x.
+\]
+
+\[
+\begin{aligned}
+e^{-x}x&\to0
+&&\text{as }x\to\infty
+&&\checkmark\\
+e^{-x}x&\to\infty
+&&\text{as }x\to-\infty
+&&\times
+\end{aligned}
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 3)}
+\[
+\phi_k=\cos(nx)
+\qquad \text{as }x\to\infty.
+\]
+
+\[
+\times
+\]
+
+\medskip
+
+\noindent\textbf{e.g. 4)}
+\[
+\left\{
+|x|,\,
+\log|x|,\,
+\log|\log|x||,\,
+\ldots
+\right\}
+\qquad \text{as }x\to\infty.
+\]
+
+\[
+?
+\]
+
+
+\subsubsection*{(b) Asymptotic Expansion}
+
+\begin{itemize}
+    \item Suppose $f(x)$ is a function we want to understand near $x=x_0$.
+
+    \item Let $\{\phi_k\}_{k=0}^{\infty}$ be an asymptotic sequence.
+\end{itemize}
+
+Then, the finite sum
+\[
+\sum_{k=0}^{N}a_k\phi_k(x)
+\]
+for some coefficients, is an ($N$-term) asymptotic approximation of $f(x)$ as $x\to x_0$ if:
+\begin{center}
+    \textbf{End of Lecture 1}
+\end{center}
 \end{document}
