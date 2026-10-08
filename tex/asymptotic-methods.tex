@@ -4,7 +4,6 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-\section*{Lecture 1}
 
 \noindent\textbf{Pre-requisites}
 \begin{itemize}
@@ -391,6 +390,23 @@ Then, the finite sum
 \sum_{k=0}^{N}a_k\phi_k(x)
 \]
 for some coefficients, is an ($N$-term) asymptotic approximation of $f(x)$ as $x\to x_0$ if:
+\[
+\boxed{
+f(x)=\sum_{k=0}^{N}a_k\phi_k(x)+o(\phi_N(x))
+}
+\qquad \text{as }x\to x_0.
+\]
+
+Alternatively, we can write the above as
+\[
+\boxed{
+\frac{f(x)-\displaystyle\sum_{k=0}^{N}a_k\phi_k(x)}
+{\phi_N(x)}
+\longrightarrow 0
+}
+\qquad \text{as }x\to x_0.
+\]
+
 \begin{center}
     \textbf{End of Lecture 1}
 \end{center}
