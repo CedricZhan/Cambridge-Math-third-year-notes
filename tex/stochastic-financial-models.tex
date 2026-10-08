@@ -4,5 +4,875 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-% Add lecture notes below this line.
+\section{Martingales and Conditional Expectation}
+
+Throughout, we work on a probability space
+$(\Omega,\mathcal{F},\mathbb{P})$.
+All random variables are real-valued unless otherwise stated.
+
+\subsection{Probability spaces and sigma-algebras}
+
+\paragraph{Definition: sigma-algebra.}
+A collection $\mathcal{F}\subseteq\mathcal{P}(\Omega)$ is a
+\emph{$\sigma$-algebra} on $\Omega$ if:
+\begin{enumerate}
+    \item $\Omega\in\mathcal{F}$;
+    \item if $A\in\mathcal{F}$, then $A^c\in\mathcal{F}$;
+    \item if $A_1,A_2,\ldots\in\mathcal{F}$, then
+    \[
+    \bigcup_{k=1}^{\infty}A_k\in\mathcal{F}.
+    \]
+\end{enumerate}
+These properties also imply that
+\[
+\varnothing\in\mathcal{F},
+\qquad
+\bigcap_{k=1}^{\infty}A_k\in\mathcal{F}
+\quad\text{whenever }A_k\in\mathcal{F}.
+\]
+
+Here $\mathcal{P}(\Omega)$ denotes the power set of $\Omega$.
+Thus, $\mathcal{F}$ is a collection of subsets of $\Omega$,
+and each $A\in\mathcal{F}$ is called an \emph{event}.
+
+A probability space consists of:
+\begin{itemize}
+    \item a sample space $\Omega$;
+    \item a $\sigma$-algebra $\mathcal{F}$ of events;
+    \item a countably additive probability measure
+    $\mathbb{P}:\mathcal{F}\to[0,1]$ with
+    $\mathbb{P}(\Omega)=1$.
+\end{itemize}
+
+\paragraph{Generated sigma-algebra.}
+For a collection $\mathcal{C}\subseteq\mathcal{P}(\Omega)$,
+the notation $\sigma(\mathcal{C})$ denotes the smallest
+$\sigma$-algebra containing $\mathcal{C}$.
+It is the intersection of all $\sigma$-algebras on $\Omega$
+that contain $\mathcal{C}$.
+
+\paragraph{Almost sure equality.}
+Two random variables $U$ and $V$ are equal
+\emph{almost surely}, written $U=V$ a.s., if
+\[
+\mathbb{P}\bigl(\{\omega\in\Omega:U(\omega)=V(\omega)\}\bigr)=1.
+\]
+Thus, they may differ on a set of probability zero.
+
+\subsection{Borel sets and measurability}
+
+\paragraph{Definition: Borel sigma-algebra.}
+The \emph{Borel $\sigma$-algebra} on $\mathbb{R}^d$ is
+\[
+\mathcal{B}(\mathbb{R}^d)
+=
+\sigma\bigl(
+\{U\subseteq\mathbb{R}^d:U\text{ is open}\}
+\bigr).
+\]
+It is the smallest $\sigma$-algebra containing every open
+subset of $\mathbb{R}^d$.
+
+An element $B\in\mathcal{B}(\mathbb{R}^d)$ is called a
+\emph{Borel set}.
+Borel sets include open sets, closed sets, singletons,
+countable sets, and countable unions or intersections of
+Borel sets.
+
+For example,
+\[
+(a,b),\qquad
+(-\infty,a],\qquad
+\{a\},\qquad
+\mathbb{Q}
+\]
+are Borel subsets of $\mathbb{R}$.
+Moreover,
+\[
+\mathcal{B}(\mathbb{R})
+=
+\sigma\bigl(
+\{(-\infty,a]:a\in\mathbb{R}\}
+\bigr).
+\]
+
+The notation distinguishes a single set from a collection:
+\[
+B\subseteq\mathbb{R}^d,
+\qquad
+B\in\mathcal{B}(\mathbb{R}^d),
+\qquad
+\mathcal{B}(\mathbb{R}^d)
+\subseteq\mathcal{P}(\mathbb{R}^d).
+\]
+
+\paragraph{Definition: measurable random variable.}
+Let $\mathcal{G}\subseteq\mathcal{F}$ be a $\sigma$-algebra.
+A function $X:\Omega\to\mathbb{R}$ is
+\emph{$\mathcal{G}$-measurable} if
+\[
+X^{-1}(B)
+=
+\{\omega\in\Omega:X(\omega)\in B\}
+\in\mathcal{G}
+\qquad
+\text{for every }B\in\mathcal{B}(\mathbb{R}).
+\]
+The expression $X^{-1}(B)$ denotes a preimage; it does not
+require $X$ to have an inverse function.
+
+Equivalently, it is enough to check that
+\[
+\{X\leq a\}\in\mathcal{G}
+\qquad
+\text{for every }a\in\mathbb{R}.
+\]
+A real-valued \emph{random variable} on
+$(\Omega,\mathcal{F},\mathbb{P})$ is an
+$\mathcal{F}$-measurable function.
+
+\paragraph{Meaning of $X_n$ being $\mathcal{F}_n$-measurable.}
+The statement means that
+\[
+\{X_n\in B\}\in\mathcal{F}_n
+\qquad
+\text{for every }B\in\mathcal{B}(\mathbb{R}).
+\]
+If $\mathcal{F}_n$ represents the information available at
+time $n$, then the value of $X_n$ is determined by that
+information.
+In particular, every question of the form
+``Is $X_n$ in the Borel set $B$?'' can be answered using
+the information in $\mathcal{F}_n$.
+
+\paragraph{Example: a sigma-algebra containing partial information.}
+Let
+\[
+\Omega=\{1,2,3,4\},
+\qquad
+\mathcal{F}=\mathcal{P}(\Omega),
+\]
+and consider
+\[
+\mathcal{G}
+=
+\{\varnothing,\Omega,\{1,2\},\{3,4\}\}.
+\]
+This information distinguishes the two groups
+$\{1,2\}$ and $\{3,4\}$, but does not distinguish outcomes
+within either group.
+
+The random variable
+\[
+U(\omega)=
+\begin{cases}
+0, & \omega\in\{1,2\},\\
+1, & \omega\in\{3,4\}
+\end{cases}
+\]
+is $\mathcal{G}$-measurable.
+
+However,
+\[
+V(\omega)=
+\begin{cases}
+0, & \omega\in\{1,3\},\\
+1, & \omega\in\{2,4\}
+\end{cases}
+\]
+is not $\mathcal{G}$-measurable, because
+\[
+\{V=1\}=\{2,4\}\notin\mathcal{G}.
+\]
+In this finite example, a function is
+$\mathcal{G}$-measurable precisely when it is constant
+on each of the two groups.
+
+\subsection{Indicators and integrability}
+
+\paragraph{Definition: indicator random variable.}
+For an event $A\in\mathcal{F}$, define
+\[
+\mathbf{1}_A(\omega)=
+\begin{cases}
+1, & \omega\in A,\\
+0, & \omega\notin A.
+\end{cases}
+\]
+Thus,
+\[
+X\mathbf{1}_A=
+\begin{cases}
+X, & \text{on }A,\\
+0, & \text{on }A^c.
+\end{cases}
+\]
+In particular,
+\[
+\mathbb{E}[\mathbf{1}_A]=\mathbb{P}(A),
+\qquad
+\mathbb{E}[X\mathbf{1}_A]
+=
+\int_A X\,d\mathbb{P}.
+\]
+
+\paragraph{Definition: integrability.}
+A random variable $X$ is \emph{integrable} if
+\[
+\mathbb{E}[|X|]<\infty.
+\]
+If $X$ is integrable, then $X\mathbf{1}_A$ is integrable
+for every event $A$, since
+\[
+|X\mathbf{1}_A|\leq |X|
+\quad\Longrightarrow\quad
+\mathbb{E}[|X\mathbf{1}_A|]
+\leq\mathbb{E}[|X|]<\infty.
+\]
+
+\subsection{Filtrations and adapted processes}
+
+\paragraph{Definition: filtration.}
+A \emph{filtration} is a sequence
+$(\mathcal{F}_n)_{n\geq0}$ of sub-$\sigma$-algebras of
+$\mathcal{F}$ such that
+\[
+\mathcal{F}_n\subseteq\mathcal{F}_{n+1}\subseteq\mathcal{F},
+\qquad n\geq0.
+\]
+The $\sigma$-algebra $\mathcal{F}_n$ represents the information
+available at time $n$.
+The inclusions express that information accumulates over time.
+
+\paragraph{Definition: stochastic process.}
+A discrete-time \emph{stochastic process} is a sequence
+\[
+X=(X_n)_{n\geq0}
+\]
+of random variables $X_n:\Omega\to\mathbb{R}$.
+
+\paragraph{Definition: adaptedness.}
+The process $X$ is \emph{adapted} to
+$(\mathcal{F}_n)_{n\geq0}$ if $X_n$ is
+$\mathcal{F}_n$-measurable for every $n\geq0$.
+
+The process is \emph{integrable} if
+\[
+\mathbb{E}[|X_n|]<\infty
+\qquad\text{for every }n\geq0.
+\]
+This is a condition at each fixed time; it does not require
+$\sup_n\mathbb{E}[|X_n|]<\infty$.
+
+\subsection{Natural filtrations}
+
+\paragraph{Definition: natural filtration.}
+For a stochastic process $X=(X_n)_{n\geq0}$, its
+\emph{natural filtration} is
+\[
+\mathcal{F}_n^X=\sigma(X_0,X_1,\ldots,X_n),
+\qquad n\geq0.
+\]
+Here $\sigma(X_0,\ldots,X_n)$ denotes the smallest
+$\sigma$-algebra making all of $X_0,\ldots,X_n$ measurable.
+
+More explicitly, define the random vector
+\[
+W_n:\Omega\to\mathbb{R}^{n+1},
+\qquad
+W_n(\omega)=
+\bigl(X_0(\omega),\ldots,X_n(\omega)\bigr).
+\]
+Then
+\[
+\mathcal{F}_n^X
+=
+\left\{
+W_n^{-1}(B):
+B\in\mathcal{B}(\mathbb{R}^{n+1})
+\right\},
+\]
+or, equivalently,
+\[
+\mathcal{F}_n^X
+=
+\left\{
+\{\omega\in\Omega:
+(X_0(\omega),\ldots,X_n(\omega))\in B\}:
+B\in\mathcal{B}(\mathbb{R}^{n+1})
+\right\}.
+\]
+
+\paragraph{Interpreting the notation.}
+For each Borel set $B\subseteq\mathbb{R}^{n+1}$,
+\[
+\{(X_0,\ldots,X_n)\in B\}
+\]
+is an event in $\Omega$.
+It consists of the outcomes for which the observed vector
+belongs to $B$.
+
+For example, when $n=1$, take
+\[
+B=(-\infty,0]\times(1,\infty).
+\]
+Then
+\[
+\{(X_0,X_1)\in B\}
+=
+\{X_0\leq0\}\cap\{X_1>1\}.
+\]
+The set $B$ describes a condition on possible observed values;
+its preimage is the corresponding event in the sample space.
+Allowing $B$ to range over all Borel sets gives the entire
+$\sigma$-algebra $\sigma(X_0,X_1)$.
+
+\paragraph{Smallest-filtration property.}
+The natural filtration is the smallest filtration to which
+$X$ is adapted.
+
+Indeed, suppose $X$ is adapted to another filtration
+$(\mathcal{F}_n)_{n\geq0}$.
+For $k\leq n$, the random variable $X_k$ is
+$\mathcal{F}_k$-measurable and hence
+$\mathcal{F}_n$-measurable, since
+$\mathcal{F}_k\subseteq\mathcal{F}_n$.
+Therefore,
+\[
+\mathcal{F}_n^X
+=
+\sigma(X_0,\ldots,X_n)
+\subseteq\mathcal{F}_n.
+\]
+
+\subsection{Conditional probabilities and expectations}
+
+\subsubsection{Conditioning on an event}
+
+Let $A,B\in\mathcal{F}$ with $\mathbb{P}(B)>0$.
+The conditional probability of $A$ given $B$ is
+\[
+\mathbb{P}(A\mid B)
+=
+\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}.
+\]
+For fixed $B$, the map
+\[
+A\longmapsto\mathbb{P}(A\mid B)
+\]
+is a probability measure on $(\Omega,\mathcal{F})$.
+
+For an integrable random variable $X$, define
+\[
+\mathbb{E}[X\mid B]
+=
+\frac{\mathbb{E}[X\mathbf{1}_B]}{\mathbb{P}(B)}.
+\]
+This is a number: the average of $X$ conditional on the
+event $B$ occurring.
+
+\subsubsection{Conditioning on a sigma-algebra}
+
+\paragraph{Theorem: existence and almost sure uniqueness.}
+Let $\mathcal{G}\subseteq\mathcal{F}$ be a $\sigma$-algebra,
+and let $X$ be integrable.
+There exists an integrable random variable $Y$ satisfying:
+\begin{enumerate}
+    \item $Y$ is $\mathcal{G}$-measurable;
+    \item for every $A\in\mathcal{G}$,
+    \[
+    \mathbb{E}[Y\mathbf{1}_A]
+    =
+    \mathbb{E}[X\mathbf{1}_A].
+    \]
+\end{enumerate}
+Moreover, if $Y'$ is another integrable random variable
+satisfying these conditions for the same $X$, then
+\[
+Y=Y'\qquad\text{a.s.}
+\]
+
+\paragraph{Definition: conditional expectation.}
+Any such $Y$ is called a \emph{version of the conditional
+expectation of $X$ given $\mathcal{G}$}.
+We write
+\[
+Y=\mathbb{E}[X\mid\mathcal{G}]
+\qquad\text{a.s.}
+\]
+
+The two defining conditions have distinct roles:
+\begin{itemize}
+    \item Measurability requires $Y$ to use only the information
+    contained in $\mathcal{G}$.
+    \item The integral identities require $Y$ to preserve
+    the average of $X$ over every event observable using
+    that information:
+    \[
+    \int_A Y\,d\mathbb{P}
+    =
+    \int_A X\,d\mathbb{P},
+    \qquad A\in\mathcal{G}.
+    \]
+\end{itemize}
+
+Taking $A=\Omega$ gives
+\[
+\mathbb{E}[Y]=\mathbb{E}[X].
+\]
+However, this single equality is insufficient to characterize
+conditional expectation: the identity must hold for every
+$A\in\mathcal{G}$.
+
+\paragraph{Why the notation includes ``almost surely''.}
+The theorem identifies a unique random variable up to
+almost sure equality.
+Two admissible versions may differ on a set of probability
+zero while satisfying exactly the same integral identities.
+
+Thus, writing
+\[
+Y=\mathbb{E}[X\mid\mathcal{G}]
+\qquad\text{a.s.}
+\]
+names the random variable characterized by the theorem.
+It is not an additional assumption on $Y$.
+
+\subsubsection{Monotonicity and the proof of uniqueness}
+
+Suppose $X$ and $X'$ are integrable and
+\[
+X\leq X'\qquad\text{a.s.}
+\]
+Let $Y$ and $Y'$ satisfy the defining conditions of
+conditional expectation for $X$ and $X'$, respectively,
+with respect to the same $\sigma$-algebra $\mathcal{G}$.
+
+Set
+\[
+A=\{Y>Y'\},
+\qquad
+Z=(Y-Y')\mathbf{1}_A.
+\]
+Since $Y$ and $Y'$ are $\mathcal{G}$-measurable,
+\[
+A\in\mathcal{G}.
+\]
+Also,
+\[
+0\leq Z\leq |Y|+|Y'|,
+\]
+so $Z$ is nonnegative and integrable.
+
+Using the defining integral identities,
+\begin{align*}
+\mathbb{E}[Z]
+&=
+\mathbb{E}[(Y-Y')\mathbf{1}_A]\\
+&=
+\mathbb{E}[Y\mathbf{1}_A]
+-
+\mathbb{E}[Y'\mathbf{1}_A]\\
+&=
+\mathbb{E}[X\mathbf{1}_A]
+-
+\mathbb{E}[X'\mathbf{1}_A]\\
+&=
+\mathbb{E}[(X-X')\mathbf{1}_A]
+\leq0.
+\end{align*}
+Since $Z\geq0$, we also have $\mathbb{E}[Z]\geq0$.
+Hence
+\[
+\mathbb{E}[Z]=0.
+\]
+A nonnegative random variable with expectation zero is
+zero almost surely, so $Z=0$ a.s.
+Consequently,
+\[
+Y\leq Y'\qquad\text{a.s.}
+\]
+
+This proves \emph{monotonicity}:
+\[
+X\leq X'\quad\text{a.s.}
+\quad\Longrightarrow\quad
+\mathbb{E}[X\mid\mathcal{G}]
+\leq
+\mathbb{E}[X'\mid\mathcal{G}]
+\quad\text{a.s.}
+\]
+
+For uniqueness, take $X'=X$.
+The argument gives $Y\leq Y'$ a.s.
+Interchanging $Y$ and $Y'$ gives $Y'\leq Y$ a.s.
+Therefore,
+\[
+Y=Y'\qquad\text{a.s.}
+\]
+
+\subsubsection{A finite-partition example}
+
+Suppose $A_1,\ldots,A_m$ form a measurable partition
+of $\Omega$, with $\mathbb{P}(A_i)>0$, and let
+\[
+\mathcal{G}=\sigma(A_1,\ldots,A_m).
+\]
+Then
+\[
+\mathbb{E}[X\mid\mathcal{G}]
+=
+\sum_{i=1}^{m}
+\frac{\mathbb{E}[X\mathbf{1}_{A_i}]}{\mathbb{P}(A_i)}
+\mathbf{1}_{A_i}.
+\]
+Thus, on each part of the partition, conditional expectation
+replaces $X$ by its average over that part.
+
+For the earlier example
+\[
+\Omega=\{1,2,3,4\},
+\qquad
+\mathcal{G}
+=
+\{\varnothing,\Omega,\{1,2\},\{3,4\}\},
+\]
+suppose all four outcomes are equally likely and $X(\omega)=\omega$.
+Then
+\[
+\mathbb{E}[X\mid\mathcal{G}](\omega)
+=
+\begin{cases}
+\frac{1+2}{2}=\frac32, & \omega\in\{1,2\},\\[4pt]
+\frac{3+4}{2}=\frac72, & \omega\in\{3,4\}.
+\end{cases}
+\]
+This is a random variable whose value depends on which
+group is observed.
+
+\subsubsection{Conditioning on a random variable}
+
+For a real-valued random variable $W$, define
+\[
+\sigma(W)
+=
+\bigl\{
+W^{-1}(B):B\in\mathcal{B}(\mathbb{R})
+\bigr\}.
+\]
+Conditioning on $W$ means conditioning on the information
+generated by $W$:
+\[
+\mathbb{E}[X\mid W]
+:=
+\mathbb{E}[X\mid\sigma(W)].
+\]
+
+\subsubsection{Conditional probability given a sigma-algebra}
+
+For an event $A\in\mathcal{F}$, define
+\[
+\mathbb{P}(A\mid\mathcal{G})
+:=
+\mathbb{E}[\mathbf{1}_A\mid\mathcal{G}].
+\]
+This is a $\mathcal{G}$-measurable random variable, with
+\[
+0\leq\mathbb{P}(A\mid\mathcal{G})\leq1
+\qquad\text{a.s.}
+\]
+Its defining integral identity is
+\[
+\mathbb{E}\!\left[
+\mathbb{P}(A\mid\mathcal{G})\mathbf{1}_B
+\right]
+=
+\mathbb{P}(A\cap B),
+\qquad B\in\mathcal{G}.
+\]
+
+\subsection{Martingales, submartingales, and supermartingales}
+
+Fix a filtration $(\mathcal{F}_n)_{n\geq0}$.
+
+\paragraph{Definition: martingale.}
+A process $X=(X_n)_{n\geq0}$ is a \emph{martingale}
+with respect to $(\mathcal{F}_n)_{n\geq0}$ if:
+\begin{enumerate}
+    \item $X$ is adapted:
+    $X_n$ is $\mathcal{F}_n$-measurable for every $n$;
+    \item $X$ is integrable:
+    $\mathbb{E}[|X_n|]<\infty$ for every $n$;
+    \item the \emph{martingale property} holds:
+    \[
+    \mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+    =
+    X_n
+    \qquad\text{a.s., for every }n\geq0.
+    \]
+\end{enumerate}
+
+The martingale property says that, given the information
+available at time $n$, the conditional expected value at
+the next time is the current value.
+
+\paragraph{Definition: submartingale.}
+An adapted, integrable process $X$ is a
+\emph{submartingale} if
+\[
+\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+\geq X_n
+\qquad\text{a.s., for every }n\geq0.
+\]
+
+\paragraph{Definition: supermartingale.}
+An adapted, integrable process $X$ is a
+\emph{supermartingale} if
+\[
+\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+\leq X_n
+\qquad\text{a.s., for every }n\geq0.
+\]
+
+Thus, the conditional expected increment is respectively
+zero, nonnegative, or nonpositive:
+\[
+\mathbb{E}[X_{n+1}-X_n\mid\mathcal{F}_n]
+\begin{cases}
+=0, & \text{for a martingale},\\
+\geq0, & \text{for a submartingale},\\
+\leq0, & \text{for a supermartingale}.
+\end{cases}
+\]
+
+\subsection{Equivalent integral characterizations}
+
+Suppose $X$ is adapted and integrable.
+Then:
+\begin{align*}
+X\text{ is a martingale}
+\quad&\Longleftrightarrow\quad
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+=
+\mathbb{E}[X_n\mathbf{1}_A],\\
+X\text{ is a submartingale}
+\quad&\Longleftrightarrow\quad
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+\geq
+\mathbb{E}[X_n\mathbf{1}_A],\\
+X\text{ is a supermartingale}
+\quad&\Longleftrightarrow\quad
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+\leq
+\mathbb{E}[X_n\mathbf{1}_A],
+\end{align*}
+where each condition on the right must hold for
+\emph{every} $n\geq0$ and \emph{every} $A\in\mathcal{F}_n$.
+
+\paragraph{Proof of the martingale characterization.}
+Fix $n$ and let
+\[
+Y=\mathbb{E}[X_{n+1}\mid\mathcal{F}_n].
+\]
+By definition,
+\[
+\mathbb{E}[Y\mathbf{1}_A]
+=
+\mathbb{E}[X_{n+1}\mathbf{1}_A],
+\qquad A\in\mathcal{F}_n.
+\]
+If $Y=X_n$ a.s., the required integral equality follows.
+
+Conversely, suppose
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+=
+\mathbb{E}[X_n\mathbf{1}_A],
+\qquad A\in\mathcal{F}_n.
+\]
+Since $X_n$ is integrable and $\mathcal{F}_n$-measurable,
+it satisfies the defining conditions for the conditional
+expectation of $X_{n+1}$ given $\mathcal{F}_n$.
+Almost sure uniqueness therefore gives
+\[
+X_n=\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+\qquad\text{a.s.}
+\]
+
+\paragraph{Why the inequality characterizations also hold.}
+Again let $Y=\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]$.
+If $Y\geq X_n$ a.s., then
+\[
+\mathbb{E}[(Y-X_n)\mathbf{1}_A]\geq0
+\qquad\text{for every }A\in\mathcal{F}_n.
+\]
+
+Conversely, suppose these integral inequalities hold.
+The event
+\[
+A=\{Y<X_n\}
+\]
+belongs to $\mathcal{F}_n$.
+On this event, $(Y-X_n)\mathbf{1}_A\leq0$, while the
+assumed inequality gives
+\[
+\mathbb{E}[(Y-X_n)\mathbf{1}_A]\geq0.
+\]
+Hence this expectation is zero, so
+\[
+(X_n-Y)\mathbf{1}_{\{Y<X_n\}}=0
+\qquad\text{a.s.}
+\]
+Therefore $Y\geq X_n$ a.s.
+The supermartingale case follows by reversing the inequalities.
+
+\paragraph{Consequence for ordinary expectations.}
+Taking $A=\Omega$ shows that
+\[
+\mathbb{E}[X_{n+1}]
+\begin{cases}
+=\mathbb{E}[X_n], & \text{for a martingale},\\
+\geq\mathbb{E}[X_n], & \text{for a submartingale},\\
+\leq\mathbb{E}[X_n], & \text{for a supermartingale}.
+\end{cases}
+\]
+These conditions on ordinary expectations alone are not
+sufficient: the integral conditions must hold on every
+event in $\mathcal{F}_n$.
+
+\subsection{A martingale under its natural filtration}
+
+\paragraph{Proposition.}
+If $X$ is a martingale with respect to
+$(\mathcal{F}_n)_{n\geq0}$, then it is also a martingale
+with respect to its natural filtration
+$(\mathcal{F}_n^X)_{n\geq0}$.
+
+\paragraph{Proof.}
+The process $X$ is adapted to its natural filtration,
+and each $X_n$ remains integrable.
+Moreover,
+\[
+\mathcal{F}_n^X\subseteq\mathcal{F}_n.
+\]
+Thus, for every $A\in\mathcal{F}_n^X$, the original
+martingale property gives
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+=
+\mathbb{E}[X_n\mathbf{1}_A].
+\]
+The integral characterization proves that $X$ is a
+martingale with respect to $(\mathcal{F}_n^X)_{n\geq0}$.
+
+\subsection{Examples from independent random variables}
+
+Let $X_1,X_2,\ldots$ be independent integrable random variables.
+Set
+\[
+\mathcal{F}_0=\{\varnothing,\Omega\},
+\qquad
+\mathcal{F}_n=\sigma(X_1,\ldots,X_n),
+\qquad n\geq1.
+\]
+Then $X_{n+1}$ is independent of $\mathcal{F}_n$.
+
+Define
+\[
+S_0=0,
+\qquad
+S_n=\sum_{i=1}^{n}X_i,
+\]
+and
+\[
+Z_0=1,
+\qquad
+Z_n=\prod_{i=1}^{n}X_i.
+\]
+
+\subsubsection{Sums of independent mean-zero random variables}
+
+Suppose
+\[
+\mathbb{E}[X_n]=0
+\qquad\text{for every }n\geq1.
+\]
+Then $(S_n)_{n\geq0}$ is a martingale with respect to
+$(\mathcal{F}_n)_{n\geq0}$.
+
+\paragraph{Proof.}
+Each $S_n$ is a measurable function of $X_1,\ldots,X_n$,
+so $S_n$ is $\mathcal{F}_n$-measurable.
+Also,
+\[
+\mathbb{E}[|S_n|]
+\leq
+\sum_{i=1}^{n}\mathbb{E}[|X_i|]
+<\infty.
+\]
+
+For $A\in\mathcal{F}_n$, independence gives
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+=
+\mathbb{E}[X_{n+1}]\,\mathbb{P}(A)
+=0.
+\]
+Therefore,
+\begin{align*}
+\mathbb{E}[S_{n+1}\mathbf{1}_A]
+&=
+\mathbb{E}[(S_n+X_{n+1})\mathbf{1}_A]\\
+&=
+\mathbb{E}[S_n\mathbf{1}_A]
++
+\mathbb{E}[X_{n+1}\mathbf{1}_A]\\
+&=
+\mathbb{E}[S_n\mathbf{1}_A].
+\end{align*}
+The integral characterization shows that $S$ is a martingale.
+
+\subsubsection{Products of independent nonnegative mean-one variables}
+
+Suppose
+\[
+X_n\geq0\quad\text{a.s.},
+\qquad
+\mathbb{E}[X_n]=1
+\qquad\text{for every }n\geq1.
+\]
+Then $(Z_n)_{n\geq0}$ is a martingale with respect to
+$(\mathcal{F}_n)_{n\geq0}$.
+
+\paragraph{Proof.}
+Each $Z_n$ is a measurable function of $X_1,\ldots,X_n$,
+so $Z_n$ is $\mathcal{F}_n$-measurable.
+
+Nonnegativity and independence give
+\[
+\mathbb{E}[|Z_n|]
+=
+\mathbb{E}[Z_n]
+=
+\prod_{i=1}^{n}\mathbb{E}[X_i]
+=1.
+\]
+Thus, $Z_n$ is integrable.
+
+For $A\in\mathcal{F}_n$, the random variable
+$Z_n\mathbf{1}_A$ is $\mathcal{F}_n$-measurable and
+integrable.
+It is therefore independent of $X_{n+1}$.
+Consequently,
+\begin{align*}
+\mathbb{E}[Z_{n+1}\mathbf{1}_A]
+&=
+\mathbb{E}[X_{n+1}Z_n\mathbf{1}_A]\\
+&=
+\mathbb{E}[X_{n+1}]
+\,\mathbb{E}[Z_n\mathbf{1}_A]\\
+&=
+\mathbb{E}[Z_n\mathbf{1}_A].
+\end{align*}
+The integral characterization shows that $Z$ is a martingale.
 \end{document}
