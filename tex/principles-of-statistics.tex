@@ -4,5 +4,264 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-% Add lecture notes below this line.
+\section*{Principles of Statistics}
+
+\subsection*{0. INTRODUCTION}
+
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and
+$X:\Omega\to\mathbb{R}$ a random variable with distribution function
+\[
+\begin{aligned}
+F(t)
+&=
+\mathbb{P}\bigl(\{\omega:X(\omega)\leq t\}\bigr) \\
+&=
+\begin{cases}
+\displaystyle \int_{-\infty}^{t} f(x)\,dx,
+& \text{if $X$ is continuous with pdf $f$}, \\[1ex]
+\displaystyle \sum_{x\leq t} f(x),
+& \text{if $X$ is discrete with pmf $f$}.
+\end{cases}
+\end{aligned}
+\]
+
+We denote $P=\mathbb{P}\circ X^{-1}$, the law or ``distribution'' of $X$.
+
+We observe $X_1,\ldots,X_n$, which are iid copies of $X$, where $n$ is
+the \underline{sample size}.
+
+\paragraph{Def 1.}
+A \underline{statistical model} is a collection
+$\{f_\theta:\theta\in\Theta\}$ of pdfs or pmfs, or
+$\{P_\theta:\theta\in\Theta\}$ of laws, indexed by a
+\underline{parameter space} $\Theta$.
+
+\paragraph{Ex.}
+\begin{itemize}
+    \item $N(\theta,1)$, \qquad $\Theta=\mathbb{R}$.
+    \item $N(\mu,\sigma^2)$, \qquad
+    $\theta=(\mu,\sigma^2)$, \quad
+    $\Theta=\mathbb{R}\times(0,\infty)$.
+    \item $\operatorname{Poi}(\theta)$, \qquad
+    $\Theta=[0,\infty)$.
+\end{itemize}
+
+\paragraph{Def 2.}
+We say the model is \underline{correctly specified} when
+$\exists\,\theta_0\in\Theta$ such that $P=P_{\theta_0}$.
+
+We will refer to the ``true parameter'' as $\theta_0$.
+
+\subsection*{Goals of Statistics}
+
+\begin{enumerate}
+    \item \underline{Estimation}:
+    We define an \underline{estimator}
+    \[
+    \widehat{\theta}_n
+    =
+    \widehat{\theta}_n(X_1,\ldots,X_n),
+    \]
+    which we hope is close to $\theta_0$ when
+    $X_i\overset{\mathrm{iid}}{\sim}P_{\theta_0}$,
+    for all $\theta_0\in\Theta$, when $n$ is large.
+
+    \item \underline{Testing}:
+    We have a null hypothesis
+    \[
+    H_0:\theta\in\Theta_0\subseteq\Theta,
+    \]
+    and an alternative hypothesis
+    \[
+    H_1:\theta\in\Theta_1\subseteq\Theta.
+    \]
+    We define a \underline{test},
+    \[
+    \psi_n:=\psi_n(X_1,\ldots,X_n),
+    \]
+    such that $\psi_n=0$ if $H_0$ is true, and
+    $\psi_n=1$ if $H_1$ is true, \underline{w.h.p.}
+
+    \item \underline{Uncertainty Quantification}
+    \begin{itemize}
+        \item Define a \underline{confidence set}
+        $C_n(X_1,\ldots,X_n;\alpha)$, such that
+        \[
+        P_\theta(\theta\in C_n)
+        \overset{(\geq)}{=}
+        1-\alpha
+        \qquad \forall\,\theta\in\Theta,
+        \]
+        where $\alpha$ is the \underline{significance level}.
+
+        \item Define a \underline{Bayesian credible set},
+        a region of high posterior probability.
+    \end{itemize}
+\end{enumerate}
+
+\section*{I. LIKELIHOOD PRINCIPLE}
+
+\paragraph{Def 3.}
+The \underline{likelihood function}
+\[
+L_n(\theta)=\prod_{i=1}^{n}f_\theta(X_i).
+\]
+
+\noindent\underline{Note:}
+This is a random function, as it depends implicitly on $X_1,\ldots,X_n$.
+
+The \underline{log-likelihood function}
+\[
+\ell_n(\theta)=\sum_{i=1}^{n}\log f_\theta(X_i),
+\]
+we write
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\ell_n(\theta)
+\]
+for a \underline{normalised log-likelihood}.
+
+\paragraph{Def 4.}
+A \underline{maximum likelihood estimator}
+$\widehat{\theta}_{\mathrm{MLE}}$ is any estimator with
+\[
+L_n\bigl(\widehat{\theta}_{\mathrm{MLE}}\bigr)
+=
+\max_{\theta\in\Theta}L_n(\theta).
+\]
+
+\paragraph{Ex.}
+\[
+X_i\overset{\mathrm{iid}}{\sim}\operatorname{Poi}(\theta).
+\]
+\[
+L_n(\theta)
+=
+\prod_{i=1}^{n}e^{-\theta}\frac{\theta^{X_i}}{X_i!}.
+\]
+\[
+\ell_n(\theta)
+=
+-n\theta+(\log\theta)\sum X_i+\mathrm{const.}
+\]
+\[
+\ell_n'(\theta)
+=
+-n+\frac{\sum X_i}{\theta}
+\overset{\mathrm{FOC}}{=}0
+\]
+\[
+\Longrightarrow\quad
+\text{suggests }
+\widehat{\theta}_{\mathrm{MLE}}
+=
+\frac{\displaystyle\sum_{i=1}^{n}X_i}{n}
+:=
+\overline{X}_n
+\qquad
+\text{``sample mean''}.
+\]
+
+\noindent\underline{SOC:}
+\[
+\ell_n''(\theta)
+=
+-\frac{1}{\theta^2}\sum X_i
+<0
+\qquad
+\text{if }\sum X_i>0.
+\]
+
+If $\sum X_i=0$,
+\[
+\ell_n(\theta)=-n\theta
+\quad\Longrightarrow\quad
+\widehat{\theta}_{\mathrm{MLE}}=0.
+\]
+
+In every case
+\[
+\widehat{\theta}_{\mathrm{MLE}}=\overline{X}_n.
+\]
+
+\paragraph{Ex.}
+\[
+X_i\overset{\mathrm{iid}}{\sim}N(\mu,\sigma^2),
+\qquad
+\theta=(\mu,\sigma^2).
+\]
+\[
+\ell_n(\theta)
+=
+-\frac{n}{2}\log\pi
+-\frac{n}{2}\log(\sigma^2)
+-\frac{1}{2\sigma^2}
+\sum_{i=1}^{n}(X_i-\mu)^2.
+\]
+
+\noindent\underline{FOC:}
+\[
+\frac{\partial\ell_n}{\partial\mu}
+=
+-\frac{1}{\sigma^2}
+\sum_{i=1}^{n}(X_i-\mu)
+=0,
+\]
+\[
+\frac{\partial\ell_n}{\partial\sigma^2}
+=
+-\frac{n}{2\sigma^2}
++
+\frac{1}{2(\sigma^2)^2}
+\sum_{i=1}^{n}(X_i-\mu)^2
+=0.
+\]
+
+We can check that the Hessian of $\ell_n$ is negative definite
+$\forall\,\theta\in\mathbb{R}\times(0,\infty)$.
+
+Hence,
+\[
+\widehat{\theta}_{\mathrm{MLE}}
+=
+\begin{pmatrix}
+\overline{X}_n \\[6pt]
+\underbrace{
+\displaystyle\frac{1}{n}
+\sum_{i=1}^{n}(X_i-\overline{X}_n)^2
+}_{\text{``Sample variance''}}
+\end{pmatrix}.
+\]
+
+\subsection*{Non-examinable}
+
+The likelihood principle poses that if two observations
+\[
+X=(X_1,\ldots,X_n)
+\qquad\text{and}\qquad
+X^*=(X_1^*,\ldots,X_n^*)
+\]
+give rise to likelihoods $L_n,L_n^*$ respectively, such that
+\[
+L_n(\theta)=L_n^*(\theta)\cdot M
+\qquad \forall\,\theta\in\Theta,
+\]
+and some constant $M$, then they should produce the same
+``inference'' on the true parameter.
+
+\begin{itemize}
+    \item The MLE, Bayes estimators, \underline{credible sets}
+    satisfy the likelihood principle.
+    \item \underline{Confidence sets}, tests generally do not.
+\end{itemize}
+
+\noindent\underline{Birnbaum (1962)}
+\[
+\text{Conditionality}+\text{Sufficiency}
+\quad\Longrightarrow\quad
+\text{Likelihood principle}.
+\]
+
+\begin{center}
+end of lecture 1
+\end{center}
 \end{document}

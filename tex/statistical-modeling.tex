@@ -4,5 +4,357 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-% Add lecture notes below this line.
+\subsection*{What is a statistical model?}
+
+\[
+\begin{array}{ccc}
+\text{Data modelling} & \text{vs.} & \text{Algorithmic modelling} \\
+\text{Inference} & \text{vs.} & \text{Computing}
+\end{array}
+\]
+
+\noindent\textbf{Def.}
+A statistical model is
+\[
+\{P_\theta:\theta\in\Theta\}.
+\]
+
+\noindent\textbf{Examples.}
+\begin{enumerate}
+    \item
+    \[
+    \mathbb{E}\{Y\mid X=x\}=x^{\mathsf T}\beta.
+    \]
+
+    \item
+    \[
+    Y=X^{\mathsf T}\beta+\varepsilon,
+    \qquad
+    \varepsilon\mid X\sim N(0,\sigma^2).
+    \]
+
+    \item
+    \[
+    Y(x)=x^{\mathsf T}\beta+\varepsilon.
+    \]
+\end{enumerate}
+
+\subsection*{Probability}
+
+\[
+(\Omega,\mathcal{F},P).
+\]
+
+Random variable/vector.
+
+\begin{itemize}
+    \item CDF:
+    \[
+    F(x)=P(X\leq x),
+    \qquad x\in\mathbb{R}.
+    \]
+
+    \item PDF/PMF:
+    \[
+    f(x)=\frac{dF(x)}{dx}
+    \qquad\text{or}\qquad
+    f(x)=P(X=x).
+    \]
+
+    \item Quantile function:
+    \[
+    F^{-1}(u)
+    =
+    \inf\{x\in\mathbb{R}:F(x)\geq u\},
+    \qquad u\in[0,1].
+    \]
+
+    \item MGF:
+    \[
+    M(t)=\mathbb{E}\{e^{tX}\},
+    \qquad
+    \text{for }t\text{ in a neighbourhood of }0.
+    \]
+\end{itemize}
+
+\noindent
+Independence. Expectation. Variance.
+
+\medskip
+
+\noindent
+Random
+\[
+X=(X_1,\ldots,X_n)\in\mathbb{R}^n.
+\]
+Fixed
+\[
+A\in\mathbb{R}^{m\times n},
+\qquad
+b\in\mathbb{R}^m.
+\]
+\[
+\mathbb{E}\{AX+b\}
+=
+A\mathbb{E}\{X\}+b.
+\]
+
+\subsection*{Normal distribution}
+
+\[
+Z\sim N_d(\mu,\Sigma),
+\qquad
+\mu\in\mathbb{R}^d,
+\qquad
+\Sigma\in\mathbb{R}^{d\times d}
+\quad\text{positive definite}.
+\]
+\[
+f(z)
+=
+\frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}
+e^{-\frac12(z-\mu)^{\mathsf T}\Sigma^{-1}(z-\mu)},
+\qquad
+z\in\mathbb{R}^d.
+\]
+
+\noindent\textbf{Properties.}
+\begin{enumerate}
+    \item
+    \[
+    AZ+b\sim N(A\mu+b,A\Sigma A^{\mathsf T}).
+    \]
+
+    \item If
+    \[
+    \begin{pmatrix}
+        Z_1\\
+        Z_2
+    \end{pmatrix}
+    \]
+    is normal, then
+    \[
+    Z_1\perp\!\!\!\perp Z_2
+    \iff
+    \operatorname{Cov}(Z_1,Z_2)=0.
+    \]
+\end{enumerate}
+
+\noindent\textbf{Informally:}
+\[
+\chi_d^2
+=
+\underbrace{
+N(0,1)^2+\cdots+N(0,1)^2
+}_{d\text{ times}}.
+\]
+\[
+t_d
+=
+\frac{N(0,1)}{\sqrt{\chi_d^2/d}},
+\qquad
+F_{d_1,d_2}
+=
+\frac{\chi_{d_1}^2/d_1}{\chi_{d_2}^2/d_2}.
+\]
+
+\medskip
+
+\noindent\textbf{Def.}
+\begin{itemize}
+    \item We say $\mathcal{P}$ is \emph{identifiable} if
+    \[
+    P_{\theta_1}=P_{\theta_2}
+    \quad\text{iff}\quad
+    \theta_1=\theta_2.
+    \]
+
+    \item We say $\mathcal{P}$ is \emph{parametric} if
+    $\Theta$ is finite-dimensional
+    ($\Theta\subseteq\mathbb{R}^p$).
+    Otherwise non-/semi-parametric.
+\end{itemize}
+
+\medskip
+
+\noindent\textbf{Conditional expectation}
+\[
+\mathbb{E}\{Y\mid X=x\}.
+\]
+
+\noindent\textbf{Law of total prob./exp.}
+\[
+\mathbb{E}\{Y\}
+=
+\mathbb{E}\bigl[\mathbb{E}\{Y\mid X\}\bigr].
+\]
+
+\subsection*{Estimation}
+
+\noindent\textbf{Likelihood function}
+\[
+L(\theta)=f(\underline{X};\theta).
+\]
+
+\noindent
+i.i.d.
+
+\medskip
+
+\noindent\textbf{Def. MLE:}
+\[
+\hat{\theta}
+=
+\operatorname*{arg\,max}_{\theta\in\Theta}L(\theta)
+\qquad
+\text{is a statistic}.
+\]
+
+\begin{itemize}
+    \item
+    \[
+    \operatorname{Bias}_{\theta}(\hat{\theta})
+    =
+    \mathbb{E}_{\theta}(\hat{\theta})-\theta.
+    \]
+
+    \item
+    \[
+    \operatorname{MSE}_{\theta}(\hat{\theta})
+    =
+    \mathbb{E}_{\theta}\bigl\{(\hat{\theta}-\theta)^2\bigr\}
+    =
+    \operatorname{Bias}_{\theta}(\hat{\theta})^2
+    +
+    \operatorname{Var}_{\theta}(\hat{\theta}).
+    \]
+
+    \item
+    $T(X)$ is \emph{sufficient} if $X\mid T$ is independent of
+    $\theta$.
+
+    \item
+    \textbf{Rao--Blackwell}
+    \[
+    \operatorname{MSE}_{\theta}
+    \left(
+        \hat{\theta}=\mathbb{E}(\tilde{\theta}\mid T)
+    \right)
+    \leq
+    \operatorname{MSE}_{\theta}(\tilde{\theta}),
+    \qquad
+    \text{for all }\theta.
+    \]
+
+    \item
+    $S(X)\subseteq\Theta$ is a $(1-\alpha)$-confidence set if
+    \[
+    P_{\theta}\{\theta\in S(X)\}
+    =
+    1-\alpha,
+    \qquad
+    \forall\,\theta\in\Theta.
+    \]
+
+    Typically via pivotal quantity $R(X,\theta)$,
+    distribution independent of $\theta$.
+\end{itemize}
+
+\subsection*{Hypothesis testing}
+
+\[
+H_0:\theta\in\Theta_0
+\qquad\text{vs.}\qquad
+H_1:\theta\in\Theta_1
+\qquad
+(\Theta_0,\Theta_1\text{ disjoint}).
+\]
+
+\noindent
+Test function
+\[
+T(X)\in\{0,1\}.
+\]
+
+\subsubsection*{Neyman--Pearson theory}
+
+\noindent\textbf{Def.}
+\begin{itemize}
+    \item Power function
+    \[
+    \beta(\theta)=P_{\theta}(T(X)=1).
+    \]
+
+    \item
+    \[
+    \text{Size}
+    =
+    \sup_{\theta\in\Theta_0}\beta(\theta).
+    \]
+\end{itemize}
+
+\[
+\begin{aligned}
+&\text{max.}\quad \beta(\theta)\quad\text{over }\Theta_1,\\
+&\text{s.t.}\quad \text{size}\leq\alpha.
+\end{aligned}
+\]
+
+\subsubsection*{N--P Lemma}
+
+If
+\[
+\Theta_0=\{\theta_0\},
+\qquad
+\Theta_1=\{\theta_1\},
+\]
+solution is
+\[
+T(X)
+=
+\mathbf{1}\left\{
+\boxed{\frac{L(\theta_1)}{L(\theta_0)}}
+\geq c(\alpha)
+\right\}.
+\]
+
+\medskip
+
+\noindent\textbf{Generalized LR:}
+\[
+\Lambda(X)
+=
+\frac{
+    \displaystyle\sup_{\theta\in\Theta_0\cup\Theta_1}L(\theta)
+}{
+    \displaystyle\sup_{\theta\in\Theta_0}L(\theta)
+}
+\qquad
+\text{LR statistic}.
+\]
+
+\[
+\begin{array}{ll}
+\text{multinomial} & /\,\mathrm{P.}\,\chi^2\\
+\text{normal} & /\,\chi^2,F.
+\end{array}
+\]
+
+\subsubsection*{Duality}
+
+If
+\[
+T(\theta,X)
+=
+\mathbf{1}\{\theta\notin S(X)\},
+\qquad
+S(X)=\{\theta:T(\theta,X)=0\},
+\]
+then $T(\theta_0,X)$ is size-$\alpha$ of
+$H_0:\theta=\theta_0$ for all $\theta_0$
+iff $S(X)$ is a $(1-\alpha)$-confidence set.
+
+\begin{center}
+end of lecture 1
+\end{center}
 \end{document}
