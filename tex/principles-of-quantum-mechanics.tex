@@ -4,5 +4,273 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-% Add lecture notes below this line.
+\section*{0. Introduction}
+
+\noindent
+$\ast$ Recall features from IB QM (Supplementary Notes 1)
+
+\begin{itemize}
+    \item Wave-particle duality:
+    
+    Waves behaving like particles, e.g.\ light quanta,
+    \& vice versa (particles behaving like waves).
+    
+    \item Wavefunction $\psi(x)$ for a particle --- prob.\ density
+    $|\psi(x)|^2$.
+    
+    (Prob.\ intrinsic to theory.)
+    
+    \item Observables became operators on wavefns:
+    \[
+        \hat{x} \to x,
+        \qquad
+        \hat{p} \to -i\hbar\frac{\partial}{\partial x}.
+    \]
+    \& lack of commutativity, e.g.
+    \[
+        [\hat{x},\hat{p}] = i\hbar
+    \]
+    leads to Uncertainty Relation.
+    
+    \item Schr\"odinger eqn with Hamiltonian $H$ specifies dynamics
+    \& eigenvalues of $H$ are allowed energy levels of system.
+    
+    \item All of this explains H atom structure \& resulting line spectra.
+\end{itemize}
+
+\noindent
+$\ast$ Aims of this course:
+
+\begin{itemize}
+    \item Reformulate QM in a more powerful, flexible, \& useful form
+    --- the Dirac formalism (go beyond wavefns!).
+\end{itemize}
+
+Previous description appears as particular realisation
+\& also leads to alternatives, e.g.
+\[
+    \tilde{\psi}(p)
+    \qquad \text{with} \qquad
+    \hat{x} \to +i\hbar\frac{\partial}{\partial p}
+    \quad \& \quad
+    \hat{p} \to p.
+\]
+
+This more general approach allows
+\begin{itemize}
+    \item Simpler analysis of known problems, e.g.\ oscillator
+\end{itemize}
+
+but also lots of new things
+\begin{itemize}
+    \item \underline{Spin} of particles
+    
+    \item \underline{Symmetries} (translations, rotations, for example)
+    \& conservation laws.
+    
+    \item \underline{Identical particles} (bosons \& fermions)
+    
+    \item Framework for quantising more general systems,
+    e.g.\ EM field
+    
+    \item \underline{Perturbation theory}: practical tool for computations ---
+    we will not look at too many detailed applications, but we
+    will try to keep track of what all this is for --- physical predictions
+\end{itemize}
+
+\section*{1. Dirac Formalism}
+
+\subsection*{1.1 Concepts \& Definitions}
+
+A quantum system is described at each instant by a \underline{state}
+$|\psi\rangle$ which belongs to a complex vector space $V$;
+any non-zero element of this space $V$ is a possible state.
+
+Thus
+\[
+    |\psi\rangle \ \&\ |\phi\rangle \in V
+    \quad\Rightarrow\quad
+    \alpha|\psi\rangle+\beta|\phi\rangle\in V
+    \qquad
+    \text{for any }\alpha,\beta\in\mathbb{C}.
+\]
+
+Physically this is a superposition principle leading to wave-like behaviour,
+but these states are \underline{not} \underline{wavefns}.
+There are also \underline{dual} or conjugate states
+$\langle\phi|$ which belong to the dual space $V^\dagger$.
+
+By definition, states \& duals can be combined or paired to give a
+complex number
+\[
+    \underset{\text{``bra''}}{\langle\phi|},
+    \quad
+    \underset{\text{``ket''}}{|\psi\rangle}
+    \ \longmapsto\
+    \underset{\text{``bra(c)ket''}}{\langle\phi|\psi\rangle},
+    \qquad
+    V^\dagger\times V\to\mathbb{C},
+\]
+with
+\begin{align*}
+    \langle\phi|
+    \bigl(\alpha_1|\psi_1\rangle+\alpha_2|\psi_2\rangle\bigr)
+    &=
+    \alpha_1\langle\phi|\psi_1\rangle
+    +\alpha_2\langle\phi|\psi_2\rangle,\\
+    \bigl(\beta_1\langle\phi_1|+\beta_2\langle\phi_2|\bigr)
+    |\psi\rangle
+    &=
+    \beta_1\langle\phi_1|\psi\rangle
+    +\beta_2\langle\phi_2|\psi\rangle.
+\end{align*}
+
+The spaces $V$ \& $V^\dagger$ come with an
+\underline{inner product}, which can be described as a one-to-one
+correspondence between the spaces
+\[
+    V\longleftrightarrow V^\dagger,
+\]
+with
+\[
+    |\psi\rangle
+    \longleftrightarrow
+    \langle\psi|
+    =
+    \bigl(|\psi\rangle\bigr)^\dagger
+    \qquad
+    \text{(use same symbol for corresponding states).}
+\]
+
+The inner product is
+\[
+    |\phi\rangle,\ |\psi\rangle
+    \longmapsto
+    \langle\phi|\psi\rangle
+    =
+    \bigl(|\phi\rangle\bigr)^\dagger|\psi\rangle,
+    \qquad
+    V\times V\to\mathbb{C},
+\]
+\& it is assumed to obey
+\[
+    \langle\phi|\psi\rangle
+    =
+    \langle\psi|\phi\rangle^*
+    \qquad
+    \underline{\text{hermitian}},
+\]
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2
+    =
+    \langle\psi|\psi\rangle
+    \qquad
+    \text{real},
+\]
+\[
+    \left.
+    \begin{aligned}
+        \langle\psi|\psi\rangle &\geq 0,\\
+        \langle\psi|\psi\rangle &=0
+        \quad\text{iff}\quad
+        |\psi\rangle=0
+    \end{aligned}
+    \right\}
+    \qquad
+    \underline{\text{positive definite}},
+\]
+where now $\bigl\|\,|\psi\rangle\,\bigr\|$ is called the norm.
+
+\medskip
+
+\noindent
+Note: Knowing $\langle\phi|\psi\rangle$ for all
+$\langle\phi|$ determines $|\psi\rangle$
+(\& vice versa).
+
+\medskip
+
+\noindent
+[Check:
+\[
+    \langle\phi|\psi_1\rangle
+    =
+    \langle\phi|\psi_2\rangle
+    \quad\Rightarrow\quad
+    \langle\phi|\chi\rangle=0,
+    \qquad
+    \text{where }
+    |\chi\rangle=|\psi_1\rangle-|\psi_2\rangle.
+\]
+If this holds $\forall\,\langle\phi|$, set
+$\langle\phi|=\langle\chi|$ \& get
+\[
+    \langle\chi|\chi\rangle
+    =
+    \bigl\|\,|\chi\rangle\,\bigr\|^2
+    =
+    0
+    \quad\Rightarrow\quad
+    |\chi\rangle=0,
+    \qquad
+    \text{as claimed.}
+\]
+]
+
+\medskip
+
+The physical content of any state is unchanged by
+\[
+    |\psi\rangle\to\alpha|\psi\rangle
+    \qquad
+    \text{for any }\alpha\in\mathbb{C},\quad\alpha\neq0.
+\]
+
+We will usually normalise to make
+$\bigl\|\,|\psi\rangle\,\bigr\|=1$, but can still change
+\[
+    |\psi\rangle\to e^{i\theta}|\psi\rangle.
+\]
+
+Relative phases can be important in expressions like
+$\alpha|\psi\rangle+\beta|\phi\rangle$.
+
+The space $V$ is \underline{complete}: we assume that appropriate
+sequences \& series \underline{converge}.
+A complete inner product space is called a
+\underline{Hilbert space}.
+
+\medskip
+
+An \underline{operator} $Q$ is a linear map on states
+\[
+    |\psi\rangle\longmapsto Q|\psi\rangle,
+    \qquad
+    V\to V,
+\]
+with
+\[
+    Q\bigl(\alpha|\psi\rangle+\beta|\phi\rangle\bigr)
+    =
+    \alpha Q|\psi\rangle+\beta Q|\phi\rangle.
+\]
+
+The same operator can be thought of as acting to the left on dual states,
+\[
+    \langle\phi|\longmapsto\langle\phi|Q,
+    \qquad
+    V^\dagger\to V^\dagger,
+\]
+where the right-hand side is defined by
+\[
+    \bigl(\langle\phi|Q\bigr)|\psi\rangle
+    =
+    \langle\phi|\bigl(Q|\psi\rangle\bigr)
+    =
+    \langle\phi|Q|\psi\rangle.
+\]
+
+\begin{center}
+    \textbf{End of Lecture 1}
+\end{center}
 \end{document}
