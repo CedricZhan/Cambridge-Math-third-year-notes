@@ -273,4 +273,276 @@ where the right-hand side is defined by
 \begin{center}
     \textbf{End of Lecture 1}
 \end{center}
+Last time: abstract notation for states
+\[
+    |\psi\rangle\in V,
+    \qquad
+    \langle\phi|\in V^\dagger,
+    \qquad
+    \text{\& map }V\longleftrightarrow V^\dagger,
+\]
+\& operators acting, e.g.\ $|\psi\rangle\longmapsto Q|\psi\rangle$
+(\S\,1.1).
+
+\medskip
+
+\noindent
+Note: States \& operators $|\psi\rangle$, $\langle\phi|$, $Q$
+can be dealt with by rules that mirror those for complex vectors
+$\underline{u}$ (column), $\underline{v}^{\dagger}$ (row),
+\& a matrix $A$; e.g.\ compare
+\[
+    \langle\phi|Q|\psi\rangle
+    \qquad\text{with}\qquad
+    \underline{v}^{\dagger}A\underline{u}.
+\]
+
+For any operator $Q$, say $|\psi\rangle\neq0$ is an
+\underline{eigenstate} with \underline{eigenvalue} $\lambda$ if
+\[
+    Q|\psi\rangle=\lambda|\psi\rangle;
+\]
+equivalently,
+\[
+    \langle\psi|Q^\dagger=\lambda^*\langle\psi|.
+\]
+For general $Q$, $\lambda$ may be complex.
+
+For any $Q$, the \underline{hermitian conjugate} or adjoint
+$Q^\dagger$ is defined by
+\[
+    \langle\phi|Q^\dagger
+    =\bigl(Q|\phi\rangle\bigr)^\dagger
+    \qquad\text{for any }|\phi\rangle.
+\]
+Equivalently,
+\begin{align*}
+    \langle\phi|Q^\dagger|\psi\rangle
+    &=\bigl(Q|\phi\rangle\bigr)^\dagger|\psi\rangle\\
+    &=\langle\psi|Q|\phi\rangle^*
+    \qquad\text{for all }|\phi\rangle,\ |\psi\rangle.
+\end{align*}
+Simple consequences:
+\begin{align*}
+    (\alpha A+\beta B)^\dagger
+    &=\alpha^*A^\dagger+\beta^*B^\dagger,\\
+    (AB)^\dagger&=B^\dagger A^\dagger,
+\end{align*}
+for any operators $A,B$ \& $\alpha,\beta\in\mathbb{C}$, \&
+\[
+    \bigl(Q^\dagger\bigr)^\dagger=Q.
+\]
+
+\medskip
+
+\noindent
+\underline{Observables}
+
+An operator $Q$ is \underline{hermitian} or
+\underline{self-adjoint} if
+\[
+    Q^\dagger=Q;
+\]
+such operators are called observables because they correspond to
+physical quantities that can be measured, e.g.\ position, momentum, energy.
+
+To define a quantum system, we must specify the \underline{Hamiltonian}
+$H$ whose eigenvalues are the allowed energy levels of the system:
+\[
+    H|\chi\rangle=E|\chi\rangle
+    \qquad\text{energy eigenvalue problem.}
+\]
+
+Key results for any hermitian $Q$:
+\begin{enumerate}
+    \item[(i)] All eigenvalues are real.
+    \item[(ii)] Eigenstates with distinct eigenvalues are orthogonal.
+    \item[(iii)] Any state can be expanded in terms of
+    (written as a linear combination of) eigenstates.
+\end{enumerate}
+We prove (i) \& (ii) \& assume (iii).
+
+\medskip
+
+\noindent
+(i) Suppose
+\[
+    Q|\psi\rangle=\lambda|\psi\rangle.
+\]
+Then
+\[
+    \langle\psi|Q^\dagger
+    =\lambda^*\langle\psi|
+    =\langle\psi|Q
+    \qquad(Q^\dagger=Q).
+\]
+Hence
+\[
+    \langle\psi|Q|\psi\rangle
+    =\lambda\langle\psi|\psi\rangle
+    =\lambda^*\langle\psi|\psi\rangle.
+\]
+But
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2
+    =\langle\psi|\psi\rangle\neq0
+    \qquad(|\psi\rangle\neq0),
+\]
+so $\underline{\lambda^*=\lambda}$.
+
+\medskip
+
+\noindent
+(ii) Let $|n\rangle$ be eigenstates of $Q$ with eigenvalues
+$\lambda=q_n$ (real), where $n$ is some discrete label,
+possibly ranging over infinitely many values.
+\[
+    Q|n\rangle=q_n|n\rangle,
+    \qquad
+    Q|m\rangle=q_m|m\rangle,
+\]
+or
+\[
+    \langle m|Q=q_m\langle m|
+    \qquad(q_m^*=q_m).
+\]
+Hence
+\[
+    \langle m|Q|n\rangle
+    =q_n\langle m|n\rangle
+    =q_m\langle m|n\rangle.
+\]
+But $q_m\neq q_n$, so $\langle m|n\rangle=0$.
+
+\subsection*{1.2 The Harmonic Oscillator}
+
+A one-dimensional harmonic oscillator of mass $m$ \& frequency
+$\omega$ is a system with position $\hat{x}$, momentum $\hat{p}$
+\& Hamiltonian
+\[
+    H=\frac{1}{2m}\hat{p}^{\,2}
+    +\frac{1}{2}m\omega^2\hat{x}^{\,2}.
+\]
+Seek eigenstates \& eigenvalues of $H$.
+
+\medskip
+
+\noindent
+(a) \underline{Annihilation, creation \& number operators}
+
+Define
+\[
+    \left\{
+    \begin{aligned}
+        a&=\left(\frac{m\omega}{2\hbar}\right)^{1/2}
+        \left(\hat{x}+\frac{i\hat{p}}{m\omega}\right),\\
+        a^\dagger&=\left(\frac{m\omega}{2\hbar}\right)^{1/2}
+        \left(\hat{x}-\frac{i\hat{p}}{m\omega}\right).
+    \end{aligned}
+    \right.
+\]
+These are dimensionless hermitian conjugates, since
+$\hat{x}^\dagger=\hat{x}$, $\hat{p}^\dagger=\hat{p}$.
+Equivalently,
+\[
+    \left\{
+    \begin{aligned}
+        \hat{x}&=\left(\frac{\hbar}{2m\omega}\right)^{1/2}
+        (a+a^\dagger),\\
+        \hat{p}&=\left(\frac{\hbar m\omega}{2}\right)^{1/2}
+        i(a^\dagger-a).
+    \end{aligned}
+    \right.
+\]
+Easy to check:
+\[
+    [\hat{x},\hat{p}]=i\hbar
+    \quad\Longleftrightarrow\quad
+    [a,a^\dagger]=1.
+\]
+In fact,
+\begin{align*}
+    aa^\dagger
+    &=\frac{m\omega}{2\hbar}\hat{x}^{\,2}
+    +\frac{1}{2m\omega\hbar}\hat{p}^{\,2}
+    -\frac{i}{2\hbar}(\hat{x}\hat{p}-\hat{p}\hat{x})\\
+    &=\frac{1}{\hbar\omega}H+\frac{1}{2},
+\end{align*}
+but
+\[
+    a^\dagger a=\frac{1}{\hbar\omega}H-\frac{1}{2}.
+\]
+This confirms the commutation relation, but we also find
+\[
+    H=\hbar\omega\left(N+\frac{1}{2}\right),
+\]
+with $N=a^\dagger a$ the \underline{number operator}.
+
+$N^\dagger=N$, \& finding eigenvalues \& eigenstates of $N$
+is equivalent to finding those for $H$.
+Let $|\lambda\rangle$ be any eigenstate of $N$ with eigenvalue $\lambda$:
+\[
+    N|\lambda\rangle=\lambda|\lambda\rangle
+    \quad\Longleftrightarrow\quad
+    H|\lambda\rangle=E|\lambda\rangle,
+    \qquad
+    E=\hbar\omega\left(\lambda+\frac{1}{2}\right).
+\]
+Then, assuming $\bigl\|\,|\lambda\rangle\,\bigr\|^2=1$
+(normalised),
+\begin{align*}
+    \lambda
+    &=\langle\lambda|N|\lambda\rangle
+    =\langle\lambda|a^\dagger a|\lambda\rangle
+    =\bigl(a|\lambda\rangle\bigr)^\dagger
+    \bigl(a|\lambda\rangle\bigr)\\
+    &=\bigl\|a|\lambda\rangle\bigr\|^2.
+\end{align*}
+Thus $\lambda\geq0$ (all eigenvalues are non-negative),
+\& $\lambda=0$ iff $a|\lambda\rangle=0$.
+
+Now consider
+\begin{align*}
+    N\bigl(a^\dagger|\lambda\rangle\bigr)
+    &=\bigl([N,a^\dagger]+a^\dagger N\bigr)|\lambda\rangle\\
+    &=\bigl(a^\dagger+a^\dagger\lambda\bigr)|\lambda\rangle\\
+    &=(\lambda+1)\bigl(a^\dagger|\lambda\rangle\bigr).
+\end{align*}
+Similarly,
+\begin{align*}
+    N\bigl(a|\lambda\rangle\bigr)
+    &=\bigl([N,a]+aN\bigr)|\lambda\rangle\\
+    &=(-a+a\lambda)|\lambda\rangle\\
+    &=(\lambda-1)a|\lambda\rangle.
+\end{align*}
+Here we have used the results for commutators
+\[
+    [N,a^\dagger]=a^\dagger
+    \qquad
+    \bigl(=[a^\dagger a,a^\dagger]
+    =a^\dagger[a,a^\dagger]\bigr),
+\]
+\&
+\[
+    [N,a]=-a.
+\]
+
+New states will be eigenstates provided their norms are non-zero.
+Compute:
+\[
+    \bigl\|a|\lambda\rangle\bigr\|^2=\lambda,
+\]
+\begin{align*}
+    \bigl\|a^\dagger|\lambda\rangle\bigr\|^2
+    &=\langle\lambda|aa^\dagger|\lambda\rangle
+    =\langle\lambda|a^\dagger a+1|\lambda\rangle\\
+    &=\lambda+1.
+\end{align*}
+Therefore $a^\dagger$ \& $a$ are called
+\underline{creation} (or raising) \&
+\underline{annihilation} (or lowering) operators, respectively.
+
+\begin{center}
+    \textbf{End of Lecture 2}
+\end{center}
 \end{document}
