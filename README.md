@@ -11,6 +11,8 @@ Course sources live in `tex/`. Edit the matching `.tex` file, then compile every
 ```
 
 The generated PDFs are written to `dist/pdfs/`, where the website links to them.
+After all courses compile successfully, the script updates the homepage's
+"Last updated" time in UTC+8. Publish `dist/index.html` together with the PDFs.
 
 ## Previewing the website
 

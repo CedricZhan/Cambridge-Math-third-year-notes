@@ -176,6 +176,13 @@ h1 {
   padding: 72px 0 88px;
 }
 
+.last-updated {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 0.78rem;
+}
+
 .term-heading {
   position: sticky;
   top: 24px;
