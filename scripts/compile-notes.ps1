@@ -34,10 +34,12 @@ finally {
     Pop-Location
 }
 
-$compiledAt = [DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(8))
+$londonZone = [TimeZoneInfo]::FindSystemTimeZoneById("GMT Standard Time")
+$compiledAt = [TimeZoneInfo]::ConvertTime([DateTimeOffset]::UtcNow, $londonZone)
+$zoneLabel = if ($londonZone.IsDaylightSavingTime($compiledAt)) { "BST" } else { "GMT" }
 $isoTime = $compiledAt.ToString("yyyy-MM-dd'T'HH:mm:sszzz", [Globalization.CultureInfo]::InvariantCulture)
 $displayTime = $compiledAt.ToString("d MMMM yyyy, HH:mm", [Globalization.CultureInfo]::InvariantCulture)
-$timestamp = '<time id="last-compiled" datetime="' + $isoTime + '">' + $displayTime + ' (UTC+8)</time>'
+$timestamp = '<time id="last-compiled" datetime="' + $isoTime + '">' + $displayTime + ' (' + $zoneLabel + ')</time>'
 $indexHtml = [regex]::Replace($indexHtml, $timestampPattern, $timestamp)
 [System.IO.File]::WriteAllText($indexPath, $indexHtml, [System.Text.UTF8Encoding]::new($false))
 
