@@ -1,8 +1,168 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
+\usepackage{graphicx}
+\graphicspath{{figures/dynamical-systems/}}
 \title{Dynamical Systems}
 \begin{document}
 \maketitle
 \thispagestyle{empty}
+
+\noindent
+\underline{Dynamical systems} -- mathematical entities described by a set of
+equations for a set of variables w.r.t. a time-like variable.
+
+\medskip
+\noindent
+\underline{State space} or \underline{phase space}.
+
+\medskip
+\noindent
+$\ast$ \underline{Continuous time} $\Rightarrow$ set of ODEs
+
+\medskip
+\noindent
+Lotka--Volterra for rabbits $(r)$ \& sheep $(s)$
+\[
+\dot r=r(a-br-cs),\qquad \dot s=s(d-er-fs),\qquad a,b,\ldots,f>0.
+\]
+\[
+\text{State space}\qquad [0,\infty)\times[0,\infty).
+\]
+
+\noindent
+e.g.\ \underline{Logistic map}\qquad
+$x_{n+1}=\mu x_n(1-x_n),\quad 0\leq\mu\leq1$
+
+\medskip
+\noindent\underline{Questions to address}
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item[$\ast$] Long-term behavior of the system?
+    \item[$\ast$] Are there periodic solutions
+    \item[$\ast$] Stability of solutions, chaos
+    \item[$\ast$] Effect of system parameter variation
+\end{itemize}
+
+\noindent\fbox{Example}\quad 1D system\qquad $\dot x=x(1-x^2)$
+\[
+\text{Solution}\qquad x(t)=\pm\left(1+2e^{2(t_0-t)}\right)^{-1/2}
+\]
+\noindent
+\begin{minipage}[c]{0.66\textwidth}
+    \includegraphics[width=\linewidth]{one-dimensional.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.32\textwidth}
+    \centering
+    \underline{as $t\to\infty$}
+    \[
+    \begin{aligned}
+    x(0)>0&\Rightarrow x(t)\to1\\
+    x(0)<0&\Rightarrow x(t)\to-1\\
+    x(0)=0&\Rightarrow x(t)=0
+    \end{aligned}
+    \]
+\end{minipage}
+
+\newpage
+\noindent\fbox{Example}\quad 2D, Lotka--Volterra
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.43\textwidth}
+    \[
+    \begin{aligned}
+    \dot r&=r(3-r-s)\\
+    \dot s&=s(2-r-s)
+    \end{aligned}
+    \]
+    Can get $r(s)\Rightarrow t(s)$
+
+    \medskip
+    $\ast$ \underline{Find fixed points}
+    \[
+    \dot r,\dot s=0:\quad (0,0),(3,0),(0,2)
+    \]
+    $\ast$ \underline{Look at $\dot r,\dot s$ in state space}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.55\textwidth}
+    \includegraphics[width=\linewidth]{lotka-volterra.png}
+\end{minipage}
+
+\[
+\text{As }t\to\infty\qquad
+(r,s)\to
+\begin{cases}
+    (3,0),&r>0,\\
+    (0,2),&r=0,\ s>0,\\
+    (0,0),&r=s=0.
+\end{cases}
+\]
+
+\bigskip
+\noindent\fbox{Example}\quad \underline{predator-prey}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.43\textwidth}
+    sheep $(s)$ \& wolves $(w)$
+    \[
+    \begin{aligned}
+    \dot w&=w(-a+bs)\\
+    \dot s&=s(c-dw)
+    \end{aligned}
+    \]
+    \[
+    \underline{a,\ldots,d>0}
+    \]
+    Fixed points
+    \[
+    (0,0),\quad (a/b,c/d)
+    \]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.55\textwidth}
+    \includegraphics[width=\linewidth]{predator-prey.png}
+\end{minipage}
+
+\[
+(s,w)\to
+\begin{cases}
+    \text{periodic around }(a/b,c/d),&s>0,\ w>0,\\
+    (0,0),&s=0,\ w\geq0,\\
+    (\infty,0),&s>0,\ w=0
+\end{cases}
+\qquad\text{as }t\to\infty
+\]
+
+\newpage
+\noindent\fbox{Example}
+\[
+\begin{aligned}
+\dot x&=-y+\varepsilon x(\mu-x^2-y^2)\\
+\dot y&=\phantom{-}x+\varepsilon y(\mu-x^2-y^2)
+\end{aligned}
+\]
+
+\noindent
+Switch to polars:
+\[
+r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan}\frac{y}{x},
+\]
+\[
+\dot r=\frac{x\dot x+y\dot y}{r},\qquad
+\dot\theta=\frac{x\dot y-y\dot x}{r^2}
+\quad\Rightarrow
+\]
+\[
+\underline{\dot r=\varepsilon r(\mu-r^2)},\qquad
+\underline{\dot\theta=1}
+\]
+
+\begin{center}
+    \includegraphics[width=\textwidth]{polar-cases.png}
+\end{center}
+
+\begin{center}
+    \textbf{End of Lecture 1}
+\end{center}
 
 \end{document}
