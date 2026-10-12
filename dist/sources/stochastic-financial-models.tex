@@ -1,0 +1,280 @@
+\documentclass[11pt,a4paper]{article}
+\input{preamble}
+\title{Stochastic Financial Models}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\section{Martingales}
+
+We work with a probability space $(\Omega,\mathcal{F},\mathbb{P})$.
+
+\subsection{Definitions}
+
+A \emph{filtration} is a sequence of $\sigma$-algebras
+$(\mathcal{F}_n)_{n\geq0}$ such that
+\[
+\mathcal{F}_n\subseteq\mathcal{F}_{n+1}\subseteq\mathcal{F}.
+\]
+
+A \emph{random process} is a sequence
+$X=(X_n)_{n\geq0}$ of random variables.
+
+Given a filtration $(\mathcal{F}_n)_{n\geq0}$ on
+$(\Omega,\mathcal{F},\mathbb{P})$, we say that $X$ is a
+\emph{martingale} if:
+\begin{enumerate}
+    \item[(a)] $X$ is adapted, i.e.\ $X_n$ is
+    $\mathcal{F}_n$-measurable for all $n$.
+
+    \item[(b)] $X$ is integrable, i.e.\ $X_n$ is integrable
+    for all $n$:
+    \[
+    \mathbb{E}[|X_n|]<\infty.
+    \]
+
+    \item[(c)] $X$ satisfies the martingale property:
+    \[
+    \mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+    =
+    X_n
+    \qquad\text{a.s., for all }n.
+    \]
+\end{enumerate}
+
+Given (a) and (b), condition (c) is equivalent to
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+=
+\mathbb{E}[X_n\mathbf{1}_A]
+\qquad
+\text{for all }n
+\text{ and all }A\in\mathcal{F}_n.
+\]
+
+If (c) is replaced by
+\[
+\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+\geq X_n
+\qquad\text{a.s., for all }n,
+\]
+or, equivalently,
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+\geq
+\mathbb{E}[X_n\mathbf{1}_A]
+\qquad
+\text{for all }n
+\text{ and all }A\in\mathcal{F}_n,
+\]
+then $(X_n)_{n\geq0}$ is a \emph{submartingale}.
+
+If (c) is replaced by
+\[
+\mathbb{E}[X_{n+1}\mid\mathcal{F}_n]
+\leq X_n
+\qquad\text{a.s., for all }n,
+\]
+or, equivalently,
+\[
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
+\leq
+\mathbb{E}[X_n\mathbf{1}_A]
+\qquad
+\text{for all }n
+\text{ and all }A\in\mathcal{F}_n,
+\]
+then $(X_n)_{n\geq0}$ is a \emph{supermartingale}.
+
+\subsection{Natural filtration}
+
+Given a random process $X=(X_n)_{n\geq0}$, its
+\emph{natural filtration} $(\mathcal{F}_n^X)_{n\geq0}$
+is defined by
+\[
+\begin{aligned}
+\mathcal{F}_n^X
+&=
+\sigma(X_0,X_1,\ldots,X_n)\\
+&=
+\left\{
+\{(X_0,X_1,\ldots,X_n)\in B\}:
+B\in\mathcal{B}(\mathbb{R}^{n+1})
+\right\}.
+\end{aligned}
+\]
+This is the smallest filtration making $X$ adapted.
+
+\paragraph{Exercise.}
+Show that a martingale $X$ with respect to
+$(\mathcal{F}_n)_{n\geq0}$ is also a martingale with respect
+to $(\mathcal{F}_n^X)_{n\geq0}$.
+
+\subsection{Examples}
+
+Let $X_1,X_2,\ldots$ be a sequence of independent integrable
+random variables. Set
+\[
+\mathcal{F}_n=\mathcal{F}_n^X.
+\]
+Define
+\[
+S_0=0,
+\qquad
+Z_0=1,
+\]
+and
+\[
+S_n=X_1+\cdots+X_n,
+\qquad
+Z_n=\prod_{i=1}^{n}X_i.
+\]
+
+\begin{itemize}
+    \item If $\mathbb{E}[X_n]=0$ for all $n$, then
+    $(S_n)_{n\geq0}$ is a martingale.
+
+    \item If $X_n\geq0$ and $\mathbb{E}[X_n]=1$ for all $n$,
+    then $(Z_n)_{n\geq0}$ is a martingale.
+\end{itemize}
+
+To see this, take $A\in\mathcal{F}_n$. Then
+\[
+\begin{aligned}
+\mathbb{E}[S_{n+1}\mathbf{1}_A]
+&=
+\mathbb{E}[X_{n+1}\mathbf{1}_A]
++
+\mathbb{E}[S_n\mathbf{1}_A]\\
+&=
+\underbrace{
+\mathbb{E}[X_{n+1}]\mathbb{P}(A)
+}_{=0}
++
+\mathbb{E}[S_n\mathbf{1}_A]\\
+&=
+\mathbb{E}[S_n\mathbf{1}_A].
+\end{aligned}
+\]
+
+Also,
+\[
+\begin{aligned}
+\mathbb{E}[Z_{n+1}\mathbf{1}_A]
+&=
+\mathbb{E}[X_{n+1}Z_n\mathbf{1}_A]\\
+&=
+\underbrace{
+\mathbb{E}[X_{n+1}]
+}_{=1}
+\mathbb{E}[Z_n\mathbf{1}_A]\\
+&=
+\mathbb{E}[Z_n\mathbf{1}_A].
+\end{aligned}
+\]
+This also shows integrability.
+
+\section{Conditional Probabilities and Expectation}
+
+For $\mathbb{P}(B)>0$,
+\[
+\mathbb{P}(A\mid B)
+=
+\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)},
+\]
+and
+\[
+\mathbb{E}[X\mid B]
+=
+\frac{\mathbb{E}[X\mathbf{1}_B]}{\mathbb{P}(B)}.
+\]
+
+\subsection{Existence and uniqueness}
+
+\paragraph{Theorem.}
+Let $\mathcal{G}\subseteq\mathcal{F}$ be a $\sigma$-algebra.
+Let $X$ be an integrable random variable. Then there exists
+a random variable $Y$ such that:
+\begin{enumerate}
+    \item[(a)] $Y$ is $\mathcal{G}$-measurable;
+
+    \item[(b)]
+    \[
+    \mathbb{E}[X\mathbf{1}_A]
+    =
+    \mathbb{E}[Y\mathbf{1}_A]
+    \qquad\text{for all }A\in\mathcal{G}.
+    \]
+\end{enumerate}
+Moreover, if $Y'$ is another random variable satisfying
+(a) and (b), then
+\[
+Y=Y'\qquad\text{a.s.}
+\]
+
+\paragraph{Proof of uniqueness.}
+Let $X'$ be another integrable random variable with
+$X\leq X'$. Suppose $Y'$ satisfies (a) and (b) with respect
+to $X'$.
+
+Set
+\[
+A=\{Y>Y'\},
+\qquad
+Z=(Y-Y')\mathbf{1}_A.
+\]
+Then $A\in\mathcal{G}$ and $Z\geq0$. Hence
+\[
+\begin{aligned}
+\mathbb{E}[Z]
+&=
+\mathbb{E}[(Y-Y')\mathbf{1}_A]\\
+&=
+\mathbb{E}[Y\mathbf{1}_A]
+-
+\mathbb{E}[Y'\mathbf{1}_A]\\
+&=
+\mathbb{E}[X\mathbf{1}_A]
+-
+\mathbb{E}[X'\mathbf{1}_A]\\
+&=
+\mathbb{E}[(X-X')\mathbf{1}_A]
+\leq0.
+\end{aligned}
+\]
+Therefore $Z=0$ a.s., so
+\[
+Y\leq Y'\qquad\text{a.s.}
+\]
+Taking $X'=X$, we also obtain $Y\geq Y'$ a.s. Thus
+\[
+Y=Y'\qquad\text{a.s.}
+\]
+
+\subsection{Notation}
+
+We write
+\[
+Y=\mathbb{E}[X\mid\mathcal{G}]
+\qquad\text{a.s.}
+\]
+
+If $\mathcal{G}=\sigma(W)$, where $W$ is a random variable,
+we write
+\[
+\mathbb{E}[X\mid\mathcal{G}]
+=
+\mathbb{E}[X\mid W].
+\]
+
+If $X=\mathbf{1}_A$, we write
+\[
+\mathbb{E}[X\mid\mathcal{G}]
+=
+\mathbb{P}(A\mid\mathcal{G}).
+\]
+\\
+
+\begin{center}
+    \textbf{End of Lecture 1}
+\end{center}
+\end{document}

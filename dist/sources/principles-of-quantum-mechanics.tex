@@ -1,0 +1,558 @@
+\documentclass[11pt,a4paper]{article}
+\input{preamble}
+\title{Principles of Quantum Mechanics}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\section*{0. Introduction}
+
+\noindent
+$\ast$ Recall features from IB QM (Supplementary Notes 1)
+
+\begin{itemize}
+    \item Wave-particle duality:
+    
+    Waves behaving like particles, e.g.\ light quanta,
+    \& vice versa (particles behaving like waves).
+    
+    \item Wavefunction $\psi(x)$ for a particle --- prob.\ density
+    $|\psi(x)|^2$.
+    
+    (Prob.\ intrinsic to theory.)
+    
+    \item Observables became operators on wavefns:
+    \[
+        \hat{x} \to x,
+        \qquad
+        \hat{p} \to -i\hbar\frac{\partial}{\partial x}.
+    \]
+    \& lack of commutativity, e.g.
+    \[
+        [\hat{x},\hat{p}] = i\hbar
+    \]
+    leads to Uncertainty Relation.
+    
+    \item Schr\"odinger eqn with Hamiltonian $H$ specifies dynamics
+    \& eigenvalues of $H$ are allowed energy levels of system.
+    
+    \item All of this explains H atom structure \& resulting line spectra.
+\end{itemize}
+
+\noindent
+$\ast$ Aims of this course:
+
+\begin{itemize}
+    \item Reformulate QM in a more powerful, flexible, \& useful form
+    --- the Dirac formalism (go beyond wavefns!).
+\end{itemize}
+
+Previous description appears as particular realisation
+\& also leads to alternatives, e.g.
+\[
+    \tilde{\psi}(p)
+    \qquad \text{with} \qquad
+    \hat{x} \to +i\hbar\frac{\partial}{\partial p}
+    \quad \& \quad
+    \hat{p} \to p.
+\]
+
+This more general approach allows
+\begin{itemize}
+    \item Simpler analysis of known problems, e.g.\ oscillator
+\end{itemize}
+
+but also lots of new things
+\begin{itemize}
+    \item \underline{Spin} of particles
+    
+    \item \underline{Symmetries} (translations, rotations, for example)
+    \& conservation laws.
+    
+    \item \underline{Identical particles} (bosons \& fermions)
+    
+    \item Framework for quantising more general systems,
+    e.g.\ EM field
+    
+    \item \underline{Perturbation theory}: practical tool for computations ---
+    we will not look at too many detailed applications, but we
+    will try to keep track of what all this is for --- physical predictions
+\end{itemize}
+
+\section*{1. Dirac Formalism}
+
+\subsection*{1.1 Concepts \& Definitions}
+
+A quantum system is described at each instant by a \underline{state}
+$|\psi\rangle$ which belongs to a complex vector space $V$;
+any non-zero element of this space $V$ is a possible state.
+
+Thus
+\[
+    |\psi\rangle \ \&\ |\phi\rangle \in V
+    \quad\Rightarrow\quad
+    \alpha|\psi\rangle+\beta|\phi\rangle\in V
+    \qquad
+    \text{for any }\alpha,\beta\in\mathbb{C}.
+\]
+
+Physically this is a superposition principle leading to wave-like behaviour,
+but these states are \underline{not} \underline{wavefns}.
+There are also \underline{dual} or conjugate states
+$\langle\phi|$ which belong to the dual space $V^\dagger$.
+
+By definition, states \& duals can be combined or paired to give a
+complex number
+\[
+    \underset{\text{``bra''}}{\langle\phi|},
+    \quad
+    \underset{\text{``ket''}}{|\psi\rangle}
+    \ \longmapsto\
+    \underset{\text{``bra(c)ket''}}{\langle\phi|\psi\rangle},
+    \qquad
+    V^\dagger\times V\to\mathbb{C},
+\]
+with
+\begin{align*}
+    \langle\phi|
+    \bigl(\alpha_1|\psi_1\rangle+\alpha_2|\psi_2\rangle\bigr)
+    &=
+    \alpha_1\langle\phi|\psi_1\rangle
+    +\alpha_2\langle\phi|\psi_2\rangle,\\
+    \bigl(\beta_1\langle\phi_1|+\beta_2\langle\phi_2|\bigr)
+    |\psi\rangle
+    &=
+    \beta_1\langle\phi_1|\psi\rangle
+    +\beta_2\langle\phi_2|\psi\rangle.
+\end{align*}
+
+The spaces $V$ \& $V^\dagger$ come with an
+\underline{inner product}, which can be described as a one-to-one
+correspondence between the spaces
+\[
+    V\longleftrightarrow V^\dagger,
+\]
+with
+\[
+    |\psi\rangle
+    \longleftrightarrow
+    \langle\psi|
+    =
+    \bigl(|\psi\rangle\bigr)^\dagger
+    \qquad
+    \text{(use same symbol for corresponding states).}
+\]
+
+The inner product is
+\[
+    |\phi\rangle,\ |\psi\rangle
+    \longmapsto
+    \langle\phi|\psi\rangle
+    =
+    \bigl(|\phi\rangle\bigr)^\dagger|\psi\rangle,
+    \qquad
+    V\times V\to\mathbb{C},
+\]
+\& it is assumed to obey
+\[
+    \langle\phi|\psi\rangle
+    =
+    \langle\psi|\phi\rangle^*
+    \qquad
+    \underline{\text{hermitian}},
+\]
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2
+    =
+    \langle\psi|\psi\rangle
+    \qquad
+    \text{real},
+\]
+\[
+    \left.
+    \begin{aligned}
+        \langle\psi|\psi\rangle &\geq 0,\\
+        \langle\psi|\psi\rangle &=0
+        \quad\text{iff}\quad
+        |\psi\rangle=0
+    \end{aligned}
+    \right\}
+    \qquad
+    \underline{\text{positive definite}},
+\]
+where now $\bigl\|\,|\psi\rangle\,\bigr\|$ is called the norm.
+
+\medskip
+
+\noindent
+Note: Knowing $\langle\phi|\psi\rangle$ for all
+$\langle\phi|$ determines $|\psi\rangle$
+(\& vice versa).
+
+\medskip
+
+\noindent
+[Check:
+\[
+    \langle\phi|\psi_1\rangle
+    =
+    \langle\phi|\psi_2\rangle
+    \quad\Rightarrow\quad
+    \langle\phi|\chi\rangle=0,
+    \qquad
+    \text{where }
+    |\chi\rangle=|\psi_1\rangle-|\psi_2\rangle.
+\]
+If this holds $\forall\,\langle\phi|$, set
+$\langle\phi|=\langle\chi|$ \& get
+\[
+    \langle\chi|\chi\rangle
+    =
+    \bigl\|\,|\chi\rangle\,\bigr\|^2
+    =
+    0
+    \quad\Rightarrow\quad
+    |\chi\rangle=0,
+    \qquad
+    \text{as claimed.}
+\]
+]
+
+\medskip
+
+The physical content of any state is unchanged by
+\[
+    |\psi\rangle\to\alpha|\psi\rangle
+    \qquad
+    \text{for any }\alpha\in\mathbb{C},\quad\alpha\neq0.
+\]
+
+We will usually normalise to make
+$\bigl\|\,|\psi\rangle\,\bigr\|=1$, but can still change
+\[
+    |\psi\rangle\to e^{i\theta}|\psi\rangle.
+\]
+
+Relative phases can be important in expressions like
+$\alpha|\psi\rangle+\beta|\phi\rangle$.
+
+The space $V$ is \underline{complete}: we assume that appropriate
+sequences \& series \underline{converge}.
+A complete inner product space is called a
+\underline{Hilbert space}.
+
+\medskip
+
+An \underline{operator} $Q$ is a linear map on states
+\[
+    |\psi\rangle\longmapsto Q|\psi\rangle,
+    \qquad
+    V\to V,
+\]
+with
+\[
+    Q\bigl(\alpha|\psi\rangle+\beta|\phi\rangle\bigr)
+    =
+    \alpha Q|\psi\rangle+\beta Q|\phi\rangle.
+\]
+
+The same operator can be thought of as acting to the left on dual states,
+\[
+    \langle\phi|\longmapsto\langle\phi|Q,
+    \qquad
+    V^\dagger\to V^\dagger,
+\]
+where the right-hand side is defined by
+\[
+    \bigl(\langle\phi|Q\bigr)|\psi\rangle
+    =
+    \langle\phi|\bigl(Q|\psi\rangle\bigr)
+    =
+    \langle\phi|Q|\psi\rangle.
+\]
+
+\begin{center}
+    \textbf{End of Lecture 1}
+\end{center}
+Last time: abstract notation for states
+\[
+    |\psi\rangle\in V,
+    \qquad
+    \langle\phi|\in V^\dagger,
+    \qquad
+    \text{\& map }V\longleftrightarrow V^\dagger,
+\]
+\& operators acting, e.g.\ $|\psi\rangle\longmapsto Q|\psi\rangle$
+(\S\,1.1).
+
+\medskip
+
+\noindent
+Note: States \& operators $|\psi\rangle$, $\langle\phi|$, $Q$
+can be dealt with by rules that mirror those for complex vectors
+$\underline{u}$ (column), $\underline{v}^{\dagger}$ (row),
+\& a matrix $A$; e.g.\ compare
+\[
+    \langle\phi|Q|\psi\rangle
+    \qquad\text{with}\qquad
+    \underline{v}^{\dagger}A\underline{u}.
+\]
+
+For any operator $Q$, say $|\psi\rangle\neq0$ is an
+\underline{eigenstate} with \underline{eigenvalue} $\lambda$ if
+\[
+    Q|\psi\rangle=\lambda|\psi\rangle;
+\]
+equivalently,
+\[
+    \langle\psi|Q^\dagger=\lambda^*\langle\psi|.
+\]
+For general $Q$, $\lambda$ may be complex.
+
+For any $Q$, the \underline{hermitian conjugate} or adjoint
+$Q^\dagger$ is defined by
+\[
+    \langle\phi|Q^\dagger
+    =\bigl(Q|\phi\rangle\bigr)^\dagger
+    \qquad\text{for any }|\phi\rangle.
+\]
+Equivalently,
+\begin{align*}
+    \langle\phi|Q^\dagger|\psi\rangle
+    &=\bigl(Q|\phi\rangle\bigr)^\dagger|\psi\rangle\\
+    &=\langle\psi|Q|\phi\rangle^*
+    \qquad\text{for all }|\phi\rangle,\ |\psi\rangle.
+\end{align*}
+Simple consequences:
+\begin{align*}
+    (\alpha A+\beta B)^\dagger
+    &=\alpha^*A^\dagger+\beta^*B^\dagger,\\
+    (AB)^\dagger&=B^\dagger A^\dagger,
+\end{align*}
+for any operators $A,B$ \& $\alpha,\beta\in\mathbb{C}$, \&
+\[
+    \bigl(Q^\dagger\bigr)^\dagger=Q.
+\]
+
+\medskip
+
+\noindent
+\underline{Observables}
+
+An operator $Q$ is \underline{hermitian} or
+\underline{self-adjoint} if
+\[
+    Q^\dagger=Q;
+\]
+such operators are called observables because they correspond to
+physical quantities that can be measured, e.g.\ position, momentum, energy.
+
+To define a quantum system, we must specify the \underline{Hamiltonian}
+$H$ whose eigenvalues are the allowed energy levels of the system:
+\[
+    H|\chi\rangle=E|\chi\rangle
+    \qquad\text{energy eigenvalue problem.}
+\]
+
+Key results for any hermitian $Q$:
+\begin{enumerate}
+    \item[(i)] All eigenvalues are real.
+    \item[(ii)] Eigenstates with distinct eigenvalues are orthogonal.
+    \item[(iii)] Any state can be expanded in terms of
+    (written as a linear combination of) eigenstates.
+\end{enumerate}
+We prove (i) \& (ii) \& assume (iii).
+
+\medskip
+
+\noindent
+(i) Suppose
+\[
+    Q|\psi\rangle=\lambda|\psi\rangle.
+\]
+Then
+\[
+    \langle\psi|Q^\dagger
+    =\lambda^*\langle\psi|
+    =\langle\psi|Q
+    \qquad(Q^\dagger=Q).
+\]
+Hence
+\[
+    \langle\psi|Q|\psi\rangle
+    =\lambda\langle\psi|\psi\rangle
+    =\lambda^*\langle\psi|\psi\rangle.
+\]
+But
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2
+    =\langle\psi|\psi\rangle\neq0
+    \qquad(|\psi\rangle\neq0),
+\]
+so $\underline{\lambda^*=\lambda}$.
+
+\medskip
+
+\noindent
+(ii) Let $|n\rangle$ be eigenstates of $Q$ with eigenvalues
+$\lambda=q_n$ (real), where $n$ is some discrete label,
+possibly ranging over infinitely many values.
+\[
+    Q|n\rangle=q_n|n\rangle,
+    \qquad
+    Q|m\rangle=q_m|m\rangle,
+\]
+or
+\[
+    \langle m|Q=q_m\langle m|
+    \qquad(q_m^*=q_m).
+\]
+Hence
+\[
+    \langle m|Q|n\rangle
+    =q_n\langle m|n\rangle
+    =q_m\langle m|n\rangle.
+\]
+But $q_m\neq q_n$, so $\langle m|n\rangle=0$.
+
+\subsection*{1.2 The Harmonic Oscillator}
+
+A one-dimensional harmonic oscillator of mass $m$ \& frequency
+$\omega$ is a system with position $\hat{x}$, momentum $\hat{p}$
+\& Hamiltonian
+\[
+    H=\frac{1}{2m}\hat{p}^{\,2}
+    +\frac{1}{2}m\omega^2\hat{x}^{\,2}.
+\]
+Seek eigenstates \& eigenvalues of $H$.
+
+\medskip
+
+\noindent
+(a) \underline{Annihilation, creation \& number operators}
+
+Define
+\[
+    \left\{
+    \begin{aligned}
+        a&=\left(\frac{m\omega}{2\hbar}\right)^{1/2}
+        \left(\hat{x}+\frac{i\hat{p}}{m\omega}\right),\\
+        a^\dagger&=\left(\frac{m\omega}{2\hbar}\right)^{1/2}
+        \left(\hat{x}-\frac{i\hat{p}}{m\omega}\right).
+    \end{aligned}
+    \right.
+\]
+These are dimensionless hermitian conjugates, since
+$\hat{x}^\dagger=\hat{x}$, $\hat{p}^\dagger=\hat{p}$.
+Equivalently,
+\[
+    \left\{
+    \begin{aligned}
+        \hat{x}&=\left(\frac{\hbar}{2m\omega}\right)^{1/2}
+        (a+a^\dagger),\\
+        \hat{p}&=\left(\frac{\hbar m\omega}{2}\right)^{1/2}
+        i(a^\dagger-a).
+    \end{aligned}
+    \right.
+\]
+Easy to check:
+\[
+    [\hat{x},\hat{p}]=i\hbar
+    \quad\Longleftrightarrow\quad
+    [a,a^\dagger]=1.
+\]
+In fact,
+\begin{align*}
+    aa^\dagger
+    &=\frac{m\omega}{2\hbar}\hat{x}^{\,2}
+    +\frac{1}{2m\omega\hbar}\hat{p}^{\,2}
+    -\frac{i}{2\hbar}(\hat{x}\hat{p}-\hat{p}\hat{x})\\
+    &=\frac{1}{\hbar\omega}H+\frac{1}{2},
+\end{align*}
+but
+\[
+    a^\dagger a=\frac{1}{\hbar\omega}H-\frac{1}{2}.
+\]
+This confirms the commutation relation, but we also find
+\[
+    H=\hbar\omega\left(N+\frac{1}{2}\right),
+\]
+with $N=a^\dagger a$ the \underline{number operator}.
+
+$N^\dagger=N$, \& finding eigenvalues \& eigenstates of $N$
+is equivalent to finding those for $H$.
+Let $|\lambda\rangle$ be any eigenstate of $N$ with eigenvalue $\lambda$:
+\[
+    N|\lambda\rangle=\lambda|\lambda\rangle
+    \quad\Longleftrightarrow\quad
+    H|\lambda\rangle=E|\lambda\rangle,
+    \qquad
+    E=\hbar\omega\left(\lambda+\frac{1}{2}\right).
+\]
+Then, assuming $\bigl\|\,|\lambda\rangle\,\bigr\|^2=1$
+(normalised),
+\begin{align*}
+    \lambda
+    &=\langle\lambda|N|\lambda\rangle
+    =\langle\lambda|a^\dagger a|\lambda\rangle
+    =\bigl(a|\lambda\rangle\bigr)^\dagger
+    \bigl(a|\lambda\rangle\bigr)\\
+    &=\bigl\|a|\lambda\rangle\bigr\|^2.
+\end{align*}
+Thus $\lambda\geq0$ (all eigenvalues are non-negative),
+\& $\lambda=0$ iff $a|\lambda\rangle=0$.
+
+Now consider
+\begin{align*}
+    N\bigl(a^\dagger|\lambda\rangle\bigr)
+    &=\bigl([N,a^\dagger]+a^\dagger N\bigr)|\lambda\rangle\\
+    &=\bigl(a^\dagger+a^\dagger\lambda\bigr)|\lambda\rangle\\
+    &=(\lambda+1)\bigl(a^\dagger|\lambda\rangle\bigr).
+\end{align*}
+Similarly,
+\begin{align*}
+    N\bigl(a|\lambda\rangle\bigr)
+    &=\bigl([N,a]+aN\bigr)|\lambda\rangle\\
+    &=(-a+a\lambda)|\lambda\rangle\\
+    &=(\lambda-1)a|\lambda\rangle.
+\end{align*}
+Here we have used the results for commutators
+\[
+    [N,a^\dagger]=a^\dagger
+    \qquad
+    \bigl(=[a^\dagger a,a^\dagger]
+    =a^\dagger[a,a^\dagger]\bigr),
+\]
+\&
+\[
+    [N,a]=-a.
+\]
+
+New states will be eigenstates provided their norms are non-zero.
+Compute:
+\[
+    \bigl\|a|\lambda\rangle\bigr\|^2=\lambda,
+\]
+\begin{align*}
+    \bigl\|a^\dagger|\lambda\rangle\bigr\|^2
+    &=\langle\lambda|aa^\dagger|\lambda\rangle
+    =\langle\lambda|a^\dagger a+1|\lambda\rangle\\
+    &=\lambda+1.
+\end{align*}
+Therefore $a^\dagger$ \& $a$ are called
+\underline{creation} (or raising) \&
+\underline{annihilation} (or lowering) operators, respectively.
+Since all eigenvalues are non-negative, any non-integer
+$\lambda$ would eventually lead to a negative eigenvalue
+under repeated lowering, which is impossible.
+Thus, $\lambda$ must be a non-negative integer.
+Repeated lowering then reaches the ground state
+$|0\rangle$, where $a|0\rangle=0$.
+Since the raising operator $a^\dagger$ can act indefinitely,
+all non-negative integers are eigenvalues. Hence,
+\[
+\boxed{\lambda=0,1,2,\ldots}
+\]
+\begin{center}
+    \textbf{End of Lecture 2}
+\end{center}
+\end{document}

@@ -34,6 +34,8 @@ finally {
     Pop-Location
 }
 
+& (Join-Path $PSScriptRoot "export-sources.ps1")
+
 $londonZone = [TimeZoneInfo]::FindSystemTimeZoneById("GMT Standard Time")
 $compiledAt = [TimeZoneInfo]::ConvertTime([DateTimeOffset]::UtcNow, $londonZone)
 $zoneLabel = if ($londonZone.IsDaylightSavingTime($compiledAt)) { "BST" } else { "GMT" }

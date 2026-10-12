@@ -338,7 +338,6 @@ h1 {
 
 .course-list li:hover {
   border-bottom-color: var(--cambridge-dark);
-  transform: translateX(4px);
 }
 
 .course-number {
@@ -378,10 +377,112 @@ h1 {
 }
 
 .course-list a:focus-visible,
+.source-toggle:focus-visible,
+.source-toolbar button:focus-visible,
+.source-panel pre:focus-visible,
 .remarks a:focus-visible,
 footer a:focus-visible {
   outline: 3px solid var(--cambridge);
   outline-offset: 5px;
+}
+
+.course-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+}
+
+.source-toggle {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cambridge-dark);
+  font: 600 0.78rem "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.source-toggle::after {
+  content: "+";
+  margin-left: 7px;
+}
+
+.source-toggle[aria-expanded="true"]::after {
+  content: "−";
+}
+
+.source-panel {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-bottom: 22px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper-deep);
+}
+
+.source-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.source-toolbar button,
+.source-toolbar a {
+  min-height: 36px;
+  padding: 0;
+  color: var(--cambridge-dark);
+  font: 600 0.76rem "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.source-toolbar button {
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.source-toolbar button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.source-toolbar a::after {
+  content: none;
+}
+
+.source-note,
+.source-status {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font: 0.76rem/1.6 "Segoe UI", Arial, sans-serif;
+}
+
+.source-status:empty {
+  display: none;
+}
+
+.source-panel pre {
+  max-height: 380px;
+  overflow: auto;
+  margin: 16px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 0.78rem/1.7 Consolas, "Courier New", monospace;
+  tab-size: 4;
+}
+
+.source-panel code {
+  font: inherit;
 }
 
 .remarks {
@@ -487,6 +588,10 @@ footer a {
     grid-column: 2;
     width: fit-content;
     min-height: 36px;
+  }
+
+  .course-actions {
+    grid-column: 2;
   }
 
   .remarks {
