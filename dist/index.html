@@ -13,6 +13,7 @@
       type="image/svg+xml"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1f33'/%3E%3Cpath d='M14 17h36v6H35v28h-6V23H14z' fill='%23a3c1ad'/%3E%3C/svg%3E"
     />
+    <script src="./theme.js"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -20,6 +21,12 @@
       <header class="masthead">
         <p class="edition">Academic year 2026–27</p>
       </header>
+      <div class="theme-toolbar">
+        <button class="theme-toggle" type="button" aria-label="Night mode" aria-pressed="false" hidden>
+          <span class="theme-option theme-day"><span aria-hidden="true">☀</span> Day mode</span>
+          <span class="theme-option theme-night"><span aria-hidden="true">☾</span> Night mode</span>
+        </button>
+      </div>
 
       <main id="top">
         <section class="intro" aria-labelledby="page-title">
