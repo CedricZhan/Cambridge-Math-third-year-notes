@@ -299,11 +299,9 @@ h1 {
   text-transform: uppercase;
 }
 
-.rule-string {
-  width: 100%;
-  height: 24px;
-  margin-block: -11px;
-  overflow: visible;
+.intro-rule span:first-child {
+  height: 2px;
+  background: linear-gradient(90deg, var(--cambridge-dark), var(--cambridge), transparent);
 }
 
 .term {
