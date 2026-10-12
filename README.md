@@ -14,8 +14,7 @@ The generated PDFs are written to `dist/pdfs/`, where the website links to them.
 After all courses compile successfully, the script updates the homepage's
 "Last updated" time in London time (GMT or BST, adjusted automatically).
 Publish `dist/index.html` together with the PDFs.
-The script also exports the original TeX files and per-course ZIP projects
-(including the shared preamble and any figures) to `dist/sources/` for the
+The script also exports each course's original TeX file to `dist/sources/` for the
 homepage's source viewer. Publish the entire `dist/` directory together.
 To refresh source downloads without compiling or changing the compilation time,
 run `.\scripts\export-sources.ps1`.

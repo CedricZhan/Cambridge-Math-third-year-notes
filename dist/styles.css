@@ -457,7 +457,6 @@ footer a:focus-visible {
   content: none;
 }
 
-.source-note,
 .source-status {
   margin: 12px 0 0;
   color: var(--muted);

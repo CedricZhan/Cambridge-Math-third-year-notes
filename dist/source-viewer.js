@@ -16,16 +16,11 @@
     copy.textContent = "Copy";
     copy.disabled = true;
     toolbar.append(copy);
-    for (const [extension, label] of [["tex", "Download .tex"], ["zip", "Download project (.zip)"]]) {
-      const link = document.createElement("a");
-      link.href = `./sources/${slug}.${extension}`;
-      link.download = `${slug}.${extension}`;
-      link.textContent = label;
-      toolbar.append(link);
-    }
-    const note = document.createElement("p");
-    note.className = "source-note";
-    note.textContent = "The ZIP includes the shared preamble and any figures needed to compile.";
+    const link = document.createElement("a");
+    link.href = `./sources/${slug}.tex`;
+    link.download = `${slug}.tex`;
+    link.textContent = "Download .tex";
+    toolbar.append(link);
     const status = document.createElement("p");
     status.className = "source-status";
     status.setAttribute("role", "status");
@@ -34,7 +29,7 @@
     pre.setAttribute("aria-label", `${course} source code`);
     const code = document.createElement("code");
     pre.append(code);
-    panel.append(toolbar, note, status, pre);
+    panel.append(toolbar, status, pre);
     row.append(panel);
     button.hidden = false;
     button.setAttribute("aria-controls", panel.id);
@@ -55,7 +50,7 @@
         copy.disabled = false;
         status.textContent = "";
       } catch {
-        status.textContent = "Couldn't load the preview. Close and reopen to retry, or use the download links.";
+        status.textContent = "Couldn't load the preview. Close and reopen to retry, or use the download link.";
       } finally {
         loading = false;
       }
