@@ -14,6 +14,7 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1f33'/%3E%3Cpath d='M14 17h36v6H35v28h-6V23H14z' fill='%23a3c1ad'/%3E%3C/svg%3E"
     />
     <script src="./theme.js"></script>
+    <script src="./study-timer.js" defer></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -26,6 +27,16 @@
           <span class="theme-option theme-day"><span aria-hidden="true">☀</span> Day mode</span>
           <span class="theme-option theme-night"><span aria-hidden="true">☾</span> Night mode</span>
         </button>
+        <div class="study-timer" hidden>
+          <svg class="study-hourglass" viewBox="0 0 32 40" fill="none" aria-hidden="true">
+            <path d="M7 3h18M7 37h18M9 3v7c0 5 7 7 7 10s-7 5-7 10v7M23 3v7c0 5-7 7-7 10s7 5 7 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M12 10h8c0 3-4 4-4 6 0-2-4-3-4-6ZM11 33c0-3 5-5 5-7 0 2 5 4 5 7Z" fill="currentColor" opacity=".55" />
+          </svg>
+          <div class="study-timer-copy">
+            <span class="study-timer-label">You've been studying for</span>
+            <span class="study-timer-value" role="timer" aria-label="Time spent studying this visit" aria-live="off">00:00:00</span>
+          </div>
+        </div>
       </div>
 
       <main id="top">
@@ -58,27 +69,27 @@
             <li>
               <span class="course-number">01</span>
               <h3>Principles of Statistics</h3>
-              <a href="./pdfs/principles-of-statistics.pdf">Open PDF</a>
+              <a href="./pdfs/principles-of-statistics.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">02</span>
               <h3>Dynamical Systems</h3>
-              <a href="./pdfs/dynamical-systems.pdf">Open PDF</a>
+              <a href="./pdfs/dynamical-systems.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">03</span>
               <h3>Principles of Quantum Mechanics</h3>
-              <a href="./pdfs/principles-of-quantum-mechanics.pdf">Open PDF</a>
+              <a href="./pdfs/principles-of-quantum-mechanics.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">04</span>
               <h3>Stochastic Financial Models<sup class="course-marker" aria-label="16-hour lecture course">*</sup></h3>
-              <a href="./pdfs/stochastic-financial-models.pdf">Open PDF</a>
+              <a href="./pdfs/stochastic-financial-models.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">05</span>
               <h3>Asymptotic Methods<sup class="course-marker" aria-label="16-hour lecture course">*</sup></h3>
-              <a href="./pdfs/asymptotic-methods.pdf">Open PDF</a>
+              <a href="./pdfs/asymptotic-methods.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
           </ol>
         </section>
@@ -92,22 +103,22 @@
             <li>
               <span class="course-number">01</span>
               <h3>Applied Probability</h3>
-              <a href="./pdfs/applied-probability.pdf">Open PDF</a>
+              <a href="./pdfs/applied-probability.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">02</span>
               <h3>Applications of Quantum Mechanics</h3>
-              <a href="./pdfs/applications-of-quantum-mechanics.pdf">Open PDF</a>
+              <a href="./pdfs/applications-of-quantum-mechanics.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">03</span>
               <h3>Further Complex Methods<sup class="course-marker" aria-label="C course">C</sup></h3>
-              <a href="./pdfs/further-complex-methods.pdf">Open PDF</a>
+              <a href="./pdfs/further-complex-methods.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
             <li>
               <span class="course-number">04</span>
               <h3>Mathematics of Machine Learning<sup class="course-marker" aria-label="16-hour lecture course">*</sup></h3>
-              <a href="./pdfs/mathematics-of-machine-learning.pdf">Open PDF</a>
+              <a href="./pdfs/mathematics-of-machine-learning.pdf" target="_blank" rel="noopener">Open PDF</a>
             </li>
           </ol>
         </section>

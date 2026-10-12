@@ -90,7 +90,48 @@ footer {
 }
 
 .theme-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 24px;
   padding-top: 16px;
+}
+
+.study-timer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--cambridge-dark);
+}
+
+.study-timer[hidden] {
+  display: none;
+}
+
+.study-hourglass {
+  width: 28px;
+  height: 36px;
+  flex: none;
+}
+
+.study-timer-copy {
+  display: grid;
+  gap: 2px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.study-timer-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.study-timer-value {
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.09em;
+  line-height: 1.2;
 }
 
 .theme-toggle {
