@@ -10,3 +10,4 @@ dist/pdfs/*.log
 dist/pdfs/*.out
 *.tmp
 .sites-runtime/
+.openai/
