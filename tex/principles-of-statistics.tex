@@ -264,4 +264,363 @@ and some constant $M$, then they should produce the same
 \begin{center}
 end of lecture 1
 \end{center}
+
+\section*{II. Information Geometry}
+
+The \underline{score function} is
+\[
+S_n(\theta)
+=
+\frac{\partial}{\partial\theta}\ell_n(\theta),
+\qquad
+\Theta\subseteq\mathbb{R}^d.
+\]
+
+In many cases,
+\[
+S_n(\widehat{\theta}_{\mathrm{MLE}})=0,
+\]
+where, by convention,
+\[
+S_n(\theta')
+=
+\left.
+\frac{\partial}{\partial\theta}\ell_n(\theta)
+\right|_{\theta=\theta'}.
+\]
+
+Let $X$ be a r.v.\ taking values in $\mathcal{X}$, and
+$g:\mathcal{X}\to\mathbb{R}$.
+Take a model $\{f(x,\theta):\theta\in\Theta\}$.
+We will write
+\[
+\mathbb{E}_{\theta}g(X)
+=
+\int g(x)f(x,\theta)\,dx,
+\qquad
+X\sim f(\cdot,\theta).
+\]
+
+\medskip
+\noindent\textbf{Obs 1.}
+
+Suppose the model $\{f(\cdot,\theta):\theta\in\Theta\}$ is such that
+\[
+\mathbb{E}_{\theta_0}\bigl|\log f(X,\theta)\bigr|
+<
+\infty
+\qquad
+\forall\theta\in\Theta.
+\]
+Define
+\[
+\ell(\theta)
+=
+\mathbb{E}_{\theta_0}\log f(X,\theta),
+\qquad
+X\sim P_{\theta_0}.
+\]
+
+The normalised log-likelihood
+\[
+\overline{\ell}_n(\theta)
+=
+\frac{1}{n}\sum_{i=1}^{n}\log f(X_i,\theta)
+\]
+can be thought of as a sample version of $\ell(\theta)$.
+
+Suppose the model is correctly specified, such that $X$ has pdf
+$f(\cdot,\theta_0)$ for some $\theta_0\in\Theta$.
+
+\medskip
+\noindent\textbf{Fact.}
+Then $\ell(\theta)$ is maximised at $\theta_0$.
+This justifies using the MLE to approximate $\theta_0$ when $n$ is large.
+
+Indeed,
+\[
+\begin{aligned}
+\ell(\theta)-\ell(\theta_0)
+&=
+\mathbb{E}_{\theta_0}
+\left(
+\log\frac{f(X,\theta)}{f(X,\theta_0)}
+\right)
+\\
+&\leq
+\log\mathbb{E}_{\theta_0}
+\left(
+\frac{f(X,\theta)}{f(X,\theta_0)}
+\right)
+\\
+&=
+\log\int
+\frac{f(x,\theta)}{f(x,\theta_0)}
+f(x,\theta_0)\,dx
+\\
+&=
+\log 1=0.
+\end{aligned}
+\]
+By Jensen's inequality, as $\log$ is concave, with equality if
+\[
+\frac{f(X,\theta)}{f(X,\theta_0)}
+\]
+is a.s.\ constant.
+
+\[
+\therefore\quad
+\ell(\theta)\leq\ell(\theta_0).
+\]
+
+If
+\[
+f(\cdot,\theta)=f(\cdot,\theta')
+\quad\Longrightarrow\quad
+\theta=\theta',
+\]
+we say the parameter is \underline{identifiable}.
+
+In that case, if $\theta\neq\theta_0$, Jensen's inequality is strict,
+so $\theta_0$ is actually the unique maximizer of $\ell$.
+
+\medskip
+\noindent\textbf{Rmk.}
+The difference
+\[
+\ell(\theta_0)-\ell(\theta)
+=
+\int
+\log\frac{f(x,\theta_0)}{f(x,\theta)}
+f(x,\theta_0)\,dx
+\]
+is called the \underline{Kullback--Leibler divergence}
+or \underline{relative entropy} between $P_{\theta_0}$ and $P_\theta$.
+
+A notion of distance which is \underline{not} symmetric.
+
+\medskip
+\noindent\textbf{Obs 2.}
+
+\[
+\begin{aligned}
+0
+&=
+\frac{\partial}{\partial\theta}
+\underbrace{\int f(x,\theta)\,dx}_{=1\ \forall\theta}
+=
+\int\frac{\partial}{\partial\theta}f(x,\theta)\,dx
+\\
+&=
+\int
+\frac{\partial\log f(x,\theta)}{\partial\theta}
+f(x,\theta)\,dx
+\\
+&=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial\log f(X,\theta)}{\partial\theta}
+\right].
+\end{aligned}
+\]
+
+[There are some conditions for this.
+(Leibniz rule). See P \& M.]
+
+``$S_n(\theta)$ is centred when $X\sim P_\theta$.''
+
+\medskip
+\noindent\textbf{Obs 3.}
+
+\medskip
+\noindent\textbf{Def 5.}
+Let $\Theta\subseteq\mathbb{R}^d$.
+For any $\theta\in\operatorname{int}(\Theta)$,
+the \underline{Fisher Information matrix} is
+\[
+I(\theta)
+=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\cdot
+\left(
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right)^T
+\right],
+\qquad
+X\sim P_\theta.
+\]
+
+\medskip
+\noindent\textbf{Rmk.}
+This is the covariance matrix of
+\[
+S_n(\theta)
+=
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\]
+when $X\sim P_\theta$.
+
+\medskip
+\noindent\textbf{Prop 1.}
+For all $\theta\in\operatorname{int}(\Theta)$, in a ``regular'' model,
+\[
+I(\theta)
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(X,\theta)
+\right]
+\]
+\[
+\left(
+I_{ij}(\theta)
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta_i\,\partial\theta_j}
+\log f(X,\theta)
+\right]
+\right).
+\]
+
+\medskip
+\noindent\textbf{Proof.}
+\[
+0
+=
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\int f(x,\theta)\,dx
+=
+\int
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+f(x,\theta)\,dx.
+\]
+
+[When this equality holds, we say the model is ``regular''.]
+
+Now, we have
+\[
+\begin{aligned}
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(x,\theta)
+&=
+\frac{\partial}{\partial\theta^T}
+\left[
+\frac{1}{f(x,\theta)}
+\frac{\partial}{\partial\theta}f(x,\theta)
+\right]
+\\
+&=
+-\frac{1}{f(x,\theta)^2}
+\frac{\partial}{\partial\theta}f(x,\theta)
+\left(
+\frac{\partial}{\partial\theta}f(x,\theta)
+\right)^T
+\\
+&\qquad
++
+\frac{1}{f(x,\theta)}
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+f(x,\theta).
+\end{aligned}
+\]
+
+Take $-\mathbb{E}_{\theta}[\cdot]$ of both sides.
+\[
+\begin{aligned}
+&-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(X,\theta)
+\right]
+\\
+&\qquad=
+\mathbb{E}_{\theta}
+\left[
+\frac{1}{f(X,\theta)^2}
+\frac{\partial}{\partial\theta}f(X,\theta)
+\left(
+\frac{\partial}{\partial\theta}f(X,\theta)
+\right)^T
+\right]
++0
+\\
+&\qquad=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\left(
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right)^T
+\right]
+=
+I(\theta).
+\end{aligned}
+\]
+\hfill$\square$
+
+\medskip
+\noindent\textbf{Tensorisation.}
+
+Suppose the observation $X$ consists of $n$ random variables
+$X_1,\ldots,X_n$. Then, the F.I.\ matrix is
+\[
+I_n(\theta)
+=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n,\theta)
+\left(
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n,\theta)
+\right)^T
+\right].
+\]
+
+If $X_1,\ldots,X_n$ are iid such that
+\[
+f(X_1,\ldots,X_n,\theta)
+=
+\prod_{i=1}^{n}f(X_i,\theta),
+\]
+where $\{f(x,\theta):\theta\in\Theta\}$ is a model for $X_1$,
+then the F.I.\ is
+\[
+\begin{aligned}
+I_n(\theta)
+&=
+\mathbb{E}_{\theta}
+\left[
+\sum_{i,j}
+\underbrace{
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+}_{\substack{\text{mean }0\text{ under}\\P_\theta}}
+\left(
+\frac{\partial}{\partial\theta}\log f(X_j,\theta)
+\right)^T
+\right]
+\\
+&=
+\mathbb{E}_{\theta}
+\left[
+\sum_{i=1}^{n}
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+\left(
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+\right)^T
+\right]
+\\
+&=
+nI(\theta),
+\end{aligned}
+\]
+where $I(\theta)$ is the Fisher Information for a single observation.
+
+\begin{center}
+\textbf{End of Lecture 2}
+\end{center}
 \end{document}
