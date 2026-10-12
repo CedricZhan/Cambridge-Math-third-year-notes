@@ -184,7 +184,7 @@ footer {
   padding: clamp(40px, 7vw, 90px) 0 clamp(70px, 9vw, 118px);
 }
 
-.intro::after {
+.part-seal {
   position: absolute;
   top: 76px;
   right: 2%;
@@ -195,13 +195,37 @@ footer {
   box-shadow:
     inset 0 0 0 12px var(--paper),
     inset 0 0 0 13px var(--seal-inner);
-  content: "II";
   display: grid;
   place-items: center;
   color: var(--cambridge-dark);
   font-size: clamp(2rem, 5vw, 4.5rem);
   font-style: italic;
   opacity: 0.8;
+  transition: box-shadow 450ms ease, text-shadow 450ms ease, border-color 450ms ease;
+}
+
+.part-seal:hover {
+  border-color: var(--cambridge);
+  box-shadow:
+    inset 0 0 0 12px var(--paper),
+    inset 0 0 0 13px var(--seal-inner),
+    inset 0 0 36px rgba(121, 169, 149, 0.16),
+    0 0 42px rgba(121, 169, 149, 0.18);
+  text-shadow: 0 0 18px rgba(121, 169, 149, 0.5);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
 }
 
 .eyebrow {
@@ -275,9 +299,11 @@ h1 {
   text-transform: uppercase;
 }
 
-.intro-rule span:first-child {
-  height: 2px;
-  background: linear-gradient(90deg, var(--cambridge-dark), var(--cambridge), transparent);
+.rule-string {
+  width: 100%;
+  height: 24px;
+  margin-block: -11px;
+  overflow: visible;
 }
 
 .term {
@@ -557,7 +583,7 @@ footer a {
     padding-top: 40px;
   }
 
-  .intro::after {
+  .part-seal {
     top: 52px;
     right: 0;
     opacity: 0.34;
@@ -609,7 +635,8 @@ footer a {
     scroll-behavior: auto;
   }
 
-  .course-list li {
+  .course-list li,
+  .part-seal {
     transition: none;
   }
 }

@@ -16,6 +16,7 @@
     <script src="./theme.js"></script>
     <script src="./study-timer.js" defer></script>
     <script src="./source-viewer.js" defer></script>
+    <script src="./effects.js" defer></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -42,6 +43,7 @@
 
       <main id="top">
         <section class="intro" aria-labelledby="page-title">
+          <div class="part-seal" aria-hidden="true">II</div>
           <p class="eyebrow">Cedric Zhan</p>
           <h1 id="page-title">Cambridge Notes</h1>
           <p class="lede">
@@ -55,7 +57,16 @@
             <span><sup class="course-marker">C</sup> denotes a C course.</span>
           </p>
           <div class="intro-rule" aria-hidden="true">
-            <span></span>
+            <svg class="rule-string" viewBox="0 -12 1000 24" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="rule-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+                  <stop offset="0" stop-color="var(--cambridge-dark)" />
+                  <stop offset="0.6" stop-color="var(--cambridge)" />
+                  <stop offset="1" stop-color="var(--cambridge)" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path d="M0 0 L1000 0" fill="none" stroke="url(#rule-gradient)" stroke-width="1.6" vector-effect="non-scaling-stroke" />
+            </svg>
             <span>Part II</span>
           </div>
           <p class="last-updated">Last updated: <time id="last-compiled" datetime="2026-10-12T23:28:13+01:00">12 October 2026, 23:28 (BST)</time></p>
