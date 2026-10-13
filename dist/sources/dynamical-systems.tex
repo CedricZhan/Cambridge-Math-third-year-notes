@@ -165,4 +165,254 @@ r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan}\frac{y}{x},
     \textbf{End of Lecture 1}
 \end{center}
 
+
+\newpage
+\noindent
+\underline{Poincare} map in 2D for a 3D dynamical system:
+
+\begin{center}
+    \includegraphics[width=\textwidth]{lecture2-poincare-maps.png}
+\end{center}
+
+\noindent
+Can also consider maps as discretized ODEs.
+
+\bigskip
+\noindent\underline{Plan for the course}
+\[
+\begin{array}{l@{\quad}l}
+\left.\begin{array}{rll}
+(3)&\S 1:&\text{\makebox[36mm][l]{Basic definitions}}\\[6pt]
+(3)&\S 2:&\text{Fixed points}\\[6pt]
+(2)&\S 3:&\text{Stability}\\[6pt]
+(5)&\S 4:&\text{Periodic orbits}\\[6pt]
+(5)&\S 5:&\text{Bifurcations}
+\end{array}\right\}&\text{ODEs}\\[8pt]
+\left.\begin{array}{rll}
+(3)&\S 6:&\text{\makebox[36mm][l]{Maps}}\\[6pt]
+(3)&\S 7:&\text{Chaos}
+\end{array}\right\}&\text{Maps}
+\end{array}
+\]
+
+\newpage
+\noindent\S 1.\ \underline{Definitions}
+
+\bigskip
+\noindent
+\begingroup\setlength{\unitlength}{1pt}\begin{picture}(24,18)(0,-4)\put(12,0){\oval(24,18)}\put(12,0){\makebox(0,0){1.1}}\end{picture}\endgroup\quad Define a \underline{State Space} (\underline{Phase Space}) $E\subseteq\mathbb{R}^n$.
+The state of the system is described by $\bar x\in E$.
+The state evolves in time according to an ODE of the form
+\[
+\underline{\dot{\bar x}=\frac{d\bar x}{dt}=\bar f(\bar x,t)},
+\qquad\text{where }\bar f:E\times\mathbb{R}\to E\text{ is a vector field.}
+\]
+\noindent
+If $\dfrac{\partial\bar f}{\partial t}=0$ the system is \underline{autonomous}.
+
+\medskip
+\noindent
+A non-autonomous system reduces to an autonomous by defining
+$\bar y=(\bar x,t)\in E\times\mathbb{R}$ so that
+\[
+\underline{\dot{\bar y}=\begin{pmatrix}\bar f(\bar y)\\1\end{pmatrix}}.
+\]
+\noindent
+Thus, can study only autonomous systems.
+
+\medskip
+\noindent
+A \underline{$n^{\text{th}}$ order ODE}
+\[
+\frac{d^n x}{dt^n}=g\left(x,\frac{dx}{dt},\ldots,\frac{d^{n-1}x}{dt^{n-1}}\right)
+\]
+can be reduced to a standard form with $n$ equations by introducing
+\[
+\bar y=\left(x,\frac{dx}{dt},\ldots,\frac{d^{n-1}x}{dt^{n-1}}\right)
+=(y_1,y_2,\ldots,y_n)
+\]
+so that
+\[
+\dot{\bar y}=\begin{pmatrix}
+y_2\\y_3\\\vdots\\y_n\\g(y_1,y_2,\ldots,y_n)
+\end{pmatrix}.
+\]
+\noindent
+Similarly to autonomous systems, will only consider maps of the form
+\[
+\underline{\bar x_{n+1}=\bar F(\bar x_n)}
+\qquad\text{and not}\qquad\bar F(\bar x_n,n).
+\]
+
+\newpage
+\noindent\begingroup\setlength{\unitlength}{1pt}\begin{picture}(24,18)(0,-4)\put(12,0){\oval(24,18)}\put(12,0){\makebox(0,0){1.2}}\end{picture}\endgroup\quad\underline{Initial value problem (IVP)}
+
+\bigskip
+\noindent
+We would like to explore an \underline{initial value problem} for
+$\underline{\dot{\bar x}=\bar f(\bar x,t)}$:
+
+\medskip
+\noindent
+\begin{tabular}{@{\vrule width 0.5pt\hspace{8pt}}p{\dimexpr\textwidth-10pt\relax}@{}}
+Given the initial value of $\bar x$: $\underline{\bar x(t_0)=\bar x_0}$,
+$\bar x_0\in E$, $t\in I\subseteq\mathbb{R}$, find a differentiable function
+$\bar x(t)$ for $t\in I$ which remains in $E$ for $t\in I$ and satisfies the
+initial condition and the ODE.
+\end{tabular}
+
+\bigskip
+\noindent
+For an autonomous system can define solution in terms of a \underline{flow $\phi_t$}.
+
+\medskip
+\noindent\fbox{Definition}\quad (\underline{Flow}) $\phi_t(\bar x)$ such that
+$\phi_t(\bar x_0)$ is the solution of $\dot{\bar x}=\bar f(\bar x)$ starting at
+$\bar x_0$ when $t=0$ is called the flow through $\bar x_0$ at $t=0$.
+
+\medskip
+\noindent Thus,
+\[
+\phi_0(\bar x_0)=\bar x_0,
+\qquad
+\phi_s\bigl(\phi_t(\bar x_0)\bigr)=\phi_{s+t}(\bar x_0).
+\]
+\noindent
+Does this solution \underline{exist}? Is it \underline{unique}?
+
+\bigskip
+\noindent\fbox{Theorem}\quad (Cauchy--Peano)
+
+\medskip
+\noindent
+If $\bar f(\bar x,t)$ is continuous and $|\bar f|<M$ in the domain
+\[
+D:\bigl\{|t-t_0|<\alpha,\;|\bar x-\bar x_0|<\beta\bigr\}
+\]
+then the IVP has a solution for
+$|t-t_0|<\underline{\min(\alpha,\beta/M)}$.
+
+\bigskip
+\noindent
+But \underline{uniqueness} requires stronger conditions on $f$.
+
+\newpage
+\noindent
+\begin{minipage}[t]{0.60\textwidth}
+\vspace{0pt}
+\fbox{Example}\quad \underline{Unique solution}
+\[
+\dot x=|x|,\qquad x(t_0)=x_0
+\]
+Solution
+\[
+x(t)=\begin{cases}
+x_0e^{t_0-t},&x_0<0,\\
+0,&x_0=0,\\
+x_0e^{t-t_0},&x_0>0.
+\end{cases}
+\]
+Note that $f$ is \underline{continuous} but \underline{not differentiable}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.37\textwidth}
+\vspace{0pt}
+\includegraphics[width=\linewidth]{lecture2-unique-solution.png}
+\end{minipage}
+\par\noindent\hfill$\blacktriangleleft$
+
+\medskip
+\noindent
+\begin{minipage}[t]{0.60\textwidth}
+\vspace{0pt}
+\fbox{Example}\quad \underline{Non-unique solution}
+\[
+\dot x=\begin{cases}
+\sqrt{x},&x\geq0,\\
+0,&x<0,
+\end{cases}
+\qquad\underline{x(0)=0}
+\]
+Can check that
+\end{minipage}\hfill
+\begin{minipage}[t]{0.37\textwidth}
+\vspace{0pt}
+\includegraphics[width=\linewidth]{lecture2-nonunique-vector-field.png}
+\end{minipage}
+\[
+x(t)=\begin{cases}
+0,&t<\tau,\\
+\frac14(t-\tau)^2,&t\geq\tau
+\end{cases}
+\qquad\text{for any }\tau\geq0
+\]
+\noindent
+\begin{minipage}[t]{0.60\textwidth}
+\vspace{0pt}
+satisfies the equation and initial condition. But $\tau$ can be anything so a
+\underline{family} of solutions!
+
+\medskip
+Here again $f$ is \underline{continuous} and \underline{not differentiable}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.37\textwidth}
+\vspace{0pt}
+\includegraphics[width=\linewidth]{lecture2-nonunique-solutions.png}
+\end{minipage}
+\par\noindent\hfill$\blacktriangleleft$
+
+\medskip
+\noindent
+Why is the difference? Because $\dfrac{d}{dx}(\sqrt{x})$ is not bounded at $0$!
+
+\medskip
+\noindent
+To guarantee uniqueness, need $f$ to be not just continuous, but also
+\underline{Lipschitz}.
+
+\newpage
+\noindent\fbox{Definition}\quad \underline{Lipschitz property}
+
+\medskip
+\noindent
+A function $\bar f$ defined on a subset of $\mathbb{R}^n$ satisfies Lipschitz
+condition at a point $\bar x_0$ with Lipschitz constant $L$ if $\exists\,(L,a)$
+such that $\forall\,\bar x,\bar y$: $|\bar x-\bar x_0|<a$,
+$|\bar y-\bar y_0|<a$ we have
+\[
+|\bar f(\bar x)-\bar f(\bar y)|\leq L|\bar x-\bar y|.
+\]
+
+\medskip
+\noindent
+Note that Differentiable $\to$ Lipschitz $\to$ Continuous
+
+\bigskip
+\noindent\fbox{Theorem}\quad
+\underline{Uniqueness/Picard--Lindel\"of/Cauchy--Lipschitz}
+
+\medskip
+\noindent
+Consider an IVP $\dot{\bar x}=\bar f(\bar x,t)$ with $\bar x=\bar x_0$ at $t=t_0$.
+If $\bar f$ satisfies a Lipschitz condition at $\bar x_0$ then the solution
+$\phi_{t-t_0}(\bar x_0)$ \underline{exists} and is \underline{unique} and
+\underline{continuous} in a neighborhood of $(\bar x_0,t_0)$.
+
+\bigskip
+\noindent
+However, in general uniqueness \& continuity do not necessarily mean existence
+of solution for all time!
+
+\bigskip
+\noindent\fbox{Example}\quad \underline{Finite time blowup}
+\[
+\dot x=x^2,\qquad x(0)=1,\qquad\text{solution is }x(t)=\frac{1}{1-t},
+\]
+\noindent
+blows up to $\infty$ at $t\to1$.
+
+\bigskip
+\noindent
+In what follows, unless stated otherwise, we will consider only
+\underline{differentiable} functions $f$.
+
 \end{document}
