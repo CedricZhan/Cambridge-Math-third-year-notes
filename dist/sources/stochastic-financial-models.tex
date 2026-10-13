@@ -277,4 +277,339 @@ If $X=\mathbf{1}_A$, we write
 \begin{center}
     \textbf{End of Lecture 1}
 \end{center}
+
+\section*{Optional stopping}
+
+We say that a random time
+\[
+T:\Omega\longrightarrow \{0,1,2,\ldots\}\cup\{\infty\}
+\]
+is a \textbf{stopping time} if
+\[
+\{T\leq n\}\in\mathcal{F}_n
+\qquad\text{for all }n.
+\]
+
+\noindent\textbf{Example.}
+Let $(X_n)_{n\geq 0}$ be an adapted process, with values in $\mathbb{Z}$, say.
+Set
+\[
+T=\inf\{n\geq 0:X_n=0\}.
+\]
+Then
+\[
+\{T\leq n\}
+=
+\underbrace{\{X_0=0\}}_{\in\mathcal{F}_0}
+\cup
+\underbrace{\{X_1=0\}}_{\in\mathcal{F}_1}
+\cup\cdots\cup
+\underbrace{\{X_n=0\}}_{\in\mathcal{F}_n},
+\]
+with
+\[
+\mathcal{F}_0\subseteq\mathcal{F}_1
+\subseteq\cdots\subseteq\mathcal{F}_n.
+\]
+So $T$ is a stopping time.
+
+\subsection*{Optional stopping theorem}
+
+Let $(M_n)_{n\geq 0}$ be a martingale and let $T$ be a bounded stopping time.
+Then
+\[
+\mathbb{E}(M_T)=\mathbb{E}(M_0),
+\qquad
+\bigl(M_T(\omega)=M_{T(\omega)}(\omega)\bigr).
+\]
+
+\noindent\textbf{Proof.}
+Choose $n$ such that $T\leq n$. Then
+\[
+\begin{aligned}
+M_T
+&=M_0+(M_1-M_0)+\cdots+(M_T-M_{T-1})\\
+&=M_0+\sum_{k=1}^{n}(M_k-M_{k-1})
+  \mathbf{1}_{\{T\geq k\}}.
+\end{aligned}
+\]
+Now
+\[
+\{T\geq k\}
+=
+\{T\leq k-1\}^{c}
+\in\mathcal{F}_{k-1},
+\]
+so
+\[
+\mathbb{E}\!\left(
+(M_k-M_{k-1})\mathbf{1}_{\{T\geq k\}}
+\right)=0
+\qquad\text{for all }k.
+\]
+Take expectations to see
+\[
+\mathbb{E}(M_T)=\mathbb{E}(M_0)+0.
+\qquad\square
+\]
+
+\subsection*{OST II}
+
+Let $(M_n)_{n\geq 0}$ be a martingale and let $T$ be a finite-valued stopping time.
+Suppose there exists $C<\infty$ such that one of the following holds:
+\begin{enumerate}
+    \item[(a)]
+    \[
+    |M_n|\leq C
+    \qquad\text{for all }n\leq T.
+    \]
+
+    \item[(b)]
+    \[
+    \mathbb{E}(T)<\infty
+    \qquad\text{and}\qquad
+    |M_n-M_{n-1}|\leq C
+    \qquad\text{for all }n\leq T.
+    \]
+\end{enumerate}
+Then
+\[
+\mathbb{E}(M_T)=\mathbb{E}(M_0).
+\]
+
+\noindent\textbf{Proof.}
+Define
+\[
+T_n=T\wedge n.
+\]
+Then $T_n$ is a bounded stopping time.
+Since $T<\infty$, $T_n=T$ eventually, so
+\[
+M_{T_n}\longrightarrow M_T
+\qquad\text{as }n\longrightarrow\infty.
+\]
+By optional stopping, we have
+\[
+\mathbb{E}(M_{T_n})=\mathbb{E}(M_0).
+\]
+
+If (a) holds, then
+\[
+\sup_n |M_{T_n}|\leq C,
+\]
+so
+\[
+\mathbb{E}(M_{T_n})\longrightarrow\mathbb{E}(M_T)
+\]
+by bounded convergence.
+
+If (b) holds, then
+\[
+\sup_n |M_{T_n}|\leq CT+|M_0|
+\qquad\text{and}\qquad
+\mathbb{E}(T)<\infty,
+\]
+so
+\[
+\mathbb{E}(M_{T_n})\longrightarrow\mathbb{E}(M_T)
+\]
+by dominated convergence.
+
+In any case, we can let $n\longrightarrow\infty$ to see
+\[
+\mathbb{E}(M_T)=\mathbb{E}(M_0).
+\qquad\square
+\]
+
+\subsection*{Examples}
+
+Let $X_1,X_2,\ldots$ and $Y_1,Y_2,\ldots$ be independent random variables such that
+\[
+\mathbb{P}(X_n=1)=\mathbb{P}(X_n=-1)=\frac12,
+\qquad
+\mathbb{P}(Y_n=0)=\mathbb{P}(Y_n=2)=\frac12.
+\]
+Set
+\[
+S_n=1+X_1+\cdots+X_n,
+\qquad
+Z_n=\prod_{i=1}^{n}Y_i,
+\qquad
+(Z_0=1).
+\]
+Then $(S_n)_{n\geq 0}$ and $(Z_n)_{n\geq 0}$ are martingales.
+
+Set
+\[
+T=\inf\{n\geq 0:S_n=0\}.
+\]
+Then
+\[
+\mathbb{P}(T<\infty)=1,
+\]
+but
+\[
+\mathbb{E}(S_0)=1,
+\qquad
+\mathbb{E}(S_T)=0.
+\]
+
+Now set
+\[
+T=\inf\{n\geq 0:Z_n=0\}.
+\]
+Then
+\[
+\mathbb{P}(T\leq n)=1-2^{-n},
+\]
+so
+\[
+\mathbb{P}(T<\infty)=1.
+\]
+In fact,
+\[
+\mathbb{E}(T)<\infty.
+\]
+But
+\[
+\mathbb{E}(Z_T)=0,
+\qquad
+\mathbb{E}(Z_0)=1.
+\]
+
+\medskip
+
+Recall that, for a $\sigma$-algebra $\mathcal{G}\subseteq\mathcal{F}$ and an integrable random variable $X$,
+$\mathbb{E}(X\mid\mathcal{G})$ is characterized by
+\[
+Y=\mathbb{E}(X\mid\mathcal{G})
+\qquad\text{a.s.}
+\]
+if
+\begin{enumerate}
+    \item[(a)] $Y$ is $\mathcal{G}$-measurable;
+
+    \item[(b)] $Y$ is integrable and
+    \[
+    \mathbb{E}(X\mathbf{1}_A)
+    =
+    \mathbb{E}(Y\mathbf{1}_A)
+    \qquad\text{for all }A\in\mathcal{G}.
+    \]
+\end{enumerate}
+
+\section*{Properties of conditional expectation}
+
+\begin{enumerate}
+    \item[(i)]
+    \[
+    \mathbb{E}\!\left(\mathbb{E}(X\mid\mathcal{G})\right)
+    =
+    \mathbb{E}(X).
+    \]
+
+    \item[(ii)]
+    If $X$ is $\mathcal{G}$-measurable, then
+    \[
+    \mathbb{E}(X\mid\mathcal{G})=X
+    \qquad\text{a.s.}
+    \]
+
+    \item[(iii)]
+    If $X$ is independent of $\mathcal{G}$, then
+    \[
+    \mathbb{E}(X\mid\mathcal{G})=\mathbb{E}(X)
+    \qquad\text{a.s.}
+    \]
+
+    \item[(iv)]
+    If $X\geq 0$ a.s., then
+    \[
+    \mathbb{E}(X\mid\mathcal{G})\geq 0
+    \qquad\text{a.s.}
+    \]
+
+    \item[(v)]
+    \textbf{Linearity.}
+    For $W,X$ integrable and $\alpha,\beta\in\mathbb{R}$,
+    \[
+    \mathbb{E}(\alpha X+\beta W\mid\mathcal{G})
+    =
+    \alpha\mathbb{E}(X\mid\mathcal{G})
+    +
+    \beta\mathbb{E}(W\mid\mathcal{G}).
+    \]
+\end{enumerate}
+
+Take
+\[
+Y=\mathbb{E}(X\mid\mathcal{G}),
+\qquad
+U=\mathbb{E}(W\mid\mathcal{G}).
+\]
+Then $\alpha Y+\beta U$ is $\mathcal{G}$-measurable and integrable.
+
+For $A\in\mathcal{G}$,
+\[
+\begin{aligned}
+\mathbb{E}\!\left((\alpha X+\beta W)\mathbf{1}_A\right)
+&=\alpha\mathbb{E}(X\mathbf{1}_A)
+  +\beta\mathbb{E}(W\mathbf{1}_A)\\
+&=\alpha\mathbb{E}(Y\mathbf{1}_A)
+  +\beta\mathbb{E}(U\mathbf{1}_A)\\
+&=\mathbb{E}\!\left((\alpha Y+\beta U)\mathbf{1}_A\right).
+\end{aligned}
+\]
+Hence
+\[
+\alpha Y+\beta U
+=
+\mathbb{E}(\alpha X+\beta W\mid\mathcal{G})
+\qquad\text{a.s.}
+\]
+
+\subsection*{Proposition (Tower property)}
+
+Let $\mathcal{H}$ be another $\sigma$-algebra, with
+\[
+\mathcal{H}\subseteq\mathcal{G}.
+\]
+Then
+\[
+\mathbb{E}\!\left(
+\mathbb{E}(X\mid\mathcal{G})\mid\mathcal{H}
+\right)
+=
+\mathbb{E}(X\mid\mathcal{H}).
+\]
+
+\noindent\textbf{Proof.}
+Take
+\[
+Y=
+\mathbb{E}\!\left(
+\mathbb{E}(X\mid\mathcal{G})\mid\mathcal{H}
+\right)
+\qquad\text{a.s.}
+\]
+Then, for $A\in\mathcal{H}$, we have $A\in\mathcal{G}$, so
+\[
+\mathbb{E}(Y\mathbf{1}_A)
+\underset{A\in\mathcal{H}}{=}
+\mathbb{E}\!\left(
+\mathbb{E}(X\mid\mathcal{G})\mathbf{1}_A
+\right)
+\underset{A\in\mathcal{G}}{=}
+\mathbb{E}(X\mathbf{1}_A).
+\]
+$Y$ is integrable and $\mathcal{H}$-measurable, so
+\[
+Y=\mathbb{E}(X\mid\mathcal{H})
+\qquad\text{a.s.}
+\qquad\square
+\]
+
+\begin{center}
+\textbf{End of Lecture 2}
+\end{center}
 \end{document}

@@ -410,4 +410,289 @@ Alternatively, we can write the above as
 \begin{center}
     \textbf{End of Lecture 1}
 \end{center}
+
+\subsection*{(c) Asymptotic expansions/series}
+
+If (b) holds for \emph{all} \(N\), then this is called an
+``asymptotic series or expansion'', and we write
+\[
+f(x) \sim \sum_{k=0}^{\infty} a_k \phi_k(x)
+\qquad \text{as } x \to x_0.
+\]
+
+\noindent
+\textbf{Attention:} No claim of convergence is made. It is just notation.
+We never fix \(x\) and then take \(N \to \infty\).
+
+Instead, we have an infinite number of approximations (of different \(N\)),
+and \(x \to x_0\) is taken in each separately!
+
+\subsection*{(d) Properties of asymptotic expansions and remarks}
+
+\subsubsection*{(I) Mathematical operations}
+
+Suppose \(\{\phi_k(x)\}\) is an asymptotic sequence as \(x \to x_0\), and let
+\[
+f \sim \sum_{k=0}^{\infty} a_k \phi_k,
+\qquad
+g \sim \sum_{k=0}^{\infty} b_k \phi_k.
+\]
+
+\noindent
+\textbf{Linearity}
+\[
+\alpha f + \beta g
+\sim \sum_{k=0}^{\infty} (\alpha a_k + \beta b_k)\phi_k
+\qquad \text{as } x \to x_0.
+\]
+
+\noindent
+\textbf{Multiplication}
+
+If \(\phi_k = (x-x_0)^k\), then
+\[
+fg \sim \sum_{k=0}^{\infty} c_k \phi_k,
+\qquad
+c_k = \sum_{j=0}^{k} a_j b_{k-j}.
+\]
+
+\noindent
+\textbf{Division}
+
+See 3.8 BO.
+
+\medskip
+\noindent
+\textbf{Integration}
+
+Term-by-term integration is usually okay.
+
+For example, if \(\phi_k = (x-x_0)^k\), then
+\[
+\int_{x_0}^{x} f(t)\,dt
+\sim \sum_{k=0}^{\infty}
+\frac{a_k(x-x_0)^{k+1}}{k+1}
+\qquad \text{as } x \to x_0.
+\]
+
+\noindent
+\textbf{Exercise:} Use the definitions to prove this.
+
+\medskip
+\noindent
+\textbf{Differentiation}
+
+Term-by-term differentiation is not always okay.
+
+To do this, you need \(f'(x)\) to be continuous and to have an
+asymptotic series, i.e.
+\[
+f'(x) \sim \sum_{k=0}^{\infty} c_k \phi_k(x).
+\]
+
+\subsubsection*{(II) Different asymptotic representations}
+
+Suppose \(\{\phi_k\}\) and \(\{\psi_k\}\) are different asymptotic
+sequences as \(x \to x_0\). Also,
+\[
+f \sim \sum_{k=0}^{\infty} a_k \phi_k,
+\qquad
+f \sim \sum_{k=0}^{\infty} b_k \psi_k
+\qquad \text{as } x \to x_0.
+\]
+Then \(a_k\) and \(b_k\) are not the same.
+
+For example,
+\[
+f(x) = 1 + \frac{1}{x}.
+\]
+Consider \(\phi_k = x^{-k}\) as \(x \to \infty\). Then
+\[
+f(x) \sim \sum_{k=0}^{\infty} a_k \phi_k,
+\qquad
+a_0 = 1,\quad a_1 = 1,\quad a_n = 0 \quad (n>1).
+\]
+
+Now consider
+\[
+\psi_k = (1+x)^{-k}.
+\]
+Then
+\[
+\begin{aligned}
+f
+&= 1 + \frac{1}{x}
+ = \frac{1}{1-(x+1)^{-1}} \\
+&= 1 + \frac{1}{1+x} + \frac{1}{(1+x)^2} + \cdots \\
+&\sim \sum_{k=0}^{\infty} b_k \psi_k,
+\end{aligned}
+\]
+where
+\[
+b_k = 1 \qquad \forall k.
+\]
+
+\subsubsection*{(III) Uniqueness of coefficients}
+
+Let \(\{\phi_k\}\) be an asymptotic sequence, and
+\[
+f(x) \sim \sum_{k=0}^{\infty} a_k \phi_k
+\qquad \text{as } x \to x_0.
+\]
+Then the coefficients \(a_k\) are unique.
+
+In fact, the \(a_k\) can be constructed:
+\[
+a_0 = \lim_{x \to x_0} \frac{f(x)}{\phi_0(x)},
+\]
+\[
+a_n = \lim_{x \to x_0}
+\left[
+\frac{f(x)-\displaystyle\sum_{k=0}^{n-1} a_k\phi_k(x)}
+{\phi_n(x)}
+\right].
+\]
+
+\noindent
+\textbf{Proof.} First, we know
+\[
+\lim_{x \to x_0}
+\frac{f(x)-\displaystyle\sum_{k=0}^{N} a_k\phi_k}
+{\phi_N}
+= 0
+\qquad \forall N.
+\]
+
+Let \(N=0\). Then
+\[
+\lim_{x \to x_0}
+\frac{f(x)-a_0\phi_0}{\phi_0}
+= 0,
+\]
+\[
+\lim_{x \to x_0}
+\left(\frac{f(x)}{\phi_0}\right)-a_0
+= 0.
+\]
+
+Use induction on \(N\).
+
+Suppose the formulae are true for \(N=n\), and the coefficients are
+unique for \(k \le n\). Then
+\[
+\begin{aligned}
+\lim_{x \to x_0}
+\frac{f(x)-\displaystyle\sum_{k=0}^{n} a_k\phi_k}
+{\phi_n}
+&= 0 \\
+&=
+\lim_{x \to x_0}
+\left(
+\frac{f(x)-\displaystyle\sum_{k=0}^{n-1} a_k\phi_k}
+{\phi_n}
+\right)-a_n.
+\end{aligned}
+\]
+
+\noindent
+Alternative proof: see p.~3 in Manton.
+
+\subsubsection*{(IV) An asymptotic series does not uniquely determine
+the function it is describing}
+
+For example, suppose
+\[
+f(x) \sim g(x)
+\qquad \text{as } x \to x_0,
+\]
+and
+\[
+h(x) \ll f(x)
+\qquad \text{as } x \to x_0.
+\]
+Then
+\[
+f(x)+h(x) \sim g(x)
+\qquad \text{as } x \to x_0.
+\]
+So, if \(g\) is an asymptotic expansion, it can describe both
+\(f\) and \(f+h\).
+
+For example,
+\[
+f_1 = \frac{1}{1+x},
+\qquad
+f_2 = \frac{1+e^{-x}}{1+x}.
+\]
+Both are
+\[
+\sim \sum_{k=0}^{\infty} (-1)^k x^{-(k+1)}
+\qquad \text{as } x \to \infty.
+\]
+
+\subsubsection*{(V) Power series}
+
+In this course, we mostly take
+\[
+\phi_k = (x-x_0)^k
+\qquad \text{as } x \to x_0,
+\]
+or
+\[
+\phi_k = x^{-k}
+\qquad \text{as } x \to \infty.
+\]
+
+In fact, a Taylor series about a point is an asymptotic series about
+that point:
+\[
+f(x) -
+\sum_{k=0}^{N}
+\frac{f^{(k)}(a)(x-a)^k}{k!}
+= o\!\left(|x-a|^N\right).
+\]
+
+\noindent
+\textbf{Exercise:} Prove this using the definitions and the integral
+form of the remainder term.
+
+\medskip
+\noindent
+\textbf{Terminology:} A term is said to be ``small beyond all orders''
+in some limit if it cannot be represented by any power series or,
+equivalently, is smaller than any power.
+
+For example, \(e^{-x}\) is small beyond all orders in inverse powers
+of \(x\) as \(x \to \infty\):
+\[
+e^{-x} \ll x^{-k}
+\qquad \forall k,
+\qquad \text{as } x \to \infty.
+\]
+
+\subsubsection*{(VI) Optimal truncation}
+
+\noindent
+\textbf{Question:} If an asymptotic series diverges, how many terms
+should I include in the sum?
+
+If
+\[
+f(x) \sim \sum_{n=0}^{\infty} a_n \psi_n(x)
+\qquad \text{as } x \to x_0,
+\]
+and we want to get the best approximation to \(f(x)\) at \(x=x_1\),
+where \(x_1\) is close to \(x_0\), then truncate the sum at the
+smallest term (or the one before).
+
+So stop adding terms when
+\[
+a_k\psi_k(x_1) < a_{k+1}\psi_{k+1}(x_1).
+\]
+
+This gives you an unexpectedly excellent approximation.
+
+\begin{center}
+\textbf{End of Lecture 2}
+\end{center}
 \end{document}
