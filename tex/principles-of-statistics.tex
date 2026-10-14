@@ -623,4 +623,386 @@ where $I(\theta)$ is the Fisher Information for a single observation.
 \begin{center}
 \textbf{End of Lecture 2}
 \end{center}
+
+\subsection*{Recap of Information Geometry}
+
+\paragraph{Observation 1.}
+\[
+\operatorname{KL}(P_{\theta_0},P_\theta)
+=
+\mathbb{E}_{\theta_0}
+\left[
+\log\frac{f(X,\theta_0)}{f(X,\theta)}
+\right]
+\geq 0,
+\]
+minimised at $\theta=\theta_0$.
+
+\paragraph{Observation 2.}
+\[
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right]
+=0,
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Observation 3.}
+\[
+I(\theta)
+:=
+\operatorname{Var}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right]
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^{T}}
+\log f(X,\theta)
+\right],
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Why geometry?}
+The F.I., $I(\theta)$, defines a metric tensor on the manifold
+\[
+\{f(\cdot,\theta):\theta\in\Theta\}.
+\]
+This is known as the \textbf{Fisher--Rao metric}.
+KL divergence is approximated locally by this metric.
+
+\begin{itemize}
+    \item \textbf{Reparametrisation invariance.}
+    Take the $\operatorname{Bernoulli}(\theta)$ model, where $\theta$
+    is the probability of success. Reparametrise it in terms of
+    ``log-odds'':
+    \[
+    \eta=\log\left(\frac{\theta}{1-\theta}\right)\in\mathbb{R}.
+    \]
+    The manifold
+    \[
+    \{f(\cdot,\eta):\eta\in\mathbb{R}\},
+    \]
+    equipped with the metric tensor $I(\eta)$, preserves geodesics,
+    path lengths, etc.
+
+    \item \textbf{Sufficient statistic invariance.}
+\end{itemize}
+
+\paragraph{Chentsov's theorems.}
+These properties characterise the Fisher--Rao metric.
+
+\subsection*{Proposition 2 (Cram\'er--Rao Lower Bound)}
+
+Let
+\[
+\{f(\cdot,\theta):\theta\in\Theta\subseteq\mathbb{R}\}
+\]
+be a ``regular'' statistical model.
+Let $\tilde{\theta}(X_1,\ldots,X_n)$ be an unbiased estimator based on
+i.i.d.\ samples $X_1,\ldots,X_n$:
+\[
+\mathbb{E}_{\theta}\tilde{\theta}=\theta,
+\qquad
+\forall\theta\in\Theta.
+\]
+Then
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta})
+\geq
+\frac{1}{nI(\theta)},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Proof.}
+Recall the Cauchy--Schwarz inequality for random variables $Y,Z$:
+\[
+\bigl(\mathbb{E}[YZ]\bigr)^2
+\leq
+\mathbb{E}[Y^2]\mathbb{E}[Z^2].
+\]
+Let
+\[
+Z=\tilde{\theta}-\theta,
+\qquad
+Y=\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta).
+\]
+Then
+\[
+\mathbb{E}[Z^2]
+=
+\operatorname{Var}_{\theta}(\tilde{\theta}),
+\qquad
+\text{as $\tilde{\theta}$ is unbiased},
+\]
+and
+\[
+\mathbb{E}[Y^2]
+=
+nI(\theta),
+\qquad
+\text{as the F.I.\ tensorises}.
+\]
+Moreover,
+\[
+\begin{aligned}
+\mathbb{E}[YZ]
+&=
+\mathbb{E}_{\theta}
+\left[
+\tilde{\theta}
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta)
+\right]
+\\
+&\quad
+-\theta
+\underbrace{
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta)
+\right]
+}_{=0}
+\\
+&=
+\int_{\mathcal{X}^n}
+\tilde{\theta}(x_1,\ldots,x_n)
+\frac{\partial f(x_1,\ldots,x_n;\theta)}{\partial\theta}
+\frac{f(x_1,\ldots,x_n;\theta)}
+     {f(x_1,\ldots,x_n;\theta)}
+\,dx_1\cdots dx_n
+\\
+&=
+\frac{\partial}{\partial\theta}
+\underbrace{
+\int_{\mathcal{X}^n}
+\tilde{\theta}\,
+f(x_1,\ldots,x_n;\theta)
+\,dx_1\cdots dx_n
+}_{=\mathbb{E}_{\theta}\tilde{\theta}=\theta}
+\qquad
+\text{(by regularity)}
+\\
+&=
+\frac{\partial\theta}{\partial\theta}
+=1.
+\end{aligned}
+\]
+Plug these expectations into the Cauchy--Schwarz inequality and rearrange.
+\hfill$\square$
+
+\paragraph{Remark.}
+Sometimes, the MLE is unbiased and attains the Cram\'er--Rao lower
+bound, but not always. However, we will show this is true asymptotically.
+
+If $\Theta\subseteq\mathbb{R}^p$ with $p>1$, let
+\[
+\Phi:\Theta\to\mathbb{R}
+\]
+be a scalar function of $\theta$.
+Consider an unbiased estimator $\tilde{\Phi}(X_1,\ldots,X_n)$.
+Then one can show that
+\[
+\operatorname{Var}_{\theta}(\tilde{\Phi})
+\geq
+\frac{1}{n}
+\left(
+\frac{\partial\Phi(\theta)}{\partial\theta}
+\right)^{T}
+I(\theta)^{-1}
+\frac{\partial\Phi(\theta)}{\partial\theta},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Corollary 1.}
+If $\tilde{\theta}$ is not unbiased, we have
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta})
+\geq
+\frac{
+\displaystyle
+\frac{\partial}{\partial\theta}
+\mathbb{E}_{\theta}\tilde{\theta}
+}{
+nI(\theta)
+},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Example.}
+Take $\Phi(\theta)=\alpha^{T}\theta$ for some
+$\alpha\in\mathbb{R}^p$.
+In this case,
+\[
+\frac{\partial\Phi(\theta)}{\partial\theta}=\alpha,
+\]
+and
+\[
+\operatorname{Var}_{\theta}(\tilde{\Phi})
+\geq
+\frac{1}{n}\alpha^{T}I(\theta)^{-1}\alpha.
+\]
+
+\subsection*{Example Sheet 1}
+
+We observe a single pair
+\[
+(X_1,X_2)
+\sim
+N\left(
+\begin{pmatrix}
+\theta_1\\
+\theta_2
+\end{pmatrix},
+\Sigma
+\right),
+\]
+where $\Sigma\succ0$ is known.
+We wish to estimate $\theta_1$.
+
+\paragraph{Case 1.}
+Assume that $\theta_2$ is known.
+In this case, the model has one parameter and F.I.\ matrix
+\[
+I_1(\theta_1).
+\]
+
+\paragraph{Case 2.}
+Assume that $\theta_2$ is unknown.
+For any estimator
+\[
+\tilde{\theta}
+=
+\begin{pmatrix}
+\tilde{\theta}_1\\
+\tilde{\theta}_2
+\end{pmatrix},
+\]
+we have
+\[
+\tilde{\theta}_1
+=
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}^{T}
+\tilde{\theta}.
+\]
+So, if $\tilde{\theta}$ is unbiased, we have the Cram\'er--Rao lower bound
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta}_1)
+\geq
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}^{T}
+I(\theta)^{-1}
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+=
+\bigl[I(\theta)^{-1}\bigr]_{11}.
+\]
+
+\paragraph{Goal.}
+Show
+\[
+I_1(\theta_1)^{-1}
+<
+\bigl[I(\theta)^{-1}\bigr]_{11},
+\]
+unless $\Sigma$ is diagonal ($X_1,X_2$ independent).
+
+\section*{II. Asymptotic Theory of the MLE}
+
+All reasonable estimators are asymptotically unbiased:
+\[
+\mathbb{E}_{\theta}\tilde{\theta}
+\xrightarrow{n\to\infty}
+\theta,
+\qquad
+\forall\theta\in\Theta.
+\]
+
+We wish to prove that estimators are \textbf{consistent}:
+\[
+\tilde{\theta}\xrightarrow{?}\theta
+\qquad
+\text{as }n\to\infty
+\quad
+\text{under }P_{\theta},
+\qquad
+\forall\theta\in\Theta.
+\]
+
+For consistent estimators, a reasonable notion of optimality is
+\textbf{asymptotic efficiency}:
+\[
+n\operatorname{Var}_{\theta}(\tilde{\theta})
+\xrightarrow{n\to\infty}
+I(\theta)^{-1},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+We will show that the MLE is asymptotically efficient and, furthermore,
+\[
+\hat{\theta}_{\mathrm{MLE}}
+\approx
+N\left(\theta,n^{-1}I(\theta)^{-1}\right),
+\qquad
+\forall\theta.
+\]
+This distributional convergence can be used for statistical inference.
+
+\subsection*{Stochastic Convergence}
+
+\paragraph{Definition 1.}
+Let $(X_n:n\in\mathbb{N})$ be a collection of random variables in some
+probability space $(\Omega,\mathcal{F},\mathbb{P})$.
+
+\begin{itemize}
+    \item We say that $X_n$ converges almost surely to a random variable
+    $X$ on $(\Omega,\mathcal{F},\mathbb{P})$, or
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}}X,
+    \]
+    if and only if
+    \[
+    \mathbb{P}\left(
+    \left\{
+    \omega:
+    \left\|X_n(\omega)-X(\omega)\right\|_2
+    \xrightarrow{n\to\infty}0
+    \right\}
+    \right)
+    =1.
+    \]
+
+    \item We say that $X_n$ converges to $X$ in probability, or
+    \[
+    X_n\xrightarrow{P}X,
+    \]
+    if, for every $\varepsilon>0$,
+    \[
+    \mathbb{P}\left(
+    \|X_n-X\|_2>\varepsilon
+    \right)
+    \xrightarrow{n\to\infty}0.
+    \]
+\end{itemize}
+
+\begin{center}
+\textbf{End of Lecture 3}
+\end{center}
 \end{document}
