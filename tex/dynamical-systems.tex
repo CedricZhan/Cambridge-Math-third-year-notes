@@ -415,4 +415,259 @@ blows up to $\infty$ at $t\to1$.
 In what follows, unless stated otherwise, we will consider only
 \underline{differentiable} functions $f$.
 
+\newpage
+\noindent\S 1.3.\ \underline{Orbits, invariant sets and limit sets}
+
+\bigskip
+\noindent
+Consider a flow $\phi_t(\bar x_0)$.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.58\textwidth}
+\fbox{Definition}
+
+\medskip
+$\ast$ The \underline{orbit/trajectory} of $\phi_t$ through $\bar x_0$ is the
+set
+\[
+O(\bar x_0)=\{\phi_t(\bar x_0):-\infty<t<\infty\}.
+\]
+$\ast$ The \underline{forward orbit} of $\phi_t$ through $\bar x_0$ is the
+set
+\[
+O^+(\bar x_0)=\{\phi_t(\bar x_0):0\leq t\};
+\]
+analogously, \underline{backward orbit} $O^-(\bar x_0)$ if for $t\leq0$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.39\textwidth}
+\includegraphics[width=\linewidth]{lecture3-orbit.png}
+\end{minipage}
+
+\bigskip
+\noindent\fbox{Definition}
+
+\medskip
+\noindent
+A set of points $\mathcal M\subseteq E$ is \underline{invariant} under $f$ if
+\[
+\bar x\in\mathcal M\quad\Rightarrow\quad O(\bar x)\subseteq\mathcal M.
+\]
+\noindent
+Clearly, any orbit is invariant.
+
+\bigskip
+\noindent\fbox{Definition}\quad\underline{Fixed point}
+
+\medskip
+\noindent
+The point $\bar x_0$ is a \underline{fixed point} (equilibrium, stationary,
+critical point) if $f(\bar x_0)=0$. Then $\bar x=\bar x_0$ for any $t$ and
+$O(\bar x_0)=\bar x_0$.
+
+\bigskip
+\noindent\fbox{Definition}\quad\underline{Periodic point \& orbit}
+
+\medskip
+\noindent
+A point $\bar x_0$ is a \underline{periodic point} with period $T$ if
+$\phi_T(\bar x_0)=\bar x_0$ for some $T>0$ but
+$\phi_t(\bar x_0)\neq\bar x_0$ for $0<t<T$.
+
+\medskip
+\noindent
+The set $\{\phi_t(\bar x_0):0\leq t<T\}$ is the \underline{periodic orbit}
+through $\bar x_0$.
+
+\newpage
+\noindent\fbox{Example}\quad\underline{Periodic orbit}
+\[
+\begin{pmatrix}\dot x\\[2pt]\dot y\end{pmatrix}
+=
+\begin{pmatrix}-y^3\\[2pt]x^3\end{pmatrix}
+\quad\Rightarrow\quad
+\underline{x^4+y^4=\operatorname{cst}(t)}
+\]
+
+\begin{center}
+\includegraphics[width=0.42\textwidth]{lecture3-periodic-orbits.png}
+
+not a limit cycle!
+\end{center}
+
+\noindent\fbox{Definition}\quad\underline{Limit cycle}
+
+\medskip
+\noindent
+A \underline{limit cycle} is an \underline{isolated} periodic orbit, i.e.
+there are no other periodic orbits in its sufficiently small neighborhood.
+
+\bigskip
+\noindent\fbox{Example}\quad\underline{Limit cycle}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.55\textwidth}
+\[
+\begin{pmatrix}\dot x\\[2pt]\dot y\end{pmatrix}
+=
+\begin{pmatrix}
+-y+x(1-x^2-y^2)\\[2pt]
+x+y(1-x^2-y^2)
+\end{pmatrix}
+\quad\Rightarrow
+\]
+\[
+\underline{\dot r=r(1-r^2)},
+\qquad
+\underline{\dot\theta=1}.
+\]
+A fixed point $(0,0)$ and a \underline{limit cycle} $r=1$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.42\textwidth}
+\includegraphics[width=\linewidth]{lecture3-limit-cycle.png}
+\end{minipage}
+
+\bigskip
+\noindent\fbox{Definition}\quad\underline{Homoclinic orbit}
+
+\medskip
+\noindent
+If $\bar x_0$ is a fixed point and $\exists\,\bar y\neq\bar x_0$ such that
+$\phi_t(\bar y)\to\bar x_0$ as $t\to\infty$ and $t\to-\infty$, then
+$O(\bar y)$ is a \underline{homoclinic orbit}.
+
+\begin{center}
+\includegraphics[width=0.78\textwidth]{lecture3-homoclinic-orbit.png}
+\end{center}
+
+\newpage
+\noindent\fbox{Definition}\quad\underline{Heteroclinic orbit}
+
+\medskip
+\noindent
+If $\bar x_0$ and $\bar x_1\neq\bar x_0$ are fixed points and
+$\exists\,\bar y$ such that $\phi_t(\bar y)\to\bar x_0$ as $t\to\infty$ and
+$\phi_t(\bar y)\to\bar x_1$ at $t\to-\infty$, then $O(\bar y)$ is a
+\underline{heteroclinic orbit}.
+
+\begin{center}
+Note that it takes $\infty$ time to leave $\bar x_1$ and reach $\bar x_0$!
+
+\includegraphics[width=0.82\textwidth]{lecture3-heteroclinic-orbit.png}
+\end{center}
+
+\noindent
+In higher dimensions more complex invariant sets are possible.
+
+\bigskip
+\noindent\fbox{Example}\quad\underline{2-torus in 3D}
+
+\medskip
+\noindent
+$\theta_1,\theta_2$ coordinates on the surface of a torus in 3D,
+$\dot\theta_1=\omega_1$, $\dot\theta_2=\omega_2$ and $\omega_1,\omega_2$ are
+not in a ratio, $\Rightarrow$ trajectory will fill the full surface of a torus.
+Thus, surface is an invariant set.
+
+\begin{center}
+\includegraphics[width=0.78\textwidth]{lecture3-torus.png}
+\end{center}
+
+\newpage
+\noindent
+When talking about the long-term behavior of trajectories need to be careful
+with statements like $\phi_t(\bar x)\to\bar y$ as such limit may not exist,
+e.g.\ for periodic orbits.
+
+\medskip
+\noindent\underline{Instead use}
+
+\medskip
+\noindent\fbox{Definition}
+
+\medskip
+\noindent
+\underline{$\omega$-limit set} of $\bar x$ is
+\[
+\omega(\bar x)=\left\{\bar y:\exists\text{ some sequence }t_1,t_2,\ldots
+\to\infty\text{ with }\phi_{t_n}(\bar x)\to\bar y\right\}.
+\]
+\noindent
+\underline{$\alpha$-limit set} defined similarly but for $t\to-\infty$.
+
+\begin{center}
+\includegraphics[width=0.92\textwidth]{lecture3-limit-set-examples.png}
+\end{center}
+
+\noindent
+When the orbit $O(\bar x)$ is \underline{bounded}, $\omega(\bar x)$ has
+properties:
+\[
+\begin{array}{ll}
+\ast\ \text{non-empty} & \ast\ \text{invariant under }f\\[4pt]
+\ast\ \text{closed}    & \ast\ \text{bounded}\\[4pt]
+\ast\ \text{connected}&
+\end{array}
+\]
+
+\noindent\fbox{Example}
+
+\medskip
+\noindent
+Go back to
+\[
+\dot r=r(1-r^2),
+\qquad
+\dot\theta=1.
+\]
+
+\begin{center}
+\includegraphics[width=0.46\textwidth]{lecture3-limit-cycle-limit-sets.png}
+\end{center}
+
+\[
+\text{Here}\qquad
+\omega(\bar x)=\{r=1\},
+\]
+\[
+\alpha(\bar x)=\{(0,0)\}\text{ for }|\bar x|<1
+\qquad\text{or undefined for }|\bar x|>1.
+\]
+
+\newpage
+\noindent\S 1.4.\ \underline{Topological equivalence of flows}
+
+\bigskip
+\noindent
+In this course we will sometimes be referring to different dynamical
+systems/flows as topologically/geometrically equivalent. Later we'll see that
+the flow structure changes at bifurcation.
+
+\bigskip
+\noindent\fbox{Definition}\quad\underline{Topological equivalence}
+
+\medskip
+\noindent
+Two flows $\phi_t^f(\bar x)$ and $\phi_t^g(\bar x)$ are
+\underline{topologically equivalent} if there is a homeomorphism
+$h(\bar x):E^f\to E^g$ (i.e.\ a continuous bijection with continuous inverse)
+and time-increasing function $\tau(\bar x,t)$ such that for any $t,\bar x$
+\[
+\phi_t^f(\bar x)=h^{-1}\circ\phi_\tau^g\circ h(\bar x)
+\]
+\[
+\text{and}\qquad
+\tau(\bar x,t_1+t_2)
+=\tau(\bar x,t_1)+\tau\bigl(\phi_{t_1}^f(\bar x),t_2\bigr).
+\]
+
+\begin{center}
+\includegraphics[width=0.94\textwidth]{lecture3-topological-equivalence.png}
+\end{center}
+
+\begin{center}
+\textbf{End of Lecture 3}
+\end{center}
+
 \end{document}
