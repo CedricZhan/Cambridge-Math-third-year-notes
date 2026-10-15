@@ -612,4 +612,220 @@ Y=\mathbb{E}(X\mid\mathcal{H})
 \begin{center}
 \textbf{End of Lecture 2}
 \end{center}
+\subsection*{Properties of conditional expectation (continued)}
+
+\noindent\textbf{Proposition (Taking out what is known).}
+Let $\mathcal{G}\subseteq\mathcal{F}$ be a $\sigma$-algebra, and let $X$ be an integrable random variable. Suppose that $Z$ is a bounded $\mathcal{G}$-measurable random variable. Then
+\[
+\mathbb{E}[ZX\mid\mathcal{G}]
+=
+Z\mathbb{E}[X\mid\mathcal{G}]
+\qquad \text{a.s.}
+\]
+
+\noindent\textbf{Proof.}
+Take $Y=\mathbb{E}[X\mid\mathcal{G}]$ a.s. Note that $ZY$ is integrable and $\mathcal{G}$-measurable.
+
+Take $A\in\mathcal{G}$. We will show that
+\[
+\mathbb{E}[ZX\mathbf{1}_A]
+=
+\mathbb{E}[ZY\mathbf{1}_A],
+\]
+so that $ZY$ satisfies (a) and (b) for $ZX$, and we are done.
+
+Consider first the case $Z=\mathbf{1}_B$, where $B\in\mathcal{G}$. Then $A\cap B\in\mathcal{G}$, so
+\[
+\begin{aligned}
+\mathbb{E}[ZX\mathbf{1}_A]
+&=\mathbb{E}[X\mathbf{1}_{A\cap B}]\\
+&=\mathbb{E}[Y\mathbf{1}_{A\cap B}]\\
+&=\mathbb{E}[ZY\mathbf{1}_A].
+\end{aligned}
+\]
+This extends to simple random variables
+\[
+Z=\sum_{i=1}^{n}a_i\mathbf{1}_{B_i}
+\]
+by linearity.
+
+For $Z\geq 0$ and $X\geq 0$, consider
+\[
+Z_n
+=
+\left(2^{-n}\left\lfloor 2^n Z\right\rfloor\right)\wedge n.
+\]
+Then $Z_n$ is simple, so
+\[
+\mathbb{E}[Z_nX\mathbf{1}_A]
+=
+\mathbb{E}[Z_nY\mathbf{1}_A].
+\]
+Since $X\geq 0$, we have $Y\geq 0$ a.s., so
+\[
+Z_nX\uparrow ZX,
+\qquad
+Z_nY\uparrow ZY.
+\]
+Letting $n\to\infty$,
+\[
+\begin{aligned}
+\mathbb{E}[Z_nX\mathbf{1}_A]
+&\longrightarrow \mathbb{E}[ZX\mathbf{1}_A],\\
+\mathbb{E}[Z_nY\mathbf{1}_A]
+&\longrightarrow \mathbb{E}[ZY\mathbf{1}_A].
+\end{aligned}
+\]
+
+Finally, for general $X$ and $Z$, use
+\[
+X=X^+-X^-,
+\qquad
+Z=Z^+-Z^-,
+\]
+and linearity to obtain the desired formula.
+\hfill$\square$
+
+\medskip
+
+\noindent\textbf{Proposition.}
+Let $X_1,X_2$ be random variables, with $X_1$ being $\mathcal{G}$-measurable and $X_2$ independent of $\mathcal{G}$. Suppose that $F$ is a bounded measurable function on $\mathbb{R}^2$. Then
+\[
+\mathbb{E}[F(X_1,X_2)\mid\mathcal{G}]
+=
+f(X_1)
+\qquad \text{a.s.},
+\]
+where
+\[
+f(x)=\mathbb{E}[F(x,X_2)].
+\]
+
+\medskip
+
+\noindent\textbf{Recall the optional stopping theorem.}
+Let $M$ be a martingale and let $T$ be a bounded stopping time. Then
+\[
+\mathbb{E}[M_T]=\mathbb{E}[M_0].
+\]
+
+\medskip
+
+\noindent\textbf{Theorem.}
+Let $M$ be a martingale and let $T$ be a stopping time. Consider the stopped process
+\[
+M_n^T:=M_{T\wedge n}.
+\]
+Then $M^T$ is also a martingale.
+
+\medskip
+
+\noindent\textbf{Proof.}
+We have
+\[
+M_n^T
+=
+M_0+\sum_{k=1}^{n}(M_k-M_{k-1})\mathbf{1}_{\{k\leq T\}}.
+\]
+Since $\{k\leq T\}\in\mathcal{F}_k$, this shows that $M_n^T$ is $\mathcal{F}_n$-measurable. Also, $M^T$ is integrable.
+
+To show the martingale property, it suffices to show, for $A\in\mathcal{F}_n$ and all $n$, that
+\[
+\mathbb{E}\left[(M_{n+1}^T-M_n^T)\mathbf{1}_A\right]=0.
+\]
+But
+\[
+M_{n+1}^T-M_n^T
+=
+(M_{n+1}-M_n)\mathbf{1}_{\{n+1\leq T\}}.
+\]
+Note that
+\[
+\{n+1\leq T\}
+=
+\{T\leq n\}^{c}
+\in\mathcal{F}_n.
+\]
+So
+\[
+\mathbb{E}\left[
+(M_{n+1}-M_n)
+\underbrace{
+\mathbf{1}_{\{n+1\leq T\}}\mathbf{1}_A
+}_{\mathcal{F}_n\text{-measurable}}
+\right]
+=0,
+\]
+as required.
+\hfill$\square$
+
+\subsection*{Martingale transforms}
+
+Say that a process $(H_n)_{n\geq 1}$ is \emph{previsible} if $H_n$ is $\mathcal{F}_{n-1}$-measurable for all $n$.
+
+\medskip
+
+\noindent\textbf{Theorem.}
+Let $M$ be a martingale and let $H$ be a bounded previsible process. We define the transform $H\cdot M$ of $M$ by $H$ by
+\[
+(H\cdot M)_n
+=
+Y_n
+=
+\sum_{k=1}^{n}H_k(M_k-M_{k-1}),
+\qquad n\geq 1,
+\]
+and
+\[
+(H\cdot M)_0=Y_0=0.
+\]
+
+\medskip
+
+\noindent\textbf{Interpretation.}
+Think of $M_n$ as the price of an asset at time $n$.
+
+An investor holds $H_n$ units of the asset between time $n-1$ and time $n$.
+
+Then the profit made from time $0$ to time $n$ is $Y_n$.
+
+The previsible restriction is natural.
+
+\medskip
+
+Then $H\cdot M$ is also a martingale. In particular,
+\[
+\mathbb{E}[(H\cdot M)_n]
+=
+\mathbb{E}[(H\cdot M)_0]
+=
+0.
+\]
+
+\noindent\textbf{Proof.}
+Note that
+\[
+(H\cdot M)_{n+1}-(H\cdot M)_n
+=
+H_{n+1}(M_{n+1}-M_n),
+\]
+and, by taking out what is known,
+\[
+\begin{aligned}
+&\mathbb{E}\left[
+H_{n+1}(M_{n+1}-M_n)\mid\mathcal{F}_n
+\right]\\
+&\qquad=
+H_{n+1}
+\underbrace{
+\mathbb{E}[M_{n+1}-M_n\mid\mathcal{F}_n]
+}_{=\,0\text{, as }M\text{ is a martingale}}.
+\end{aligned}
+\]
+So $H\cdot M$ is a martingale, as claimed.
+\hfill$\square$
+
+\begin{center}
+\textbf{End of Lecture 3}
+\end{center}
 \end{document}

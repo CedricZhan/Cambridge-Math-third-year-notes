@@ -555,4 +555,153 @@ all non-negative integers are eigenvalues. Hence,
 \begin{center}
     \textbf{End of Lecture 2}
 \end{center}
+
+From calculations of norms above, we can choose normalised eigenstates
+$|n\rangle$ related by
+\[
+    a^\dagger|n\rangle=\sqrt{n+1}\,|n+1\rangle,
+    \qquad
+    a|n\rangle=\sqrt{n}\,|n-1\rangle.
+\]
+Starting from any state $|n\rangle$ we can generate all others.
+In particular, starting from the ground state $|0\rangle$ characterised by
+\[
+    a|0\rangle=0,
+\]
+have normalised eigenstate
+\[
+    |n\rangle=\frac{1}{\sqrt{n!}}(a^\dagger)^n|0\rangle.
+\]
+$a$, $a^\dagger$ also called \underline{ladder operators}.
+
+\medskip
+
+\noindent
+(b) \underline{Importance of the oscillator}
+
+\begin{itemize}
+    \item A smooth potential $V(x)$ with equilibrium point $x=x_0$
+    (so that $V'(x_0)=0$) can be expanded
+    \[
+        V(x_0+x)=V(x_0)+\frac{1}{2}V''(x_0)x^2+O(x^3).
+    \]
+    So, if $x=x_0$ is \underline{stable}, can set $V''(x_0)=m\omega^2$
+    \& for displacements $x$ not too large, expect system to be
+    well-approximated by oscillator.
+
+    e.g.\ diatomic molecules --- quantisation of vibrational energies important
+    in understanding internal energy \& heat capacities --- macroscopic consequences.
+
+    \item More complicated systems can be analysed in terms of
+    \underline{normal modes}: coherent motion in which all degrees of freedom
+    oscillate with same common frequency $\omega$.
+    General solution for \underline{classical} oscillator is
+    \[
+        x(t)=Ae^{-i\omega t}+A^*e^{+i\omega t}
+        \qquad A\text{ complex constant.}
+    \]
+    Normal modes for a system with variables $x_N$ are solutions of form
+    \[
+        x_N(t)=Au_Ne^{-i\omega t}+A^*u_N^*e^{+i\omega t}
+    \]
+    with $u_N$ complex vector specific to each normal frequency $\omega$.
+
+    e.g.\ crystal with $\#\text{ atom }\mathcal{N}\sim10^{23}$ --- forces
+    approximately elastic \& $N$ labels directions of motion for each atom,
+    so $3\times\mathcal{N}$ values.
+
+    \underline{or} EM field --- normal modes oscillations of electric \& magnetic
+    fields at each point in space
+    \[
+        \underline{E}(\underline{x},t)
+        =A\underline{u}(\underline{x})e^{-i\omega t}
+        +A^*\underline{u}(\underline{x})^*e^{+i\omega t}
+    \]
+    for some complex vector field $\underline{u}(\underline{x})$.
+    This is \underline{exact}.
+
+    \item QM: normal modes are independent oscillators --- treat these as above.
+    For each mode have
+    \[
+        a(\omega)\quad\&\quad a(\omega)^\dagger.
+    \]
+    Ground state $|0\rangle$ with
+    \[
+        a(\omega)|0\rangle=0.
+    \]
+    Other states e.g.\ $a^\dagger(\omega)|0\rangle$ \& find they have energy
+    \& momentum \& behave like \underline{particles}.
+    \[
+        \left.
+        \begin{aligned}
+            a&\text{ destroys}\\
+            a^\dagger&\text{ creates}
+        \end{aligned}
+        \right\}
+        \text{particles}
+        \left\{
+        \begin{aligned}
+            &\text{phonons in crystal}\\
+            &\text{photons in EM field}
+        \end{aligned}
+        \right.
+    \]
+\end{itemize}
+
+\subsection*{1.3 Bases \& Measurements}
+
+\noindent
+(a) \underline{Bases of Eigenstates}
+
+From key properties (i), (ii), (iii) in \S\,1.1 we know that
+for any observable $Q$ there is an orthonormal basis of eigenstates
+$\{|n\rangle\}$ for $V$
+\[
+    Q|n\rangle=q_n|n\rangle,
+    \qquad
+    \langle m|n\rangle=\delta_{mn}.
+\]
+For any state,
+\[
+    |\psi\rangle=\sum_n\alpha_n|n\rangle,
+    \qquad\text{where}\quad
+    \alpha_n=\langle n|\psi\rangle.
+\]
+Note
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2=1
+    \quad\Longleftrightarrow\quad
+    \begin{aligned}
+        \langle\psi|\psi\rangle
+        &=\left(\sum_m\alpha_m^*\langle m|\right)
+        \left(\sum_n\alpha_n|n\rangle\right)\\
+        &=\sum_n|\alpha_n|^2=1.
+    \end{aligned}
+\]
+Note that we can write
+\[
+    1=\sum_n|n\rangle\langle n|
+    \qquad\text{``completeness relation''}
+\]
+since on any state
+\begin{align*}
+    |\psi\rangle
+    &=\left(\sum_n|n\rangle\langle n|\right)|\psi\rangle\\
+    &=\sum_n|n\rangle\bigl(\langle n|\psi\rangle\bigr),
+\end{align*}
+so holds for any orthonormal basis.
+
+In above there may be several independent states with same eigenvalue $\lambda$.
+The \underline{eigenspace} for a given eval is
+\[
+    V_\lambda=\bigl\{|\psi\rangle:Q|\psi\rangle=\lambda|\psi\rangle\bigr\}.
+\]
+\& note $V_\lambda$ has basis $\bigl\{|n\rangle:q_n=\lambda\bigr\}$.
+The \underline{degeneracy} of $\lambda$ is the number of states in this basis,
+i.e.\ $\dim V_\lambda$, but note that $\lambda$ is also called
+\underline{non-degenerate} if degeneracy is $1$.
+
+\begin{center}
+    \textbf{End of Lecture 3}
+\end{center}
 \end{document}

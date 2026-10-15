@@ -695,4 +695,214 @@ This gives you an unexpectedly excellent approximation.
 \begin{center}
 \textbf{End of Lecture 2}
 \end{center}
+
+\subsection*{2.3 A. expansions in $\mathbb{C}$ --- Stokes phenomenon}
+
+\begin{itemize}
+    \item So far our defns relied on real limits, $x,x_0\in\mathbb{R}$ etc.
+    \item When we use complex variables, $x=z\in\mathbb{C}$ and $z\to z_0$,
+    typically $z$ must be restricted to a sector of $\mathbb{C}$ around $z_0$
+    for some of our definitions to work.
+
+    [See III.2 in Stuart]
+
+    e.g.\ little $o$ \& $O$ defns need to bring in moduli of functions.
+    \item Even if $f(z)$ analytic at $z_0$, it may have different a.\ series
+    as $z_0$ is approached from different sectors in $\mathbb{C}$.
+    This is Stokes phenomenon.
+\end{itemize}
+
+\begin{center}
+    \pdfximage width 0.42\linewidth {figures/asymptotic-lecture3-sectors.png}
+    \pdfrefximage\pdflastximage
+\end{center}
+
+e.g.
+\[
+    f(z)=\sinh(z^2)=\frac{1}{2}\left(e^{z^2}-e^{-z^2}\right),
+    \qquad z\in\mathbb{C}.
+\]
+What is its behaviour as $|z|\to\infty$?
+
+Which of $e^{z^2}$ or $e^{-z^2}$ is dominant?
+\[
+    \left|\frac{e^{-z^2}}{e^{z^2}}\right|
+    =\left|e^{-2z^2}\right|=e^{-2\operatorname{Re}(z^2)}.
+\]
+
+\noindent
+(a) Suppose $|z|\to\infty$ \& $\operatorname{Re}(z^2)>0$.
+\[
+    \text{ratio}\to0
+    \quad\Rightarrow\quad e^{-z^2}\ll e^{z^2}
+    \quad\Rightarrow\quad f(z)\sim\frac{1}{2}e^{z^2}
+    \quad\text{in this limit.}
+\]
+\[
+    \operatorname{Re}(z^2)>0
+    \quad\Rightarrow\quad
+    \Omega:\quad
+    \begin{gathered}
+        -\frac{\pi}{4}+\delta<\arg z<\frac{\pi}{4}-\delta,\\
+        \text{and}\quad
+        \frac{3\pi}{4}+\delta<\arg z<\frac{5\pi}{4}-\delta,
+    \end{gathered}
+\]
+for small $\delta$.
+
+\begin{center}
+    \pdfximage width 0.72\linewidth {figures/asymptotic-lecture3-stokes-lines.png}
+    \pdfrefximage\pdflastximage
+\end{center}
+
+\noindent
+(b) $|z|\to\infty$ \& $\operatorname{Re}(z^2)<0$.
+\[
+    \text{ratio}\to\infty
+    \quad\Rightarrow\quad e^{z^2}\ll e^{-z^2}
+    \quad\&\quad f\sim-\frac{1}{2}e^{-z^2}.
+\]
+\[
+    \widetilde{\Omega}:\quad
+    \frac{\pi}{4}+\delta<\arg z<\frac{3\pi}{4}-\delta
+    \quad\&\quad
+    -\frac{3\pi}{4}+\delta<\arg z<-\frac{\pi}{4}-\delta.
+\]
+\[
+    f(z)\sim
+    \begin{cases}
+        \frac{1}{2}e^{z^2}, & |z|\to\infty\ \&\ z\in\Omega,\\
+        -\frac{1}{2}e^{-z^2}, & |z|\to\infty\ \&\ z\in\widetilde{\Omega}.
+    \end{cases}
+\]
+
+\begin{itemize}
+    \item A.\ behaviour of $f$ as $|z|\to\infty$ depends on which wedge
+    $z\to\infty$ within.
+    \item $\mathbb{C}$ is divided into sectors, separated by special lines,
+    called \underline{Stokes lines}.
+
+    [Warning, sometimes called anti-Stokes lines!!]
+\end{itemize}
+
+\section*{3. Approximations of Integrals}
+
+\subsection*{3.1 Taylor expanding the integrand --- Stieltjes integrals}
+
+(Warm up problem)
+
+Consider:
+\[
+    I(x)=\int_0^\infty\frac{e^{-t}}{1+xt}\,dt,
+    \qquad x\geq0.
+\]
+\begin{itemize}
+    \item We want to understand $I$'s behaviour when $x\to0^+$.
+    \item How about we expand $\dfrac{1}{1+xt}$?
+\end{itemize}
+\[
+    \frac{1}{1+xt}=\sum_{n=0}^\infty(-1)^n x^n t^n
+    \qquad\text{\Large$\times$}\quad t\text{ can be big!}
+\]
+
+Consider instead
+\[
+    \sum_{n=0}^N(-xt)^n
+    =\frac{1-(-xt)^{N+1}}{1+xt}
+    =\frac{1}{1+xt}-\underbrace{\frac{(-xt)^{N+1}}{1+xt}}_{r_N}.
+\]
+\[
+    \Rightarrow\quad\frac{1}{1+xt}=\sum_{n=0}^N(-xt)^n+r_N.
+\]
+\begin{align*}
+    I(x)&=\int_0^\infty e^{-t}
+    \left[\sum_{n=0}^N(-1)^n x^n t^n+r_N\right]dt\\
+    &=\sum_{n=0}^N(-1)^n x^n
+    \underbrace{\int_0^\infty t^n e^{-t}\,dt}_{=n!}+R_N\\
+    &=\sum_{n=0}^N(-1)^n n!\,x^n+R_N\\
+    &=\sum c_n\phi_n(x)+R_N.
+\end{align*}
+$\phi_n=x^n$ as $x\to0^+$, so is a.\ sequence!
+
+Need to show $R_N=o(x^N)$ as $x\to0^+$.
+\[
+    \begin{aligned}
+        \frac{R_N}{x^N}
+        &=\frac{x^{N+1}}{x^N}\int_0^\infty
+        \frac{t^{N+1}e^{-t}}{1+xt}\,dt\\
+        &\leq x\int_0^\infty t^{N+1}e^{-t}\,dt
+        =x(N+1)!\longrightarrow0
+        \quad\text{as }x\to0^+.
+    \end{aligned}
+\]
+Note $1+xt>1$.
+True $\forall N$.
+\[
+    \Rightarrow\quad I(x)\sim\sum_{n=0}^\infty(-1)^n n!\,x^n
+    \qquad\text{as }x\to0^+.
+\]
+
+\subsection*{3.2 Integration by parts}
+
+Recap:
+\[
+    \int_a^b f'(t)g(t)\,dt
+    =[fg]_a^b-\int_a^b fg'\,dt.
+\]
+Generalisation:
+\begin{align*}
+    I&=\int_a^b f(t)g^{(n)}(t)\,dt\\
+    &=\sum_{k=1}^n(-1)^{k-1}
+    \left[f^{(k-1)}(t)g^{(n-k)}(t)\right]_a^b
+    +(-1)^n\int_a^b f^{(n)}(t)g(t)\,dt.
+\end{align*}
+
+\begin{itemize}
+    \item Repeated integration by parts can generate an a.\ approximation
+    under certain circumstances.
+\end{itemize}
+e.g.\ How does
+\[
+    F(x)=\int_x^\infty e^{-t^2/2}\,dt
+\]
+behave as $x\to\infty$?
+\begin{align*}
+    F(x)&=\int_x^\infty\frac{te^{-t^2/2}}{t}\,dt\\
+    &=\left[-\frac{1}{t}e^{-t^2/2}\right]_x^\infty
+    +\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt\\
+    &=\underbrace{\frac{e^{-x^2/2}}{x}}_{\text{a.\ approximation}}
+    +\underbrace{\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt}_{\text{error}}.
+\end{align*}
+Need to check that
+\[
+    \text{error}=o\!\left(\frac{e^{-x^2/2}}{x}\right)
+    \qquad\text{as }x\to\infty.
+\]
+\begin{align*}
+    \text{error}&=\int_x^\infty\frac{te^{-t^2/2}}{t^3}\,dt
+    \qquad(\text{note }t\geq x)\\
+    &\leq\frac{1}{x^3}\int_x^\infty te^{-t^2/2}\,dt
+    =\frac{1}{x^3}e^{-x^2/2}\\
+    &=o\!\left(\frac{e^{-x^2/2}}{x}\right)
+    \qquad\text{as }x\to\infty.
+\end{align*}
+\[
+    \Rightarrow\quad F(x)\sim\frac{e^{-x^2/2}}{x}
+    \qquad\text{as }x\to\infty.
+\]
+
+In fact we find
+\[
+    F(x)\sim\frac{e^{-x^2/2}}{x}
+    \sum_{n=0}^\infty(-1)^n\frac{(2n-1)!!}{x^{2n}}
+    \qquad\text{as }x\to\infty.
+\]
+\[
+    (2n-1)!!=(2n-1)(2n-3)(2n-5)\cdots3\cdot1.
+\]
+Exercise: Show this.
+
+\begin{center}
+    \textbf{End of Lecture 3}
+\end{center}
 \end{document}
