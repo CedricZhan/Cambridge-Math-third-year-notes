@@ -670,4 +670,216 @@ and time-increasing function $\tau(\bar x,t)$ such that for any $t,\bar x$
 \textbf{End of Lecture 3}
 \end{center}
 
+\newpage
+\noindent\S 1.4.\ \underline{Topological equivalence of flows}
+
+\bigskip
+\noindent
+In this course we will sometimes be referring to different dynamical
+systems/flows as topologically/geometrically equivalent. Later we'll see that
+the flow structure changes at bifurcation.
+
+\bigskip
+\noindent\fbox{Definition}\quad\underline{Topological equivalence}
+
+\medskip
+\noindent
+Two flows $\phi_t^f(\bar x)$ and $\phi_t^g(\bar x)$ are
+\underline{topologically equivalent} if there is a homeomorphism
+$\bar h(\bar x):E^f\to E^g$ (i.e.\ a continuous bijection with continuous inverse)
+and time-increasing function $\tau(\bar x,t)$ such that for any $t,\bar x$
+\[
+\underline{\phi_t^f(\bar x)=\bar h^{-1}\circ\phi_\tau^g\circ h(\bar x)}
+\]
+\[
+\text{and}\qquad
+\underline{\tau(\bar x,t_1+t_2)
+=\tau(\bar x,t_1)+\tau\bigl(\phi_{t_1}^f(\bar x),t\bigr)}.
+\]
+
+\begin{center}
+\includegraphics[width=0.98\textwidth]{lecture4-topological-equivalence.png}
+\end{center}
+
+\newpage
+\noindent
+In words, $\exists$ a `nice' mapping from one phase-space to the other and a map
+from one time to another such that the evolutions of the two systems are the same.
+
+\medskip
+\noindent
+Clearly, $\bar h$ must map \underline{fixed points} into \underline{fixed points}
+and \underline{periodic orbits} to \underline{periodic orbits}
+(with generally different period).
+
+\medskip
+\noindent
+If $\tau=t$ we say that the two flows are \underline{topologically conjugate}.
+
+\bigskip
+\noindent\fbox{Example}
+\[
+\begin{aligned}\dot r&=-r\\\dot\theta&=1\end{aligned}
+\qquad\text{and}\qquad
+\begin{aligned}\dot\rho&=-2\rho\\\dot\psi&=0\end{aligned}
+\]
+\begin{center}
+\includegraphics[height=34mm]{lecture4-spiral.png}
+\hspace{35mm}
+\includegraphics[height=32mm]{lecture4-radial.png}
+\end{center}
+
+\noindent
+Flows are topologically equivalent with $\bar h(0,0)=(0,0)$,
+$h(r,\theta)=(r^2,\theta+\ln r)$ for $r\neq0$ in polars and
+$\tau=t$ (so topologically conjugate).
+
+\medskip
+\noindent
+To show, solve both: starting at $\bar x=(r_0,\theta_0)$
+\[
+\underline{\phi_t^f=(r_0e^{-t},\theta_0+t)},\qquad
+\underline{\phi_t^g=(\rho_0e^{-2t},\psi_0)}.
+\]
+\noindent Then
+\[
+h\circ\phi_t^f
+=\bigl(r_0^2e^{-2t},\theta_0+t+\ln(r_0e^{-t})\bigr)
+=\bigl(r_0^2e^{-2t},\theta_0+\ln r_0\bigr)
+\]
+\noindent and
+\[
+\phi_t^g\circ h=\bigl(r_0^2e^{-2t},\theta_0+\ln r_0\bigr)
+\quad\text{-- the same, }\Rightarrow\ \text{Ok}
+\]
+\[
+\text{as }h(\bar x)=(r_0^2,\theta_0+\ln r_0).
+\]
+\par\noindent\hfill$\blacktriangleleft$
+
+\newpage
+\noindent\fbox{Example}
+\[
+\begin{aligned}\dot r&=0\\\dot\theta&=1\end{aligned}
+\qquad\text{and}\qquad
+\begin{aligned}\dot r&=0\\\dot\theta&=r+\sin^2\theta\end{aligned}
+\]
+\noindent
+\begin{minipage}[c]{0.25\textwidth}
+\includegraphics[width=\linewidth]{lecture4-circular-orbits.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.71\textwidth}
+Both are periodic circular orbits, so $\underline{\bar h(\bar x)=\bar x}$,
+and time is stretched:
+\[
+\frac{d\theta}{dt}*(r+\sin^2\theta)=\frac{d\theta}{d\tau},\quad\Rightarrow
+\]
+\end{minipage}
+\[
+\underline{\tau=\int_0^t\frac{dt'}{r_0+\sin^2(\theta_0+t')}}
+\qquad\begin{gathered}
+\text{as first flow is}\\[4pt]
+\phi_t(r_0,\theta_0)=(r_0,\theta_0+t).
+\end{gathered}
+\]
+\noindent
+Thus, \underline{topologically equivalent} (but not conjugate).
+\hfill$\blacktriangleleft$
+
+\bigskip
+\noindent\fbox{Definition}
+
+\medskip
+\noindent
+The vector field $\bar f$ (or system $\dot{\bar x}=\bar f(\bar x)$ or flow
+$\phi_t(\bar x)$) is \underline{structurally stable} if $\exists\,\varepsilon>0$
+such that $\bar f+\bar\delta$ is topologically equivalent to $f$
+$\forall\,\bar\delta(\bar x)$ with
+\[
+|\bar\delta|+\sum_i\left|\frac{\partial\bar\delta}{\partial x_i}\right|
+<\varepsilon.
+\]
+\noindent
+In the first example system is structurally stable, in the second it is not
+(a small $\delta\neq0$ will turn $\dot r=0$ into $\dot r=\delta$, which is
+no longer a periodic orbit).
+
+\bigskip
+\noindent
+We will discuss this later in the context of \underline{bifurcations}.
+
+\newpage
+\noindent\S 2.\ \underline{Behavior near fixed points}
+
+\medskip
+\noindent
+Suppose $\bar x_0$ is a fixed point of $\dot{\bar x}=\bar f(\bar x)$,
+i.e.\ $\underline{\bar f(\bar x_0)=0}$. If $f$ is smooth near $\bar x_0$, set
+\[
+\bar y=\bar x-\bar x_0,\quad\Rightarrow\quad
+\dot{\bar y}=\overset{\boldsymbol{\cdot}}{(\bar x-\bar x_0)}=\dot{\bar x}
+=\bar f(\bar x)=\bar f(\bar y+\bar x_0).
+\]
+\noindent Taylor expand r.h.s.:
+\[
+\dot{\bar y}=\underbrace{\bar f(\bar x_0)}_{=0}+\hat A\bar y+O(|y|^2),
+\qquad A_{ij}=\frac{\partial f_i}{\partial x_j}
+\quad\begin{gathered}\text{-- the Jacobian}\\\text{matrix of }f\text{ at }\bar x_0.
+\end{gathered}
+\]
+\noindent
+Thus, near $\bar x_0$ the behavior of the system is approximated by
+$\underline{\dot{\bar y}=\hat A\bar y}$.
+
+\bigskip
+\noindent\S 2.1\quad\underline{2D flows near fixed points}
+
+\medskip
+\noindent
+In 2D is a $2\times2$ matrix $\hat A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$
+with $\operatorname{Det}(\hat A)=ad-bc$, $\operatorname{Tr}(\hat A)=a+d$.
+
+\medskip
+\noindent Eigenvalues satisfy characteristic eq-n
+\[
+\underline{\lambda^2-\lambda\cdot\operatorname{Tr}(\hat A)+\det(\hat A)=0},
+\quad\Rightarrow\quad
+\underline{\lambda=\frac12\left[\operatorname{Tr}(\hat A)
+\pm\sqrt{(\operatorname{Tr}(\hat A))^2-4\operatorname{Det}(\hat A)}\right]}.
+\]
+\noindent
+By finding eigenvectors (when we can) we can put $\hat A$ into canonical form
+\& analyze.
+
+\bigskip
+\noindent
+\textcircled{1}\quad\underline{Saddle point}: $\underline{\operatorname{Det}(\hat A)<0}$,
+$\Rightarrow\lambda_1,\lambda_2$ are \underline{real} and have
+\underline{opposite signs}, $\lambda_1\lambda_2<0$.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.62\textwidth}
+\[
+\hat A=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},
+\quad\text{e.g. }\lambda_1<0<\lambda_2
+\]
+\[\Updownarrow\]
+\[
+\dot y_1=\lambda_1y_1,\quad\dot y_2=\lambda_2y_2,
+\quad\Rightarrow\quad
+\begin{aligned}
+y_1&=y_{1,0}e^{\lambda_1t}\\
+y_2&=y_{2,0}e^{\lambda_2t}
+\end{aligned}
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.35\textwidth}
+\includegraphics[width=\linewidth]{lecture4-saddle.png}
+\end{minipage}
+
+\begin{center}
+\textbf{End of Lecture 4}
+\end{center}
+
 \end{document}
