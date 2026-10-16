@@ -1004,5 +1004,351 @@ probability space $(\Omega,\mathcal{F},\mathbb{P})$.
 
 \begin{center}
 \textbf{End of Lecture 3}
+\end{center}\noindent
+Recall: If $(X_n),X$ are random vectors in $\mathbb{R}^k$, we say
+\begin{itemize}
+    \item
+    $X_n \xrightarrow{\mathrm{a.s.}} X$ iff
+    \[
+    \mathbb{P}\left(
+    \|X_n-X\|_2 \xrightarrow{n\to\infty} 0
+    \right)=1.
+    \]
+
+    \item
+    $X_n \xrightarrow{P} X$ iff
+    \[
+    \forall \varepsilon>0,\qquad
+    \mathbb{P}\left(\|X_n-X\|_2>\varepsilon\right)
+    \xrightarrow{n\to\infty}0.
+    \]
+\end{itemize}
+
+\noindent
+\underline{Rmk.}
+\[
+X_n \xrightarrow{\mathrm{a.s.}/P} X
+\quad\text{iff}\quad
+X_{n,i} \xrightarrow{\mathrm{a.s.}/P} X_i
+\qquad \forall\,1\leq i\leq k.
+\]
+
+\[
+\left[
+X\leq t
+\iff
+X_i\leq t_i
+\quad \forall\,1\leq i\leq k
+\right]
+\]
+
+\noindent
+\underline{Def 2.}
+We say that $X_n$ converges \underline{in distribution} to $X$,
+or $X_n\xrightarrow{d}X$, if for all $t\in\mathbb{R}^k$
+where the function
+\[
+t\mapsto\mathbb{P}(X\leq t)
+\]
+is continuous, we have
+\[
+\mathbb{P}(X_n\leq t)
+\xrightarrow{n\to\infty}
+\mathbb{P}(X\leq t).
+\]
+
+\medskip
+\noindent
+Some facts from P \& M.
+
+\medskip
+\noindent
+\underline{Prop 1.}
+
+\begin{enumerate}
+    \item[(a)]
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}}X
+    \implies
+    X_n\xrightarrow{P}X
+    \implies
+    X_n\xrightarrow{d}X.
+    \]
+
+    \item[(b)]
+    \underline{Continuous Mapping Theorem} (CMT).
+    Let $(X_n),X$ take values in
+    $\mathcal{X}\subseteq\mathbb{R}^k$,
+    let $g:\mathcal{X}\to\mathbb{R}$ be continuous.
+    Then,
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}/P/d}X
+    \implies
+    g(X_n)\xrightarrow{\mathrm{a.s.}/P/d}g(X).
+    \]
+
+    \item[(c)]
+    \underline{Slutsky's Lemma.}
+    Suppose that
+    \[
+    X_n\xrightarrow{d}X,
+    \qquad
+    Y_n\xrightarrow{d}c,
+    \]
+    where $c$ is constant, then
+    \begin{enumerate}
+        \item[(i)]
+        \[
+        Y_n\xrightarrow{P}c.
+        \]
+
+        \item[(ii)]
+        \[
+        X_n+Y_n\xrightarrow{d}X+c.
+        \]
+
+        \item[(iii)]
+        If $k=1$,
+        \[
+        X_nY_n\xrightarrow{d}X\cdot c,
+        \]
+        \[
+        \frac{X_n}{Y_n}\xrightarrow{d}\frac{X}{c}
+        \qquad\text{if }c\neq0.
+        \]
+
+        \item[(iv)]
+        Let $(A_n)$ be a sequence of random matrices in
+        $\mathbb{R}^{m\times k}$, and suppose,
+        \[
+        (A_n)_{ij}\xrightarrow{P}A_{ij}
+        \qquad \forall i,j
+        \]
+        where $A$ is deterministic. Then,
+        \[
+        A_nX_n\xrightarrow{d}AX.
+        \]
+    \end{enumerate}
+
+    \item[(d)]
+    If $X_n\xrightarrow{d}X$, then $(X_n)$ is
+    ``bounded in probability'' or $X_n=O_P(1)$, i.e.\
+    for all $\varepsilon>0$,
+    $\exists\,M_\varepsilon>0$, $N_\varepsilon\in\mathbb{N}$ s.t.
+    \[
+    \mathbb{P}\left(\|X_n\|_2>M_\varepsilon\right)
+    <\varepsilon
+    \qquad \forall n\geq N_\varepsilon.
+    \]
+\end{enumerate}
+
+\medskip
+\noindent
+\underline{2. LLN \& CLT}
+
+\medskip
+\noindent
+Let $X_1,X_2,\ldots$ be iid copies of a r.v.\ $X$ in
+$\mathbb{R}^k$.
+When $k=1$, the Weak Law of large numbers says that if
+$\operatorname{Var}(X)<\infty$, then
+\[
+\bar{X}_n:=\frac{1}{n}\sum_{i=1}^n X_i
+\xrightarrow{P}\mathbb{E}X.
+\]
+Indeed by Chebyshev's inequality,
+\[
+\forall\varepsilon>0,\qquad
+\mathbb{P}\left(
+|\bar{X}_n-\mathbb{E}X|>\varepsilon
+\right)
+\leq
+\frac{\operatorname{Var}(\bar{X}_n)}{\varepsilon^2}
+=
+\frac{\operatorname{Var}(X)}{n\varepsilon^2}
+\xrightarrow{n\to\infty}0.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 1} (Strong law of large numbers).
+If $\mathbb{E}\left(\|X_n\|_2\right)<\infty$, then
+\[
+\bar{X}_n\xrightarrow{\mathrm{a.s.}}\mathbb{E}[X]
+\qquad\text{as }n\to\infty.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 2} (Central Limit Theorem).
+When $k=1$, assume in addition that
+$\operatorname{Var}(X)=\sigma^2<\infty$, then,
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)
+\xrightarrow{d}N(0,\sigma^2).
+\]
+
+\noindent
+To state a multivariate version, recall that
+$Z\sim N(\mu,\Sigma)$ iff
+\[
+\forall\alpha\in\mathbb{R}^k,\qquad
+\alpha^T Z\sim N(\alpha^T\mu,\alpha^T\Sigma\alpha).
+\]
+If $\Sigma$ is positive definite, then $Z$ has a p.d.f.
+\[
+f(z)
+=
+\frac{1}{(2\pi)^{n/2}}
+\frac{1}{|\det\Sigma|^{1/2}}
+\exp\left\{
+-\frac{1}{2}(z-\mu)^T\Sigma^{-1}(z-\mu)
+\right\},
+\qquad z\in\mathbb{R}^k.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 2} $(k\geq1)$.
+If $\operatorname{Var}(X)=\Sigma$ is finite \& pos.\ def.\ then
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)
+\xrightarrow{d}N(0,\Sigma).
+\]
+
+\medskip
+\noindent
+\underline{Cor.}
+By Prop 1(d),
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)=O_P(1)
+\iff
+\left(\bar{X}_n-\mathbb{E}X\right)
+=
+O_P\left(\frac{1}{\sqrt{n}}\right).
+\]
+
+\medskip
+\noindent
+The CLT is useful to define confidence intervals.
+Let $X_1,X_2,\ldots$ be iid copies of $X$ with mean $\mu_0$
+and $\operatorname{Var}(X)=\sigma^2<\infty$ known.
+Define
+\[
+C_n
+=
+\left\{
+\mu\in\mathbb{R}:
+\sqrt{n}\frac{|\bar{X}_n-\mu|}{\sigma}
+\leq z_\alpha
+\right\}
+\]
+where $z_\alpha$ is such that
+\[
+\mathbb{P}(|Z|\leq z_\alpha)=1-\alpha
+\qquad\text{if }Z\sim N(0,1).
+\]
+
+\[
+\begin{aligned}
+\mathbb{P}(\mu_0\in C_n)
+&=
+\mathbb{P}\left(
+\sqrt{n}|\bar{X}_n-\mu_0|\leq\sigma z_\alpha
+\right)\\
+&\xrightarrow{n\to\infty}
+\mathbb{P}(|Z|\leq z_\alpha)
+\qquad\text{by the CLT}\\
+&=1-\alpha.
+\end{aligned}
+\]
+
+\noindent
+Hence, we say that $C_n$ is an ``asymptotic''
+$(1-\alpha)$-confidence interval.
+
+\medskip
+\noindent
+If $\sigma^2$ is unknown, we can define an estimator
+\[
+\begin{aligned}
+\hat{\sigma}^2
+&=
+\frac{1}{n-1}
+\sum_{i=1}^n
+\left(
+X_i-\underbrace{\bar{X}_n}_{\frac{1}{n}\sum_j X_j}
+\right)^2\\
+&=
+\frac{1}{n-1}
+\left(
+\sum_{i=1}^n X_i^2-n\bar{X}_n^2
+\right)\\
+&\xrightarrow{d}
+\mathbb{E}(X^2)-(\mathbb{E}X)^2
+=
+\sigma^2
+\end{aligned}
+\]
+by several applications of the SLLN, the CMT and Slutsky's lemma.
+
+\medskip
+\noindent
+Define a new random interval
+\[
+\widetilde{C}_n
+=
+\left\{
+\mu\in\mathbb{R}:
+\sqrt{n}\frac{|\bar{X}_n-\mu|}{\hat{\sigma}}
+\leq z_\alpha
+\right\}.
+\]
+
+\noindent
+By the CMT, $\hat{\sigma}\xrightarrow{d}\sigma$ constant.
+By Slutsky's Lemma,
+\[
+\sqrt{n}\frac{(\bar{X}_n-\mu_0)}{\hat{\sigma}}
+\xrightarrow{d}N(0,1).
+\]
+
+\noindent
+Hence, $C_n$ is an asymptotic $(1-\alpha)$-confidence interval
+for $\mu_0$.
+
+\medskip
+\noindent
+\underline{Next time}: Uniform laws of Large Numbers (ULLN)
+
+\medskip
+\noindent
+Let $\mathcal{H}$ be a class of functions
+$\mathbb{R}^k\to\mathbb{R}$.
+Assume that
+\[
+\mathbb{E}|h(X)|<\infty
+\qquad \forall h\in\mathcal{H}.
+\]
+We know from the SLLN that
+\[
+\frac{1}{n}\sum_{i=1}^n h(X_i)
+\xrightarrow{\mathrm{a.s.}}
+\mathbb{E}[h(X)]
+\qquad \forall h\in\mathcal{H}.
+\]
+
+\noindent
+We have a ULLN if
+\[
+\sup_{h\in\mathcal{H}}
+\left|
+\frac{1}{n}\sum_{i=1}^n h(X_i)-\mathbb{E}[h(X)]
+\right|
+\xrightarrow{\mathrm{a.s.}}0.
+\]
+
+\begin{center}
+\textbf{End of Lecture 4}
 \end{center}
 \end{document}
