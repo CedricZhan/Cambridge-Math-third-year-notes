@@ -704,4 +704,198 @@ i.e.\ $\dim V_\lambda$, but note that $\lambda$ is also called
 \begin{center}
     \textbf{End of Lecture 3}
 \end{center}
+
+\noindent
+(b) \underline{Functions of Operators}
+
+It is straightforward to define $f(Q)$ for some operator $Q$
+if $f$ is a polynomial or power series (assuming convergence), e.g.
+\[
+    f(Q)=Q^3+Q
+    \qquad\text{or}\qquad
+    f(Q)=\exp Q=\sum_{n=0}^{\infty}\frac{1}{n!}Q^n.
+\]
+Important examples are
+\[
+    e^{-iHt/\hbar}
+    \qquad\text{time evolution operator ($H$ Hamiltonian)}
+\]
+\&
+\[
+    e^{-ia\hat{p}/\hbar}
+    \qquad\text{translation operator (see later section of Chapter 1).}
+\]
+
+More generally, for $Q$ an observable with basis of eigenstates as in (a),
+we can define
+\[
+    f(Q)|n\rangle=f(q_n)|n\rangle
+\]
+\& then defined on any state, provided $f(q_n)$ makes sense, e.g.
+\[
+    \frac{1}{Q}|n\rangle=\frac{1}{q_n}|n\rangle
+    \qquad\text{defined for }q_n\neq0.
+\]
+In addition, note that
+\[
+    Q=\sum_n q_n|n\rangle\langle n|
+    \qquad\&\qquad
+    f(Q)=\sum_n f(q_n)|n\rangle\langle n|.
+\]
+Recall, introduced eigenspaces
+\[
+    V_\lambda=\bigl\{|\psi\rangle:Q|\psi\rangle=\lambda|\psi\rangle\bigr\}.
+\]
+A \underline{projection operator} $P_\lambda$ onto this subspace,
+$V\to V_\lambda$, can be defined by its action on basis states:
+\[
+    P_\lambda|n\rangle=
+    \begin{cases}
+        |n\rangle & \text{if }q_n=\lambda,\\
+        0 & \text{else}.
+    \end{cases}
+\]
+This can be written
+\[
+    P_\lambda=\sum_{n:\,q_n=\lambda}|n\rangle\langle n|.
+\]
+
+\medskip
+\noindent
+(c) \underline{Measurement Axioms}
+
+Consider a measurement of $Q$ (observable) when the system is in state
+$|\psi\rangle$. Then
+\begin{itemize}
+    \item The result is an eigenvalue $\lambda$ of $Q$.
+    \item This result is obtained with probability
+    \[
+        p(\lambda)=\bigl\|P_\lambda|\psi\rangle\bigr\|^2
+        =\sum_{n:\,q_n=\lambda}|\alpha_n|^2.
+    \]
+    \item Immediately after the measurement the state is
+    \[
+        cP_\lambda|\psi\rangle
+        =c\sum_{n:\,q_n=\lambda}\alpha_n|n\rangle,
+    \]
+    with $c$ a constant for normalisation.
+\end{itemize}
+
+Often have case with $\lambda$ non-degenerate ($\dim V_\lambda=1$),
+eigenstate $|n\rangle$ unique (up to a phase), \& then
+\begin{itemize}
+    \item $p(\lambda)=|\alpha_n|^2=|\langle n|\psi\rangle|^2$,
+    \& $\alpha_n=\langle n|\psi\rangle$ is called the \underline{amplitude}.
+    \item State after measurement is $|n\rangle$.
+\end{itemize}
+In general
+\[
+    \sum_\lambda p(\lambda)=\sum_n|\alpha_n|^2=1.
+\]
+
+\medskip
+\noindent
+\underline{Example}
+
+System with space $V$ with basis states (orthonormal)
+\[
+    |1\rangle,\quad |2\rangle,\quad |3\rangle,
+\]
+\& these are eigenstates of $Q$ with evals
+\[
+    q_1=q_2=0,\qquad q_3=1.
+\]
+State of system
+\[
+    |\psi\rangle=\frac{1}{\sqrt{6}}\bigl(2|1\rangle+|2\rangle+|3\rangle\bigr).
+\]
+\[
+\begin{array}{c@{\qquad}c@{\qquad}c}
+    \text{Result} & \text{Probability of measuring} & \text{State afterwards}\\[6pt]
+    1 & \left|\dfrac{1}{\sqrt{6}}\right|^2=\dfrac{1}{6}
+      & |3\rangle\\[12pt]
+    0 & \left|\dfrac{2}{\sqrt{6}}\right|^2
+        +\left|\dfrac{1}{\sqrt{6}}\right|^2=\dfrac{5}{6}
+      & \dfrac{1}{\sqrt{5}}\bigl(2|1\rangle+|2\rangle\bigr)
+\end{array}
+\]
+
+\medskip
+\underline{Expectation value} (mean) of $Q$ in state $|\psi\rangle$ is
+\[
+    \langle Q\rangle_\psi=\langle\psi|Q|\psi\rangle
+    =\sum_\lambda\lambda p(\lambda)=\sum_n q_n|\alpha_n|^2,
+\]
+\& the \underline{uncertainty} (spread or variance) is
+\[
+    (\Delta Q)_\psi^2
+    =\bigl\langle(Q-\langle Q\rangle_\psi)^2\bigr\rangle_\psi
+    =\langle Q^2\rangle_\psi-\langle Q\rangle_\psi^2.
+\]
+In thinking about many repeated measurements: must prepare the system
+in the same state $|\psi\rangle$ each time.
+
+\medskip
+\noindent
+Note: If $|\psi\rangle$ is an eigenstate of $Q$ with eval $\lambda$, then
+\[
+    \langle Q\rangle_\psi=\lambda,
+    \qquad\&\qquad (\Delta Q)_\psi=0.
+\]
+QM behaviour arises from fact that certain observables do not commute.
+In general, in any state $|\psi\rangle$,
+\[
+    (\Delta A)_\psi(\Delta B)_\psi
+    \geq\frac{1}{2}\bigl|\langle[A,B]\rangle_\psi\bigr|,
+\]
+so $[A,B]\neq0$ $\Rightarrow$ cannot expect to measure $A$ \& $B$
+precisely at same time.
+
+\noindent
+[Result follows from
+\[
+    \bigl\|(A+i\lambda B)|\psi\rangle\bigr\|^2\geq0
+\]
+for all real $\lambda$; expand \& look at discriminant of quadratic in $\lambda$.]
+
+Prototype case: position \& momentum $\hat{x}$, $\hat{p}$ obey
+\[
+    [\hat{x},\hat{p}]=i\hbar\qquad\text{in one dimension},
+    \qquad\&\qquad \Delta x\,\Delta p\geq\hbar/2.
+\]
+In three dimensions have $\hat{x}_i$ \& $\hat{p}_i$ with
+\[
+    [\hat{x}_i,\hat{p}_j]=i\hbar\delta_{ij},
+\]
+\& uncertainty applies to position/momentum in a given direction.
+
+\medskip
+\noindent
+(d) \underline{Simultaneous measurement \& complete commuting sets}
+
+If observable $Q$ does not distinguish completely, because some evals
+are degenerate, then we can look for an additional observable $Q'$
+such that $Q$, $Q'$ are simultaneously measurable.
+This means we have joint eigenstates $|\lambda,\lambda'\rangle$ with
+\begin{align*}
+    Q|\lambda,\lambda'\rangle&=\lambda|\lambda,\lambda'\rangle,\\
+    Q'|\lambda,\lambda'\rangle&=\lambda'|\lambda,\lambda'\rangle.
+\end{align*}
+This implies
+\[
+    QQ'|\lambda,\lambda'\rangle=Q'Q|\lambda,\lambda'\rangle.
+\]
+Hence, if we have a basis of such eigenstates, then $QQ'=Q'Q$ on any
+state, or $[Q,Q']=0$.
+Conversely, if $[Q,Q']=0$, easy to check that
+\[
+    Q':V_\lambda\to V_\lambda
+    \qquad(V_\lambda\text{ eigenspace for }Q),
+\]
+\& finding a basis for $V_\lambda$ consisting of eigenstates of $Q'$
+then gives us a basis of joint eigenstates.
+
+\begin{center}
+    \textbf{End of Lecture 4}
+\end{center}
 \end{document}
