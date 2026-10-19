@@ -898,4 +898,261 @@ then gives us a basis of joint eigenstates.
 \begin{center}
     \textbf{End of Lecture 4}
 \end{center}
+
+\noindent
+\S\,1.3 (d) --- continued
+
+A set of observables $\{Q,Q',Q'',\ldots\}$ is a \underline{complete}
+\underline{commuting} set if any pair commute $\Rightarrow$ a basis of joint
+eigenstates, \& the set of eigenvalues, $\lambda,\lambda',\lambda'',\ldots$
+label states \underline{uniquely} (up to normalisation).
+
+Equivalent, if $A$ is any observable such that
+\[
+    [A,Q]=[A,Q']=\cdots=0
+\]
+then
+\[
+    A=f(Q,Q',\ldots).
+\]
+
+\noindent
+\underline{Example}
+
+Refer to example in (c): orthonormal states $|1\rangle$, $|2\rangle$, $|3\rangle$
+eigenstates of $Q$ with $\lambda(=q_1=q_2)=0$, $\lambda(=q_3)=1$.
+
+Second observable $Q'$ with
+\[
+    \begin{aligned}
+        Q'|1\rangle&=|2\rangle,\\
+        Q'|2\rangle&=|1\rangle,\\
+        Q'|3\rangle&=0.
+    \end{aligned}
+\]
+Check
+\[
+    [Q,Q']=0
+    \qquad (Q':V_{\lambda=0}\to V_{\lambda=0}).
+\]
+Let
+\[
+    |\pm\rangle=\frac{1}{\sqrt{2}}\bigl(|1\rangle\pm|2\rangle\bigr)
+\]
+then
+\[
+    Q'|\pm\rangle=\pm|\pm\rangle.
+\]
+$Q,Q'$ complete commuting set with basis of joint eigenstates
+\[
+    \begin{array}{c@{\qquad}rr}
+        &\lambda&\lambda'\\
+        |+\rangle&0&1\\
+        |-\rangle&0&-1\\
+        |3\rangle&1&0
+    \end{array}
+\]
+
+\subsection*{1.4 Bases, Representations \& Wavefunctions}
+
+\noindent
+(a) \underline{Discrete \& Continuous Bases}
+
+Consider orthonormal basis $\{|n\rangle\}$ with $n$ discrete label.
+We can regard all states \& operators as row/col vecs \& matrices, respectively:
+\[
+    \begin{aligned}
+        |\psi\rangle&=\sum_n\alpha_n|n\rangle
+        &\quad\Longleftrightarrow\quad \alpha_n&=\langle n|\psi\rangle,\\
+        |\phi\rangle&=\sum_n\beta_n|n\rangle
+        &\quad\Longleftrightarrow\quad \beta_n&=\langle n|\phi\rangle.
+    \end{aligned}
+    \qquad\text{cmpts of complex vectors}
+\]
+Inner product
+\[
+    \langle\phi|\psi\rangle=\sum_n\beta_n^*\alpha_n.
+\]
+For an operator $A$,
+\[
+    A|n\rangle=\sum_m|m\rangle A_{mn},
+    \qquad\text{complex matrix }A_{mn}=\langle m|A|n\rangle.
+\]
+Simple to check that
+\[
+    |\phi\rangle=A|\psi\rangle
+    \quad\Longleftrightarrow\quad
+    \beta_m=\sum_n A_{mn}\alpha_n
+\]
+\& also, if $B$ is another operator, matrix $B_{mn}=\langle m|B|n\rangle$, then
+\[
+    (AB)_{mn}=\sum_p A_{mp}B_{pn}
+    \qquad\text{(matrix multiplication)}.
+\]
+The choice of basis provides a representation of the quantum states \& operators.
+
+We can also allow the index $n$ to be continuous. This requires modifications
+\[
+    \sum_n\ \longrightarrow\ \int dn
+\]
+\[
+    \langle n|m\rangle=\delta_{nm}\ \longrightarrow\ \delta(n-m)
+\]
+\[
+    |\psi\rangle=\sum_n\alpha_n|n\rangle
+    \ \longrightarrow\ \int dn\,\alpha_n|n\rangle
+\]
+\[
+    \alpha_n=\langle n|\psi\rangle.
+\]
+Completeness relation
+\[
+    1=\sum_n|n\rangle\langle n|
+    \ \longrightarrow\ \int dn\,|n\rangle\langle n|.
+\]
+Note: if basis states above arise as eigenstates of observable, then
+\[
+    |\alpha_n|^2=|\langle n|\psi\rangle|^2
+    \ \longrightarrow\ \text{probability \underline{density} for continuous range of }n.
+\]
+
+\medskip
+\noindent
+(b) \underline{Position \& Momentum Bases --- Wavefunctions}
+
+Consider a particle in one dimension, position $\hat{x}$ \& momentum $\hat{p}$
+obeying
+\[
+    [\hat{x},\hat{p}]=i\hbar.
+\]
+Let $|x\rangle$ be position eigenstates
+\[
+    \hat{x}|x\rangle=x|x\rangle
+\]
+continuous evals with
+\[
+    \langle x|x'\rangle=\delta(x-x'),
+    \qquad \int dx\,|x\rangle\langle x|=1.
+\]
+Any state can be written
+\[
+    |\psi\rangle=\int dx\,\psi(x)|x\rangle
+\]
+with
+\[
+    \psi(x)=\langle x|\psi\rangle
+\]
+\& this is the usual position space wavefunction.
+From remarks in (a), $|\psi(x)|^2$ is a probability density for measuring position.
+
+Inner product
+\begin{align*}
+    \langle\phi|\psi\rangle
+    &=\left(\int dx\,\phi(x)^*\langle x|\right)
+      \left(\int dx'\,\psi(x')|x'\rangle\right)\\
+    &=\int dx\int dx'\,\phi(x)^*\psi(x')
+      \underbrace{\langle x|x'\rangle}_{\delta(x-x')}
+      =\int dx\,\phi(x)^*\psi(x)
+\end{align*}
+\&
+\[
+    \bigl\|\,|\psi\rangle\,\bigr\|^2
+    =\langle\psi|\psi\rangle=\int dx\,|\psi(x)|^2=1,
+    \quad\text{if normalised}.
+\]
+Similarly, define momentum eigenstates $|p\rangle$ with
+\[
+    \hat{p}|p\rangle=p|p\rangle
+\]
+\&
+\[
+    \langle p|p'\rangle=\delta(p-p'),
+    \qquad \int dp\,|p\rangle\langle p|=1.
+\]
+Now can expand
+\[
+    |\psi\rangle=\int dp\,\tilde{\psi}(p)|p\rangle
+\]
+with
+\[
+    \tilde{\psi}(p)=\langle p|\psi\rangle
+\]
+momentum space wavefunction \& $|\tilde{\psi}(p)|^2$ probability distribution
+for measurements of momentum.
+
+To proceed, we need
+\[
+    \left.
+    \begin{aligned}
+        \langle x|p\rangle&=\frac{1}{(2\pi\hbar)^{1/2}}e^{ipx/\hbar},\\
+        \langle p|x\rangle&=\frac{1}{(2\pi\hbar)^{1/2}}e^{-ipx/\hbar}.
+    \end{aligned}
+    \right\}\qquad (*)
+\]
+Assume $(*)$ holds \& verify it below.
+
+Consider action of $\hat{x}$ \& $\hat{p}$ on position space wavefunctions
+\[
+    \hat{x}|\psi\rangle\quad\text{wavefn}:\quad
+    \langle x|\hat{x}|\psi\rangle=x\langle x|\psi\rangle=x\psi(x).
+\]
+\begin{align*}
+    \hat{p}|\psi\rangle\quad\text{wavefn}:\quad
+    &\langle x|\hat{p}|\psi\rangle\\
+    &=\int dp\,\langle x|\hat{p}|p\rangle\langle p|\psi\rangle
+    \qquad\text{completeness}\\
+    &=\int dp\,p\langle x|p\rangle\langle p|\psi\rangle.
+\end{align*}
+Note
+\[
+    p\langle x|p\rangle=-i\hbar\frac{\partial}{\partial x}\langle x|p\rangle
+    \qquad\text{from }(*).
+\]
+Hence
+\begin{align*}
+    \langle x|\hat{p}|\psi\rangle
+    &=-i\hbar\frac{\partial}{\partial x}
+      \int dp\,\langle x|p\rangle\langle p|\psi\rangle\\
+    &=-i\hbar\frac{\partial}{\partial x}\langle x|\psi\rangle
+      \qquad\text{completeness again}\\
+    &=-i\hbar\psi'(x).
+\end{align*}
+i.e.
+\[
+    \left.
+    \begin{aligned}
+        \hat{x}&\to x\\
+        \hat{p}&\to-i\hbar\,\partial/\partial x
+    \end{aligned}
+    \right\}\quad\text{on position space wavefunctions}.
+\]
+Similarly, on momentum space wavefunctions, calculate
+\[
+    \begin{gathered}
+        \langle p|\hat{x}|\psi\rangle\\
+        \langle p|\hat{p}|\psi\rangle
+    \end{gathered}
+    \qquad\text{\& find}\qquad
+    \begin{aligned}
+        \hat{x}&\to i\hbar\frac{\partial}{\partial p}\\
+        \hat{p}&\to p.
+    \end{aligned}
+\]
+Relationship between wavefunctions $\psi(x)$ \& $\tilde{\psi}(p)$ also follows from $(*)$
+\begin{align*}
+    \tilde{\psi}(p)&=\langle p|\psi\rangle
+    =\int dx\,\langle p|x\rangle\langle x|\psi\rangle\\
+    &=\frac{1}{(2\pi\hbar)^{1/2}}\int dx\,e^{-ipx/\hbar}\psi(x)
+\end{align*}
+\&
+\begin{align*}
+    \psi(x)&=\langle x|\psi\rangle
+    =\int dp\,\langle x|p\rangle\langle p|\psi\rangle\\
+    &=\frac{1}{(2\pi\hbar)^{1/2}}\int dp\,e^{ixp/\hbar}\tilde{\psi}(p).
+\end{align*}
+Fourier transform \& inverse.
+
+\begin{center}
+    \textbf{End of Lecture 5}
+\end{center}
 \end{document}
