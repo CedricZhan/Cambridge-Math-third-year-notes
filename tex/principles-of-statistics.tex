@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
+\usepackage{graphicx}
 \title{Principles of Statistics}
 \begin{document}
 \maketitle
@@ -1350,5 +1351,192 @@ We have a ULLN if
 
 \begin{center}
 \textbf{End of Lecture 4}
+\end{center}
+
+\subsection*{Uniform Laws of Large Numbers}
+
+Let $X$ be a r.v. on $\mathcal{X}$. $(X_i)$ iid copies of $X$.
+Let $\mathcal{H}$ be a class of functions $\mathcal{X}\to\mathbb{R}$, s.t.
+\[
+\mathbb{E}|h(X)|<\infty\qquad\forall h\in\mathcal{H}.
+\]
+\[
+\underline{\mathrm{ULLN}}\qquad
+\sup_{h\in\mathcal{H}}\left|
+\underbrace{\frac{1}{n}\sum_{i=1}^n h(X_i)}_{=P_nh}
+-\underbrace{\mathbb{E}h(X)}_{=Ph}\right|
+\xrightarrow{\mathrm{a.s.}}0.
+\]
+If $\mathcal{H}=\{h_1,\ldots,h_M\}$ is finite, then by the SLLN,
+for any $1\leq j\leq M$,
+\[
+|P_nh_j-Ph_j|\xrightarrow{\mathrm{a.s.}}0
+\]
+i.e. on an event $A_j$ with $\mathbb{P}(A_j)=1$, $\forall\varepsilon>0$,
+$\exists N_j(\varepsilon)$ s.t.
+\[
+|P_nh_j-Ph_j|<\varepsilon\qquad\forall n>N_j(\varepsilon).
+\]
+Hence on $A:=\bigcap_{j=1}^M A_j$, we have $\forall\varepsilon>0$,
+\[
+\max_{1\leq j\leq M}|P_nh_j-Ph_j|<\varepsilon
+\qquad\forall n>\max_j N_j(\varepsilon).
+\]
+As $\mathbb{P}(A)=1$, this means
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\xrightarrow{\mathrm{a.s.}}0.
+\]
+When $|\mathcal{H}|$ is infinite, we will use a ``bracketing argument''.
+A \underline{bracket} is a collection of functions
+$\{\underline{h}_j,\overline{h}_j\}_{j=1}^M$ such that
+\[
+\forall j,\qquad\underline{h}_j(x)\leq\overline{h}_j(x)
+\qquad\forall x\in\mathcal{X}.
+\]
+A finite bracket \underline{covers} $\mathcal{H}$ if for all $h\in\mathcal{H}$,
+$\exists j\in\{1,\ldots,M\}$ s.t.
+\[
+\underline{h}_j(x)\leq h(x)\leq\overline{h}_j(x)
+\qquad\forall x\in\mathcal{X}.
+\]
+
+\paragraph{Prop 2.}
+Suppose that $\forall\varepsilon>0$, there is a finite bracket
+$\{\underline{h}_j,\overline{h}_j\}_{j=1}^M$ covering $\mathcal{H}$, s.t.
+\begin{align*}
+\text{(1)}\quad&\mathbb{E}|\underline{h}_j(X)|<\infty,\quad
+\mathbb{E}|\overline{h}_j(X)|<\infty\qquad\forall 1\leq j\leq M,\\
+\text{(2)}\quad&\mathbb{E}|\overline{h}_j(X)-\underline{h}_j(X)|<\varepsilon.
+\end{align*}
+Then,
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\xrightarrow{\mathrm{a.s.}}0.
+\]
+\noindent\underline{Proof.}
+Take any $\varepsilon>0$, then for any $h\in\mathcal{H}$,
+$\exists 1\leq j\leq M$ s.t. $\underline{h}_j\leq h\leq\overline{h}_j$.
+Then
+\[
+\begin{aligned}
+P_nh-Ph&\leq P_n\overline{h}_j-P\underline{h}_j\\
+&\leq |P_n\overline{h}_j-P\overline{h}_j|
++\underbrace{|P(\overline{h}_j-\underline{h}_j)|}_{\leq\varepsilon}.
+\end{aligned}
+\]
+Similarly,
+\[
+Ph-P_nh\leq P\overline{h}_j-P_n\underline{h}_j
+\leq |P_n\underline{h}_j-P\underline{h}_j|
++\underbrace{|P(\overline{h}_j-\underline{h}_j)|}_{\leq\varepsilon}.
+\]
+\[
+\therefore\quad\sup_{h\in\mathcal{H}}|P_nh-Ph|
+\leq\underbrace{\max_{g\in\mathrm{bracket}}|P_ng-Pg|}
+_{\xrightarrow{\mathrm{a.s.}}0\text{ by the SLLN as bracket is finite}}
++\varepsilon.
+\]
+Hence, on an event $A_\varepsilon$ with $\mathbb{P}(A_\varepsilon)=1$, we have
+\[
+\limsup_{n\to\infty}\sup_{h\in\mathcal{H}}|P_nh-Ph|\leq\varepsilon.
+\]
+Take sequence $\varepsilon_k\downarrow0$. Let
+$A=\bigcap_{k=1}^\infty A_{\varepsilon_k}$, with $\mathbb{P}(A)=1$.
+On $A$,
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\longrightarrow0.\qquad\square
+\]
+
+\subsection*{3 Consistency of the MLE}
+
+\paragraph{Def 3.}
+We say an estimator $\hat{\theta}(X_1,\ldots,X_n)$ is \underline{consistent}
+if $\hat{\theta}\xrightarrow{P}\theta$ under $P_\theta$ $\forall\theta\in\Theta$.
+
+\medskip\noindent\underline{Assumptions.}
+Let $\{f(\cdot,\theta):\theta\in\Theta\}$ be a model of pdfs or pmfs on
+$\mathcal{X}\subseteq\mathbb{R}^d$. We'll assume
+\begin{enumerate}
+\item[(1)] $f(x,\theta)>0\qquad\forall x\in\mathcal{X},\ \theta\in\Theta$.
+\item[(2)] $\theta\mapsto f(x,\theta)$ is continuous $\forall x\in\mathcal{X}$.
+\item[(3)] $\Theta$ is compact.
+\item[(4)] \underline{Strict identifiability}: $f(\cdot,\theta)=f(\cdot,\theta')
+\implies\theta=\theta'$.
+\item[(5)] $\displaystyle\mathbb{E}_\theta
+\underbrace{\sup_{\theta'\in\Theta}|\log f(X,\theta')|}_{M(X)}<\infty
+\qquad\forall\theta\in\Theta$.
+\end{enumerate}
+
+Recall that (5) allows us to define
+$\ell(\theta):=\mathbb{E}_{\theta_0}\log f(X,\theta)$ for a true parameter $\theta_0$.
+Furthermore, by (4) $\ell(\theta)$ is maximised uniquely at $\theta=\theta_0$.
+
+By (2) \& (5), we have that $\ell$ is continuous.
+Indeed take $(\theta_i)$, $\theta_i\to\theta$, then
+\[
+\begin{aligned}
+|\ell(\theta_i)-\ell(\theta)|
+&=\left|\mathbb{E}_{\theta_0}\left[
+\underbrace{\log f(X,\theta_i)-\log f(X,\theta)}
+_{\xrightarrow{\mathrm{a.s.}}0\text{ by (2)}}\right]\right|\\
+&\longrightarrow0\quad\begin{gathered}
+\text{by the Dominated Convergence Theorem (P\&M)}\\
+\text{using the domination condition (5).}
+\end{gathered}
+\end{aligned}
+\]
+In maximum likelihood we maximise
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\sum_{i=1}^n\log f(X_i,\theta),
+\qquad\text{a ``sample'' version of }\ell(\theta).
+\]
+
+\paragraph{Lemma.}
+If $(X_i)$ are iid with law $P_{\theta_0}$, we have the ULLN
+\[
+\sup_{\theta\in\Theta}\left|
+\underbrace{\overline{\ell}_n(\theta)}_{=P_nh_\theta}
+-\underbrace{\ell(\theta)}_{=Ph_\theta}\right|
+\xrightarrow{\mathrm{a.s.}}0
+\]
+where $h_\theta:x\mapsto\log f(x,\theta)$.
+Here $\mathcal{H}=\{h_\theta:\theta\in\Theta\}$.
+
+\medskip\noindent\underline{*Proof sketch*}
+To apply Prop 2, we need to construct for any $\varepsilon>0$ a finite bracket
+satisfying the hypotheses (1) \& (2).
+Take any $\theta\in\Theta$, let
+$B_{\theta,\delta}=\{\theta':\|\theta-\theta'\|\leq\delta\}$, let
+\[
+\overline{h}_\theta^{(\delta)}=\sup_{\theta'\in B_{\theta,\delta}}h_{\theta'}(x),
+\qquad
+\underline{h}_\theta(x)=\inf_{\theta'\in B_{\delta,\theta}}h_{\theta'}(x).
+\]
+\begin{center}
+\includegraphics[width=0.30\textwidth]{figures/principles-of-statistics/lecture5-compactness.png}
+\end{center}
+By def
+\[
+\underline{h}_\theta\leq h_{\theta'}\leq\overline{h}_\theta
+\qquad\forall\theta'\in B_{\delta,\theta}.
+\]
+Hypothesis (1) is given by Assumption (5).
+We'll choose $\delta$ small enough so that we can obtain Hypothesis 2:
+\[
+\mathbb{E}|\overline{h}_\theta(X)-\underline{h}_\theta(X)|<\varepsilon
+\]
+(To do this carefully, apply the DCT using assumptions (2) \& (5).)
+
+For each $\theta\in\Theta$ we obtain a pair $(\underline{h}_\theta,\overline{h}_\theta)$
+sandwiching functions in a ``ball'' around $h_\theta$.
+By compactness, $\exists$ a finite bracket
+$\{\overline{h}_{\theta_j},\underline{h}_{\theta_j}\}_{j=1}^M$ s.t.
+$\forall\theta\in\Theta$, $\exists j$ s.t.
+\[
+\underline{h}_{\theta_j}\leq h_\theta\leq\overline{h}_{\theta_j}.
+\]
+This allows us to apply prop 2.\quad$\square$
+
+\begin{center}
+\textbf{End of Lecture 5}
 \end{center}
 \end{document}

@@ -1,0 +1,1016 @@
+                                      Principles of Statistics
+                                                    Part II
+
+
+                               Recorded from the lecturer in 2026-2027.
+
+
+
+
+Principles of Statistics
+
+0. INTRODUCTION
+Let (Ω, F, P) be a probability space, and X : Ω → R a random variable with distribution
+function                                    
+                   F (t) = P {ω : X(ω) ≤ t}
+                           Z t
+                                  f (x) dx, if X is continuous with pdf f ,
+                           
+                           
+                           
+                         = X  −∞
+                           
+                           
+                               f (x),      if X is discrete with pmf f .
+                                     x≤t
+
+      We denote P = P ◦ X
+                               −1 , the law or distribution of X .
+
+      We observe X1 , . . . , Xn , which are iid copies of X , where n is the sample size.
+
+
+Def 1.      A statistical model is a collection {fθ : θ ∈ Θ} of pdfs or pmfs, or {Pθ : θ ∈ Θ} of laws,
+indexed by a parameter space Θ.
+
+
+Ex.
+       N (θ, 1),      Θ = R.
+       N (µ, σ 2 ),     θ = (µ, σ 2 ),    Θ = R × (0, ∞).
+       Poi(θ),        Θ = [0, ∞).
+
+Def 2.      We say the model is correctly specied when ∃ θ0 ∈ Θ such that P = Pθ0 .
+      We will refer to the true parameter as θ0 .
+
+
+Goals of Statistics
+  1. Estimation: We dene an estimator
+
+                                               θbn = θbn (X1 , . . . , Xn ),
+                                                    iid
+        which we hope is close to θ0 when Xi ∼ Pθ0 , for all θ0 ∈ Θ, when n is large.
+
+  2. Testing: We have a null hypothesis
+
+                                                 H0 : θ ∈ Θ0 ⊆ Θ,
+        and an alternative hypothesis
+                                                 H1 : θ ∈ Θ1 ⊆ Θ.
+        We dene a test,
+                                              ψn := ψn (X1 , . . . , Xn ),
+        such that ψn = 0 if H0 is true, and ψn = 1 if H1 is true, w.h.p.
+   3. Uncertainty Quantication
+
+
+             Dene a condence set Cn (X1 , . . . , Xn ; α), such that
+
+                                                           (≥)
+                                         Pθ (θ ∈ Cn ) = 1 − α                   ∀ θ ∈ Θ,
+
+              where α is the signicance level.
+
+             Dene a Bayesian credible set, a region of high posterior probability.
+
+
+I. LIKELIHOOD PRINCIPLE
+
+Def 3.      The likelihood function
+                                                          n
+                                                          Y
+                                           Ln (θ) =             fθ (Xi ).
+                                                          i=1
+
+Note: This is a random function, as it depends implicitly on X1 , . . . , Xn .
+   The log-likelihood function
+                                                    n
+                                                    X
+                                         ℓn (θ) =             log fθ (Xi ),
+                                                    i=1
+we write
+                                                              1
+                                             ℓn (θ) =           ℓn (θ)
+                                                              n
+for a normalised log-likelihood.
+
+
+
+Def 4.      A maximum likelihood estimator θ
+                                           bMLE is any estimator with
+                                                 
+                                         Ln θbMLE = max Ln (θ).
+                                                              θ∈Θ
+
+
+Ex.
+                                                    iid
+                                               Xi ∼ Poi(θ).
+                                                      n
+                                                      Y     θXi
+                                           Ln (θ) =             e−θ
+                                                                 .
+                                                            Xi !
+                                                     i=1
+                                                          X
+                                 ℓn (θ) = −nθ + (log θ)       Xi + const.
+                                                        P
+                                                           Xi FOC
+                                       ℓ′n (θ) = −n +          = 0
+                                                          θ
+                                                 Xn
+                                                     Xi
+                       =⇒     suggests θbMLE = i=1       := X n     sample mean .
+                                                    n
+SOC:
+                                            1 X                             X
+                               ℓ′′n (θ) = − 2   Xi < 0                 if       Xi > 0.
+                                           θ
+        P
+   If       Xi = 0,
+                                    ℓn (θ) = −nθ          =⇒          θbMLE = 0.
+   In every case
+                                               θbMLE = X n .
+
+
+
+
+                                                          2
+Ex.
+                                       iid
+                                   Xi ∼ N (µ, σ 2 ),           θ = (µ, σ 2 ).
+                                                                             n
+                                  n       n            1 X
+                        ℓn (θ) = − log π − log(σ 2 ) − 2   (Xi − µ)2 .
+                                  2       2           2σ
+                                                                           i=1
+
+FOC:
+                                                       n
+                                     ∂ℓn    1 X
+                                         =− 2   (Xi − µ) = 0,
+                                     ∂µ    σ
+                                                      i=1
+                                                              n
+                             ∂ℓn     n     1 X
+                                2
+                                  =− 2 +          (Xi − µ)2 = 0.
+                             ∂σ     2σ   2(σ 2 )2
+                                                              i=1
+
+   We can check that the Hessian of ℓn is negative denite ∀ θ ∈ R × (0, ∞).
+   Hence,
+                                                                           
+                                                            Xn
+                                            n                
+                                           1 X             2
+                                                              
+                                    θMLE = 
+                                    b
+                                           n    (Xi − X n ) .
+                                            i=1              
+                                             |     {z       }
+                                                     Sample variance
+
+
+
+Non-examinable
+The likelihood principle poses that if two observations
+
+
+                        X = (X1 , . . . , Xn )        and           X ∗ = (X1∗ , . . . , Xn∗ )
+                               ∗
+give rise to likelihoods Ln , Ln respectively, such that
+
+
+                                   Ln (θ) = L∗n (θ) · M               ∀ θ ∈ Θ,
+
+and some constant M , then they should produce the same inference on the true parameter.
+
+
+    The MLE, Bayes estimators, credible sets satisfy the likelihood principle.
+
+    Condence sets, tests generally do not.
+
+Birnbaum (1962)
+
+
+                    Conditionality + Suciency              =⇒         Likelihood principle.
+
+
+                                             end of lecture 1
+
+II. Information Geometry
+
+The score function is
+                                                 ∂
+                                   Sn (θ) =         ℓn (θ),          Θ ⊆ Rd .
+                                                 ∂θ
+   In many cases,
+                                              Sn (θbMLE ) = 0,
+where, by convention,
+                                                      ∂
+                                        Sn (θ′ ) =       ℓn (θ)      .
+                                                      ∂θ        θ=θ′
+
+
+
+                                                        3
+     Let X be a r.v. taking values in X , and g : X → R. Take a model {f (x, θ) : θ ∈ Θ}. We will
+write                                   Z
+                            Eθ g(X) =       g(x)f (x, θ) dx,            X ∼ f (·, θ).
+
+Obs 1.
+     Suppose the model {f (·, θ) : θ ∈ Θ} is such that
+
+
+                                  Eθ0 log f (X, θ) < ∞               ∀θ ∈ Θ.
+
+Dene
+                                 ℓ(θ) = Eθ0 log f (X, θ),             X ∼ Pθ0 .
+     The normalised log-likelihood
+
+                                                       n
+                                                  1X
+                                       ℓn (θ) =      log f (Xi , θ)
+                                                  n
+                                                      i=1
+
+can be thought of as a sample version of ℓ(θ).
+     Suppose the model is correctly specied, such that X has pdf f (·, θ0 ) for some θ0 ∈ Θ.
+
+Fact. Then ℓ(θ) is maximised at θ0 . This justies using the MLE to approximate θ0 when n is
+large.
+     Indeed,                                                        
+                                                          f (X, θ)
+                               ℓ(θ) − ℓ(θ0 ) = Eθ0 log
+                                                          f (X, θ0 )
+                                                                    
+                                                          f (X, θ)
+                                             ≤ log Eθ0
+                                                          f (X, θ0 )
+                                                   Z
+                                                       f (x, θ)
+                                             = log               f (x, θ0 ) dx
+                                                      f (x, θ0 )
+                                             = log 1 = 0.
+By Jensen's inequality, as log is concave, with equality if
+
+
+                                                  f (X, θ)
+                                                  f (X, θ0 )
+
+is a.s. constant.
+
+
+                                             ∴     ℓ(θ) ≤ ℓ(θ0 ).
+     If
+                                   f (·, θ) = f (·, θ′ )     =⇒       θ = θ′ ,
+we say the parameter is identiable.
+     In that case, if θ ̸= θ0 , Jensen's inequality is strict, so θ0 is actually the unique maximizer of
+ℓ.
+Rmk. The dierence                                Z
+                                                            f (x, θ0 )
+                               ℓ(θ0 ) − ℓ(θ) =        log              f (x, θ0 ) dx
+                                                            f (x, θ)
+is called the KullbackLeibler divergence or relative entropy between Pθ0 and Pθ .
+     A notion of distance which is not symmetric.
+
+Obs 2.
+
+
+
+                                                       4
+                                           Z                    Z
+                                      ∂                             ∂
+                                 0=          f (x, θ) dx =             f (x, θ) dx
+                                      ∂θ                            ∂θ
+                                           |    {z     }
+                                                =1 ∀θ
+                                      Z
+                                        ∂ log f (x, θ)
+                                   =                   f (x, θ) dx
+                                              ∂θ
+                                                         
+                                          ∂ log f (X, θ)
+                                   = Eθ                     .
+                                                ∂θ
+   [There are some conditions for this. (Leibniz rule). See P & M.]
+    Sn (θ) is centred when X ∼ Pθ .
+
+Obs 3.
+Def 5. Let Θ ⊆ Rd . For any θ ∈ int(Θ), the Fisher Information matrix is
+                             "                                            T #
+                                 ∂                       ∂
+                I(θ) = Eθ           log f (X, θ) ·          log f (X, θ)          ,   X ∼ Pθ .
+                                 ∂θ                      ∂θ
+
+Rmk. This is the covariance matrix of
+                                                        ∂
+                                           Sn (θ) =        log f (X, θ)
+                                                        ∂θ
+when X ∼ Pθ .
+
+Prop 1. For all θ ∈ int(Θ), in a regular model,
+                                                    ∂2
+                                                                     
+                                   I(θ) = −Eθ             log f (X, θ)
+                                                  ∂θ ∂θT
+
+                                                    ∂2
+                                                                     
+                                  Iij (θ) = −Eθ           log f (X, θ) .
+                                                  ∂θi ∂θj
+
+Proof.
+                                   ∂2                                 ∂2
+                                           Z                    Z
+                        0=                     f (x, θ) dx =               f (x, θ) dx.
+                                 ∂θ ∂θT                             ∂θ ∂θT
+   [When this equality holds, we say the model is regular.]
+   Now, we have
+
+                      ∂2
+                                                                          
+                                           ∂               1    ∂
+                          T
+                            log f (x, θ) = T                       f (x, θ)
+                    ∂θ ∂θ                 ∂θ           f (x, θ) ∂θ
+                                                                                    T
+                                                      1      ∂             ∂
+                                               =−              f (x, θ)      f (x, θ)
+                                                  f (x, θ)2 ∂θ            ∂θ
+                                                         1      ∂2
+                                                  +                   f (x, θ).
+                                                     f (x, θ) ∂θ ∂θT
+   Take −Eθ [·] of both sides.
+
+
+                               ∂2
+                                                 
+                     − Eθ             log f (X, θ)
+                             ∂θ ∂θT
+                                 "                                    T #
+                                        1     ∂             ∂
+                            = Eθ                f (X, θ)       f (X, θ)     +0
+                                   f (X, θ)2 ∂θ            ∂θ
+                                 "                                   T #
+                                    ∂                 ∂
+                            = Eθ       log f (X, θ)      log f (X, θ)      = I(θ).
+                                   ∂θ                 ∂θ
+
+                                                            5
+                                                                                                                            □
+Tensorisation.
+     Suppose the observation X consists of n random variables X1 , . . . , Xn . Then, the F.I. matrix
+is                              "                                                                             T #
+                                    ∂                                         ∂
+                 In (θ) = Eθ           log f (X1 , . . . , Xn , θ)               log f (X1 , . . . , Xn , θ)          .
+                                    ∂θ                                        ∂θ
+     If X1 , . . . , Xn are iid such that
+
+                                                                          n
+                                                                          Y
+                                             f (X1 , . . . , Xn , θ) =            f (Xi , θ),
+                                                                          i=1
+
+where {f (x, θ) : θ ∈ Θ} is a model for X1 , then the F.I. is
+
+                                                                                                        
+                                     X                                        T 
+                                           ∂                   ∂                  
+                         In (θ) = Eθ          log f (Xi , θ)     log f (Xj , θ) 
+                                      i,j |∂θ              } ∂θ
+                                                                                  
+                                                  {z                               
+                                                         mean 0 under
+                                                                Pθ
+                                              " n                                                    T #
+                                               X ∂                                ∂
+                                    = Eθ                     log f (Xi , θ)          log f (Xi , θ)
+                                                        ∂θ                        ∂θ
+                                                  i=1
+                                    = nI(θ),
+
+where I(θ) is the Fisher Information for a single observation.
+
+
+                                                        End of Lecture 2
+
+Recap of Information Geometry
+Observation 1.                                                         
+                                                             f (X, θ0 )
+                                     KL(Pθ0 , Pθ ) = Eθ0 log              ≥ 0,
+                                                             f (X, θ)
+minimised at θ = θ0 .
+
+
+Observation 2.                                             
+                                             ∂
+                                    Eθ          log f (X, θ) = 0,                  ∀θ ∈ int(Θ).
+                                             ∂θ
+
+Observation 3.
+                                                         ∂2
+                                                                       
+                               ∂
+            I(θ) := Varθ          log f (X, θ) = −Eθ          log f (X, θ) ,                                 ∀θ ∈ int(Θ).
+                               ∂θ                      ∂θ ∂θT
+
+Why geometry?            The F.I., I(θ), denes a metric tensor on the manifold
+
+
+                                                         {f (·, θ) : θ ∈ Θ}.
+
+This is known as the       FisherRao metric.                        KL divergence is approximated locally by this
+metric.
+
+
+
+
+                                                                     6
+       Reparametrisation invariance. Take the Bernoulli(θ) model, where θ is the probability
+        of success. Reparametrise it in terms of log-odds:
+                                                                        
+                                                                    θ
+                                                    η = log                  ∈ R.
+                                                                   1−θ
+        The manifold
+                                                        {f (·, η) : η ∈ R},
+        equipped with the metric tensor I(η), preserves geodesics, path lengths, etc.
+
+
+       Sucient statistic invariance.
+
+Chentsov's theorems.              These properties characterise the FisherRao metric.
+
+
+
+Proposition 2 (CramérRao Lower Bound)
+Let
+                                                 {f (·, θ) : θ ∈ Θ ⊆ R}
+be a regular statistical model.            Let θ̃(X1 , . . . , Xn ) be an unbiased estimator based on i.i.d.
+samples X1 , . . . , Xn :
+                                                 Eθ θ̃ = θ,        ∀θ ∈ Θ.
+Then
+                                                        1
+                                       Varθ (θ̃) ≥          ,         ∀θ ∈ int(Θ).
+                                                      nI(θ)
+
+Proof.     Recall the CauchySchwarz inequality for random variables Y, Z :
+                                                      2
+                                                E[Y Z] ≤ E[Y 2 ]E[Z 2 ].
+
+Let
+                                                              ∂
+                                 Z = θ̃ − θ,          Y =        log f (X1 , . . . , Xn ; θ).
+                                                              ∂θ
+Then
+                                     E[Z 2 ] = Varθ (θ̃),          as θ̃ is unbiased,
+
+and
+                                   E[Y 2 ] = nI(θ),           as the F.I. tensorises.
+
+Moreover,
+                                                                  
+                                ∂
+               E[Y Z] = Eθ θ̃ log f (X1 , . . . , Xn ; θ)
+                               ∂θ
+                                                                    
+                                   ∂
+                        − θ Eθ         log f (X1 , . . . , Xn ; θ)
+                                  ∂θ
+                            |                    {z                   }
+                                                =0
+                        Z
+                                                  ∂f (x1 , . . . , xn ; θ) f (x1 , . . . , xn ; θ)
+                      =      θ̃(x1 , . . . , xn )                                                  dx1 · · · dxn
+                         X n                                ∂θ             f (x1 , . . . , xn ; θ)
+                            Z
+                         ∂
+                      =           θ̃ f (x1 , . . . , xn ; θ) dx1 · · · dxn          (by regularity)
+                        ∂θ X n
+                            |                       {z                     }
+                                                  =Eθ θ̃=θ
+                            ∂θ
+                        =      = 1.
+                            ∂θ
+Plug these expectations into the CauchySchwarz inequality and rearrange.                                          □
+
+                                                               7
+Remark.     Sometimes, the MLE is unbiased and attains the CramérRao lower bound, but not
+always. However, we will show this is true asymptotically.
+   If Θ ⊆ R
+              p with p > 1, let
+
+                                                 Φ:Θ→R
+be a scalar function of θ . Consider an unbiased estimator Φ̃(X1 , . . . , Xn ). Then one can show
+that
+                                                T
+                                 1       ∂Φ(θ)                    ∂Φ(θ)
+                     Varθ (Φ̃) ≥                      I(θ)−1            ,   ∀θ ∈ int(Θ).
+                                 n        ∂θ                       ∂θ
+
+Corollary 1.     If θ̃ is not unbiased, we have
+
+                                              ∂
+                                                 Eθ θ̃
+                                  Varθ (θ̃) ≥ ∂θ       ,           ∀θ ∈ int(Θ).
+                                              nI(θ)
+
+Example.      Take Φ(θ) = α
+                              T θ for some α ∈ Rp . In this case,
+
+
+                                                 ∂Φ(θ)
+                                                       = α,
+                                                  ∂θ
+and
+                                                         1 T
+                                         Varθ (Φ̃) ≥       α I(θ)−1 α.
+                                                         n
+
+Example Sheet 1
+We observe a single pair
+                                                        
+                                                        θ1
+                                       (X1 , X2 ) ∼ N      ,Σ ,
+                                                        θ2
+where Σ ≻ 0 is known. We wish to estimate θ1 .
+
+
+Case 1.    Assume that θ2 is known. In this case, the model has one parameter and F.I. matrix
+
+
+                                                      I1 (θ1 ).
+
+Case 2.    Assume that θ2 is unknown. For any estimator
+
+                                                      
+                                                      θ̃
+                                                 θ̃ = 1 ,
+                                                      θ̃2
+
+we have
+                                                         T
+                                                         1
+                                               θ̃1 =         θ̃.
+                                                         0
+So, if θ̃ is unbiased, we have the CramérRao lower bound
+
+                                           T         
+                                           1        −1 1
+                                                          = I(θ)−1 11 .
+                                                                 
+                            Varθ (θ̃1 ) ≥      I(θ)
+                                           0           0
+
+Goal.     Show
+                                          I1 (θ1 )−1 < I(θ)−1 11 ,
+                                                            
+
+unless Σ is diagonal (X1 , X2 independent).
+
+
+
+
+                                                         8
+II. Asymptotic Theory of the MLE
+
+All reasonable estimators are asymptotically unbiased:
+
+                                                   n→∞
+                                           Eθ θ̃ −−−→ θ,             ∀θ ∈ Θ.
+
+   We wish to prove that estimators are             consistent:
+                                ?
+                                 − θ
+                              θ̃ →         as n → ∞        under Pθ ,           ∀θ ∈ Θ.
+
+   For consistent estimators, a reasonable notion of optimality is                   asymptotic eciency:
+                                              n→∞
+                                n Varθ (θ̃) −−−→ I(θ)−1 ,              ∀θ ∈ int(Θ).
+
+   We will show that the MLE is asymptotically ecient and, furthermore,
+
+
+                                    θ̂MLE ≈ N θ, n−1 I(θ)−1 ,
+                                                           
+                                                                               ∀θ.
+
+This distributional convergence can be used for statistical inference.
+
+
+
+Stochastic Convergence
+Denition 1.        Let (Xn : n ∈ N) be a collection of random variables in some probability space
+(Ω, F, P).
+
+    We say that Xn converges almost surely to a random variable X on (Ω, F, P), or
+                                                              a.s.
+                                                         Xn −−→ X,
+
+       if and only if                   n                           o
+                                                               n→∞
+                                    P     ω : ∥Xn (ω) − X(ω)∥2 −−−→ 0   = 1.
+
+    We say that Xn converges to X in probability, or
+                                                              P
+                                                            → X,
+                                                         Xn −
+
+       if, for every ε > 0,
+                                                                        n→∞
+                                            P (∥Xn − X∥2 > ε) −−−→ 0.
+
+                                              End of Lecture 3
+
+Recall: If (Xn ), X are random vectors in R , we say
+                                                     k
+
+             a.s.
+    Xn −−→ X i                                             
+                                                        n→∞
+                                            P ∥Xn − X∥2 −−−→ 0 = 1.
+
+             P
+    Xn −
+        → X i
+                                                                                n→∞
+                                    ∀ε > 0,         P (∥Xn − X∥2 > ε) −−−→ 0.
+
+Rmk.
+                               a.s./P                     a.s./P
+                          Xn −−−−→ X          i    Xn,i −−−−→ Xi              ∀ 1 ≤ i ≤ k.
+
+
+                                    [X ≤ t ⇐⇒ Xi ≤ ti                ∀ 1 ≤ i ≤ k]
+
+
+                                                          9
+                                                                                 d                     k where the
+                                                             → X , if for all t ∈ R
+Def 2. We say that Xn converges in distribution to X , or Xn −
+function
+                                               t 7→ P(X ≤ t)
+is continuous, we have
+                                                     n→∞
+                                    P(Xn ≤ t) −−−→ P(X ≤ t).
+
+Some facts from P & M.
+
+Prop 1.
+
+
+ (a)
+                                    a.s.                       P                      d
+                                               → X =⇒ Xn −
+                                Xn −−→ X =⇒ Xn −         → X.
+
+ (b) Continuous Mapping Theorem (CMT). Let (Xn ), X take values in X ⊆ R , let g : X → R
+                                                                                                   k
+
+       be continuous. Then,
+
+                                    a.s./P/d                              a.s./P/d
+                                Xn −−−−−→ X =⇒ g(Xn ) −−−−−→ g(X).
+
+ (c) Slutsky's Lemma. Suppose that
+
+
+                                                 d                        d
+                                              → X,
+                                           Xn −                           → c,
+                                                                       Yn −
+
+       where c is constant, then
+
+
+        (i)
+                                                                   P
+                                                              → c.
+                                                           Yn −
+       (ii)
+                                                                   d
+                                                         → X + c.
+                                                 Xn + Yn −
+       (iii) If k = 1,
+                                                                   d
+                                                           → X · c,
+                                                     Xn Yn −
+                                                Xn d X
+                                                   →
+                                                   −                     if c ̸= 0.
+                                                Yn   c
+       (iv) Let (An ) be a sequence of random matrices in R
+                                                                              m×k , and suppose,
+
+
+                                                           P
+                                                        → Aij
+                                                (An )ij −                     ∀i, j
+
+              where A is deterministic. Then,
+
+                                                                   d
+                                                           → AX.
+                                                     An Xn −
+                d
+ (d) If Xn   → X , then (Xn ) is bounded in probability or Xn = OP (1), i.e. for all ε > 0,
+             −
+       ∃ Mε > 0, Nε ∈ N s.t.
+                                 P (∥Xn ∥2 > Mε ) < ε    ∀n ≥ Nε .
+
+2. LLN & CLT
+
+                                                     k
+Let X1 , X2 , . . . be iid copies of a r.v. X in R . When k = 1, the Weak Law of large numbers
+says that if Var(X) < ∞, then
+                                                     n
+                                             1X    P
+                                      X̄n :=       → EX.
+                                                Xi −
+                                             n
+                                                     i=1
+
+
+                                                      10
+Indeed by Chebyshev's inequality,
+
+                                                Var(X̄n )   Var(X) n→∞
+                  ∀ε > 0,      P |X̄n − EX| > ε ≤          =        −−−→ 0.
+                                                    ε2        nε2
+
+Theorem 1 (Strong law of large numbers). If E (∥Xn ∥2 ) < ∞, then
+
+                                            a.s.
+                                    X̄n −−→ E[X]                  as n → ∞.
+
+
+Theorem 2 (Central Limit Theorem). When k = 1, assume in addition that Var(X) = σ
+                                                                                                           2 < ∞,
+
+then,
+                                     √              d
+                                         n X̄n − EX −→ N (0, σ 2 ).
+To state a multivariate version, recall that Z ∼ N (µ, Σ) i
+
+
+                                ∀α ∈ Rk ,              αT Z ∼ N (αT µ, αT Σα).
+
+If Σ is positive denite, then Z has a p.d.f.
+                                                                 
+                          1         1           1       T −1
+               f (z) =                     exp − (z − µ) Σ (z − µ) ,                            z ∈ Rk .
+                       (2π)n/2 | det Σ|1/2      2
+
+Theorem 2 (k ≥ 1). If Var(X) = Σ is nite & pos. def. then
+
+                                     √               d
+                                          n X̄n − EX −→ N (0, Σ).
+
+Cor. By Prop 1(d),
+
+                     √
+                                                                                               
+                                                                                         1
+                      n X̄n − EX = OP (1) ⇐⇒                      X̄n − EX = OP           √         .
+                                                                                            n
+
+The CLT is useful to dene condence intervals. Let X1 , X2 , . . . be iid copies of X with mean
+µ0 and Var(X) = σ 2 < ∞ known. Dene
+                                       √ |X̄n − µ|
+                                                       
+                           Cn = µ ∈ R : n          ≤ zα
+                                             σ
+where zα is such that
+                               P(|Z| ≤ zα ) = 1 − α                if Z ∼ N (0, 1).
+
+                                                   √                             
+                            P(µ0 ∈ Cn ) = P            n|X̄n − µ0 | ≤ σzα
+                                           n→∞
+                                           −−−→ P(|Z| ≤ zα )                 by the CLT
+
+                                           = 1 − α.
+Hence, we say that Cn is an asymptotic (1 − α)-condence interval.
+
+If σ
+       2 is unknown, we can dene an estimator
+
+                                                                                2
+                                                       n
+                                            1          X
+                                  σ̂ 2 =                     Xi −        X̄n 
+                                                                             
+                                           n−1                           |{z}
+                                                       i=1           1   P
+                                                                     n    j Xj
+                                                        n
+                                                                             !
+                                        1               X
+                                     =                         Xi2 − nX̄n2
+                                       n−1
+                                                         i=1
+                                      d            2
+                                     → E(X ) − (EX)2 = σ 2
+                                     −
+
+                                                             11
+by several applications of the SLLN, the CMT and Slutsky's lemma.
+
+Dene a new random interval
+
+                                              √ |X̄n − µ|
+                                                             
+                                en =
+                                C         µ∈R: n          ≤ zα .
+                                                    σ̂
+                  d
+               → σ constant. By Slutsky's Lemma,
+By the CMT, σ̂ −
+
+                                 √ (X̄n − µ0 ) d
+                                    n          → N (0, 1).
+                                               −
+                                         σ̂
+Hence, Cn is an asymptotic (1 − α)-condence interval for µ0 .
+
+Next time: Uniform laws of Large Numbers (ULLN)
+
+Let H be a class of functions R
+                                   k → R. Assume that
+
+                                         E|h(X)| < ∞          ∀h ∈ H.
+We know from the SLLN that
+                                   n
+                               1X         a.s.
+                                  h(Xi ) −−→ E[h(X)]                   ∀h ∈ H.
+                               n
+                                   i=1
+We have a ULLN if
+                                           n
+                                    1X                   a.s.
+                                sup    h(Xi ) − E[h(X)] −−→ 0.
+                                h∈H n      i=1
+
+                                           End of Lecture 4
+
+Uniform Laws of Large Numbers
+Let X be a r.v. on X . (Xi ) iid copies of X . Let H be a class of functions X → R, s.t.
+
+                                         E|h(X)| < ∞          ∀h ∈ H.
+
+                                                  n
+                                              1X                    a.s.
+                           ULLN           sup       h(Xi ) − Eh(X) −−→ 0.
+                                          h∈H n i=1          | {z }
+                                              |   {z    }     =P h
+                                                   =Pn h
+If H = {h1 , . . . , hM } is nite, then by the SLLN, for any 1 ≤ j ≤ M ,
+                                                              a.s.
+                                           |Pn hj − P hj | −−→ 0
+i.e. on an event Aj with P(Aj ) = 1, ∀ε > 0, ∃Nj (ε) s.t.
+
+                                 |Pn hj − P hj | < ε          ∀n > Nj (ε).
+                TM
+Hence on A :=     j=1 Aj , we have ∀ε > 0,
+
+                            max |Pn hj − P hj | < ε             ∀n > max Nj (ε).
+                           1≤j≤M                                          j
+
+As P(A) = 1, this means
+                                                               a.s.
+                                          sup |Pn h − P h| −−→ 0.
+                                          h∈H
+When |H| is innite, we will use a bracketing argument. A bracket is a collection of functions
+{hj , hj }M
+          j=1 such that
+                                 ∀j,        hj (x) ≤ hj (x)           ∀x ∈ X .
+A nite bracket covers H if for all h ∈ H, ∃j ∈ {1, . . . , M } s.t.
+
+                                 hj (x) ≤ h(x) ≤ hj (x)               ∀x ∈ X .
+
+                                                      12
+Prop 2.                                                                              M
+             Suppose that ∀ε > 0, there is a nite bracket {hj , hj }j=1 covering H, s.t.
+
+
+                         (1)     E|hj (X)| < ∞,         E|hj (X)| < ∞           ∀1 ≤ j ≤ M,
+                         (2)     E|hj (X) − hj (X)| < ε.
+Then,
+                                                                    a.s.
+                                              sup |Pn h − P h| −−→ 0.
+                                             h∈H
+
+Proof. Take any ε > 0, then for any h ∈ H, ∃1 ≤ j ≤ M s.t. hj ≤ h ≤ hj . Then
+
+
+                                  Pn h − P h ≤ Pn hj − P hj
+                                               ≤ |Pn hj − P hj | + |P (hj − hj )| .
+                                                                   |     {z     }
+                                                                            ≤ε
+
+Similarly,
+                      P h − Pn h ≤ P hj − Pn hj ≤ |Pn hj − P hj | + |P (hj − hj )| .
+                                                                    |     {z     }
+                                                                                         ≤ε
+
+                      ∴        sup |Pn h − P h| ≤               max |Pn g − P g|              +ε.
+                               h∈H                            g∈bracket
+                                                              |      {z        }
+                                                       a.s.
+                                                       −−→0 by the SLLN as bracket is nite
+Hence, on an event Aε with P(Aε ) = 1, we have
+
+                                         lim sup sup |Pn h − P h| ≤ ε.
+                                             n→∞ h∈H
+                                        T∞
+Take sequence εk ↓ 0. Let A =            k=1 Aεk , with P(A) = 1. On A,
+
+                                         sup |Pn h − P h| −→ 0.             □
+                                         h∈H
+
+
+3 Consistency of the MLE
+Def 3.    We say an estimator θ̂(X1 , . . . , Xn ) is consistent if θ̂ −
+                                                                                 P
+                                                                       → θ under Pθ ∀θ ∈ Θ.
+Assumptions. Let {f (·, θ) : θ ∈ Θ} be a model of pdfs or pmfs on X ⊆ R . We'll assume
+                                                                                              d
+
+ (1)   f (x, θ) > 0       ∀x ∈ X , θ ∈ Θ.
+ (2)   θ 7→ f (x, θ) is continuous ∀x ∈ X .
+ (3)   Θ is compact.
+ (4) Strict identiability: f (·, θ) = f (·, θ )
+                                                   ′     =⇒ θ = θ′ .
+ (5)   Eθ sup | log f (X, θ′ )| < ∞          ∀θ ∈ Θ.
+          θ′ ∈Θ
+          |       {z          }
+                 M (X)
+
+   Recall that (5) allows us to dene ℓ(θ) := Eθ0 log f (X, θ) for a true parameter θ0 . Further-
+more, by (4) ℓ(θ) is maximised uniquely at θ = θ0 .
+   By (2) & (5), we have that ℓ is continuous. Indeed take (θi ), θi → θ , then
+                                                                          
+                                                                 
+              |ℓ(θi ) − ℓ(θ)| = Eθ0                − log f (X, θ)
+                                    |log f (X, θi ){z           }
+                                               a.s.
+                                              −−→0 by (2)
+                                         by the Dominated Convergence Theorem (P&M)
+                                 −→ 0
+                                                   using the domination condition (5).
+
+
+                                                              13
+In maximum likelihood we maximise
+
+                               n
+                            1X
+                   ℓn (θ) =    log f (Xi , θ),                  a sample version of ℓ(θ).
+                            n
+                              i=1
+
+
+Lemma.     If (Xi ) are iid with law Pθ0 , we have the ULLN
+
+
+
+                                                                    a.s.
+                                        sup ℓn (θ) − ℓ(θ) −−→ 0
+                                        θ∈Θ | {z }   |{z}
+                                                  =Pn hθ    =P hθ
+
+where hθ : x 7→ log f (x, θ). Here H = {hθ : θ ∈ Θ}.
+
+*Proof sketch* To apply Prop 2, we need to construct for any ε > 0 a nite bracket satisfying
+the hypotheses (1) & (2). Take any θ ∈ Θ, let Bθ,δ = {θ
+                                                                      ′ : ∥θ − θ ′ ∥ ≤ δ}, let
+
+
+                        hθ (x) = sup hθ′ (x),                   hθ (x) = ′ inf hθ′ (x).
+                                   θ′ ∈Bθ,δ                                θ ∈Bδ,θ
+
+
+
+
+By def
+                                    hθ ≤ hθ′ ≤ hθ                ∀θ′ ∈ Bδ,θ .
+Hypothesis (1) is given by Assumption (5). We'll choose δ small enough so that we can obtain
+Hypothesis 2:
+                                         E|hθ (X) − hθ (X)| < ε
+(To do this carefully, apply the DCT using assumptions (2) & (5).)
+   For each θ ∈ Θ we obtain a pair (hθ , hθ ) sandwiching functions in a ball around hθ . By
+                                                   M
+compactness, ∃ a nite bracket {hθj , hθ }j=1 s.t. ∀θ ∈ Θ, ∃j s.t.
+                                              j
+
+
+                                                  hθj ≤ hθ ≤ hθj .
+
+This allows us to apply prop 2.     □
+
+                                          End of Lecture 5
+
+
+
+
+                                                           14
+
