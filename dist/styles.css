@@ -401,14 +401,20 @@ h1 {
 }
 
 .course-actions > a[href$=".pdf"] {
-  border-radius: 6px;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: color 200ms ease;
+}
+
+.course-actions > a[href$=".pdf"]::after {
+  transition: transform 200ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .course-actions > a[href$=".pdf"]:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 16px rgba(121, 169, 149, 0.2);
+    color: var(--cambridge-dark);
+  }
+
+  .course-actions > a[href$=".pdf"]:hover::after {
+    transform: translate(3px, -3px);
   }
 }
 
@@ -647,11 +653,12 @@ footer a {
 
   .course-list li,
   .course-actions > a[href$=".pdf"],
+  .course-actions > a[href$=".pdf"]::after,
   .part-seal {
     transition: none;
   }
 
-  .course-actions > a[href$=".pdf"]:hover {
+  .course-actions > a[href$=".pdf"]:hover::after {
     transform: none;
   }
 }
