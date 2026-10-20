@@ -400,6 +400,18 @@ h1 {
   font-size: 1rem;
 }
 
+.course-actions > a[href$=".pdf"] {
+  border-radius: 6px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .course-actions > a[href$=".pdf"]:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(121, 169, 149, 0.2);
+  }
+}
+
 .course-list a:focus-visible,
 .source-toggle:focus-visible,
 .source-toolbar button:focus-visible,
@@ -634,7 +646,12 @@ footer a {
   }
 
   .course-list li,
+  .course-actions > a[href$=".pdf"],
   .part-seal {
     transition: none;
+  }
+
+  .course-actions > a[href$=".pdf"]:hover {
+    transform: none;
   }
 }
