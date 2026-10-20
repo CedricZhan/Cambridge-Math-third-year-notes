@@ -828,4 +828,150 @@ So $H\cdot M$ is a martingale, as claimed.
 \begin{center}
 \textbf{End of Lecture 3}
 \end{center}
+
+\section*{2. Pricing contingent claims}
+
+\subsection*{2.1 Multi-period asset price model}
+
+Let $(\bar S_n)_{0\leq n\leq T}$ be a random process in
+$\mathbb{R}^{d+1}$, with
+\[
+\bar S_n=(S_n^0,S_n^1,\ldots,S_n^d)=(S_n^0,S_n),
+\qquad S_n\in\mathbb{R}^d.
+\]
+We say that $(S_n^0)_{0\leq n\leq T}$ is a \emph{numeraire} if
+$S_n^0>0$ for all $n$.
+
+If $(S_n^0)_{0\leq n\leq T}$ is a numeraire, we call
+$(\bar S_n)_{0\leq n\leq T}$ a \emph{$T$-period asset price model}.
+If $T=1$, it is called a single-period model.
+
+We think of $(S_n^0)_{0\leq n\leq T}$ as a bank account or bond, and write
+\[
+S_n^0=(1+r_n)S_{n-1}^0,
+\]
+where $r_n$ is the interest rate.
+There are $T$ time periods:
+\[
+0\longrightarrow1,\quad 1\longrightarrow2,\quad\ldots,\quad
+T-1\longrightarrow T.
+\]
+We think of $S_n^i$ as the price of one unit of asset $i$ at time $n$,
+for $i=1,\ldots,d$.
+
+We will focus on \emph{discounted prices}:
+\[
+\bar X_n=\frac{\bar S_n}{S_n^0}
+=(1,X_n^1,\ldots,X_n^d),
+\qquad
+X_n^i=\frac{S_n^i}{S_n^0}.
+\]
+To determine the model fully, we could suppose that the interest rates
+$r_n$ are non-random and that prices take discrete values. We would then
+want to know the values of
+\[
+\mathbb{P}(S_0=s_0,S_1=s_1,\ldots,S_T=s_T)
+\]
+for all possible sequences $(s_n)_{0\leq n\leq T}$ in $\mathbb{R}^d$.
+
+\subsubsection*{Portfolios}
+
+Let $(\bar\Theta_n)_{1\leq n\leq T}$ be a previsible random process in
+$\mathbb{R}^{d+1}$, so that $\bar\Theta_n$ is
+$\mathcal{F}_{n-1}$-measurable.
+We use $(\bar\Theta_n)_{1\leq n\leq T}$ to describe a \emph{portfolio}
+in which we hold $\Theta_n^i$ units of asset $i$ during the $n$th period,
+from $n-1$ to $n$.
+
+We say that $(\bar\Theta_n)_{1\leq n\leq T}$ is \emph{self-financing} if
+\[
+\underbrace{\bar\Theta_n\cdot\bar S_n}_{\text{value at the end of period }n}
+=
+\underbrace{\bar\Theta_{n+1}\cdot\bar S_n}_{\text{value at the start of period }n+1},
+\qquad n=1,\ldots,T-1.
+\]
+
+The \emph{value function} of the portfolio, $(V_n)_{0\leq n\leq T}$,
+is given by
+\[
+V_0=\bar\Theta_1\cdot\bar X_0,
+\qquad
+V_n=\bar\Theta_n\cdot\bar X_n
+=\sum_{i=0}^{d}\Theta_n^i X_n^i,
+\qquad n=1,\ldots,T.
+\]
+
+\medskip
+
+\noindent\textbf{Proposition.}
+Let $V_0\in\mathbb{R}$ and let $(\Theta_n)_{1\leq n\leq T}$ be a
+previsible process in $\mathbb{R}^d$.
+Then there exists a previsible process $(\Theta_n^0)_{1\leq n\leq T}$
+such that $(\bar\Theta_n)_{1\leq n\leq T}$ is a self-financing portfolio
+with initial value $V_0$, where $\bar\Theta_n=(\Theta_n^0,\Theta_n)$.
+Moreover,
+\[
+V_m=V_0+\sum_{n=1}^{m}\Theta_n\cdot(X_n-X_{n-1}),
+\qquad 0\leq m\leq T.
+\]
+
+\medskip
+
+\noindent\textbf{Proof.}
+We have to satisfy the conditions
+\[
+V_0=\bar\Theta_1\cdot\bar X_0
+=\Theta_1^0+\Theta_1\cdot X_0
+\]
+and
+\[
+\begin{aligned}
+\bar\Theta_n\cdot\bar S_n
+&=\bar\Theta_{n+1}\cdot\bar S_n,\\
+\Theta_n^0S_n^0+\Theta_n\cdot S_n
+&=\Theta_{n+1}^0S_n^0+\Theta_{n+1}\cdot S_n,
+\qquad n=1,\ldots,T-1.
+\end{aligned}
+\]
+We can solve these uniquely for a previsible process
+$(\Theta_n^0)_{1\leq n\leq T}$.
+
+To obtain the formula for $V_m$, note that the change in discounted value
+in period $n$ is
+\[
+\sum_{i=1}^{d}\Theta_n^i(X_n^i-X_{n-1}^i)
+=\Theta_n\cdot(X_n-X_{n-1}).
+\]
+The formula follows by induction.
+\hfill$\square$
+
+\subsection*{2.2 Contingent claims}
+
+A \emph{(European) contingent claim} $C$ with maturity $T$ is a
+non-negative $\mathcal{F}_T$-measurable random variable.
+We think of $C$ as a contract which pays the investor $C$ at time $T$.
+The term ``European'' signifies that $T$ is fixed.
+
+Here we are thinking of
+\[
+\mathcal{F}_T=\sigma(S_0,S_1,\ldots,S_T).
+\]
+
+\subsubsection*{Examples}
+
+Restrict to $d=1$, so there is one risky asset and $S_n\in\mathbb{R}$.
+
+\begin{enumerate}
+    \item[(a)] $(S_T-K)^+$ is the payoff of a \emph{call} with strike
+    price $K$ and maturity $T$. It gives the holder the right, but not the
+    obligation, to buy one unit of the asset at time $T$ for price $K$.
+
+    \item[(b)] $(S_T-K)^-$ is the payoff of a \emph{put} with strike
+    price $K$ and maturity $T$. This is the same as a call, but for
+    selling at price $K$.
+\end{enumerate}
+
+\begin{center}
+\textbf{End of Lecture 4}
+\end{center}
 \end{document}

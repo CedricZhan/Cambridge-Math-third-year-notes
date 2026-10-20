@@ -905,4 +905,207 @@ Exercise: Show this.
 \begin{center}
     \textbf{End of Lecture 3}
 \end{center}
+
+\noindent\textbf{Example 2.}
+Find the behaviour of
+\[
+    I(x)=\int_a^b f(t)e^{xt}\,dt
+    \qquad\text{as }x\to\infty,
+\]
+where $b>a$, $f(b)\neq0$, and $f$ is smooth on $[a,b]$.
+
+As $x\to\infty$, the integral is dominated by a narrow region near $t=b$
+because of the exponential. Very roughly,
+\[
+    I(x)\approx f(b)\int_a^b e^{xt}\,dt
+    =\frac{f(b)}{x}(e^{xb}-e^{xa})
+    \sim\frac{f(b)e^{xb}}{x},
+\]
+using $e^{xb}\gg e^{xa}$ as $x\to\infty$.
+
+Repeated integration by parts, using
+$e^{xt}=\dfrac{d}{dt}\left(\dfrac{e^{xt}}{x}\right)$, gives
+\begin{align*}
+    I(x)
+    &=\sum_{k=1}^N(-1)^{k-1}
+      \left[f^{(k-1)}(t)e^{xt}x^{-k}\right]_a^b
+      +\frac{(-1)^N}{x^N}\int_a^b f^{(N)}(t)e^{xt}\,dt\\
+    &=e^{xb}\bigl(J_1-J_2+J_3\bigr),
+\end{align*}
+where
+\begin{align*}
+    J_1&=\sum_{k=1}^N(-1)^{k-1}f^{(k-1)}(b)x^{-k},\\
+    J_2&=e^{-x(b-a)}
+         \sum_{k=1}^N(-1)^{k-1}f^{(k-1)}(a)x^{-k},\\
+    J_3&=\frac{(-1)^N}{x^N}
+         \int_a^b f^{(N)}(t)e^{x(t-b)}\,dt.
+\end{align*}
+$J_1$ could be an $N$-term a.\ approximation with $\phi_k=x^{-k}$
+as $x\to\infty$, but we need to show that
+\[
+    J_2=o(x^{-N}),
+    \qquad J_3=o(x^{-N})
+    \qquad\text{as }x\to\infty.
+\]
+For the first term,
+\[
+    \frac{J_2}{x^{-N}}
+    =e^{-x(b-a)}
+      \sum_{k=1}^N(-1)^{k-1}f^{(k-1)}(a)x^{N-k}
+    \longrightarrow0
+    \qquad\text{as }x\to\infty,
+\]
+which is true for every $N$. For the remainder,
+\begin{align*}
+    \left|\frac{J_3}{x^{-N}}\right|
+    &\leq\int_a^b |f^{(N)}(t)|e^{x(t-b)}\,dt\\
+    &\leq\max_{a\leq t\leq b}|f^{(N)}(t)|
+          \int_a^b e^{x(t-b)}\,dt\\
+    &=\max_{a\leq t\leq b}|f^{(N)}(t)|
+      \frac{1-e^{-x(b-a)}}{x}
+      \longrightarrow0
+      \qquad\text{as }x\to\infty.
+\end{align*}
+This holds for every $N$ for which $f$ has $N$ continuous derivatives.
+If $f$ is infinitely differentiable, then
+\[
+    I(x)=\int_a^b f(t)e^{xt}\,dt
+    \sim\sum_{k=1}^\infty
+    (-1)^{k-1}\frac{f^{(k-1)}(b)e^{xb}}{x^k}
+    \qquad\text{as }x\to\infty.
+\]
+
+\subsection*{3.3 The Gamma function}
+
+Recall
+\[
+    \Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\,dt,
+    \qquad \operatorname{Re}(z)>0.
+\]
+\begin{enumerate}
+    \renewcommand{\labelenumi}{(\alph{enumi})}
+    \item $\Gamma$ is analytic for $\operatorname{Re}(z)>0$.
+    \item $\Gamma(z+1)=z\Gamma(z)$ \quad (recursion relation).
+    \item $\Gamma(1)=1$ and $\Gamma(n+1)=n!$ for positive integers $n$.
+    \item For $x>0$ and $\operatorname{Re}(z)>0$,
+    \[
+        \int_0^\infty t^{z-1}e^{-xt}\,dt
+        =\frac{\Gamma(z)}{x^z}.
+    \]
+    \item Generalisation of binomial coefficients:
+    \[
+        \binom{z}{k}
+        =\frac{1}{k!}\frac{\Gamma(z+1)}{\Gamma(z-k+1)},
+        \qquad z\in\mathbb{C},\quad k=0,1,2,3,\ldots,
+    \]
+    with the quotient interpreted by continuation where necessary.
+    \[
+        (1+t)^z=\sum_{k=0}^\infty\binom{z}{k}t^k,
+        \qquad |t|<1.
+    \]
+    \item Reflection and duplication formulae: see Section 3.2 in
+    Chapling.
+\end{enumerate}
+
+\subsection*{3.4 Watson's lemma}
+
+Consider
+\[
+    F(x)=\int_0^T f(t)e^{-xt}\,dt
+    \qquad\text{as }x\to\infty,
+    \qquad 0<T\leq\infty.
+\]
+Suppose
+\[
+    f(t)\sim t^\alpha\sum_{n=0}^\infty a_n t^{\beta n}
+    \qquad\text{as }t\to0^+,
+    \qquad \alpha>-1,\quad\beta>0.
+\]
+Also assume that either
+\begin{enumerate}
+    \renewcommand{\labelenumi}{(\roman{enumi})}
+    \item $|f(t)|<Ke^{bt}$ for all $t\in[0,T]$, for some $K,b>0$; or
+    \item $\displaystyle\int_0^T |f(t)|\,dt<\infty$.
+\end{enumerate}
+Then
+\[
+    \boxed{
+    F(x)\sim\sum_{n=0}^\infty
+    a_n\frac{\Gamma(\alpha+\beta n+1)}{x^{\alpha+\beta n+1}}}
+    \qquad\text{as }x\to\infty.
+\]
+This is \emph{Watson's lemma}.
+
+\noindent\textbf{Example 2.}
+\[
+    xy''+(a+1-x)y'-ay=0,
+    \qquad a>0.
+\]
+One solution is
+\[
+    M(x)=\frac{e^x}{\Gamma(a)}
+    \int_0^1 e^{-xt}(1-t)^{a-1}\,dt.
+\]
+What is its behaviour as $x\to\infty$?
+
+Here $f(t)=(1-t)^{a-1}$ is integrable, so case (ii) applies, and
+\[
+    f(t)=(1-t)^{a-1}
+    =\sum_{n=0}^\infty
+    (-1)^n\frac{\Gamma(a)}{\Gamma(a-n)n!}\,t^n,
+    \qquad |t|<1.
+\]
+Thus $\alpha=0$, $\beta=1$, and Watson's lemma gives
+\begin{align*}
+    M(x)
+    &\sim\frac{e^x}{\Gamma(a)}
+    \sum_{n=0}^\infty
+    \frac{(-1)^n\Gamma(a)\Gamma(n+1)}{\Gamma(a-n)n!}
+    \frac{1}{x^{n+1}}\\
+    &=e^x\sum_{n=0}^\infty
+    \frac{(-1)^n}{\Gamma(a-n)x^{n+1}}
+    \qquad\text{as }x\to\infty.
+\end{align*}
+In particular,
+\[
+    M(x)\sim\frac{e^x}{x\Gamma(a)}
+    \qquad\text{as }x\to\infty.
+\]
+
+\noindent\textbf{Proof of Watson's lemma.}
+Write
+\begin{align*}
+    F(x)
+    &=\int_0^\epsilon f(t)e^{-xt}\,dt
+      +\int_\epsilon^T f(t)e^{-xt}\,dt\\
+    &\equiv F_1(x)+F_2(x),
+\end{align*}
+where $\epsilon>0$ is small and fixed, with $\epsilon<T$.
+
+First, show that $F_2$ is small.
+
+\noindent Case (i): for $x>b$,
+\begin{align*}
+    |F_2(x)|
+    &\leq\int_\epsilon^T Ke^{bt}e^{-xt}\,dt\\
+    &\leq\int_\epsilon^\infty Ke^{-(x-b)t}\,dt\\
+    &=\frac{K}{x-b}e^{(b-x)\epsilon}\\
+    &=O\!\left(\frac{e^{-\epsilon x}}{x}\right)
+    \qquad\text{as }x\to\infty.
+\end{align*}
+
+\noindent Case (ii):
+\begin{align*}
+    |F_2(x)|
+    &\leq\int_\epsilon^T |f(t)|e^{-xt}\,dt\\
+    &\leq e^{-\epsilon x}\int_\epsilon^T |f(t)|\,dt\\
+    &\leq e^{-\epsilon x}\int_0^T |f(t)|\,dt\\
+    &=O(e^{-\epsilon x})
+    \qquad\text{as }x\to\infty.
+\end{align*}
+In both cases, $F_2$ is small beyond all orders in inverse powers of $x$.
+
+\begin{center}
+    \textbf{End of Lecture 4.}
+\end{center}
 \end{document}
