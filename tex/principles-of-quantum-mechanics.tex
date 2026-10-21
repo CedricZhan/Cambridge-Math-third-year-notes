@@ -1155,4 +1155,214 @@ Fourier transform \& inverse.
 \begin{center}
     \textbf{End of Lecture 5}
 \end{center}
+
+Now given $H(\hat{x},\hat{p})$ we can consider
+\[
+    H|\psi\rangle=E|\psi\rangle.
+\]
+If
+\[
+    H=\frac{\hat{p}^2}{2m}+V(\hat{x})
+\]
+\[
+    \begin{aligned}
+        \text{on }\psi(x)\qquad H&\to-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+V(x),\\
+        \text{on }\tilde{\psi}(p)\qquad H&\to\frac{p^2}{2m}+V\!\left(i\hbar\frac{\partial}{\partial p}\right).
+    \end{aligned}
+\]
+It may be easy to interpret potential term in momentum space.
+e.g.\ $V(x)=\lambda x^n$ then
+\[
+    V\!\left(i\hbar\frac{\partial}{\partial p}\right)
+    =\lambda(i\hbar)^n\left(\frac{\partial}{\partial p}\right)^n
+\]
+for $n$ a positive integer.
+More generally, argue from first principles as follows.
+
+Consider
+\begin{align*}
+    \langle p|V(\hat{x})|\psi\rangle
+    &=\int dx\,\langle p|V(\hat{x})|x\rangle\langle x|\psi\rangle\\
+    &=\int dx\int dp'\,\langle p|V(\hat{x})|x\rangle
+      \langle x|p'\rangle\langle p'|\psi\rangle\\
+    &=\int dp'\left(\int dx\,V(x)
+      \underbrace{\langle p|x\rangle\langle x|p'\rangle}_{\text{use }(*)}
+      \langle p'|\psi\rangle\right)\\
+    &=\int dp'\int dx\,V(x)\frac{e^{-i(p-p')x/\hbar}}{2\pi\hbar}\tilde{\psi}(p')\\
+    &=\frac{1}{(2\pi\hbar)^{1/2}}\int dp'\,\tilde{V}(p-p')\tilde{\psi}(p'),
+\end{align*}
+\hfill reproducing convolution theorem.
+
+i.e.\ $H|\psi\rangle=E|\psi\rangle$ becomes
+\[
+    -\frac{\hbar^2}{2m}\psi''(x)+V(x)\psi(x)=E\psi
+    \qquad\text{in position space}
+\]
+or
+\[
+    \frac{p^2}{2m}\tilde{\psi}(p)
+    +\frac{1}{(2\pi\hbar)^{1/2}}\int dp'\,\tilde{V}(p-p')\tilde{\psi}(p')
+    =E\tilde{\psi}(p)
+\]
+\hfill in momentum space.
+
+To generalise from one to three dimensions: position \& momentum operators obey
+\[
+    [\hat{x}_i,\hat{p}_j]=i\hbar\delta_{ij}.
+\]
+One complete commuting set is
+\[
+    \underline{\hat{x}}=(\hat{x}_1,\hat{x}_2,\hat{x}_3)
+\]
+with joint eigenstates
+\[
+    \hat{x}_i|\underline{x}\rangle=x_i|\underline{x}\rangle
+\]
+orthonormal
+\[
+    \langle\underline{x}|\underline{x}'\rangle
+    =\delta^{(3)}(\underline{x}-\underline{x}').
+\]
+An alternative set
+\[
+    \underline{\hat{p}}=(\hat{p}_1,\hat{p}_2,\hat{p}_3)
+\]
+with joint eigenstates
+\[
+    \hat{p}_i|\underline{p}\rangle=p_i|\underline{p}\rangle
+    \qquad\text{(also orthonormal)}.
+\]
+For any state $|\psi\rangle$ we can expand
+\[
+    |\psi\rangle=\int d^3\underline{x}\,\psi(\underline{x})|\underline{x}\rangle
+    =\int d^3\underline{p}\,\tilde{\psi}(\underline{p})|\underline{p}\rangle
+\]
+\&
+\[
+    \psi(\underline{x})=\langle\underline{x}|\psi\rangle,
+    \qquad\tilde{\psi}(\underline{p})=\langle\underline{p}|\psi\rangle.
+\]
+$(*)$ becomes
+\[
+    \langle\underline{x}|\underline{p}\rangle
+    =\frac{1}{(2\pi\hbar)^{3/2}}e^{i\underline{p}\cdot\underline{x}/\hbar}
+\]
+\& wavefunctions related by
+\[
+    \tilde{\psi}(\underline{p})=\frac{1}{(2\pi\hbar)^{3/2}}
+    \int d^3\underline{x}\,e^{-i\underline{p}\cdot\underline{x}/\hbar}\psi(\underline{x})
+    \qquad\text{(\& inverse)}.
+\]
+
+\medskip
+\noindent
+(c) \underline{More on position \& momentum eigenstates}
+
+Return to one dimension \& seek to justify $(*)$ using only
+$[\hat{x},\hat{p}]=i\hbar$.
+
+Given $|x\rangle$ with $\hat{x}|x\rangle=x|x\rangle$, consider
+\[
+    T(a)=e^{-ia\hat{p}/\hbar}
+    =\sum_{n=0}^{\infty}\frac{1}{n!}\left(\frac{-ia}{\hbar}\right)^n\hat{p}^n
+    \qquad a\text{ any real number}
+\]
+\& note
+\[
+    [\hat{x},T(a)]=\left[\hat{x},\frac{-ia\hat{p}}{\hbar}\right]T(a)=aT(a)
+    \qquad\text{[see 3 on Example Sheet 1]}.
+\]
+Hence
+\begin{align*}
+    \hat{x}\bigl(T(a)|x\rangle\bigr)
+    &=\bigl([\hat{x},T(a)]+T(a)\hat{x}\bigr)|x\rangle\\
+    &=(x+a)\bigl(T(a)|x\rangle\bigr).
+\end{align*}
+Think of $T(a)|x\rangle$ as a translated eigenstate.
+
+Similarly, consider
+\[
+    S(b)=e^{ib\hat{x}/\hbar}
+\]
+\& note
+\[
+    [\hat{p},S(b)]=bS(b).
+\]
+Hence
+\[
+    \hat{p}|p\rangle=p|p\rangle
+    \quad\Rightarrow\quad
+    \hat{p}\bigl(S(b)|p\rangle\bigr)=(p+b)\bigl(S(b)|p\rangle\bigr).
+\]
+$S(b)$ gives translation in momentum space.
+
+Now take fixed values $x_0$ \& $p_0$ \& define all eigenstates by
+\[
+    |x_0+a\rangle=T(a)|x_0\rangle,
+    \qquad |p_0+b\rangle=S(b)|p_0\rangle.
+\]
+Now observe
+\begin{align*}
+    \langle x_0+a|p_0+b\rangle
+    &=\langle x_0|e^{ia\hat{p}/\hbar}|p_0+b\rangle\\
+    &=\langle x_0|e^{ia(p_0+b)/\hbar}e^{ib\hat{x}/\hbar}|p_0\rangle\\
+    &=e^{i(ab+ap_0+bx_0)/\hbar}
+      \underbrace{\langle x_0|p_0\rangle}_{\displaystyle\text{choose }=\frac{1}{\sqrt{2\pi\hbar}}}.
+\end{align*}
+\hfill for correct, consistent normalisation.
+
+Then set $x_0=p_0=0$ to get
+\[
+    \langle a|b\rangle=\frac{1}{\sqrt{2\pi\hbar}}e^{iab/\hbar}
+    \qquad\text{which is }(*).
+\]
+
+\section*{2. Evolution in Time \& Pictures}
+\subsection*{2.1 The Schr\"odinger Equation \& the Schr\"odinger Picture}
+
+The evolution in time of a state $|\psi(t)\rangle$ is governed
+(in absence of external influences or measurements) by the Schr\"odinger equation (SE)
+\[
+    i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle=H|\psi(t)\rangle
+\]
+where $H=H^\dagger$ is the Hamiltonian.
+
+Equivalently
+\[
+    -i\hbar\frac{\partial}{\partial t}\langle\psi(t)|=\langle\psi(t)|H.
+\]
+This implies
+\[
+    \frac{\partial}{\partial t}\bigl(\langle\psi(t)|\psi(t)\rangle\bigr)=0
+\]
+so that normalisation of $|\psi(t)\rangle$ is preserved in time.
+
+Solution of SE can be written
+\[
+    |\psi(t)\rangle=U(t)|\psi(0)\rangle
+\]
+where
+\[
+    U(t)=e^{-iHt/\hbar}
+    \qquad\text{time evolution operator, assuming }H\text{ independent of }t.
+\]
+Check immediately from
+\[
+    i\hbar\frac{\partial U(t)}{\partial t}=HU(t).
+\]
+Recall that time-evolution problems can also be conveniently solved by
+working with basis of energy eigenstates $\{|n\rangle\}$
+with
+\[
+    H|n\rangle=E_n|n\rangle
+\]
+with
+\[
+    e^{-iE_nt/\hbar}|n\rangle
+    \qquad\text{solution of (t-dep) SE}.
+\]
+
+\begin{center}
+    \textbf{End of Lecture 6}
+\end{center}
 \end{document}

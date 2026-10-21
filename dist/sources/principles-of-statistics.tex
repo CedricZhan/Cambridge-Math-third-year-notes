@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
 \usepackage{graphicx}
+
 \title{Principles of Statistics}
 \begin{document}
 \maketitle
@@ -1538,5 +1539,220 @@ This allows us to apply prop 2.\quad$\square$
 
 \begin{center}
 \textbf{End of Lecture 5}
+\end{center}
+
+\paragraph{Recall.}
+We stated 5 assumptions for consistency of the MLE.
+
+\noindent\underline{Implications}
+\begin{itemize}
+\item $\ell(\theta)=\mathbb{E}_{\theta_0}[\log f(X,\theta)]<\infty$
+$\forall\theta$, maximised uniquely at $\theta_0$.
+\item $\ell$ is continuous on $\Theta$.
+\item \underline{ULLN}
+\[
+\sup_{\theta\in\Theta}|\overline{\ell}_n(\theta)-\ell(\theta)|
+\xrightarrow{\mathrm{a.s.}/P/d}0.
+\]
+\end{itemize}
+
+\paragraph{Theorem 3.}
+Suppose that $\{f(\cdot,\theta):\theta\in\Theta\}$ satisfies the stated
+assumptions and $X_1,X_2,\ldots$ are iid $P_{\theta_0}$.
+Then an MLE $\hat{\theta}_n$ based on $X_1,\ldots,X_n$ exists and
+\[
+\hat{\theta}_n\xrightarrow{P}\theta_0.
+\]
+
+\paragraph{Proof.}
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\sum_{i=1}^n\log f(X_i,\theta)
+\]
+is continuous, so it attains a supremum in $\Theta$ compact at some
+$\hat{\theta}_n\in\Theta$.
+
+Define
+\[
+\Theta_\varepsilon=\{\theta\in\Theta:\|\theta-\theta_0\|_2\geq\varepsilon\}
+\]
+and note $\Theta_\varepsilon$ is compact (we remove an open ball from
+$\Theta$ compact). We'll show that
+\[
+\mathbb{P}(\hat{\theta}_n\in\Theta_\varepsilon)\longrightarrow0
+\qquad\text{as }n\to\infty.
+\]
+If this holds for arbitrary $\varepsilon>0$,
+$\hat{\theta}_n\xrightarrow{P}\theta_0$.
+
+\begin{center}
+% Cropped from 屏幕截图 2026-10-21 161827.png (third supplied screenshot).
+\includegraphics[width=0.40\textwidth]{figures/principles-of-statistics/lecture6-consistency.png}
+\end{center}
+
+\[
+\sup_{\theta\in\Theta_\varepsilon}\ell(\theta)=:c(\varepsilon)<\ell(\theta_0).
+\]
+Choose
+\[
+\delta(\varepsilon)<\frac{\ell(\theta_0)-c(\varepsilon)}{2}.
+\]
+Define an event
+\[
+A_\varepsilon=\left\{\sup_{\theta\in\Theta}
+|\overline{\ell}_n(\theta)-\ell(\theta)|\leq\delta(\varepsilon)\right\}.
+\]
+By the ULLN, $\mathbb{P}(A_\varepsilon)\to1$ as $n\to\infty$.
+\[
+\begin{aligned}
+\sup_{\theta\in\Theta_\varepsilon}\overline{\ell}_n(\theta)
+&\leq\sup_{\theta\in\Theta_\varepsilon}\ell(\theta)
++\underbrace{\sup_{\theta\in\Theta_\varepsilon}
+(\overline{\ell}_n(\theta)-\ell(\theta))}_{\leq\delta(\varepsilon)\text{ on }A_\varepsilon}\\
+&\leq c(\varepsilon)+\delta(\varepsilon)\\
+&<\ell(\theta_0)-\delta(\varepsilon)
+\qquad\text{(by def of $\delta(\varepsilon)$)}\\
+&\leq\overline{\ell}_n(\theta_0).
+\end{aligned}
+\]
+Hence, on $A_\varepsilon$, $\hat{\theta}_n\notin\Theta_\varepsilon$.
+In other words $A_\varepsilon\subseteq\{\hat{\theta}_n\notin\Theta_\varepsilon\}$.
+Therefore
+\[
+\mathbb{P}(\hat{\theta}_n\notin\Theta_\varepsilon)
+\geq\mathbb{P}(A_\varepsilon)\longrightarrow1\qquad\text{as }n\to\infty.
+\]
+Finally
+\[
+\mathbb{P}(\hat{\theta}_n\in\Theta_\varepsilon)\longrightarrow0
+\qquad\text{as }n\to\infty.\qquad\square
+\]
+
+\paragraph{Rmk.}
+If we assume that $\theta\mapsto\log f(x,\theta)$ is differentiable for
+all $x\in\mathcal{X}$, and $\frac{\partial\overline{\ell}_n(\theta)}{\partial\theta}$
+satisfies a ULLN and its limit $\frac{\partial\ell(\theta)}{\partial\theta}$
+has a single $0$ at $\theta_0$, there is a simpler argument to show consistency.
+Can deal with noncompact $\Theta$ in some simple models.
+
+\subsection*{4. Asymptotic Normality of the MLE}
+Fluctuations of $\sqrt{n}(\hat{\theta}_n-\theta_0)$.
+
+\paragraph{Theorem 4.}
+Suppose that $\{f(\cdot,\theta):\theta\in\Theta\}$ satisfies the 9 stated
+assumptions. Let $\hat{\theta}_n$ be an MLE based on $X_1,\ldots,X_n$
+iid $P_{\theta_0}$. Then as $n\to\infty$,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
+N(0,I^{-1}(\theta_0)).
+\]
+
+The nine assumptions are the five assumptions for consistency stated above,
+together with the following four additional regularity assumptions (R2).
+
+\medskip\noindent\textbf{Regularity assumptions (R2).} Let the statistical model be such that:
+\begin{enumerate}
+\item[(1)] $\theta_0\in\operatorname{int}\Theta$;
+\item[(2)] there exists an open neighbourhood $N$ of $\theta_0$ on which
+$\theta\mapsto f(x,\theta)$ is twice continuously differentiable for all $x\in\mathcal{X}$;
+\item[(3)] $I(\theta_0)$ exists and is invertible;
+\item[(4)]
+\[
+\int_{\mathcal{X}}\sup_{\theta\in\Theta}
+\|\nabla_\theta\log f(x,\theta)\|_2\,dx<\infty
+\]
+\[
+\mathbb{E}_{\theta_0}\left(\sup_{\theta\in\Theta}
+\|\nabla_\theta^2\log f(X,\theta)\|_2\right)<\infty
+\]
+\[
+\int_{\mathcal{X}}\sup_{\theta\in\Theta}
+\|\nabla_\theta^2\log f(x,\theta)\|_2\,dx<\infty.
+\]
+\end{enumerate}
+(In fact the above can be weakened by replacing $\Theta$ above with any compact set $K$ with
+non-empty interior that contains $\theta_0$.)
+
+\paragraph{Proof.}
+Define $\varepsilon>0$ s.t. the ball
+\[
+\{\theta\in\Theta:\|\theta-\theta_0\|<\varepsilon\}\subseteq K\subset U.
+\]
+Here $K$ is a compact set with non-empty interior containing $\theta_0$,
+as in (R2) above; $U$ denotes the open neighbourhood called $N$ in (R2).
+
+We'll work in an event
+\[
+E_n=\{\|\hat{\theta}_n-\theta_0\|<\varepsilon\}.
+\]
+By consistency, $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
+We'll show that
+\[
+\mathbf{1}_{E_n}\sqrt{n}(\hat{\theta}_n-\theta_0)
+=\mathbf{1}_{E_n}W_n\xrightarrow{d}N(0,I^{-1}(\theta_0))
+\qquad\text{(Ex sheet 1, 8(a)).}
+\]
+Throughout the proof, just assume we're in $E_n$.
+
+On $E_n$, the regularity conditions guarantee that
+\[
+\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)=0.
+\]
+The MVT implies that
+\[
+0=\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)
+=\nabla_\theta\overline{\ell}_n(\theta_0)
++\overline{A}_n(\hat{\theta}_n-\theta_0),
+\]
+where $\overline{A}_n\approx\nabla_\theta^2\overline{\ell}_n(\theta_0)$ is given by
+\[
+(\overline{A}_n)_{i,j}
+=\frac{\partial^2}{\partial\theta_i\partial\theta_j}
+\overline{\ell}_n(\theta^{(i)})
+\qquad\text{for }\theta^{(i)}\in[\theta_0,\hat{\theta}_n].
+\]
+Rearranging yields
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=(-\overline{A}_n)^{-1}\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+\]
+(reg conditions imply $\overline{A}_n$ is invertible).
+
+\paragraph{Claim.}
+\[
+\overline{A}_n\xrightarrow{P}
+\mathbb{E}_{\theta_0}[\nabla_\theta^2\overline{\ell}_n(\theta_0)]
+=-I(\theta_0).
+\]
+\paragraph{Cor.}
+By the CMT,
+\[
+\overline{A}_n^{-1}\xrightarrow{P}-I(\theta_0)^{-1}.
+\]
+Furthermore,
+\[
+\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+=\frac{1}{\sqrt{n}}\sum_{i=1}^n
+\left(\underbrace{\nabla_\theta\log f(X_i,\theta_0)}_{\mathrm{iid}}
+-\underbrace{\mathbb{E}_{\theta_0}[\nabla_\theta\log f(X,\theta_0)]}
+_{=0\ (\mathrm{reg})}\right).
+\]
+By the multivariate CLT,
+\[
+\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+\xrightarrow{d}
+N\left(0,\underbrace{\operatorname{Var}_{\theta_0}
+(\nabla_\theta\log f(X,\theta_0))}_{I(\theta_0)}\right).
+\]
+By Slutsky's Lemma we have
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
+N\left(0,I(\theta_0)^{-1}I(\theta_0)I(\theta_0)^{-1}\right).
+\qquad\square
+\]
+
+\noindent\underline{Next time}: Proving claim
+
+\begin{center}
+\textbf{End of lecture 6}
 \end{center}
 \end{document}

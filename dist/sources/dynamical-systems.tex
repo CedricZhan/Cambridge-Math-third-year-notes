@@ -1132,4 +1132,236 @@ in \underline{autonomous Hamiltonian} systems.
 \textbf{End of Lecture 5}
 \end{center}
 
+\newpage
+% Lecture 6, source PDF page 1 (handwritten page 22).
+\noindent\underline{\S 2.2\quad Effect of nonlinear terms}
+
+\medskip
+\noindent
+How does the behavior of linearization $\dot{\bar y}=\hat A\bar y$ of the
+system $\dot{\bar x}=\bar f(\bar x)$ about the fixed point $\bar x_0$
+inform us about the behavior of the full nonlinear system around $\bar x_0$?
+
+\medskip
+\noindent\fbox{Definition}
+
+\medskip
+\noindent
+A fixed point $\bar x_0$ is \underline{hyperbolic} if none of the eigenvalues
+of the Jacobian of $\bar f(\bar x)$ (matrix $\hat A$) at $\bar x_0$ have zero
+real part. It is non-hyperbolic otherwise.
+
+\medskip
+\noindent We classify hyperbolic fixed points as
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item[$(\ast)$] source if all $\operatorname{Re}(\lambda_i)>0$
+\item[$(\ast)$] sink if all $\operatorname{Re}(\lambda_i)<0$
+\item[$(\ast)$] saddle otherwise (i.e.\ some $\operatorname{Re}(\lambda_i)>0$, others $<0$).
+\end{itemize}
+\noindent
+We will discuss separately hyperbolic \& non-hyperbolic fixed points.
+
+\medskip
+\noindent One can show (e.g.\ see Glendinning, Ch.\ 4) that if
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\item[(1)] $\bar x_0$ is hyperbolic and
+\item[(2)] the nonlinear corrections of $\bar f$ are $O(|\bar x-\bar x_0|^2)$
+\end{enumerate}
+\noindent
+then the full nonlinear system and the linearized system are topologically conjugate.
+
+\medskip
+\noindent\underline{Note}: non-hyperbolic fixed points arise when
+\[
+\{\operatorname{Det}\hat A\geq0,\ \operatorname{Tr}\hat A=0\},\quad
+\{\operatorname{Det}\hat A=0,\ \operatorname{Tr}\hat A\neq0\},
+\]
+\noindent i.e.\ cases 5, 6, 7 identified earlier.
+
+\newpage
+% Lecture 6, source PDF page 2 (handwritten page 23).
+\noindent\underline{\S 2.2.1\quad Stable and unstable manifolds}
+
+\medskip
+\noindent
+For a linearized system we can separate the phase space into different domains
+according to different behaviors in time.
+
+\medskip
+\noindent\fbox{Definition}
+
+\medskip
+\noindent
+The \underline{stable}, \underline{unstable} and \underline{centre subspaces}
+of the linearization of $\bar f(\bar x)$ near a fixed point $\bar x_0$ are the
+three linear subspaces $E^s$, $E^u$ and $E^c$ spanned by subsets of (possibly
+generalized) eigenvectors of $\hat A$ whose eigenvalues have real parts
+$\operatorname{Re}(\lambda)<0$, $\operatorname{Re}(\lambda)>0$ and
+$\operatorname{Re}(\lambda)=0$, respectively.
+
+\medskip
+\noindent\underline{Note}: a hyperbolic fixed point has no centre subspace.
+
+\medskip
+\noindent\fbox{Example}
+
+\noindent
+\begin{minipage}[c]{0.55\textwidth}
+\[
+\underset{\text{2D}}{\hat A=\begin{pmatrix}-1&0\\0&1\end{pmatrix}},
+\quad\Rightarrow\quad
+\begin{array}{l}E^s=x\text{-axis}\\E^u=y\text{-axis}\end{array}
+\quad\text{1D}
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.43\textwidth}
+% Snapshot: Lecture6.pdf, page 2, saddle subspaces.
+\includegraphics[width=\linewidth]{lecture6-subspaces.png}
+\end{minipage}
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Stable manifold theorem}
+
+\medskip
+\noindent
+Suppose $\bar 0$ is a hyperbolic fixed point of $\dot{\bar x}=\bar f(\bar x)$
+and $E^s$ and $E^u$ are the stable and unstable subspaces of the linearization
+of $\bar f$ near $\bar 0$. Then $\exists$ \underline{stable and unstable manifolds}
+$W^s_{\mathrm{loc}}$ \& $W^u_{\mathrm{loc}}$, which have the \underline{same dimension}
+as $E^s$, $E^u$ and are \underline{tangent} to $E^s$ \& $E^u$ at $\bar 0$,
+such that for $\bar x\neq0$ but in a sufficiently small neighborhood of $\bar 0$,
+\[
+W^s_{\mathrm{loc}}=\{\bar x:\phi_t(\bar x)\to\bar 0\text{ as }t\to+\infty\},
+\]
+\[
+W^u_{\mathrm{loc}}=\{\bar x:\phi_t(\bar x)\to\bar 0\text{ as }t\to-\infty\}.
+\]
+\noindent\underline{Proof}: not part of the course, see Glendinning.
+
+\newpage
+% Lecture 6, source PDF page 3 (handwritten page 24).
+\noindent
+The \underline{local} stable manifold $W^s_{\mathrm{loc}}$ can be extended to a
+\underline{global invariant manifold} $W^s$ by following the flow backwards in
+time starting at $\bar x\in W^s_{\mathrm{loc}}$. Same for $W^u_{\mathrm{loc}}$,
+extend to $W^u$ by $t\to+\infty$.
+
+\medskip
+\noindent
+In $\mathbb R^2$, this theorem guarantees the existence of two trajectories that
+approach and leave a saddle fixed point in a tangent fashion.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.55\textwidth}
+It is often easy in practice to find local approximations to stable and unstable manifolds.
+
+\medskip
+Indeed, for a saddle in $\mathbb R^2$ assume that $E^s$ is $x=0$ and $E^u$ is
+$y=0$ (can always change the basis).
+\end{minipage}\hfill
+\begin{minipage}[c]{0.43\textwidth}
+% Snapshot: Lecture6.pdf, page 3, local stable and unstable manifolds.
+\includegraphics[width=\linewidth]{lecture6-local-manifolds.png}
+\end{minipage}
+
+\medskip
+\noindent
+Then look for $W^s_{\mathrm{loc}}$ in the form $x=S(y)$ with $S(0)=0$ and
+$S'(0)=0$. For $W^u_{\mathrm{loc}}$ take $y=U(x)$ with $U(0)=0$, $U'(0)=0$.
+These manifolds must satisfy $\dot{\bar x}=\bar f(\bar x)$, i.e.\
+$\dot x=\frac{\partial S}{\partial y}\dot y$ and
+$\dot y=\frac{\partial U}{\partial x}\dot x$ must solve
+$\dot{\bar x}=\bar f(\bar x)$. Thus, for
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}f(x,y)\\g(x,y)\end{pmatrix},
+\]
+\[
+\dot x=\frac{dS}{dy}\dot y=
+\underbrace{\frac{dS}{dy}g(S(y),y)=f(S(y),y)}_{\text{(nonlinear) ODE for }S(y)}
+\quad\text{and}
+\]
+\[
+\dot y=\frac{dU}{dx}\dot x=
+\underbrace{\frac{dU}{dx}f(x,U(x))=g(x,U(x))}_{\text{ODE for }U(x)}.
+\]
+
+\newpage
+% Lecture 6, source PDF page 4 (handwritten page 25).
+\noindent
+No need to solve these ODEs, we can simply find a locally convergent series
+expansion in the form
+\[
+S(y)=a_2y^2+a_3y^3+\cdots,\qquad U(x)=b_2x^2+b_3x^3+\cdots
+\]
+\noindent and solve term by term.
+
+\medskip
+\noindent\fbox{Example}
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}x(1-y)\\-y+x^2\end{pmatrix},\qquad
+\hat A=\left.\begin{pmatrix}1-y&-x\\2x&-1\end{pmatrix}\right|_{(0,0)}
+=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+\[
+\det\hat A=-1\ \Rightarrow\ \underline{\text{saddle}},\qquad
+\Rightarrow\quad E^s=\{x=0\},\quad E^u=\{y=0\}.
+\]
+\noindent For $W^u_{\mathrm{loc}}$ take
+\[
+y=U(x)=a_2x^2+a_3x^3+a_4x^4+\cdots,
+\]
+\noindent substitute into
+\[
+\dot y=-y+x^2=\frac{dU}{dx}x(1-y),\quad\Rightarrow
+\]
+\[
+-U(x)+x^2=\frac{dU}{dx}x(1-U(x)),\quad\Rightarrow
+\]
+\[
+\begin{aligned}
+x^2-a_2x^2-a_3x^3-a_4x^4+\cdots
+&=(2a_2x+3a_3x^2+4a_4x^3+\cdots)\,x\\
+&\qquad\times(1-a_2x^2-a_3x^3-a_4x^4+\cdots),\quad\Rightarrow
+\end{aligned}
+\]
+\[
+\begin{array}{rclcl}
+x^2:&1-a_2=2a_2&&\Rightarrow&a_2=\dfrac13\\[5pt]
+x^3:&-a_3=3a_3&&\Rightarrow&a_3=0\\[5pt]
+x^4:&-a_4=4a_4-2a_2^2&&\Rightarrow&a_4=\dfrac{2}{45}
+\end{array}
+\]
+\hfill due to $x\mapsto-x$ symmetry!\quad ($a_3=0$)
+\[
+\text{Thus,}\quad U(x)=\frac{x^2}{3}+\frac{2}{45}x^4+\cdots.
+\]
+
+\noindent
+\begin{minipage}[c]{0.57\textwidth}
+To find $W^s_{\mathrm{loc}}$, $x=S(y)=a_2y^2+a_3y^3+\cdots$,
+\[
+S(y)(1-y)=\frac{dS}{dy}[-y+S^2(y)],
+\]
+repeat calculation, find $a_n=0\ \forall n$.
+This is caused by symmetry! If $X=-x$ then system the same so
+$W^s_{\mathrm{loc}}$ has to be symmetric w.r.t.\ $y$-axis \& tangent to it,
+\[
+\Rightarrow\quad W^s_{\mathrm{loc}}=y\text{-axis}.
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\textwidth}
+% Snapshot: Lecture6.pdf, page 4, example phase portrait.
+\includegraphics[width=\linewidth]{lecture6-example.png}
+\end{minipage}
+
+\begin{center}
+\textbf{End of Lecture 6}
+\end{center}
+
 \end{document}
+
