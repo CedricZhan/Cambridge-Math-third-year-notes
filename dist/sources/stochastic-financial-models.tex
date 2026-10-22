@@ -974,4 +974,196 @@ Restrict to $d=1$, so there is one risky asset and $S_n\in\mathbb{R}$.
 \begin{center}
 \textbf{End of Lecture 4}
 \end{center}
+
+\subsubsection*{Examples of contingent claims (cont.)}
+
+\[
+(\bar S_n)_{0\leq n\leq T},\qquad d=1.
+\]
+\noindent Barrier options ($B$):
+\begin{enumerate}
+    \item[(c)]
+    \[
+    C=\begin{cases}
+    (S_T-K)^+ & \text{if }\displaystyle\max_{0\leq n\leq T}S_n<B,\\
+    0 & \text{otherwise}.
+    \end{cases}
+    \]
+    Up-and-out call knocked out at $B$.
+
+    \item[(d)]
+    \[
+    C=\begin{cases}
+    (S_T-K)^- & \text{if }\displaystyle\min_{0\leq n\leq T}S_n\leq B,\\
+    0 & \text{otherwise}.
+    \end{cases}
+    \]
+    Down-and-in put knocked in at $B$.
+\end{enumerate}
+
+\subsection*{2.3 Equivalent probability measures}
+
+\[
+(\Omega,\mathcal F,\mathbb P).
+\]
+Say that a prob.\ meas.\ $\widetilde{\mathbb P}$ on $(\Omega,\mathcal F)$
+has \emph{density} $\rho$ w.r.\ to $\mathbb P$ if $\rho$ is a random variable,
+$\rho\geq0$ and
+\[
+\widetilde{\mathbb P}(A)=\mathbb E(\rho\mathbf1_A),
+\qquad A\in\mathcal F.
+\]
+By standard arguments in this case
+\[
+\widetilde{\mathbb E}(X)=\mathbb E(\rho X),
+\qquad\text{any }X\geq0\text{ r.v.}
+\]
+
+In the case where $\rho$ takes values in $(0,\infty)$ then $\mathbb P$
+has density $1/\rho$ w.r.\ to $\widetilde{\mathbb P}$,
+\[
+\mathbb P(A)=\mathbb E\left(\rho\,\frac{\mathbf1_A}{\rho}\right)
+=\widetilde{\mathbb E}\left(\frac1\rho\mathbf1_A\right).
+\]
+We write
+\[
+\rho=\frac{d\widetilde{\mathbb P}}{d\mathbb P}\quad\text{a.s.},
+\qquad
+\frac1\rho=\frac{d\mathbb P}{d\widetilde{\mathbb P}}\quad\text{a.s.}
+\]
+Suppose $\rho,\rho'$ are both densities for $\widetilde{\mathbb P}$
+w.r.\ to $\mathbb P$, then $\rho=\rho'$ a.s.
+
+Say that $\mathbb P,\widetilde{\mathbb P}$ are \emph{equivalent} if
+$d\widetilde{\mathbb P}/d\mathbb P$ is a r.v.\ $\rho$ with values in $(0,\infty)$.
+
+\subsection*{2.4 Arbitrage}
+
+An arbitrage is an opportunity to make risk-free profits in the market.
+Basic modelling assumption is that no such opportunity exists.
+\[
+\begin{aligned}
+(\bar S_n)_{0\leq n\leq T},\qquad
+\bar S_n&=(S_n^0,S_n),& S_n&=(S_n^1,\ldots,S_n^d)
+&&\text{asset price model},\\
+(\bar\Theta_n)_{1\leq n\leq T},\qquad
+\bar\Theta_n&=(\Theta_n^0,\Theta_n),&
+\Theta_n&=(\Theta_n^1,\ldots,\Theta_n^d)
+&&\text{portfolio}.
+\end{aligned}
+\]
+Value
+\[
+V_0=\bar\Theta_1\cdot\bar X_0,\qquad
+V_n=\bar\Theta_n\cdot\bar X_n,\quad n\geq1,
+\qquad X_n^i=S_n^i/S_n^0.
+\]
+\[
+V_n=V_0+\sum_{k=1}^n\Theta_k\cdot(X_k-X_{k-1}).
+\]
+In this set-up an \emph{arbitrage} for $(\bar S_n)_{0\leq n\leq T}$
+is a previsible self-financing portfolio with initial value $0$ such that
+\[
+V_T\geq0\quad\text{a.s.},\qquad
+V_T>0\quad\text{with positive probability}.
+\]
+
+Since $V_T$ depends on $(\bar S_n)_{0\leq n\leq T}$ and
+$(\bar\Theta_n)_{1\leq n\leq T}$ only through
+\[
+V_0\text{ and }(X_n)_{0\leq n\leq T}\text{ and }(\Theta_n)_{1\leq n\leq T},
+\]
+we will often say $(\Theta_n)_{1\leq n\leq T}$ is an arbitrage for
+$(X_n)_{0\leq n\leq T}$.
+
+Consider the case $(X_n)_{0\leq n\leq T}$ is a martingale in $\mathbb R^d$
+(all components are mgs) and let $(\Theta_n)_{1\leq n\leq T}$ be a bounded
+previsible process in $\mathbb R^d$, considered as a portfolio.
+Then
+\[
+V_n=\sum_{k=1}^n\Theta_k\cdot(X_k-X_{k-1})
+\qquad\text{is the martingale transform}
+\]
+\[
+\left(=\sum_{i=1}^d\sum_{k=1}^n\Theta_k^i(X_k^i-X_{k-1}^i)\right).
+\]
+Suppose $\Theta$ chosen so that $V_T\geq0$ a.s.
+We have $\mathbb E(V_T)=0$ so $V_T=0$ a.s.
+
+So we see that $(X_n)_{0\leq n\leq T}$ has no bounded arbitrage.
+
+\medskip
+\noindent\textbf{Proposition.}
+Let $(X_n)_{0\leq n\leq T}$ be a martingale in $\mathbb R^d$.
+Then $(X_n)_{0\leq n\leq T}$ has no arbitrage.
+
+\medskip
+\noindent\textbf{Proof.}
+Let $(\Theta_n)_{1\leq n\leq T}$ be any previsible process. Let
+\[
+V_n=\sum_{k=1}^n\Theta_k\cdot(X_k-X_{k-1}).
+\]
+Suppose $V_T\geq0$ (WTS $V_T=0$ a.s.).
+Note that
+\[
+\mathbb E(V_T\mid\mathcal F_T)=V_T\quad\text{a.s.}
+\]
+Suppose in a backwards induction for $n\leq T$ that
+\[
+\mathbb E(V_T\mid\mathcal F_n)=V_n\quad\text{a.s.}
+\]
+Note that then $V_n\geq0$ a.s.
+Now
+\[
+V_n=V_{n-1}+\Theta_n\cdot(X_n-X_{n-1}).
+\]
+Fix $R<\infty$, set
+\[
+A=\{|V_{n-1}|\leq R\text{ and }|\Theta_n|\leq R\}.
+\]
+Then $A$ is $\mathcal F_{n-1}$-meas.\ and
+\[
+\mathbf1_AV_n=\mathbf1_AV_{n-1}
++(\Theta_n\mathbf1_A)\cdot(X_n-X_{n-1}).
+\]
+Now take $\mathbb E(\,\cdot\mid\mathcal F_{n-1})$, taking out what is known,
+\[
+\mathbf1_A\mathbb E(V_n\mid\mathcal F_{n-1})
+=\mathbf1_AV_{n-1}+(\Theta_n\mathbf1_A)\,
+\underbrace{\mathbb E(X_n-X_{n-1}\mid\mathcal F_{n-1})}_{0}.
+\]
+But $R$ was arbitrary and $|\Theta_n|$, $|V_{n-1}|$ are finite-valued,
+so we must have
+\[
+\mathbb E(V_n\mid\mathcal F_{n-1})=V_{n-1}\quad\text{a.s.}
+\]
+so, by tower,
+\[
+\mathbb E(V_T\mid\mathcal F_{n-1})=V_{n-1}\quad\text{a.s.}
+\]
+Hence $\mathbb E(V_T)=V_0=0$ so $V_T=0$ a.s., so
+$(\Theta_n)_{1\leq n\leq T}$ is not an arbitrage.
+\hfill$\square$
+
+\subsection*{2.5 Fundamental Theorem of Asset Pricing}
+
+\noindent\textbf{Theorem.}
+For any asset price model $(\bar S_n)_{0\leq n\leq T}$ the following are equivalent:
+\begin{enumerate}
+    \item[(a)] $(\bar S_n)_{0\leq n\leq T}$ has no arbitrage.
+    \item[(b)] There exists an equivalent probability measure $\widetilde{\mathbb P}$
+    under which the discounted price process $(X_n)_{0\leq n\leq T}$
+    is a martingale.
+\end{enumerate}
+\[
+\widetilde{\mathbb P}\text{ is called an }
+\left\{\begin{array}{l}
+\text{equivalent martingale}\\
+\text{risk-neutral}
+\end{array}\right\}\text{ measure}.
+\]
+
+\begin{center}
+\textbf{End of Lecture 5}
+\end{center}
 \end{document}

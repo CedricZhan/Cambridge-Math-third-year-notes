@@ -1108,4 +1108,214 @@ In both cases, $F_2$ is small beyond all orders in inverse powers of $x$.
 \begin{center}
     \textbf{End of Lecture 4.}
 \end{center}
+\subsection*{3.3 Gamma function (again)}
+
+$\Gamma$ can be analytically continued to $\mathbb{C}$, except at
+$z=0,-1,-2,\ldots$, using
+\[
+    \Gamma(z)=\frac{\Gamma(z+1)}{z}.
+\]
+
+\noindent\textbf{Proof of Watson's lemma (continued).}
+Recall that
+\[
+    F(x)=\int_0^\epsilon f(t)e^{-xt}\,dt
+        +\int_\epsilon^T f(t)e^{-xt}\,dt
+        =F_1(x)+F_2(x),
+\]
+with $F_2(x)=O(e^{-\epsilon x})$ as $x\to\infty$.
+We want to show, for every $N$, that
+\[
+    F_1(x)=\sum_{n=0}^N
+    a_n\frac{\Gamma(\alpha+\beta n+1)}{x^{\alpha+\beta n+1}}
+    +o\!\left(x^{-\alpha-\beta N-1}\right).
+\]
+Using property (d) of the Gamma function, consider
+\begin{align*}
+    &\left|F_1(x)-\sum_{n=0}^N
+    a_n\frac{\Gamma(\alpha+\beta n+1)}{x^{\alpha+\beta n+1}}\right|\\
+    &\quad=\left|\int_0^\epsilon f(t)e^{-xt}\,dt
+    -\int_0^\infty\sum_{n=0}^N a_n t^{\alpha+\beta n}e^{-xt}\,dt\right|\\
+    &\quad\leq\int_0^\epsilon e^{-xt}
+    \left|f(t)-\sum_{n=0}^N a_n t^{\alpha+\beta n}\right|\,dt
+    +\left|\int_\epsilon^\infty e^{-xt}
+    \sum_{n=0}^N a_n t^{\alpha+\beta n}\,dt\right|\\
+    &\quad\equiv R_1+R_2.
+\end{align*}
+For $R_2$, put $u=t-\epsilon$. Then
+\begin{align*}
+    R_2
+    &\leq e^{-\epsilon x}\sum_{n=0}^N |a_n|
+    \int_\epsilon^\infty e^{-x(t-\epsilon)}t^{\alpha+\beta n}\,dt\\
+    &=e^{-\epsilon x}\sum_{n=0}^N |a_n|
+    \int_0^\infty e^{-xu}(\epsilon+u)^{\alpha+\beta n}\,du.
+\end{align*}
+For each $n$, there exist $C_n,k_n>0$ such that
+\[
+    (\epsilon+u)^{\alpha+\beta n}<C_n e^{k_nu}
+    \qquad\text{for all }u\in[0,\infty).
+\]
+Hence, for $x>\max_{0\leq n\leq N}k_n$,
+\begin{align*}
+    R_2
+    &\leq e^{-\epsilon x}\sum_{n=0}^N C_n|a_n|
+    \int_0^\infty e^{(k_n-x)u}\,du\\
+    &=e^{-\epsilon x}\sum_{n=0}^N\frac{C_n|a_n|}{x-k_n}
+    =O\!\left(\frac{e^{-\epsilon x}}{x}\right)
+    \qquad\text{as }x\to\infty.
+\end{align*}
+
+In $R_1$, use the asymptotic expansion of $f$. In particular,
+\[
+    f(t)-\sum_{n=0}^N a_n t^{\alpha+\beta n}
+    =o(t^{\alpha+\beta N})
+    =O(t^{\alpha+\beta(N+1)})
+    \qquad\text{as }t\to0^+,
+\]
+where the last bound follows by taking one more term in the expansion.
+By the definition of $O$, for sufficiently small $\epsilon$ there is
+$K_3>0$ such that
+\begin{align*}
+    R_1
+    &\leq K_3\int_0^\epsilon e^{-xt}t^{\alpha+\beta(N+1)}\,dt\\
+    &\leq K_3\int_0^\infty e^{-xt}t^{\alpha+\beta(N+1)}\,dt\\
+    &=K_3\frac{\Gamma(\alpha+\beta(N+1)+1)}
+    {x^{\alpha+\beta(N+1)+1}}.
+\end{align*}
+Since $\beta>0$,
+\[
+    R_1=o\!\left(x^{-\alpha-\beta N-1}\right)
+    \qquad\text{as }x\to\infty.
+\]
+This is true for every $N$, so
+\[
+    F_1(x)\sim\sum_{n=0}^\infty
+    a_n\frac{\Gamma(\alpha+\beta n+1)}{x^{\alpha+\beta n+1}}.
+\]
+Since $F_2$ is smaller than every inverse power of $x$, the same expansion
+holds for $F=F_1+F_2$:
+\[
+    F(x)\sim\sum_{n=0}^\infty
+    a_n\frac{\Gamma(\alpha+\beta n+1)}{x^{\alpha+\beta n+1}}
+    \qquad\text{as }x\to\infty.
+\]
+
+\subsection*{3.5 Laplace integrals and Laplace's method}
+
+Laplace integrals are of the form
+\[
+    I(x)=\int_a^b f(t)e^{x\phi(t)}\,dt,
+\]
+where $b>a$, and $f$ and $\phi$ are sufficiently nice functions.
+What happens to $I$ as $x\to\infty$?
+Watson's lemma deals with the special case $\phi(t)=-t$, $a=0$, $b=T$.
+
+In general, we have Laplace's \emph{principle of localisation}:
+the asymptotic expansion of $I$ as $x\to\infty$ is determined by
+contributions from arbitrarily small regions around the maxima of $\phi$.
+Figure~\ref{fig:am-lecture5-localisation} illustrates this principle.
+\begin{figure}[htbp]
+    \centering
+    \pdfximage width 0.88\linewidth {figures/asymptotic-lecture5-localisation.jpg}
+    \pdfrefximage\pdflastximage
+    \caption{The three blackboard sketches of localisation. Left: Watson's
+    case, where the integral is dominated by an endpoint. Upper right:
+    a phase $\phi$ with an interior maximum at $t=c$. Lower right:
+    the integrand becomes concentrated in a tiny region around $c$.
+    Source: lecture blackboard photograph.}
+    \label{fig:am-lecture5-localisation}
+\end{figure}
+
+\noindent\textbf{(a) Suppose $\phi$ is monotonic on $[a,b]$.}
+If $\phi'(t)>0$ and $f(b)\neq0$, let
+\[
+    u=\phi(t),\qquad t=\phi^{-1}(u).
+\]
+Then
+\[
+    I(x)=\int_{\phi(a)}^{\phi(b)}
+    \frac{f(t)}{\phi'(t)}e^{xu}\,du,
+    \qquad t=\phi^{-1}(u).
+\]
+Comparing with Example 2 from Section 3.2 gives
+\[
+    I(x)\sim\frac{f(b)e^{x\phi(b)}}{x\phi'(b)}
+    \qquad\text{as }x\to\infty.
+\]
+If $\phi'(t)<0$ and $f(a)\neq0$, then similarly
+\[
+    I(x)\sim\frac{f(a)e^{x\phi(a)}}{x|\phi'(a)|}
+    \qquad\text{as }x\to\infty.
+\]
+
+\noindent\textbf{(b) Suppose $\phi(t)$ has one interior maximum at $t=c$.}
+Assume
+\[
+    \phi'(c)=0,\qquad \phi''(c)<0,\qquad f(c)\neq0.
+\]
+For small, positive $\epsilon$, write
+\[
+    \Omega_\epsilon=[a,c-\epsilon]\cup[c+\epsilon,b]
+\]
+and
+\begin{align*}
+    I(x)&=\int_{c-\epsilon}^{c+\epsilon}f(t)e^{x\phi(t)}\,dt
+    +\int_{\Omega_\epsilon}f(t)e^{x\phi(t)}\,dt\\
+    &\equiv I_1(x)+I_2(x).
+\end{align*}
+The small region around $c$ is the region responsible for the concentration
+shown in Figure~\ref{fig:am-lecture5-localisation}.
+
+First, bound $I_2$. In the monotonic regions on either side of $c$,
+\begin{align*}
+    I_2(x)&=\int_{c+\epsilon}^b f(t)e^{x\phi(t)}\,dt
+    +\int_a^{c-\epsilon}f(t)e^{x\phi(t)}\,dt\\
+    &=O\!\left(\frac{e^{x\phi(c+\epsilon)}}{x}\right)
+    +O\!\left(\frac{e^{x\phi(c-\epsilon)}}{x}\right).
+\end{align*}
+Here $\phi$ is monotonically decreasing on the right and monotonically
+increasing on the left. But
+\[
+    \phi(c+\epsilon)<\phi(c),\qquad
+    \phi(c-\epsilon)<\phi(c),
+\]
+so
+\[
+    I_2(x)=o\!\left(\frac{e^{x\phi(c)}}{x}\right)
+    \qquad\text{as }x\to\infty.
+\]
+
+Now consider $I_1$. Expand $f$ and $\phi$ around $t=c$, assuming they are
+sufficiently differentiable:
+\begin{align*}
+    \phi(t)&=\phi(c)+\underbrace{\phi'(c)(t-c)}_{=0}
+    +\tfrac12\phi''(c)(t-c)^2+O((t-c)^3),\\
+    f(t)&=f(c)+O(t-c)
+    \qquad\text{as }t\to c.
+\end{align*}
+Thus
+\begin{align*}
+    I_1(x)
+    &=\int_{c-\epsilon}^{c+\epsilon}
+    [f(c)+\text{H.O.T.}]\,
+    \exp\!\left[x\phi(c)+\tfrac12x\phi''(c)(t-c)^2
+    +\text{H.O.T.}\right]dt\\
+    &=f(c)e^{x\phi(c)}\int_{c-\epsilon}^{c+\epsilon}
+    e^{x\phi''(c)(t-c)^2/2}\,[1+\text{H.O.T.}]\,dt.
+\end{align*}
+The idea is that the higher-order terms (H.O.T.) in powers of $(t-c)$
+generate higher-order terms in an asymptotic series in inverse powers
+of $x$ (see Chapling, Section 3.3.1, and B\&O, Section 6.4).
+For now, we generate the leading-order term:
+\[
+    I_1(x)\sim f(c)e^{x\phi(c)}
+    \int_{c-\epsilon}^{c+\epsilon}e^{x\phi''(c)(t-c)^2/2}\,dt
+    \qquad\text{as }x\to\infty.
+\]
+
+\begin{center}
+    \textbf{End of lecture five}
+\end{center}
+
 \end{document}
+

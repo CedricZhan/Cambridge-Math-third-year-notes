@@ -1,0 +1,2165 @@
+Asymptotic Methods
+Part II
+Recorded from the lecturer in 2026-2027.
+
+Pre-requisites
+
+ Complex methods / analysis.
+ Refer to Section II in Stuart.
+
+1. Intro & Motivation
+ Most real problems don't have closed form solutions, or if they do, they are unworkable or
+dicult to interpret.
+
+ Numerical approximations can be useful, but they can be expensive, they may have bad
+numerical properties, or solutions may be inscrutable.
+
+ Taylor series, etc. can be limited in applicability.
+ Asymptotic methods emphasise usefulness, interpretability as well as accuracy.
+Examples
+e.g. 1)
+
+Z ∞
+Γ(z) =
+
+tz−1 e−t dt,
+
+Re(z) > 0.
+
+0
+For n an integer,
+
+Γ(n + 1) = n! ∼
+
+√
+
+n+ 21 −n
+
+2π n
+
+e
+
+
+
+1
+1
+1+
++
++ ···
+12n 288n2
+
+e.g. 2)
+
+x2 y ′′ + xy ′ − x2 y = 0.
+Exact series solution:
+
+I0 (x) =
+
+∞
+X
+n=0
+
+x2n
+.
+22n (n!)2
+
+LiouvilleGreen:
+
+=⇒ I0 (x) ∼ (2πx)−1/2 ex
+
+as x → ∞.
+
+e.g. 3)
+2
+
+y ′′ + k 2 e−x /2 y = 0,
+with
+
+y → y0
+
+as x → ∞,
+
+y → ±y0
+
+as x → −∞.
+
+as n → ∞.
+
+k =?,
+
+k = k0 , k1 , k2 , . . .
+
+
+√ 
+π
+1
+=⇒ kn ∼
+n+
+2
+2
+
+as n → ∞.
+
+WKBJ.
+
+ Convergent methods typically give arbitrarily accurate approximations with more & more
+terms/iterations.
+
+ Asymptotic methods give arbitrarily accurate approximations as some variable approaches
+a limit. Thus they always come with a qualier, e.g. z → 0 or n → ∞.
+
+2. Asymptotic Expansions
+
+2.1 Denitions & Notation
+
+(a) Asymptotic Equality/Equivalence
+For 2 functions f (x) and g(x), we have
+
+f (x) ∼ g(x)
+
+about x = x0
+
+if
+
+lim
+
+f (x)
+
+x→x0 g(x)
+
+= 1.
+
+Remarks:
+
+ Usually we want to approximate f with g .
+ We can write
+
+f (x) = g(x) + [f (x) − g(x)] .
+|{z}
+|
+{z
+}
+dominant
+
+subdominant
+
+ Note ∼ is an equivalence relation (that is reexive, transitive, symmetric).
+ It respects products:
+
+f1 ∼ g1 ,
+
+f 2 ∼ g2
+
+=⇒ f1 f2 ∼ g1 g2 .
+ It is linear:
+
+αf1 + βf2 ∼ αg1 + βg2 ,
+where α, β are constants.
+
+ Denition has problems when dealing with oscillatory functions that go through 0 as
+x → x0 .
+
+2
+
+(b) Little o
+Suppose f & g are real functions.
+We write
+as x → x0
+
+f (x) = o(g(x))
+if
+
+f (x)
+= 0.
+x→x0 g(x)
+lim
+
+Remark:
+
+f (x) = o(g(x))
+can also be written as
+
+f (x) ≪ g(x)
+
+as x → x0 .
+
+ Can be framed in inequalities, e.g. x0 = ∞ and let g > 0.
+Then f = o(g) as x → ∞ is equivalent to
+
+∀ε > 0,
+
+∃a
+
+s.t. when x > a,
+
+|f | ≤ εg.
+(c) Big O 
+We write
+as x → x0
+
+f (x) = O(g(x))
+for g > 0, if
+
+∃C > 0
+
+s.t.
+
+|f (x)| ≤ Cg(x)
+for x suciently close to x0 .
+
+Warning:
+In some areas of physics people use big-O and ∼ interchangeably.
+
+Little Exercises: Show That
+(a)
+
+f (x) ∼ g(x) ⇐⇒ f − g = o(g)
+
+as x → x0 .
+
+(b)
+
+sin x ≪ x2
+
+as x → ∞.
+
+(c)
+
+12x5 + 6x3 + x = O(x5 )
+
+as x → ∞.
+
+(d)
+
+eax ≪ ebx
+
+as x → ∞,
+
+ex ≫ xN
+
+as x → ∞,
+
+if b > a > 0.
+
+(e)
+
+∀N ∈ Z+ .
+3
+
+2.2 Asymptotic Expansions
+ Have unworkable/unknown f (x).
+ Want to know its behaviour in a limit.
+ Want to nd a simpler/known g(x) so that
+
+f ∼ g.
+ Also want to break up g into a hierarchy of approximations, s.t.
+
+g(x) =
+
+N
+X
+
+ak ϕk (x),
+
+k=0
+where ak are coecients, ϕk are known & workable, and where adding more terms gives a
+better approximation that can be estimated.
+
+(a) Asymptotic Sequence
+A sequence of functions
+
+{ϕ0 (x), ϕ1 (x), . . .}
+is an asymptotic sequence as x → x0 if
+
+ϕk+1 (x) ≪ ϕk (x)
+
+as x → x0 ,
+
+∀k.
+
+e.g. 1)
+
+Check:
+
+ϕk = (x − a)k
+
+around x = a.
+
+ϕk+1
+=x−a→0
+ϕk
+
+as x → a.
+
+✓
+
+e.g. 2)
+
+ϕk = e−kx xk
+Check:
+
+as x → ∞ or x → −∞.
+
+ϕk+1
+= e−x x.
+ϕk
+e−x x → 0
+e
+
+−x
+
+x→∞
+
+as x → ∞
+
+✓
+
+as x → −∞
+
+×
+
+e.g. 3)
+as x → ∞.
+
+ϕk = cos(nx)
+×
+e.g. 4)
+
+{|x|, log |x|, log | log |x||, . . .}
+?
+
+4
+
+as x → ∞.
+
+(b) Asymptotic Expansion
+
+ Suppose f (x) is a function we want to understand near x = x0 .
+ Let {ϕk }∞
+k=0 be an asymptotic sequence.
+Then, the nite sum
+
+N
+X
+
+ak ϕk (x)
+
+k=0
+for some coecients, is an (N -term) asymptotic approximation of f (x) as x → x0 if:
+
+f (x) =
+
+N
+X
+
+ak ϕk (x) + o(ϕN (x))
+
+as x → x0 .
+
+k=0
+Alternatively, we can write the above as
+
+f (x) −
+
+N
+X
+
+ak ϕk (x)
+
+k=0
+
+−→ 0
+
+ϕN (x)
+
+as x → x0 .
+
+End of Lecture 1
+
+(c) Asymptotic expansions/series
+If (b) holds for all N , then this is called an asymptotic series or expansion, and we write
+
+f (x) ∼
+
+∞
+X
+
+as x → x0 .
+
+ak ϕk (x)
+
+k=0
+
+Attention: No claim of convergence is made. It is just notation. We never x x and then take
+
+N → ∞.
+Instead, we have an innite number of approximations (of dierent N ), and x → x0 is taken
+in each separately!
+
+(d) Properties of asymptotic expansions and remarks
+(I) Mathematical operations
+Suppose {ϕk (x)} is an asymptotic sequence as x → x0 , and let
+
+f∼
+
+∞
+X
+
+g∼
+
+ak ϕk ,
+
+k=0
+
+Linearity
+
+αf + βg ∼
+
+∞
+X
+
+∞
+X
+
+bk ϕk .
+
+k=0
+
+as x → x0 .
+
+(αak + βbk )ϕk
+
+k=0
+
+Multiplication
+k
+
+If ϕk = (x − x0 ) , then
+
+fg ∼
+
+∞
+X
+
+ck ϕk ,
+
+ck =
+
+k
+X
+j=0
+
+k=0
+5
+
+aj bk−j .
+
+Division
+See 3.8 BO.
+
+Integration
+Term-by-term integration is usually okay.
+
+k
+
+For example, if ϕk = (x − x0 ) , then
+
+Z x
+f (t) dt ∼
+x0
+
+∞
+X
+ak (x − x0 )k+1
+
+k+1
+
+k=0
+
+as x → x0 .
+
+Exercise: Use the denitions to prove this.
+Dierentiation
+Term-by-term dierentiation is not always okay.
+
+′
+
+To do this, you need f (x) to be continuous and to have an asymptotic series, i.e.
+
+′
+
+f (x) ∼
+
+∞
+X
+
+ck ϕk (x).
+
+k=0
+
+(II) Dierent asymptotic representations
+Suppose {ϕk } and {ψk } are dierent asymptotic sequences as x → x0 . Also,
+
+f∼
+
+∞
+X
+
+∞
+X
+
+f∼
+
+ak ϕk ,
+
+k=0
+
+bk ψk
+
+as x → x0 .
+
+k=0
+
+Then ak and bk are not the same.
+For example,
+
+f (x) = 1 +
+Consider ϕk = x
+
+1
+.
+x
+
+−k as x → ∞. Then
+
+f (x) ∼
+
+∞
+X
+
+ak ϕk ,
+
+a0 = 1,
+
+a1 = 1,
+
+an = 0 (n > 1).
+
+k=0
+Now consider
+
+ψk = (1 + x)−k .
+Then
+
+1
+1
+=
+x
+1 − (x + 1)−1
+1
+1
+=1+
++
++ ···
+1 + x (1 + x)2
+∞
+X
+∼
+bk ψk ,
+
+f =1+
+
+k=0
+where
+
+∀k.
+
+bk = 1
+
+6
+
+(III) Uniqueness of coecients
+Let {ϕk } be an asymptotic sequence, and
+
+f (x) ∼
+
+∞
+X
+
+as x → x0 .
+
+ak ϕk
+
+k=0
+Then the coecients ak are unique.
+In fact, the ak can be constructed:
+
+f (x)
+,
+x→x0 ϕ0 (x)
+
+a0 = lim
+
+
+
+
+n−1
+X
+
+ f (x) −
+ak ϕk (x) 
+
+
+
+
+k=0
+an = lim 
+.
+x→x0 
+
+ϕn (x)
+
+
+Proof. First, we know
+
+f (x) −
+
+ak ϕk
+
+k=0
+
+lim
+
+∀N.
+
+=0
+
+ϕN
+
+x→x0
+Let N = 0. Then
+
+N
+X
+
+f (x) − a0 ϕ0
+= 0,
+x→x0
+ϕ0
+
+
+f (x)
+lim
+− a0 = 0.
+x→x0
+ϕ0
+lim
+
+Use induction on N .
+Suppose the formulae are true for N = n, and the coecients are unique for k ≤ n. Then
+
+f (x) −
+lim
+
+x→x0
+
+n
+X
+
+ak ϕk
+
+k=0
+
+ϕn
+
+=0
+
+
+n−1
+X
+
+
+
+ f (x) −
+ak ϕk 
+
+
+
+
+k=0
+= lim 
+ − an .
+x→x0 
+
+ϕn
+
+
+Alternative proof: see p. 3 in Manton.
+
+(IV) An asymptotic series does not uniquely determine the function it is describing
+For example, suppose
+
+f (x) ∼ g(x)
+
+as x → x0 ,
+
+h(x) ≪ f (x)
+
+as x → x0 .
+
+and
+
+Then
+
+f (x) + h(x) ∼ g(x)
+7
+
+as x → x0 .
+
+So, if g is an asymptotic expansion, it can describe both f and f + h.
+For example,
+
+f1 =
+Both are
+
+∼
+
+∞
+X
+
+1
+,
+1+x
+
+f2 =
+
+(−1)k x−(k+1)
+
+1 + e−x
+.
+1+x
+as x → ∞.
+
+k=0
+
+(V) Power series
+In this course, we mostly take
+
+ϕk = (x − x0 )k
+
+as x → x0 ,
+
+or
+
+ϕk = x−k
+
+as x → ∞.
+
+In fact, a Taylor series about a point is an asymptotic series about that point:
+
+f (x) −
+
+N
+X
+f (k) (a)(x − a)k
+
+k!
+
+k=0
+
+
+= o |x − a|N .
+
+Exercise: Prove this using the denitions and the integral form of the remainder term.
+Terminology: A term is said to be small beyond all orders in some limit if it cannot be
+represented by any power series or, equivalently, is smaller than any power.
+For example, e
+
+−x is small beyond all orders in inverse powers of x as x → ∞:
+
+e−x ≪ x−k
+
+∀k,
+
+as x → ∞.
+
+(VI) Optimal truncation
+Question: If an asymptotic series diverges, how many terms should I include in the sum?
+If
+
+f (x) ∼
+
+∞
+X
+
+an ψn (x)
+
+as x → x0 ,
+
+n=0
+and we want to get the best approximation to f (x) at x = x1 , where x1 is close to x0 , then
+truncate the sum at the smallest term (or the one before).
+So stop adding terms when
+
+|ak ψk (x1 )| < |ak+1 ψk+1 (x1 )|.
+This gives you an unexpectedly excellent approximation.
+
+End of Lecture 2
+
+2.3 A. expansions in C  Stokes phenomenon
+ So far our defns relied on real limits, x, x0 ∈ R etc.
+ When we use complex variables, x = z ∈ C and z → z0 , typically z must be restricted to
+a sector of C around z0 for some of our denitions to work.
+[See III.2 in Stuart]
+e.g. little o & O defns need to bring in moduli of functions.
+
+8
+
+ Even if f (z) analytic at z0 , it may have dierent a. series as z0 is approached from dierent
+sectors in C. This is Stokes phenomenon.
+
+e.g.
+
+f (z) = sinh(z 2 ) =
+
+
+1  z2
+2
+e − e−z ,
+2
+
+z ∈ C.
+
+What is its behaviour as |z| → ∞?
+Which of e
+
+z 2 or e−z 2 is dominant?
+2
+
+e−z
+ez 2
+(a) Suppose |z| → ∞ & Re(z
+
+ratio → 0
+
+= e−2z
+
+2
+
+2
+
+= e−2 Re(z ) .
+
+2 ) > 0.
+
+⇒
+
+2
+
+e−z ≪ ez
+
+2
+
+⇒
+
+1 2
+f (z) ∼ ez
+2
+
+in this limit.
+
+π
+π
++ δ < arg z < − δ,
+4
+4
+3π
+5π
+and
++ δ < arg z <
+− δ,
+4
+4
+−
+
+Re(z 2 ) > 0
+
+⇒
+
+Ω:
+
+for small δ .
+
+(b) |z| → ∞ & Re(z
+
+2 ) < 0.
+ratio → ∞
+
+⇒
+
+2
+
+ez ≪ e−z
+9
+
+2
+
+1
+2
+& f ∼ − e−z .
+2
+
+e:
+Ω
+
+π
+3π
+3π
+π
++ δ < arg z <
+−δ & −
++ δ < arg z < − − δ.
+4
+4
+4
+4
+( 2
+1 z
+e ,
+|z| → ∞ & z ∈ Ω,
+f (z) ∼ 2 1 −z 2
+e
+− 2 e , |z| → ∞ & z ∈ Ω.
+
+ A. behaviour of f as |z| → ∞ depends on which wedge z → ∞ within.
+ C is divided into sectors, separated by special lines, called Stokes lines.
+[Warning, sometimes called anti-Stokes lines!!]
+
+3. Approximations of Integrals
+
+3.1 Taylor expanding the integrand  Stieltjes integrals
+(Warm up problem)
+Consider:
+
+Z ∞
+I(x) =
+0
+
+e−t
+dt,
+1 + xt
+
+x ≥ 0.
+
+ We want to understand I 's behaviour when x → 0+ .
+ How about we expand
+
+1
+?
+1 + xt
+∞
+
+X
+1
+=
+(−1)n xn tn
+1 + xt
+
+×
+
+t can be big!
+
+n=0
+
+Consider instead
+
+N
+X
+
+(−xt)n =
+
+n=0
+
+1 − (−xt)N +1
+1
+(−xt)N +1
+=
+−
+.
+1 + xt
+1 + xt
+1 + xt
+| {z }
+rN
+
+N
+
+X
+1
+=
+(−xt)n + rN .
+1 + xt
+
+⇒
+
+n=0
+
+Z ∞
+I(x) =
+
+e
+0
+
+=
+
+N
+X
+
+=
+
+"N
+X
+
+#
+n n n
+
+(−1) x t + rN dt
+
+n=0
+n n
+
+Z ∞
+
+(−1) x
+
+n=0
+N
+X
+
+−t
+
+0
+
+|
+
+tn e−t dt +RN
+{z
+}
+=n!
+
+(−1)n n! xn + RN
+
+n=0
+
+=
+
+X
+
+cn ϕn (x) + RN .
+
+ϕn = xn as x → 0+ , so is a. sequence!
+N
++
+Need to show RN = o(x ) as x → 0 .
+Z
+RN
+xN +1 ∞ tN +1 e−t
+= N
+dt
+xN
+x
+1 + xt
+Z ∞ 0
+≤x
+tN +1 e−t dt = x(N + 1)! −→ 0
+0
+10
+
++
+
+as x → 0
+
+.
+
+Note 1 + xt > 1. True ∀N .
+
+⇒
+
+I(x) ∼
+
+∞
+X
+
+(−1)n n! xn
+
++
+
+as x → 0
+
+.
+
+n=0
+
+3.2 Integration by parts
+Recap:
+
+Z b
+
+′
+
+f (t)g(t) dt = [f g]ba −
+
+Z b
+
+f g ′ dt.
+
+a
+
+a
+Generalisation:
+
+Z b
+I=
+
+f (t)g (n) (t) dt
+
+a
+
+Z b
+n
+h
+ib
+X
+f (n) (t)g(t) dt.
+=
+(−1)k−1 f (k−1) (t)g (n−k) (t) + (−1)n
+a
+
+k=1
+
+a
+
+ Repeated integration by parts can generate an a. approximation under certain circumstances.
+e.g. How does
+
+Z ∞
+F (x) =
+
+2
+
+e−t /2 dt
+
+x
+behave as x → ∞?
+2
+
+Z ∞
+
+te−t /2
+F (x) =
+dt
+t
+x
+
+
+Z ∞ −t2 /2
+e
+1 −t2 /2 ∞
++
+dt
+= − e
+t
+t2
+x
+x
+Z ∞ −t2 /2
+2
+e−x /2
+e
+=
++
+dt .
+x }
+t2
+| {z
+| x {z
+}
+a. approximation
+
+Need to check that
+
+2
+
+e−x /2
+error = o
+x
+Z ∞
+error =
+
+x
+
+≤
+
+1
+x3
+
+=o
+
+error
+
+!
+as x → ∞.
+
+2
+
+te−t /2
+dt
+t3
+
+(note t ≥ x)
+
+Z ∞
+
+1
+2
+2
+te−t /2 dt = 3 e−x /2
+x
+x
+!
+2
+
+e−x /2
+x
+
+as x → ∞.
+
+2
+
+⇒
+In fact we nd
+
+F (x) ∼
+2
+
+F (x) ∼
+
+e−x /2
+x
+
+as x → ∞.
+
+∞
+
+(2n − 1)!!
+e−x /2 X
+(−1)n
+x
+x2n
+
+as x → ∞.
+
+n=0
+
+(2n − 1)!! = (2n − 1)(2n − 3)(2n − 5) · · · 3 · 1.
+Exercise: Show this.
+
+11
+
+End of Lecture 3
+Example 2. Find the behaviour of
+
+Z b
+I(x) =
+
+f (t)ext dt
+
+as x → ∞,
+
+a
+where b > a, f (b) ̸= 0, and f is smooth on [a, b].
+As x → ∞, the integral is dominated by a narrow region near t = b because of the exponential. Very roughly,
+
+Z b
+I(x) ≈ f (b)
+
+ext dt =
+
+a
+using e
+
+f (b) xb
+f (b)exb
+(e − exa ) ∼
+,
+x
+x
+
+xb ≫ exa as x → ∞.
+
+xt =
+Repeated integration by parts, using e
+
+d
+dt
+
+ xt 
+e
+, gives
+x
+
+N
+X
+
+h
+ib (−1)N Z b
+f (N ) (t)ext dt
+(−1)k−1 f (k−1) (t)ext x−k +
+xN
+a
+a
+k=1
+
+xb
+= e J1 − J2 + J3 ,
+
+I(x) =
+
+where
+
+J1 =
+
+N
+X
+
+(−1)k−1 f (k−1) (b)x−k ,
+
+k=1
+
+J2 = e
+
+−x(b−a)
+
+N
+X
+
+(−1)k−1 f (k−1) (a)x−k ,
+
+k=1
+Z b
+N
+(−1)
+
+J3 =
+
+xN
+
+f (N ) (t)ex(t−b) dt.
+
+a
+
+J1 could be an N -term a. approximation with ϕk = x−k as x → ∞, but we need to show that
+J2 = o(x−N ),
+
+J3 = o(x−N )
+
+as x → ∞.
+
+For the rst term,
+
+N
+
+X
+J2
+−x(b−a)
+=
+e
+(−1)k−1 f (k−1) (a)xN −k −→ 0
+x−N
+
+as x → ∞,
+
+k=1
+
+which is true for every N . For the remainder,
+
+J3
+≤
+x−N
+
+Z b
+
+|f (N ) (t)|ex(t−b) dt
+
+a
+
+≤ max |f
+a≤t≤b
+
+(N )
+
+Z b
+(t)|
+
+= max |f (N ) (t)|
+a≤t≤b
+
+ex(t−b) dt
+
+a
+
+1 − e−x(b−a)
+−→ 0
+x
+
+as x → ∞.
+
+This holds for every N for which f has N continuous derivatives. If f is innitely dierentiable,
+then
+
+∞
+X
+f (k−1) (b)exb
+I(x) =
+f (t)e dt ∼
+(−1)k−1
+xk
+a
+
+Z b
+
+xt
+
+k=1
+
+12
+
+as x → ∞.
+
+3.3 The Gamma function
+Recall
+
+Z ∞
+
+tz−1 e−t dt,
+
+Γ(z) =
+
+Re(z) > 0.
+
+0
+(a)
+
+Γ is analytic for Re(z) > 0.
+
+(b)
+
+Γ(z + 1) = zΓ(z)
+
+(c)
+
+Γ(1) = 1 and Γ(n + 1) = n! for positive integers n.
+
+(recursion relation).
+
+(d) For x > 0 and Re(z) > 0,
+
+Z ∞
+
+tz−1 e−xt dt =
+
+0
+
+Γ(z)
+.
+xz
+
+(e) Generalisation of binomial coecients:
+
+ 
+z
+1 Γ(z + 1)
+=
+,
+k
+k! Γ(z − k + 1)
+
+z ∈ C,
+
+k = 0, 1, 2, 3, . . . ,
+
+with the quotient interpreted by continuation where necessary.
+
+∞  
+X
+z k
+(1 + t) =
+t ,
+k
+z
+
+|t| < 1.
+
+k=0
+
+(f ) Reection and duplication formulae: see Section 3.2 in Chapling.
+
+3.4 Watson's lemma
+Consider
+
+Z T
+F (x) =
+
+f (t)e−xt dt
+
+as x → ∞,
+
+0 < T ≤ ∞.
+
+0
+Suppose
+
+f (t) ∼ tα
+
+∞
+X
+
+an tβn
+
++
+
+as t → 0
+
+,
+
+α > −1,
+
+β > 0.
+
+n=0
+Also assume that either
+
+|f (t)| < Kebt for all t ∈ [0, T ], for some K, b > 0; or
+Z T
+(ii)
+|f (t)| dt < ∞.
+(i)
+
+0
+Then
+
+F (x) ∼
+
+∞
+X
+
+an
+
+n=0
+
+Γ(α + βn + 1)
+xα+βn+1
+
+as x → ∞.
+
+This is Watson's lemma.
+
+Example 2.
+
+xy ′′ + (a + 1 − x)y ′ − ay = 0,
+One solution is
+
+M (x) =
+
+ex
+Γ(a)
+
+Z 1
+
+a > 0.
+
+e−xt (1 − t)a−1 dt.
+
+0
+
+What is its behaviour as x → ∞?
+
+13
+
+Here f (t) = (1 − t)
+
+a−1 is integrable, so case (ii) applies, and
+
+f (t) = (1 − t)a−1 =
+
+∞
+X
+
+(−1)n
+
+n=0
+
+Γ(a)
+tn ,
+Γ(a − n)n!
+
+|t| < 1.
+
+Thus α = 0, β = 1, and Watson's lemma gives
+
+∞
+
+ex X (−1)n Γ(a)Γ(n + 1) 1
+M (x) ∼
+Γ(a)
+Γ(a − n)n!
+xn+1
+n=0
+
+= ex
+
+∞
+X
+n=0
+
+In particular,
+
+M (x) ∼
+
+(−1)n
+Γ(a − n)xn+1
+ex
+xΓ(a)
+
+as x → ∞.
+
+as x → ∞.
+
+Proof of Watson's lemma. Write
+
+Z ϵ
+F (x) =
+
+f (t)e−xt dt +
+
+Z T
+
+f (t)e−xt dt
+
+ϵ
+
+0
+
+≡ F1 (x) + F2 (x),
+where ϵ > 0 is small and xed, with ϵ < T .
+First, show that F2 is small.
+Case (i): for x > b,
+
+Z T
+|F2 (x)| ≤
+
+Kebt e−xt dt
+
+Zϵ ∞
+≤
+
+Ke−(x−b)t dt
+
+ϵ
+
+K (b−x)ϵ
+e
+x−b
+ −ϵx 
+e
+=O
+x
+=
+
+as x → ∞.
+
+Case (ii):
+
+Z T
+
+|f (t)|e−xt dt
+ϵ
+Z T
+−ϵx
+≤e
+|f (t)| dt
+ϵ
+Z T
+−ϵx
+≤e
+|f (t)| dt
+
+|F2 (x)| ≤
+
+= O(e
+
+0
+−ϵx
+
+)
+
+as x → ∞.
+
+In both cases, F2 is small beyond all orders in inverse powers of x.
+
+End of Lecture 4.
+
+14
+
+3.3 Gamma function (again)
+Γ can be analytically continued to C, except at z = 0, −1, −2, . . ., using
+Γ(z + 1)
+.
+z
+
+Γ(z) =
+
+Proof of Watson's lemma (continued). Recall that
+
+Z ϵ
+f (t)e
+
+F (x) =
+
+−xt
+
+Z T
+dt +
+
+with F2 (x) = O(e
+
+f (t)e−xt dt = F1 (x) + F2 (x),
+
+ϵ
+
+0
+
+−ϵx ) as x → ∞. We want to show, for every N , that
+
+F1 (x) =
+
+N
+X
+
+an
+
+n=0
+
+
+
+Γ(α + βn + 1)
+−α−βN −1
++
+o
+x
+.
+xα+βn+1
+
+Using property (d) of the Gamma function, consider
+
+N
+X
+
+Γ(α + βn + 1)
+xα+βn+1
+n=0
+Z ϵ
+Z ∞X
+N
+−xt
+=
+f (t)e
+dt −
+an tα+βn e−xt dt
+
+F1 (x) −
+
+an
+
+0
+
+0
+
+Z ϵ
+
+N
+X
+
+≤
+
+e−xt f (t) −
+
+0
+
+n=0
+
+an tα+βn dt +
+
+Z ∞
+
+e−xt
+
+ϵ
+
+n=0
+
+N
+X
+
+an tα+βn dt
+
+n=0
+
+≡ R1 + R2 .
+For R2 , put u = t − ϵ. Then
+
+−ϵx
+
+R2 ≤ e
+
+=e
+
+−ϵx
+
+N
+X
+n=0
+N
+X
+
+Z ∞
+|an |
+
+e−x(t−ϵ) tα+βn dt
+
+ϵ
+
+Z ∞
+|an |
+
+e−xu (ϵ + u)α+βn du.
+
+0
+
+n=0
+For each n, there exist Cn , kn > 0 such that
+
+(ϵ + u)α+βn < Cn ekn u
+
+for all u ∈ [0, ∞).
+
+Hence, for x > max0≤n≤N kn ,
+
+−ϵx
+
+R2 ≤ e
+
+= e−ϵx
+
+N
+X
+n=0
+N
+X
+n=0
+
+Z ∞
+Cn |an |
+
+e(kn −x)u du
+
+0
+
+ −ϵx 
+Cn |an |
+e
+=O
+x − kn
+x
+
+as x → ∞.
+
+In R1 , use the asymptotic expansion of f . In particular,
+
+f (t) −
+
+N
+X
+
+an tα+βn = o(tα+βN ) = O(tα+β(N +1) )
+
+n=0
+
+15
+
++
+
+as t → 0
+
+,
+
+where the last bound follows by taking one more term in the expansion. By the denition of O ,
+for suciently small ϵ there is K3 > 0 such that
+
+Z ϵ
+R1 ≤ K3
+
+e−xt tα+β(N +1) dt
+
+0
+
+Z ∞
+≤ K3
+
+e−xt tα+β(N +1) dt
+
+0
+
+Γ(α + β(N + 1) + 1)
+= K3
+.
+xα+β(N +1)+1
+Since β > 0,
+
+
+
+R1 = o x−α−βN −1
+This is true for every N , so
+
+F1 (x) ∼
+
+∞
+X
+
+an
+
+n=0
+
+as x → ∞.
+
+Γ(α + βn + 1)
+.
+xα+βn+1
+
+Since F2 is smaller than every inverse power of x, the same expansion holds for F = F1 + F2 :
+
+F (x) ∼
+
+∞
+X
+
+an
+
+n=0
+
+Γ(α + βn + 1)
+xα+βn+1
+
+as x → ∞.
+
+3.5 Laplace integrals and Laplace's method
+Laplace integrals are of the form
+
+Z b
+I(x) =
+
+f (t)exϕ(t) dt,
+
+a
+
+> a, and f and ϕ are suciently nice functions. What happens to I as x → ∞?
+Watson's lemma deals with the special case ϕ(t) = −t, a = 0, b = T .
+In general, we have Laplace's principle of localisation : the asymptotic expansion of I as
+x → ∞ is determined by contributions from arbitrarily small regions around the maxima of ϕ.
+where b
+
+Figure 1 illustrates this principle.
+
+(a) Suppose ϕ is monotonic on [a, b]. If ϕ′ (t) > 0 and f (b) ̸= 0, let
+
+t = ϕ−1 (u).
+
+u = ϕ(t),
+Then
+
+Z ϕ(b)
+I(x) =
+
+f (t) xu
+e du,
+′
+ϕ(a) ϕ (t)
+
+t = ϕ−1 (u).
+
+Comparing with Example 2 from Section 3.2 gives
+
+I(x) ∼
+
+f (b)exϕ(b)
+xϕ′ (b)
+
+as x → ∞.
+
+′
+
+If ϕ (t) < 0 and f (a) ̸= 0, then similarly
+
+I(x) ∼
+
+f (a)exϕ(a)
+x|ϕ′ (a)|
+
+as x → ∞.
+
+(b) Suppose ϕ(t) has one interior maximum at t = c. Assume
+
+ϕ′ (c) = 0,
+
+ϕ′′ (c) < 0,
+
+16
+
+f (c) ̸= 0.
+
+Figure 1: The three blackboard sketches of localisation. Left: Watson's case, where the integral
+is dominated by an endpoint. Upper right: a phase ϕ with an interior maximum at t = c. Lower
+right: the integrand becomes concentrated in a tiny region around c. Source: lecture blackboard
+photograph.
+
+17
+
+For small, positive ϵ, write
+
+Ωϵ = [a, c − ϵ] ∪ [c + ϵ, b]
+and
+
+Z c+ϵ
+I(x) =
+
+xϕ(t)
+
+f (t)e
+
+Z
+dt +
+
+c−ϵ
+
+f (t)exϕ(t) dt
+
+Ωϵ
+
+≡ I1 (x) + I2 (x).
+The small region around c is the region responsible for the concentration shown in Figure 1.
+First, bound I2 . In the monotonic regions on either side of c,
+
+Z b
+
+xϕ(t)
+
+f (t)e
+
+I2 (x) =
+
+Z c−ϵ
+dt +
+a
+
+c+ϵ
+
+=O
+
+exϕ(c+ϵ)
+
+!
++O
+
+x
+
+f (t)exϕ(t) dt
+!
+
+exϕ(c−ϵ)
+x
+
+.
+
+Here ϕ is monotonically decreasing on the right and monotonically increasing on the left. But
+
+ϕ(c − ϵ) < ϕ(c),
+
+ϕ(c + ϵ) < ϕ(c),
+so
+
+!
+
+exϕ(c)
+I2 (x) = o
+x
+
+as x → ∞.
+
+Now consider I1 . Expand f and ϕ around t = c, assuming they are suciently dierentiable:
+
+ϕ(t) = ϕ(c) + ϕ′ (c)(t − c) + 21 ϕ′′ (c)(t − c)2 + O((t − c)3 ),
+{z
+}
+|
+=0
+
+f (t) = f (c) + O(t − c)
+
+as t → c.
+
+Thus
+
+Z c+ϵ
+I1 (x) =
+c−ϵ
+
+
+
+[f (c) + H.O.T.] exp xϕ(c) + 21 xϕ′′ (c)(t − c)2 + H.O.T. dt
+
+= f (c)exϕ(c)
+
+Z c+ϵ
+
+′′
+
+2
+
+exϕ (c)(t−c) /2 [1 + H.O.T.] dt.
+
+c−ϵ
+The idea is that the higher-order terms (H.O.T.) in powers of (t − c) generate higher-order terms
+in an asymptotic series in inverse powers of x (see Chapling, Section 3.3.1, and B&O, Section
+6.4). For now, we generate the leading-order term:
+
+I1 (x) ∼ f (c)e
+
+xϕ(c)
+
+Z c+ϵ
+
+′′
+
+2
+
+exϕ (c)(t−c) /2 dt
+
+c−ϵ
+
+End of lecture ve
+
+18
+
+as x → ∞.
+
+
