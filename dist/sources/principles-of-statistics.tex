@@ -1672,177 +1672,159 @@ $\theta\mapsto f(x,\theta)$ is twice continuously differentiable for all $x\in\m
 (In fact the above can be weakened by replacing $\Theta$ above with any compact set $K$ with
 non-empty interior that contains $\theta_0$.)
 
-\paragraph{Proof.}
-Define $\varepsilon>0$ s.t. the ball
-\[
-\{\theta\in\Theta:\|\theta-\theta_0\|<\varepsilon\}\subseteq K\subset U.
-\]
-Here $K$ is a compact set with non-empty interior containing $\theta_0$,
-as in (R2) above; $U$ denotes the open neighbourhood called $N$ in (R2).
-
-We'll work in an event
-\[
-E_n=\{\|\hat{\theta}_n-\theta_0\|<\varepsilon\}.
-\]
-By consistency, $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
-We'll show that
-\[
-\mathbf{1}_{E_n}\sqrt{n}(\hat{\theta}_n-\theta_0)
-=\mathbf{1}_{E_n}W_n\xrightarrow{d}N(0,I^{-1}(\theta_0))
-\qquad\text{(Ex sheet 1, 8(a)).}
-\]
-Throughout the proof, just assume we're in $E_n$.
-
-On $E_n$, the regularity conditions guarantee that
-\[
-\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)=0.
-\]
-The MVT implies that
-\[
-0=\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)
-=\nabla_\theta\overline{\ell}_n(\theta_0)
-+\overline{A}_n(\hat{\theta}_n-\theta_0),
-\]
-where $\overline{A}_n\approx\nabla_\theta^2\overline{\ell}_n(\theta_0)$ is given by
-\[
-(\overline{A}_n)_{i,j}
-=\frac{\partial^2}{\partial\theta_i\partial\theta_j}
-\overline{\ell}_n(\theta^{(i)})
-\qquad\text{for }\theta^{(i)}\in[\theta_0,\hat{\theta}_n].
-\]
-Rearranging yields
-\[
-\sqrt{n}(\hat{\theta}_n-\theta_0)
-=(-\overline{A}_n)^{-1}\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
-\]
-(reg conditions imply $\overline{A}_n$ is invertible).
-
-\paragraph{Claim.}
-\[
-\overline{A}_n\xrightarrow{P}
-\mathbb{E}_{\theta_0}[\nabla_\theta^2\overline{\ell}_n(\theta_0)]
-=-I(\theta_0).
-\]
-\paragraph{Cor.}
-By the CMT,
-\[
-\overline{A}_n^{-1}\xrightarrow{P}-I(\theta_0)^{-1}.
-\]
-Furthermore,
-\[
-\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
-=\frac{1}{\sqrt{n}}\sum_{i=1}^n
-\left(\underbrace{\nabla_\theta\log f(X_i,\theta_0)}_{\mathrm{iid}}
--\underbrace{\mathbb{E}_{\theta_0}[\nabla_\theta\log f(X,\theta_0)]}
-_{=0\ (\mathrm{reg})}\right).
-\]
-By the multivariate CLT,
-\[
-\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
-\xrightarrow{d}
-N\left(0,\underbrace{\operatorname{Var}_{\theta_0}
-(\nabla_\theta\log f(X,\theta_0))}_{I(\theta_0)}\right).
-\]
-By Slutsky's Lemma we have
-\[
-\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
-N\left(0,I(\theta_0)^{-1}I(\theta_0)I(\theta_0)^{-1}\right).
-\qquad\square
-\]
-
-\noindent\underline{Next time}: Proving claim
-
 \begin{center}
 \textbf{End of lecture 6}
 \end{center}
-\noindent\underline{Theorem 4}\quad
-If $(X_i)$ iid $P_{\theta_0}$, under regularity conditions,
+
+\noindent\underline{Theorem 4 (Asymp. Normality of MLE).}\quad
+Suppose $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}P_{\theta_0}$, and the 9 stated
+assumptions hold. Then the MLE $\hat{\theta}_n$ satisfies
 \[
-\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0)).
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
+N(0,I(\theta_0)^{-1}).
 \]
 
-\noindent\underline{Proof}\quad
-Define $E_n=\{\hat{\theta}_n\in K\}$, for a ``regular'' neighbourhood of $\theta_0$.
-By consistency $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
-Working on $E_n$, a Taylor series gives
+\paragraph{Proof.}
+Recall that
 \[
-\sqrt{n}(\hat{\theta}_n-\theta_0)
-=-(\overline{A}_n)^{-1}
-\underbrace{\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)}
-_{\xrightarrow{d}N(0,I(\theta_0))\text{ by a CLT}}
-=:Z_n,
+\ell_n(\theta)=\frac1n\sum_{i=1}^n\log f(X_i,\theta).
+\]
+
+\paragraph{Step 1. Taylor expansion.}
+Choose a compact neighbourhood $K\subset\operatorname{int}\Theta$
+of $\theta_0$ on which the regularity conditions hold,
+and let
+\[
+E_n=\{\|\hat{\theta}_n-\theta_0\|<\varepsilon\},
+\]
+where $\varepsilon>0$ is sufficiently small that the
+line segment $[\theta_0,\hat{\theta}_n]$ lies in $K$ on $E_n$.
+By consistency of MLE,
+\[
+\mathbb{P}(E_n)\to1.
+\]
+On $E_n$, $\|\hat{\theta}_n-\theta_0\|<\varepsilon$, so
+$B_\varepsilon(\theta_0)\subseteq\operatorname{int}(K)\subset\operatorname{int}(\Theta)$
+given $\varepsilon$ small.
+Hence, the MLE is the interior maximiser.
+So
+\[
+\nabla\ell_n(\hat{\theta}_n)=0.
+\]
+Apply MVT componentwise:
+\[
+\nabla\ell_n(\hat{\theta}_n)=0
+=\nabla\ell_n(\theta_0)+A_n(\hat{\theta}_n-\theta_0),
 \]
 where
 \[
-(\overline{A}_n)_{j,k}
-=\frac1n\sum_{i=1}^n
-\underbrace{\frac{\partial^2}{\partial\theta_j\partial\theta_k}
-\log f(X_i,\theta^{(j)})}_{=:g(X_i,\theta^{(j)})},
-\qquad\theta^{(j)}\in[\hat{\theta}_n,\theta_0].
+(A_n)_{jk}=\frac1n\sum_{i=1}^n
+\frac{\partial^2}{\partial\theta_j\partial\theta_k}
+\log\bigl(f(X_i,\theta^{(j)})\bigr),
+\qquad
+\theta^{(j)}\in[\theta_0,\hat{\theta}_n].
 \]
-\noindent\underline{Claim}\quad
-$\overline{A}_n\xrightarrow{P}-I(\theta_0)$.
 
-Several applications of Slutsky's Lemma and CMT show that
-$Z_n\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
-
-Why can we work on $E_n$? On $E_n$,
-$\sqrt{n}(\hat{\theta}_n-\theta_0)=Z_n$. Hence,
+\paragraph{Step 2. Prove $A_n\xrightarrow{P}-I(\theta_0)$.}
+Fix $j,k$, define
 \[
-\sqrt{n}(\hat{\theta}_n-\theta_0)
-=\underbrace{Z_n}_{\xrightarrow{d}N(0,I^{-1}(\theta_0))}
-+\underbrace{\bigl(\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\bigr)}
-_{\xrightarrow{P}0},
+g(x,\theta)=\frac{\partial^2}{\partial\theta_j\partial\theta_k}
+\log f(x,\theta),
+\qquad
+\bar{g}(\theta)=\mathbb{E}_{\theta_0}[g(X,\theta)].
 \]
-as
+By equivalent form of Fisher information,
 \[
-\mathbb{P}\bigl(\lvert\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\rvert<\varepsilon\bigr)
-\geq\mathbb{P}(E_n)\xrightarrow{n\to\infty}1.
+\bar{g}(\theta_0)=-I(\theta_0)_{jk}.
 \]
-By Slutsky,
-$\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
-
-\medskip
-\noindent\underline{Proof of Claim}\quad
-We need to show, $\forall j,k$,
-\[
-\lvert(\overline{A}_n)_{j,k}-(-I(\theta_0))_{j,k}\rvert\xrightarrow{P}0.
-\]
-Let $g(\theta)=\mathbb{E}_{\theta_0}[g(X,\theta)]$.
-Recall that $I(\theta_0)=-g(\theta_0)$ (under reg conditions).
-Note
-\[
-(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}
-=\frac1n\sum_{i=1}^n g(X_i,\theta^{(j)})-g(\theta^{(j)})
-+g(\theta^{(j)})-g(\theta_0).
-\]
-Then,
+Hence,
 \[
 \begin{aligned}
-\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert
+|(A_n)_{jk}+I(\theta_0)_{jk}|
+&=\left|\frac1n\sum_{i=1}^n g(X_i,\theta^{(j)})-\bar{g}(\theta_0)\right|\\
 &\leq\underbrace{\sup_{\theta\in K}
-\left\lvert\frac1n\sum_{i=1}^n g(X_i,\theta)-g(\theta)\right\rvert}_{\text{(I)}}
-+\underbrace{\lvert g(\theta^{(j)})-g(\theta_0)\rvert}_{\text{(II)}}.
+\left|\frac1n\sum_{i=1}^n g(X_i,\theta)-\bar{g}(\theta)\right|}_{\text{(I)}}
++\underbrace{|\bar{g}(\theta^{(j)})-\bar{g}(\theta_0)|}_{\text{(II)}}.
 \end{aligned}
 \]
-By a ULLN, $\text{(I)}\xrightarrow{\mathrm{a.s.}}0$, using
+For (I), by continuity of $g(x,\cdot)$, compactness of $K$, and
 \[
-\theta\longmapsto g(x,\theta)
-=\frac{\partial^2}{\partial\theta_j\partial\theta_k}\log f(x,\theta)
-\quad\text{is continuous},
+\mathbb{E}_{\theta_0}\left[\sup_{\theta\in K}|g(X,\theta)|\right]<\infty,
 \]
-$K$ is compact, and
-$\mathbb{E}_{\theta_0}\sup_{\theta\in K}|g(X,\theta)|<\infty$.
-Also, we know $\hat{\theta}_n\xrightarrow{P}\theta_0$ by consistency,
-thus $\theta^{(j)}\xrightarrow{P}\theta_0$, and an application of the
-dominated convergence theorem shows that $g$ is continuous in $K$.
-Hence, by the CMT,
-$\text{(II)}\xrightarrow{P}0$.
-Therefore,
+and the ``bracket'' version of ULLN, we can in a similar way deduce that
+$g$ has ULLN here, namely
 \[
-\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert\xrightarrow{P}0.
-\qquad\square
+\text{(I)}\xrightarrow{\mathrm{a.s.}}0.
 \]
+For (II), since $\theta^{(j)}\in[\theta_0,\hat{\theta}_n]$,
+\[
+\|\theta^{(j)}-\theta_0\|
+\leq\|\hat{\theta}_n-\theta_0\|\xrightarrow{P}0
+\]
+by consistency of MLE.
+Moreover, DCT implies that $\bar{g}$ is cts.\ at $\theta_0$,
+thus by CMT,
+\[
+\text{(II)}\xrightarrow{P}0.
+\]
+Thus, for $\forall j,k$,
+\[
+(A_n)_{jk}\xrightarrow{P}-I(\theta_0)_{jk}.
+\]
+Result follows.\hfill$\square$
+
+Since $I(\theta_0)$ is invertible, by CMT on $\det(\cdot)$,
+$A_n$ is invertible with probability tending to 1
+(i.e., in probability).
+
+\paragraph{Step 3. Apply multivariate CLT.}
+Define
+\[
+S_i=\nabla_\theta\log f(X_i,\theta_0).
+\]
+By regularity conditions,
+\[
+\mathbb{E}_{\theta_0}[S_i]=0,
+\qquad
+\operatorname{Var}_{\theta_0}(S_i)=I(\theta_0).
+\]
+By CLT,
+\[
+\sqrt{n}\,\nabla\ell_n(\theta_0)
+=\frac1{\sqrt{n}}\sum_{i=1}^n S_i
+\xrightarrow{d}N(0,I(\theta_0)).
+\]
+
+\paragraph{Step 4. Apply Slutsky's Lemma.}
+On $E_n$, whenever $A_n$ is invertible,
+Taylor expansion gives
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=-A_n^{-1}\sqrt{n}\,\nabla\ell_n(\theta_0). \tag{$*$}
+\]
+By Slutsky's Lemma, and claim,
+\[
+-A_n^{-1}\sqrt{n}\,\nabla\ell_n(\theta_0)
+\xrightarrow{d}N(0,I(\theta_0)^{-1}I(\theta_0)I(\theta_0)^{-1}).
+\]
+(Using fact:
+$X_n\sim N(\mu,\Sigma)\Rightarrow AX_n\sim N(A\mu,A\Sigma A^T)$.)
+So
+\[
+-A_n^{-1}\sqrt{n}\,\nabla\ell_n(\theta_0)
+\xrightarrow{d}N(0,I(\theta_0)^{-1}).
+\]
+Finally, since $\mathbb{P}(E_n)\to1$ and
+$\mathbb{P}(A_n\text{ invertible})\to1$,
+$(*)$ holds with probability tending to 1.
+So the difference $\xrightarrow{P}0$.
+So using Slutsky again,
+\[
+X_n\xrightarrow{d}X,\quad Y_n\xrightarrow{P}0
+\quad\Rightarrow\quad X_n+Y_n\xrightarrow{d}X.
+\]
+Result follows.\hfill$\square$
+
 
 \noindent (1) The continuous derivatives of
 $\theta\mapsto\log f(x,\theta)$ are \underline{not} necessary for asymptotic normality.
