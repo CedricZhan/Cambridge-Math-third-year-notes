@@ -1,0 +1,1981 @@
+\documentclass[11pt,a4paper]{article}
+\input{preamble}
+\usepackage{graphicx}
+
+\title{Principles of Statistics}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\section*{Principles of Statistics}
+
+\subsection*{0. INTRODUCTION}
+
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and
+$X:\Omega\to\mathbb{R}$ a random variable with distribution function
+\[
+\begin{aligned}
+F(t)
+&=
+\mathbb{P}\bigl(\{\omega:X(\omega)\leq t\}\bigr) \\
+&=
+\begin{cases}
+\displaystyle \int_{-\infty}^{t} f(x)\,dx,
+& \text{if $X$ is continuous with pdf $f$}, \\[1ex]
+\displaystyle \sum_{x\leq t} f(x),
+& \text{if $X$ is discrete with pmf $f$}.
+\end{cases}
+\end{aligned}
+\]
+
+We denote $P=\mathbb{P}\circ X^{-1}$, the law or ``distribution'' of $X$.
+
+We observe $X_1,\ldots,X_n$, which are iid copies of $X$, where $n$ is
+the \underline{sample size}.
+
+\paragraph{Def 1.}
+A \underline{statistical model} is a collection
+$\{f_\theta:\theta\in\Theta\}$ of pdfs or pmfs, or
+$\{P_\theta:\theta\in\Theta\}$ of laws, indexed by a
+\underline{parameter space} $\Theta$.
+
+\paragraph{Ex.}
+\begin{itemize}
+    \item $N(\theta,1)$, \qquad $\Theta=\mathbb{R}$.
+    \item $N(\mu,\sigma^2)$, \qquad
+    $\theta=(\mu,\sigma^2)$, \quad
+    $\Theta=\mathbb{R}\times(0,\infty)$.
+    \item $\operatorname{Poi}(\theta)$, \qquad
+    $\Theta=[0,\infty)$.
+\end{itemize}
+
+\paragraph{Def 2.}
+We say the model is \underline{correctly specified} when
+$\exists\,\theta_0\in\Theta$ such that $P=P_{\theta_0}$.
+
+We will refer to the ``true parameter'' as $\theta_0$.
+
+\subsection*{Goals of Statistics}
+
+\begin{enumerate}
+    \item \underline{Estimation}:
+    We define an \underline{estimator}
+    \[
+    \widehat{\theta}_n
+    =
+    \widehat{\theta}_n(X_1,\ldots,X_n),
+    \]
+    which we hope is close to $\theta_0$ when
+    $X_i\overset{\mathrm{iid}}{\sim}P_{\theta_0}$,
+    for all $\theta_0\in\Theta$, when $n$ is large.
+
+    \item \underline{Testing}:
+    We have a null hypothesis
+    \[
+    H_0:\theta\in\Theta_0\subseteq\Theta,
+    \]
+    and an alternative hypothesis
+    \[
+    H_1:\theta\in\Theta_1\subseteq\Theta.
+    \]
+    We define a \underline{test},
+    \[
+    \psi_n:=\psi_n(X_1,\ldots,X_n),
+    \]
+    such that $\psi_n=0$ if $H_0$ is true, and
+    $\psi_n=1$ if $H_1$ is true, \underline{w.h.p.}
+
+    \item \underline{Uncertainty Quantification}
+    \begin{itemize}
+        \item Define a \underline{confidence set}
+        $C_n(X_1,\ldots,X_n;\alpha)$, such that
+        \[
+        P_\theta(\theta\in C_n)
+        \overset{(\geq)}{=}
+        1-\alpha
+        \qquad \forall\,\theta\in\Theta,
+        \]
+        where $\alpha$ is the \underline{significance level}.
+
+        \item Define a \underline{Bayesian credible set},
+        a region of high posterior probability.
+    \end{itemize}
+\end{enumerate}
+
+\section*{I. LIKELIHOOD PRINCIPLE}
+
+\paragraph{Def 3.}
+The \underline{likelihood function}
+\[
+L_n(\theta)=\prod_{i=1}^{n}f_\theta(X_i).
+\]
+
+\noindent\underline{Note:}
+This is a random function, as it depends implicitly on $X_1,\ldots,X_n$.
+
+The \underline{log-likelihood function}
+\[
+\ell_n(\theta)=\sum_{i=1}^{n}\log f_\theta(X_i),
+\]
+we write
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\ell_n(\theta)
+\]
+for a \underline{normalised log-likelihood}.
+
+\paragraph{Def 4.}
+A \underline{maximum likelihood estimator}
+$\widehat{\theta}_{\mathrm{MLE}}$ is any estimator with
+\[
+L_n\bigl(\widehat{\theta}_{\mathrm{MLE}}\bigr)
+=
+\max_{\theta\in\Theta}L_n(\theta).
+\]
+
+\paragraph{Ex.}
+\[
+X_i\overset{\mathrm{iid}}{\sim}\operatorname{Poi}(\theta).
+\]
+\[
+L_n(\theta)
+=
+\prod_{i=1}^{n}e^{-\theta}\frac{\theta^{X_i}}{X_i!}.
+\]
+\[
+\ell_n(\theta)
+=
+-n\theta+(\log\theta)\sum X_i+\mathrm{const.}
+\]
+\[
+\ell_n'(\theta)
+=
+-n+\frac{\sum X_i}{\theta}
+\overset{\mathrm{FOC}}{=}0
+\]
+\[
+\Longrightarrow\quad
+\text{suggests }
+\widehat{\theta}_{\mathrm{MLE}}
+=
+\frac{\displaystyle\sum_{i=1}^{n}X_i}{n}
+:=
+\overline{X}_n
+\qquad
+\text{``sample mean''}.
+\]
+
+\noindent\underline{SOC:}
+\[
+\ell_n''(\theta)
+=
+-\frac{1}{\theta^2}\sum X_i
+<0
+\qquad
+\text{if }\sum X_i>0.
+\]
+
+If $\sum X_i=0$,
+\[
+\ell_n(\theta)=-n\theta
+\quad\Longrightarrow\quad
+\widehat{\theta}_{\mathrm{MLE}}=0.
+\]
+
+In every case
+\[
+\widehat{\theta}_{\mathrm{MLE}}=\overline{X}_n.
+\]
+
+\paragraph{Ex.}
+\[
+X_i\overset{\mathrm{iid}}{\sim}N(\mu,\sigma^2),
+\qquad
+\theta=(\mu,\sigma^2).
+\]
+\[
+\ell_n(\theta)
+=
+-\frac{n}{2}\log\pi
+-\frac{n}{2}\log(\sigma^2)
+-\frac{1}{2\sigma^2}
+\sum_{i=1}^{n}(X_i-\mu)^2.
+\]
+
+\noindent\underline{FOC:}
+\[
+\frac{\partial\ell_n}{\partial\mu}
+=
+-\frac{1}{\sigma^2}
+\sum_{i=1}^{n}(X_i-\mu)
+=0,
+\]
+\[
+\frac{\partial\ell_n}{\partial\sigma^2}
+=
+-\frac{n}{2\sigma^2}
++
+\frac{1}{2(\sigma^2)^2}
+\sum_{i=1}^{n}(X_i-\mu)^2
+=0.
+\]
+
+We can check that the Hessian of $\ell_n$ is negative definite
+$\forall\,\theta\in\mathbb{R}\times(0,\infty)$.
+
+Hence,
+\[
+\widehat{\theta}_{\mathrm{MLE}}
+=
+\begin{pmatrix}
+\overline{X}_n \\[6pt]
+\underbrace{
+\displaystyle\frac{1}{n}
+\sum_{i=1}^{n}(X_i-\overline{X}_n)^2
+}_{\text{``Sample variance''}}
+\end{pmatrix}.
+\]
+
+\subsection*{Non-examinable}
+
+The likelihood principle poses that if two observations
+\[
+X=(X_1,\ldots,X_n)
+\qquad\text{and}\qquad
+X^*=(X_1^*,\ldots,X_n^*)
+\]
+give rise to likelihoods $L_n,L_n^*$ respectively, such that
+\[
+L_n(\theta)=L_n^*(\theta)\cdot M
+\qquad \forall\,\theta\in\Theta,
+\]
+and some constant $M$, then they should produce the same
+``inference'' on the true parameter.
+
+\begin{itemize}
+    \item The MLE, Bayes estimators, \underline{credible sets}
+    satisfy the likelihood principle.
+    \item \underline{Confidence sets}, tests generally do not.
+\end{itemize}
+
+\noindent\underline{Birnbaum (1962)}
+\[
+\text{Conditionality}+\text{Sufficiency}
+\quad\Longrightarrow\quad
+\text{Likelihood principle}.
+\]
+
+\begin{center}
+\textbf{end of lecture 1}
+\end{center}
+
+\section*{II. Information Geometry}
+
+The \underline{score function} is
+\[
+S_n(\theta)
+=
+\frac{\partial}{\partial\theta}\ell_n(\theta),
+\qquad
+\Theta\subseteq\mathbb{R}^d.
+\]
+
+In many cases,
+\[
+S_n(\widehat{\theta}_{\mathrm{MLE}})=0,
+\]
+where, by convention,
+\[
+S_n(\theta')
+=
+\left.
+\frac{\partial}{\partial\theta}\ell_n(\theta)
+\right|_{\theta=\theta'}.
+\]
+
+Let $X$ be a r.v.\ taking values in $\mathcal{X}$, and
+$g:\mathcal{X}\to\mathbb{R}$.
+Take a model $\{f(x,\theta):\theta\in\Theta\}$.
+We will write
+\[
+\mathbb{E}_{\theta}g(X)
+=
+\int g(x)f(x,\theta)\,dx,
+\qquad
+X\sim f(\cdot,\theta).
+\]
+
+\medskip
+\noindent\textbf{Obs 1.}
+
+Suppose the model $\{f(\cdot,\theta):\theta\in\Theta\}$ is such that
+\[
+\mathbb{E}_{\theta_0}\bigl|\log f(X,\theta)\bigr|
+<
+\infty
+\qquad
+\forall\theta\in\Theta.
+\]
+Define
+\[
+\ell(\theta)
+=
+\mathbb{E}_{\theta_0}\log f(X,\theta),
+\qquad
+X\sim P_{\theta_0}.
+\]
+
+The normalised log-likelihood
+\[
+\overline{\ell}_n(\theta)
+=
+\frac{1}{n}\sum_{i=1}^{n}\log f(X_i,\theta)
+\]
+can be thought of as a sample version of $\ell(\theta)$.
+
+Suppose the model is correctly specified, such that $X$ has pdf
+$f(\cdot,\theta_0)$ for some $\theta_0\in\Theta$.
+
+\medskip
+\noindent\textbf{Fact.}
+Then $\ell(\theta)$ is maximised at $\theta_0$.
+This justifies using the MLE to approximate $\theta_0$ when $n$ is large.
+
+Indeed,
+\[
+\begin{aligned}
+\ell(\theta)-\ell(\theta_0)
+&=
+\mathbb{E}_{\theta_0}
+\left(
+\log\frac{f(X,\theta)}{f(X,\theta_0)}
+\right)
+\\
+&\leq
+\log\mathbb{E}_{\theta_0}
+\left(
+\frac{f(X,\theta)}{f(X,\theta_0)}
+\right)
+\\
+&=
+\log\int
+\frac{f(x,\theta)}{f(x,\theta_0)}
+f(x,\theta_0)\,dx
+\\
+&=
+\log 1=0.
+\end{aligned}
+\]
+By Jensen's inequality, as $\log$ is concave, with equality if
+\[
+\frac{f(X,\theta)}{f(X,\theta_0)}
+\]
+is a.s.\ constant.
+
+\[
+\therefore\quad
+\ell(\theta)\leq\ell(\theta_0).
+\]
+
+If
+\[
+f(\cdot,\theta)=f(\cdot,\theta')
+\quad\Longrightarrow\quad
+\theta=\theta',
+\]
+we say the parameter is \underline{identifiable}.
+
+In that case, if $\theta\neq\theta_0$, Jensen's inequality is strict,
+so $\theta_0$ is actually the unique maximizer of $\ell$.
+
+\medskip
+\noindent\textbf{Rmk.}
+The difference
+\[
+\ell(\theta_0)-\ell(\theta)
+=
+\int
+\log\frac{f(x,\theta_0)}{f(x,\theta)}
+f(x,\theta_0)\,dx
+\]
+is called the \underline{Kullback--Leibler divergence}
+or \underline{relative entropy} between $P_{\theta_0}$ and $P_\theta$.
+
+A notion of distance which is \underline{not} symmetric.
+
+\medskip
+\noindent\textbf{Obs 2.}
+
+\[
+\begin{aligned}
+0
+&=
+\frac{\partial}{\partial\theta}
+\underbrace{\int f(x,\theta)\,dx}_{=1\ \forall\theta}
+=
+\int\frac{\partial}{\partial\theta}f(x,\theta)\,dx
+\\
+&=
+\int
+\frac{\partial\log f(x,\theta)}{\partial\theta}
+f(x,\theta)\,dx
+\\
+&=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial\log f(X,\theta)}{\partial\theta}
+\right].
+\end{aligned}
+\]
+
+[There are some conditions for this.
+(Leibniz rule). See P \& M.]
+
+``$S_n(\theta)$ is centred when $X\sim P_\theta$.''
+
+\medskip
+\noindent\textbf{Obs 3.}
+
+\medskip
+\noindent\textbf{Def 5.}
+Let $\Theta\subseteq\mathbb{R}^d$.
+For any $\theta\in\operatorname{int}(\Theta)$,
+the \underline{Fisher Information matrix} is
+\[
+I(\theta)
+=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\cdot
+\left(
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right)^T
+\right],
+\qquad
+X\sim P_\theta.
+\]
+
+\medskip
+\noindent\textbf{Rmk.}
+This is the covariance matrix of
+\[
+S_n(\theta)
+=
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\]
+when $X\sim P_\theta$.
+
+\medskip
+\noindent\textbf{Prop 1.}
+For all $\theta\in\operatorname{int}(\Theta)$, in a ``regular'' model,
+\[
+I(\theta)
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(X,\theta)
+\right]
+\]
+\[
+\left(
+I_{ij}(\theta)
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta_i\,\partial\theta_j}
+\log f(X,\theta)
+\right]
+\right).
+\]
+
+\medskip
+\noindent\textbf{Proof.}
+\[
+0
+=
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\int f(x,\theta)\,dx
+=
+\int
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+f(x,\theta)\,dx.
+\]
+
+[When this equality holds, we say the model is ``regular''.]
+
+Now, we have
+\[
+\begin{aligned}
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(x,\theta)
+&=
+\frac{\partial}{\partial\theta^T}
+\left[
+\frac{1}{f(x,\theta)}
+\frac{\partial}{\partial\theta}f(x,\theta)
+\right]
+\\
+&=
+-\frac{1}{f(x,\theta)^2}
+\frac{\partial}{\partial\theta}f(x,\theta)
+\left(
+\frac{\partial}{\partial\theta}f(x,\theta)
+\right)^T
+\\
+&\qquad
++
+\frac{1}{f(x,\theta)}
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+f(x,\theta).
+\end{aligned}
+\]
+
+Take $-\mathbb{E}_{\theta}[\cdot]$ of both sides.
+\[
+\begin{aligned}
+&-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^T}
+\log f(X,\theta)
+\right]
+\\
+&\qquad=
+\mathbb{E}_{\theta}
+\left[
+\frac{1}{f(X,\theta)^2}
+\frac{\partial}{\partial\theta}f(X,\theta)
+\left(
+\frac{\partial}{\partial\theta}f(X,\theta)
+\right)^T
+\right]
++0
+\\
+&\qquad=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\left(
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right)^T
+\right]
+=
+I(\theta).
+\end{aligned}
+\]
+\hfill$\square$
+
+\medskip
+\noindent\textbf{Tensorisation.}
+
+Suppose the observation $X$ consists of $n$ random variables
+$X_1,\ldots,X_n$. Then, the F.I.\ matrix is
+\[
+I_n(\theta)
+=
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n,\theta)
+\left(
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n,\theta)
+\right)^T
+\right].
+\]
+
+If $X_1,\ldots,X_n$ are iid such that
+\[
+f(X_1,\ldots,X_n,\theta)
+=
+\prod_{i=1}^{n}f(X_i,\theta),
+\]
+where $\{f(x,\theta):\theta\in\Theta\}$ is a model for $X_1$,
+then the F.I.\ is
+\[
+\begin{aligned}
+I_n(\theta)
+&=
+\mathbb{E}_{\theta}
+\left[
+\sum_{i,j}
+\underbrace{
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+}_{\substack{\text{mean }0\text{ under}\\P_\theta}}
+\left(
+\frac{\partial}{\partial\theta}\log f(X_j,\theta)
+\right)^T
+\right]
+\\
+&=
+\mathbb{E}_{\theta}
+\left[
+\sum_{i=1}^{n}
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+\left(
+\frac{\partial}{\partial\theta}\log f(X_i,\theta)
+\right)^T
+\right]
+\\
+&=
+nI(\theta),
+\end{aligned}
+\]
+where $I(\theta)$ is the Fisher Information for a single observation.
+
+\begin{center}
+\textbf{End of Lecture 2}
+\end{center}
+
+\subsection*{Recap of Information Geometry}
+
+\paragraph{Observation 1.}
+\[
+\operatorname{KL}(P_{\theta_0},P_\theta)
+=
+\mathbb{E}_{\theta_0}
+\left[
+\log\frac{f(X,\theta_0)}{f(X,\theta)}
+\right]
+\geq 0,
+\]
+minimised at $\theta=\theta_0$.
+
+\paragraph{Observation 2.}
+\[
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right]
+=0,
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Observation 3.}
+\[
+I(\theta)
+:=
+\operatorname{Var}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}\log f(X,\theta)
+\right]
+=
+-\mathbb{E}_{\theta}
+\left[
+\frac{\partial^2}{\partial\theta\,\partial\theta^{T}}
+\log f(X,\theta)
+\right],
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Why geometry?}
+The F.I., $I(\theta)$, defines a metric tensor on the manifold
+\[
+\{f(\cdot,\theta):\theta\in\Theta\}.
+\]
+This is known as the \textbf{Fisher--Rao metric}.
+KL divergence is approximated locally by this metric.
+
+\begin{itemize}
+    \item \textbf{Reparametrisation invariance.}
+    Take the $\operatorname{Bernoulli}(\theta)$ model, where $\theta$
+    is the probability of success. Reparametrise it in terms of
+    ``log-odds'':
+    \[
+    \eta=\log\left(\frac{\theta}{1-\theta}\right)\in\mathbb{R}.
+    \]
+    The manifold
+    \[
+    \{f(\cdot,\eta):\eta\in\mathbb{R}\},
+    \]
+    equipped with the metric tensor $I(\eta)$, preserves geodesics,
+    path lengths, etc.
+
+    \item \textbf{Sufficient statistic invariance.}
+\end{itemize}
+
+\paragraph{Chentsov's theorems.}
+These properties characterise the Fisher--Rao metric.
+
+\subsection*{Proposition 2 (Cram\'er--Rao Lower Bound)}
+
+Let
+\[
+\{f(\cdot,\theta):\theta\in\Theta\subseteq\mathbb{R}\}
+\]
+be a ``regular'' statistical model.
+Let $\tilde{\theta}(X_1,\ldots,X_n)$ be an unbiased estimator based on
+i.i.d.\ samples $X_1,\ldots,X_n$:
+\[
+\mathbb{E}_{\theta}\tilde{\theta}=\theta,
+\qquad
+\forall\theta\in\Theta.
+\]
+Then
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta})
+\geq
+\frac{1}{nI(\theta)},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Proof.}
+Recall the Cauchy--Schwarz inequality for random variables $Y,Z$:
+\[
+\bigl(\mathbb{E}[YZ]\bigr)^2
+\leq
+\mathbb{E}[Y^2]\mathbb{E}[Z^2].
+\]
+Let
+\[
+Z=\tilde{\theta}-\theta,
+\qquad
+Y=\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta).
+\]
+Then
+\[
+\mathbb{E}[Z^2]
+=
+\operatorname{Var}_{\theta}(\tilde{\theta}),
+\qquad
+\text{as $\tilde{\theta}$ is unbiased},
+\]
+and
+\[
+\mathbb{E}[Y^2]
+=
+nI(\theta),
+\qquad
+\text{as the F.I.\ tensorises}.
+\]
+Moreover,
+\[
+\begin{aligned}
+\mathbb{E}[YZ]
+&=
+\mathbb{E}_{\theta}
+\left[
+\tilde{\theta}
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta)
+\right]
+\\
+&\quad
+-\theta
+\underbrace{
+\mathbb{E}_{\theta}
+\left[
+\frac{\partial}{\partial\theta}
+\log f(X_1,\ldots,X_n;\theta)
+\right]
+}_{=0}
+\\
+&=
+\int_{\mathcal{X}^n}
+\tilde{\theta}(x_1,\ldots,x_n)
+\frac{\partial f(x_1,\ldots,x_n;\theta)}{\partial\theta}
+\frac{f(x_1,\ldots,x_n;\theta)}
+     {f(x_1,\ldots,x_n;\theta)}
+\,dx_1\cdots dx_n
+\\
+&=
+\frac{\partial}{\partial\theta}
+\underbrace{
+\int_{\mathcal{X}^n}
+\tilde{\theta}\,
+f(x_1,\ldots,x_n;\theta)
+\,dx_1\cdots dx_n
+}_{=\mathbb{E}_{\theta}\tilde{\theta}=\theta}
+\qquad
+\text{(by regularity)}
+\\
+&=
+\frac{\partial\theta}{\partial\theta}
+=1.
+\end{aligned}
+\]
+Plug these expectations into the Cauchy--Schwarz inequality and rearrange.
+\hfill$\square$
+
+\paragraph{Remark.}
+Sometimes, the MLE is unbiased and attains the Cram\'er--Rao lower
+bound, but not always. However, we will show this is true asymptotically.
+
+If $\Theta\subseteq\mathbb{R}^p$ with $p>1$, let
+\[
+\Phi:\Theta\to\mathbb{R}
+\]
+be a scalar function of $\theta$.
+Consider an unbiased estimator $\tilde{\Phi}(X_1,\ldots,X_n)$.
+Then one can show that
+\[
+\operatorname{Var}_{\theta}(\tilde{\Phi})
+\geq
+\frac{1}{n}
+\left(
+\frac{\partial\Phi(\theta)}{\partial\theta}
+\right)^{T}
+I(\theta)^{-1}
+\frac{\partial\Phi(\theta)}{\partial\theta},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Corollary 1.}
+If $\tilde{\theta}$ is not unbiased, we have
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta})
+\geq
+\frac{
+\displaystyle
+\frac{\partial}{\partial\theta}
+\mathbb{E}_{\theta}\tilde{\theta}
+}{
+nI(\theta)
+},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+\paragraph{Example.}
+Take $\Phi(\theta)=\alpha^{T}\theta$ for some
+$\alpha\in\mathbb{R}^p$.
+In this case,
+\[
+\frac{\partial\Phi(\theta)}{\partial\theta}=\alpha,
+\]
+and
+\[
+\operatorname{Var}_{\theta}(\tilde{\Phi})
+\geq
+\frac{1}{n}\alpha^{T}I(\theta)^{-1}\alpha.
+\]
+
+\subsection*{Example Sheet 1}
+
+We observe a single pair
+\[
+(X_1,X_2)
+\sim
+N\left(
+\begin{pmatrix}
+\theta_1\\
+\theta_2
+\end{pmatrix},
+\Sigma
+\right),
+\]
+where $\Sigma\succ0$ is known.
+We wish to estimate $\theta_1$.
+
+\paragraph{Case 1.}
+Assume that $\theta_2$ is known.
+In this case, the model has one parameter and F.I.\ matrix
+\[
+I_1(\theta_1).
+\]
+
+\paragraph{Case 2.}
+Assume that $\theta_2$ is unknown.
+For any estimator
+\[
+\tilde{\theta}
+=
+\begin{pmatrix}
+\tilde{\theta}_1\\
+\tilde{\theta}_2
+\end{pmatrix},
+\]
+we have
+\[
+\tilde{\theta}_1
+=
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}^{T}
+\tilde{\theta}.
+\]
+So, if $\tilde{\theta}$ is unbiased, we have the Cram\'er--Rao lower bound
+\[
+\operatorname{Var}_{\theta}(\tilde{\theta}_1)
+\geq
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}^{T}
+I(\theta)^{-1}
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+=
+\bigl[I(\theta)^{-1}\bigr]_{11}.
+\]
+
+\paragraph{Goal.}
+Show
+\[
+I_1(\theta_1)^{-1}
+<
+\bigl[I(\theta)^{-1}\bigr]_{11},
+\]
+unless $\Sigma$ is diagonal ($X_1,X_2$ independent).
+
+\section*{II. Asymptotic Theory of the MLE}
+
+All reasonable estimators are asymptotically unbiased:
+\[
+\mathbb{E}_{\theta}\tilde{\theta}
+\xrightarrow{n\to\infty}
+\theta,
+\qquad
+\forall\theta\in\Theta.
+\]
+
+We wish to prove that estimators are \textbf{consistent}:
+\[
+\tilde{\theta}\xrightarrow{?}\theta
+\qquad
+\text{as }n\to\infty
+\quad
+\text{under }P_{\theta},
+\qquad
+\forall\theta\in\Theta.
+\]
+
+For consistent estimators, a reasonable notion of optimality is
+\textbf{asymptotic efficiency}:
+\[
+n\operatorname{Var}_{\theta}(\tilde{\theta})
+\xrightarrow{n\to\infty}
+I(\theta)^{-1},
+\qquad
+\forall\theta\in\operatorname{int}(\Theta).
+\]
+
+We will show that the MLE is asymptotically efficient and, furthermore,
+\[
+\hat{\theta}_{\mathrm{MLE}}
+\approx
+N\left(\theta,n^{-1}I(\theta)^{-1}\right),
+\qquad
+\forall\theta.
+\]
+This distributional convergence can be used for statistical inference.
+
+\subsection*{Stochastic Convergence}
+
+\paragraph{Definition 1.}
+Let $(X_n:n\in\mathbb{N})$ be a collection of random variables in some
+probability space $(\Omega,\mathcal{F},\mathbb{P})$.
+
+\begin{itemize}
+    \item We say that $X_n$ converges almost surely to a random variable
+    $X$ on $(\Omega,\mathcal{F},\mathbb{P})$, or
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}}X,
+    \]
+    if and only if
+    \[
+    \mathbb{P}\left(
+    \left\{
+    \omega:
+    \left\|X_n(\omega)-X(\omega)\right\|_2
+    \xrightarrow{n\to\infty}0
+    \right\}
+    \right)
+    =1.
+    \]
+
+    \item We say that $X_n$ converges to $X$ in probability, or
+    \[
+    X_n\xrightarrow{P}X,
+    \]
+    if, for every $\varepsilon>0$,
+    \[
+    \mathbb{P}\left(
+    \|X_n-X\|_2>\varepsilon
+    \right)
+    \xrightarrow{n\to\infty}0.
+    \]
+\end{itemize}
+
+\begin{center}
+\textbf{End of Lecture 3}
+\end{center}\noindent
+Recall: If $(X_n),X$ are random vectors in $\mathbb{R}^k$, we say
+\begin{itemize}
+    \item
+    $X_n \xrightarrow{\mathrm{a.s.}} X$ iff
+    \[
+    \mathbb{P}\left(
+    \|X_n-X\|_2 \xrightarrow{n\to\infty} 0
+    \right)=1.
+    \]
+
+    \item
+    $X_n \xrightarrow{P} X$ iff
+    \[
+    \forall \varepsilon>0,\qquad
+    \mathbb{P}\left(\|X_n-X\|_2>\varepsilon\right)
+    \xrightarrow{n\to\infty}0.
+    \]
+\end{itemize}
+
+\noindent
+\underline{Rmk.}
+\[
+X_n \xrightarrow{\mathrm{a.s.}/P} X
+\quad\text{iff}\quad
+X_{n,i} \xrightarrow{\mathrm{a.s.}/P} X_i
+\qquad \forall\,1\leq i\leq k.
+\]
+
+\[
+\left[
+X\leq t
+\iff
+X_i\leq t_i
+\quad \forall\,1\leq i\leq k
+\right]
+\]
+
+\noindent
+\underline{Def 2.}
+We say that $X_n$ converges \underline{in distribution} to $X$,
+or $X_n\xrightarrow{d}X$, if for all $t\in\mathbb{R}^k$
+where the function
+\[
+t\mapsto\mathbb{P}(X\leq t)
+\]
+is continuous, we have
+\[
+\mathbb{P}(X_n\leq t)
+\xrightarrow{n\to\infty}
+\mathbb{P}(X\leq t).
+\]
+
+\medskip
+\noindent
+Some facts from P \& M.
+
+\medskip
+\noindent
+\underline{Prop 1.}
+
+\begin{enumerate}
+    \item[(a)]
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}}X
+    \implies
+    X_n\xrightarrow{P}X
+    \implies
+    X_n\xrightarrow{d}X.
+    \]
+
+    \item[(b)]
+    \underline{Continuous Mapping Theorem} (CMT).
+    Let $(X_n),X$ take values in
+    $\mathcal{X}\subseteq\mathbb{R}^k$,
+    let $g:\mathcal{X}\to\mathbb{R}$ be continuous.
+    Then,
+    \[
+    X_n\xrightarrow{\mathrm{a.s.}/P/d}X
+    \implies
+    g(X_n)\xrightarrow{\mathrm{a.s.}/P/d}g(X).
+    \]
+
+    \item[(c)]
+    \underline{Slutsky's Lemma.}
+    Suppose that
+    \[
+    X_n\xrightarrow{d}X,
+    \qquad
+    Y_n\xrightarrow{d}c,
+    \]
+    where $c$ is constant, then
+    \begin{enumerate}
+        \item[(i)]
+        \[
+        Y_n\xrightarrow{P}c.
+        \]
+
+        \item[(ii)]
+        \[
+        X_n+Y_n\xrightarrow{d}X+c.
+        \]
+
+        \item[(iii)]
+        If $k=1$,
+        \[
+        X_nY_n\xrightarrow{d}X\cdot c,
+        \]
+        \[
+        \frac{X_n}{Y_n}\xrightarrow{d}\frac{X}{c}
+        \qquad\text{if }c\neq0.
+        \]
+
+        \item[(iv)]
+        Let $(A_n)$ be a sequence of random matrices in
+        $\mathbb{R}^{m\times k}$, and suppose,
+        \[
+        (A_n)_{ij}\xrightarrow{P}A_{ij}
+        \qquad \forall i,j
+        \]
+        where $A$ is deterministic. Then,
+        \[
+        A_nX_n\xrightarrow{d}AX.
+        \]
+    \end{enumerate}
+
+    \item[(d)]
+    If $X_n\xrightarrow{d}X$, then $(X_n)$ is
+    ``bounded in probability'' or $X_n=O_P(1)$, i.e.\
+    for all $\varepsilon>0$,
+    $\exists\,M_\varepsilon>0$, $N_\varepsilon\in\mathbb{N}$ s.t.
+    \[
+    \mathbb{P}\left(\|X_n\|_2>M_\varepsilon\right)
+    <\varepsilon
+    \qquad \forall n\geq N_\varepsilon.
+    \]
+\end{enumerate}
+
+\medskip
+\noindent
+\underline{2. LLN \& CLT}
+
+\medskip
+\noindent
+Let $X_1,X_2,\ldots$ be iid copies of a r.v.\ $X$ in
+$\mathbb{R}^k$.
+When $k=1$, the Weak Law of large numbers says that if
+$\operatorname{Var}(X)<\infty$, then
+\[
+\bar{X}_n:=\frac{1}{n}\sum_{i=1}^n X_i
+\xrightarrow{P}\mathbb{E}X.
+\]
+Indeed by Chebyshev's inequality,
+\[
+\forall\varepsilon>0,\qquad
+\mathbb{P}\left(
+|\bar{X}_n-\mathbb{E}X|>\varepsilon
+\right)
+\leq
+\frac{\operatorname{Var}(\bar{X}_n)}{\varepsilon^2}
+=
+\frac{\operatorname{Var}(X)}{n\varepsilon^2}
+\xrightarrow{n\to\infty}0.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 1} (Strong law of large numbers).
+If $\mathbb{E}\left(\|X_n\|_2\right)<\infty$, then
+\[
+\bar{X}_n\xrightarrow{\mathrm{a.s.}}\mathbb{E}[X]
+\qquad\text{as }n\to\infty.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 2} (Central Limit Theorem).
+When $k=1$, assume in addition that
+$\operatorname{Var}(X)=\sigma^2<\infty$, then,
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)
+\xrightarrow{d}N(0,\sigma^2).
+\]
+
+\noindent
+To state a multivariate version, recall that
+$Z\sim N(\mu,\Sigma)$ iff
+\[
+\forall\alpha\in\mathbb{R}^k,\qquad
+\alpha^T Z\sim N(\alpha^T\mu,\alpha^T\Sigma\alpha).
+\]
+If $\Sigma$ is positive definite, then $Z$ has a p.d.f.
+\[
+f(z)
+=
+\frac{1}{(2\pi)^{n/2}}
+\frac{1}{|\det\Sigma|^{1/2}}
+\exp\left\{
+-\frac{1}{2}(z-\mu)^T\Sigma^{-1}(z-\mu)
+\right\},
+\qquad z\in\mathbb{R}^k.
+\]
+
+\medskip
+\noindent
+\underline{Theorem 2} $(k\geq1)$.
+If $\operatorname{Var}(X)=\Sigma$ is finite \& pos.\ def.\ then
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)
+\xrightarrow{d}N(0,\Sigma).
+\]
+
+\medskip
+\noindent
+\underline{Cor.}
+By Prop 1(d),
+\[
+\sqrt{n}\left(\bar{X}_n-\mathbb{E}X\right)=O_P(1)
+\iff
+\left(\bar{X}_n-\mathbb{E}X\right)
+=
+O_P\left(\frac{1}{\sqrt{n}}\right).
+\]
+
+\medskip
+\noindent
+The CLT is useful to define confidence intervals.
+Let $X_1,X_2,\ldots$ be iid copies of $X$ with mean $\mu_0$
+and $\operatorname{Var}(X)=\sigma^2<\infty$ known.
+Define
+\[
+C_n
+=
+\left\{
+\mu\in\mathbb{R}:
+\sqrt{n}\frac{|\bar{X}_n-\mu|}{\sigma}
+\leq z_\alpha
+\right\}
+\]
+where $z_\alpha$ is such that
+\[
+\mathbb{P}(|Z|\leq z_\alpha)=1-\alpha
+\qquad\text{if }Z\sim N(0,1).
+\]
+
+\[
+\begin{aligned}
+\mathbb{P}(\mu_0\in C_n)
+&=
+\mathbb{P}\left(
+\sqrt{n}|\bar{X}_n-\mu_0|\leq\sigma z_\alpha
+\right)\\
+&\xrightarrow{n\to\infty}
+\mathbb{P}(|Z|\leq z_\alpha)
+\qquad\text{by the CLT}\\
+&=1-\alpha.
+\end{aligned}
+\]
+
+\noindent
+Hence, we say that $C_n$ is an ``asymptotic''
+$(1-\alpha)$-confidence interval.
+
+\medskip
+\noindent
+If $\sigma^2$ is unknown, we can define an estimator
+\[
+\begin{aligned}
+\hat{\sigma}^2
+&=
+\frac{1}{n-1}
+\sum_{i=1}^n
+\left(
+X_i-\underbrace{\bar{X}_n}_{\frac{1}{n}\sum_j X_j}
+\right)^2\\
+&=
+\frac{1}{n-1}
+\left(
+\sum_{i=1}^n X_i^2-n\bar{X}_n^2
+\right)\\
+&\xrightarrow{d}
+\mathbb{E}(X^2)-(\mathbb{E}X)^2
+=
+\sigma^2
+\end{aligned}
+\]
+by several applications of the SLLN, the CMT and Slutsky's lemma.
+
+\medskip
+\noindent
+Define a new random interval
+\[
+\widetilde{C}_n
+=
+\left\{
+\mu\in\mathbb{R}:
+\sqrt{n}\frac{|\bar{X}_n-\mu|}{\hat{\sigma}}
+\leq z_\alpha
+\right\}.
+\]
+
+\noindent
+By the CMT, $\hat{\sigma}\xrightarrow{d}\sigma$ constant.
+By Slutsky's Lemma,
+\[
+\sqrt{n}\frac{(\bar{X}_n-\mu_0)}{\hat{\sigma}}
+\xrightarrow{d}N(0,1).
+\]
+
+\noindent
+Hence, $C_n$ is an asymptotic $(1-\alpha)$-confidence interval
+for $\mu_0$.
+
+\medskip
+\noindent
+\underline{Next time}: Uniform laws of Large Numbers (ULLN)
+
+\medskip
+\noindent
+Let $\mathcal{H}$ be a class of functions
+$\mathbb{R}^k\to\mathbb{R}$.
+Assume that
+\[
+\mathbb{E}|h(X)|<\infty
+\qquad \forall h\in\mathcal{H}.
+\]
+We know from the SLLN that
+\[
+\frac{1}{n}\sum_{i=1}^n h(X_i)
+\xrightarrow{\mathrm{a.s.}}
+\mathbb{E}[h(X)]
+\qquad \forall h\in\mathcal{H}.
+\]
+
+\noindent
+We have a ULLN if
+\[
+\sup_{h\in\mathcal{H}}
+\left|
+\frac{1}{n}\sum_{i=1}^n h(X_i)-\mathbb{E}[h(X)]
+\right|
+\xrightarrow{\mathrm{a.s.}}0.
+\]
+
+\begin{center}
+\textbf{End of Lecture 4}
+\end{center}
+
+\subsection*{Uniform Laws of Large Numbers}
+
+Let $X$ be a r.v. on $\mathcal{X}$. $(X_i)$ iid copies of $X$.
+Let $\mathcal{H}$ be a class of functions $\mathcal{X}\to\mathbb{R}$, s.t.
+\[
+\mathbb{E}|h(X)|<\infty\qquad\forall h\in\mathcal{H}.
+\]
+\[
+\underline{\mathrm{ULLN}}\qquad
+\sup_{h\in\mathcal{H}}\left|
+\underbrace{\frac{1}{n}\sum_{i=1}^n h(X_i)}_{=P_nh}
+-\underbrace{\mathbb{E}h(X)}_{=Ph}\right|
+\xrightarrow{\mathrm{a.s.}}0.
+\]
+If $\mathcal{H}=\{h_1,\ldots,h_M\}$ is finite, then by the SLLN,
+for any $1\leq j\leq M$,
+\[
+|P_nh_j-Ph_j|\xrightarrow{\mathrm{a.s.}}0
+\]
+i.e. on an event $A_j$ with $\mathbb{P}(A_j)=1$, $\forall\varepsilon>0$,
+$\exists N_j(\varepsilon)$ s.t.
+\[
+|P_nh_j-Ph_j|<\varepsilon\qquad\forall n>N_j(\varepsilon).
+\]
+Hence on $A:=\bigcap_{j=1}^M A_j$, we have $\forall\varepsilon>0$,
+\[
+\max_{1\leq j\leq M}|P_nh_j-Ph_j|<\varepsilon
+\qquad\forall n>\max_j N_j(\varepsilon).
+\]
+As $\mathbb{P}(A)=1$, this means
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\xrightarrow{\mathrm{a.s.}}0.
+\]
+When $|\mathcal{H}|$ is infinite, we will use a ``bracketing argument''.
+A \underline{bracket} is a collection of functions
+$\{\underline{h}_j,\overline{h}_j\}_{j=1}^M$ such that
+\[
+\forall j,\qquad\underline{h}_j(x)\leq\overline{h}_j(x)
+\qquad\forall x\in\mathcal{X}.
+\]
+A finite bracket \underline{covers} $\mathcal{H}$ if for all $h\in\mathcal{H}$,
+$\exists j\in\{1,\ldots,M\}$ s.t.
+\[
+\underline{h}_j(x)\leq h(x)\leq\overline{h}_j(x)
+\qquad\forall x\in\mathcal{X}.
+\]
+
+\paragraph{Prop 2.}
+Suppose that $\forall\varepsilon>0$, there is a finite bracket
+$\{\underline{h}_j,\overline{h}_j\}_{j=1}^M$ covering $\mathcal{H}$, s.t.
+\begin{align*}
+\text{(1)}\quad&\mathbb{E}|\underline{h}_j(X)|<\infty,\quad
+\mathbb{E}|\overline{h}_j(X)|<\infty\qquad\forall 1\leq j\leq M,\\
+\text{(2)}\quad&\mathbb{E}|\overline{h}_j(X)-\underline{h}_j(X)|<\varepsilon.
+\end{align*}
+Then,
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\xrightarrow{\mathrm{a.s.}}0.
+\]
+\noindent\underline{Proof.}
+Take any $\varepsilon>0$, then for any $h\in\mathcal{H}$,
+$\exists 1\leq j\leq M$ s.t. $\underline{h}_j\leq h\leq\overline{h}_j$.
+Then
+\[
+\begin{aligned}
+P_nh-Ph&\leq P_n\overline{h}_j-P\underline{h}_j\\
+&\leq |P_n\overline{h}_j-P\overline{h}_j|
++\underbrace{|P(\overline{h}_j-\underline{h}_j)|}_{\leq\varepsilon}.
+\end{aligned}
+\]
+Similarly,
+\[
+Ph-P_nh\leq P\overline{h}_j-P_n\underline{h}_j
+\leq |P_n\underline{h}_j-P\underline{h}_j|
++\underbrace{|P(\overline{h}_j-\underline{h}_j)|}_{\leq\varepsilon}.
+\]
+\[
+\therefore\quad\sup_{h\in\mathcal{H}}|P_nh-Ph|
+\leq\underbrace{\max_{g\in\mathrm{bracket}}|P_ng-Pg|}
+_{\xrightarrow{\mathrm{a.s.}}0\text{ by the SLLN as bracket is finite}}
++\varepsilon.
+\]
+Hence, on an event $A_\varepsilon$ with $\mathbb{P}(A_\varepsilon)=1$, we have
+\[
+\limsup_{n\to\infty}\sup_{h\in\mathcal{H}}|P_nh-Ph|\leq\varepsilon.
+\]
+Take sequence $\varepsilon_k\downarrow0$. Let
+$A=\bigcap_{k=1}^\infty A_{\varepsilon_k}$, with $\mathbb{P}(A)=1$.
+On $A$,
+\[
+\sup_{h\in\mathcal{H}}|P_nh-Ph|\longrightarrow0.\qquad\square
+\]
+
+\subsection*{3 Consistency of the MLE}
+
+\paragraph{Def 3.}
+We say an estimator $\hat{\theta}(X_1,\ldots,X_n)$ is \underline{consistent}
+if $\hat{\theta}\xrightarrow{P}\theta$ under $P_\theta$ $\forall\theta\in\Theta$.
+
+\medskip\noindent\underline{Assumptions.}
+Let $\{f(\cdot,\theta):\theta\in\Theta\}$ be a model of pdfs or pmfs on
+$\mathcal{X}\subseteq\mathbb{R}^d$. We'll assume
+\begin{enumerate}
+\item[(1)] $f(x,\theta)>0\qquad\forall x\in\mathcal{X},\ \theta\in\Theta$.
+\item[(2)] $\theta\mapsto f(x,\theta)$ is continuous $\forall x\in\mathcal{X}$.
+\item[(3)] $\Theta$ is compact.
+\item[(4)] \underline{Strict identifiability}: $f(\cdot,\theta)=f(\cdot,\theta')
+\implies\theta=\theta'$.
+\item[(5)] $\displaystyle\mathbb{E}_\theta
+\underbrace{\sup_{\theta'\in\Theta}|\log f(X,\theta')|}_{M(X)}<\infty
+\qquad\forall\theta\in\Theta$.
+\end{enumerate}
+
+Recall that (5) allows us to define
+$\ell(\theta):=\mathbb{E}_{\theta_0}\log f(X,\theta)$ for a true parameter $\theta_0$.
+Furthermore, by (4) $\ell(\theta)$ is maximised uniquely at $\theta=\theta_0$.
+
+By (2) \& (5), we have that $\ell$ is continuous.
+Indeed take $(\theta_i)$, $\theta_i\to\theta$, then
+\[
+\begin{aligned}
+|\ell(\theta_i)-\ell(\theta)|
+&=\left|\mathbb{E}_{\theta_0}\left[
+\underbrace{\log f(X,\theta_i)-\log f(X,\theta)}
+_{\xrightarrow{\mathrm{a.s.}}0\text{ by (2)}}\right]\right|\\
+&\longrightarrow0\quad\begin{gathered}
+\text{by the Dominated Convergence Theorem (P\&M)}\\
+\text{using the domination condition (5).}
+\end{gathered}
+\end{aligned}
+\]
+In maximum likelihood we maximise
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\sum_{i=1}^n\log f(X_i,\theta),
+\qquad\text{a ``sample'' version of }\ell(\theta).
+\]
+
+\paragraph{Lemma.}
+If $(X_i)$ are iid with law $P_{\theta_0}$, we have the ULLN
+\[
+\sup_{\theta\in\Theta}\left|
+\underbrace{\overline{\ell}_n(\theta)}_{=P_nh_\theta}
+-\underbrace{\ell(\theta)}_{=Ph_\theta}\right|
+\xrightarrow{\mathrm{a.s.}}0
+\]
+where $h_\theta:x\mapsto\log f(x,\theta)$.
+Here $\mathcal{H}=\{h_\theta:\theta\in\Theta\}$.
+
+\medskip\noindent\underline{*Proof sketch*}
+To apply Prop 2, we need to construct for any $\varepsilon>0$ a finite bracket
+satisfying the hypotheses (1) \& (2).
+Take any $\theta\in\Theta$, let
+$B_{\theta,\delta}=\{\theta':\|\theta-\theta'\|\leq\delta\}$, let
+\[
+\overline{h}_\theta^{(\delta)}=\sup_{\theta'\in B_{\theta,\delta}}h_{\theta'}(x),
+\qquad
+\underline{h}_\theta(x)=\inf_{\theta'\in B_{\delta,\theta}}h_{\theta'}(x).
+\]
+\begin{center}
+\includegraphics[width=0.30\textwidth]{figures/principles-of-statistics/lecture5-compactness.png}
+\end{center}
+By def
+\[
+\underline{h}_\theta\leq h_{\theta'}\leq\overline{h}_\theta
+\qquad\forall\theta'\in B_{\delta,\theta}.
+\]
+Hypothesis (1) is given by Assumption (5).
+We'll choose $\delta$ small enough so that we can obtain Hypothesis 2:
+\[
+\mathbb{E}|\overline{h}_\theta(X)-\underline{h}_\theta(X)|<\varepsilon
+\]
+(To do this carefully, apply the DCT using assumptions (2) \& (5).)
+
+For each $\theta\in\Theta$ we obtain a pair $(\underline{h}_\theta,\overline{h}_\theta)$
+sandwiching functions in a ``ball'' around $h_\theta$.
+By compactness, $\exists$ a finite bracket
+$\{\overline{h}_{\theta_j},\underline{h}_{\theta_j}\}_{j=1}^M$ s.t.
+$\forall\theta\in\Theta$, $\exists j$ s.t.
+\[
+\underline{h}_{\theta_j}\leq h_\theta\leq\overline{h}_{\theta_j}.
+\]
+This allows us to apply prop 2.\quad$\square$
+
+\begin{center}
+\textbf{End of Lecture 5}
+\end{center}
+
+\paragraph{Recall.}
+We stated 5 assumptions for consistency of the MLE.
+
+\noindent\underline{Implications}
+\begin{itemize}
+\item $\ell(\theta)=\mathbb{E}_{\theta_0}[\log f(X,\theta)]<\infty$
+$\forall\theta$, maximised uniquely at $\theta_0$.
+\item $\ell$ is continuous on $\Theta$.
+\item \underline{ULLN}
+\[
+\sup_{\theta\in\Theta}|\overline{\ell}_n(\theta)-\ell(\theta)|
+\xrightarrow{\mathrm{a.s.}/P/d}0.
+\]
+\end{itemize}
+
+\paragraph{Theorem 3.}
+Suppose that $\{f(\cdot,\theta):\theta\in\Theta\}$ satisfies the stated
+assumptions and $X_1,X_2,\ldots$ are iid $P_{\theta_0}$.
+Then an MLE $\hat{\theta}_n$ based on $X_1,\ldots,X_n$ exists and
+\[
+\hat{\theta}_n\xrightarrow{P}\theta_0.
+\]
+
+\paragraph{Proof.}
+\[
+\overline{\ell}_n(\theta)=\frac{1}{n}\sum_{i=1}^n\log f(X_i,\theta)
+\]
+is continuous, so it attains a supremum in $\Theta$ compact at some
+$\hat{\theta}_n\in\Theta$.
+
+Define
+\[
+\Theta_\varepsilon=\{\theta\in\Theta:\|\theta-\theta_0\|_2\geq\varepsilon\}
+\]
+and note $\Theta_\varepsilon$ is compact (we remove an open ball from
+$\Theta$ compact). We'll show that
+\[
+\mathbb{P}(\hat{\theta}_n\in\Theta_\varepsilon)\longrightarrow0
+\qquad\text{as }n\to\infty.
+\]
+If this holds for arbitrary $\varepsilon>0$,
+$\hat{\theta}_n\xrightarrow{P}\theta_0$.
+
+\begin{center}
+% Cropped from 屏幕截图 2026-10-21 161827.png (third supplied screenshot).
+\includegraphics[width=0.40\textwidth]{figures/principles-of-statistics/lecture6-consistency.png}
+\end{center}
+
+\[
+\sup_{\theta\in\Theta_\varepsilon}\ell(\theta)=:c(\varepsilon)<\ell(\theta_0).
+\]
+Choose
+\[
+\delta(\varepsilon)<\frac{\ell(\theta_0)-c(\varepsilon)}{2}.
+\]
+Define an event
+\[
+A_\varepsilon=\left\{\sup_{\theta\in\Theta}
+|\overline{\ell}_n(\theta)-\ell(\theta)|\leq\delta(\varepsilon)\right\}.
+\]
+By the ULLN, $\mathbb{P}(A_\varepsilon)\to1$ as $n\to\infty$.
+\[
+\begin{aligned}
+\sup_{\theta\in\Theta_\varepsilon}\overline{\ell}_n(\theta)
+&\leq\sup_{\theta\in\Theta_\varepsilon}\ell(\theta)
++\underbrace{\sup_{\theta\in\Theta_\varepsilon}
+(\overline{\ell}_n(\theta)-\ell(\theta))}_{\leq\delta(\varepsilon)\text{ on }A_\varepsilon}\\
+&\leq c(\varepsilon)+\delta(\varepsilon)\\
+&<\ell(\theta_0)-\delta(\varepsilon)
+\qquad\text{(by def of $\delta(\varepsilon)$)}\\
+&\leq\overline{\ell}_n(\theta_0).
+\end{aligned}
+\]
+Hence, on $A_\varepsilon$, $\hat{\theta}_n\notin\Theta_\varepsilon$.
+In other words $A_\varepsilon\subseteq\{\hat{\theta}_n\notin\Theta_\varepsilon\}$.
+Therefore
+\[
+\mathbb{P}(\hat{\theta}_n\notin\Theta_\varepsilon)
+\geq\mathbb{P}(A_\varepsilon)\longrightarrow1\qquad\text{as }n\to\infty.
+\]
+Finally
+\[
+\mathbb{P}(\hat{\theta}_n\in\Theta_\varepsilon)\longrightarrow0
+\qquad\text{as }n\to\infty.\qquad\square
+\]
+
+\paragraph{Rmk.}
+If we assume that $\theta\mapsto\log f(x,\theta)$ is differentiable for
+all $x\in\mathcal{X}$, and $\frac{\partial\overline{\ell}_n(\theta)}{\partial\theta}$
+satisfies a ULLN and its limit $\frac{\partial\ell(\theta)}{\partial\theta}$
+has a single $0$ at $\theta_0$, there is a simpler argument to show consistency.
+Can deal with noncompact $\Theta$ in some simple models.
+
+\subsection*{4. Asymptotic Normality of the MLE}
+Fluctuations of $\sqrt{n}(\hat{\theta}_n-\theta_0)$.
+
+\paragraph{Theorem 4.}
+Suppose that $\{f(\cdot,\theta):\theta\in\Theta\}$ satisfies the 9 stated
+assumptions. Let $\hat{\theta}_n$ be an MLE based on $X_1,\ldots,X_n$
+iid $P_{\theta_0}$. Then as $n\to\infty$,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
+N(0,I^{-1}(\theta_0)).
+\]
+
+The nine assumptions are the five assumptions for consistency stated above,
+together with the following four additional regularity assumptions (R2).
+
+\medskip\noindent\textbf{Regularity assumptions (R2).} Let the statistical model be such that:
+\begin{enumerate}
+\item[(1)] $\theta_0\in\operatorname{int}\Theta$;
+\item[(2)] there exists an open neighbourhood $N$ of $\theta_0$ on which
+$\theta\mapsto f(x,\theta)$ is twice continuously differentiable for all $x\in\mathcal{X}$;
+\item[(3)] $I(\theta_0)$ exists and is invertible;
+\item[(4)]
+\[
+\int_{\mathcal{X}}\sup_{\theta\in\Theta}
+\|\nabla_\theta\log f(x,\theta)\|_2\,dx<\infty
+\]
+\[
+\mathbb{E}_{\theta_0}\left(\sup_{\theta\in\Theta}
+\|\nabla_\theta^2\log f(X,\theta)\|_2\right)<\infty
+\]
+\[
+\int_{\mathcal{X}}\sup_{\theta\in\Theta}
+\|\nabla_\theta^2\log f(x,\theta)\|_2\,dx<\infty.
+\]
+\end{enumerate}
+(In fact the above can be weakened by replacing $\Theta$ above with any compact set $K$ with
+non-empty interior that contains $\theta_0$.)
+
+\paragraph{Proof.}
+Define $\varepsilon>0$ s.t. the ball
+\[
+\{\theta\in\Theta:\|\theta-\theta_0\|<\varepsilon\}\subseteq K\subset U.
+\]
+Here $K$ is a compact set with non-empty interior containing $\theta_0$,
+as in (R2) above; $U$ denotes the open neighbourhood called $N$ in (R2).
+
+We'll work in an event
+\[
+E_n=\{\|\hat{\theta}_n-\theta_0\|<\varepsilon\}.
+\]
+By consistency, $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
+We'll show that
+\[
+\mathbf{1}_{E_n}\sqrt{n}(\hat{\theta}_n-\theta_0)
+=\mathbf{1}_{E_n}W_n\xrightarrow{d}N(0,I^{-1}(\theta_0))
+\qquad\text{(Ex sheet 1, 8(a)).}
+\]
+Throughout the proof, just assume we're in $E_n$.
+
+On $E_n$, the regularity conditions guarantee that
+\[
+\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)=0.
+\]
+The MVT implies that
+\[
+0=\nabla_\theta\overline{\ell}_n(\hat{\theta}_n)
+=\nabla_\theta\overline{\ell}_n(\theta_0)
++\overline{A}_n(\hat{\theta}_n-\theta_0),
+\]
+where $\overline{A}_n\approx\nabla_\theta^2\overline{\ell}_n(\theta_0)$ is given by
+\[
+(\overline{A}_n)_{i,j}
+=\frac{\partial^2}{\partial\theta_i\partial\theta_j}
+\overline{\ell}_n(\theta^{(i)})
+\qquad\text{for }\theta^{(i)}\in[\theta_0,\hat{\theta}_n].
+\]
+Rearranging yields
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=(-\overline{A}_n)^{-1}\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+\]
+(reg conditions imply $\overline{A}_n$ is invertible).
+
+\paragraph{Claim.}
+\[
+\overline{A}_n\xrightarrow{P}
+\mathbb{E}_{\theta_0}[\nabla_\theta^2\overline{\ell}_n(\theta_0)]
+=-I(\theta_0).
+\]
+\paragraph{Cor.}
+By the CMT,
+\[
+\overline{A}_n^{-1}\xrightarrow{P}-I(\theta_0)^{-1}.
+\]
+Furthermore,
+\[
+\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+=\frac{1}{\sqrt{n}}\sum_{i=1}^n
+\left(\underbrace{\nabla_\theta\log f(X_i,\theta_0)}_{\mathrm{iid}}
+-\underbrace{\mathbb{E}_{\theta_0}[\nabla_\theta\log f(X,\theta_0)]}
+_{=0\ (\mathrm{reg})}\right).
+\]
+By the multivariate CLT,
+\[
+\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)
+\xrightarrow{d}
+N\left(0,\underbrace{\operatorname{Var}_{\theta_0}
+(\nabla_\theta\log f(X,\theta_0))}_{I(\theta_0)}\right).
+\]
+By Slutsky's Lemma we have
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}
+N\left(0,I(\theta_0)^{-1}I(\theta_0)I(\theta_0)^{-1}\right).
+\qquad\square
+\]
+
+\noindent\underline{Next time}: Proving claim
+
+\begin{center}
+\textbf{End of lecture 6}
+\end{center}
+\noindent\underline{Theorem 4}\quad
+If $(X_i)$ iid $P_{\theta_0}$, under regularity conditions,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0)).
+\]
+
+\noindent\underline{Proof}\quad
+Define $E_n=\{\hat{\theta}_n\in K\}$, for a ``regular'' neighbourhood of $\theta_0$.
+By consistency $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
+Working on $E_n$, a Taylor series gives
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=-(\overline{A}_n)^{-1}
+\underbrace{\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)}
+_{\xrightarrow{d}N(0,I(\theta_0))\text{ by a CLT}}
+=:Z_n,
+\]
+where
+\[
+(\overline{A}_n)_{j,k}
+=\frac1n\sum_{i=1}^n
+\underbrace{\frac{\partial^2}{\partial\theta_j\partial\theta_k}
+\log f(X_i,\theta^{(j)})}_{=:g(X_i,\theta^{(j)})},
+\qquad\theta^{(j)}\in[\hat{\theta}_n,\theta_0].
+\]
+\noindent\underline{Claim}\quad
+$\overline{A}_n\xrightarrow{P}-I(\theta_0)$.
+
+% Pending confirmation: cropped beginning of the first line in screenshot 2.
+Successive applications of Slutsky's Lemma and CMT show that
+$Z_n\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+
+Why can we work on $E_n$? On $E_n$,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)=Z_n$. Hence,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=\underbrace{Z_n}_{\xrightarrow{d}N(0,I^{-1}(\theta_0))}
++\underbrace{\bigl(\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\bigr)}
+_{\xrightarrow{P}0},
+\]
+as
+\[
+\mathbb{P}\bigl(\lvert\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\rvert<\varepsilon\bigr)
+\geq\mathbb{P}(E_n)\xrightarrow{n\to\infty}1.
+\]
+By Slutsky,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+
+\medskip
+\noindent\underline{Proof of Claim}\quad
+We need to show, $\forall j,k$,
+\[
+\lvert(\overline{A}_n)_{j,k}-(-I(\theta_0))_{j,k}\rvert\xrightarrow{P}0.
+\]
+Let $g(\theta)=\mathbb{E}_{\theta_0}[g(X,\theta)]$.
+Recall that $I(\theta_0)=-g(\theta_0)$ (under reg conditions).
+Note
+\[
+(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}
+=\frac1n\sum_{i=1}^n g(X_i,\theta^{(j)})-g(\theta^{(j)})
++g(\theta^{(j)})-g(\theta_0).
+\]
+Then,
+\[
+\begin{aligned}
+\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert
+&\leq\underbrace{\sup_{\theta\in K}
+\left\lvert\frac1n\sum_{i=1}^n g(X_i,\theta)-g(\theta)\right\rvert}_{\text{(I)}}
++\underbrace{\lvert g(\theta^{(j)})-g(\theta_0)\rvert}_{\text{(II)}}.
+\end{aligned}
+\]
+By a ULLN, $\text{(I)}\xrightarrow{\mathrm{a.s.}}0$, using
+\[
+\theta\longmapsto g(x,\theta)
+=\frac{\partial^2}{\partial\theta_j\partial\theta_k}\log f(x,\theta)
+\quad\text{is continuous},
+\]
+$K$ is compact, and
+$\mathbb{E}_{\theta_0}\sup_{\theta\in K}|g(X,\theta)|<\infty$.
+Also, we know $\hat{\theta}_n\xrightarrow{P}\theta_0$ by consistency,
+thus $\theta^{(j)}\xrightarrow{P}\theta_0$, and an application of the
+dominated convergence theorem shows that $g$ is continuous in $K$.
+Hence, by the CMT,
+$\text{(II)}\xrightarrow{P}0$.
+Therefore,
+\[
+\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert\xrightarrow{P}0.
+\qquad\square
+\]
+
+% Pending confirmation: cropped first line and right edge in screenshot 4.
+\noindent (1) Two continuous derivatives of
+$\theta\mapsto\log f(x,\theta)$ are \underline{not} necessary for asymptotic normality.
+Le Cam theory relaxes this for models with a single weak derivative.
+
+\medskip
+\noindent\underline{Ex}\quad Laplace model
+\[
+f(x,\theta)=\frac12\exp\{-|x-\theta|\},\qquad x\in\mathbb{R}.
+\]
+\noindent (2) One weak derivative is necessary.
+
+\medskip
+\noindent\underline{Ex}\quad $X\sim\operatorname{Unif}([0,\theta])$, $\theta>0$.
+
+The MLE is $\hat{\theta}_n=\max_{1\leq i\leq n}X_i$, and
+\[
+f(x,\theta)=\frac1\theta\,\mathbf{1}_{\{x\leq\theta\}}.
+\]
+\begin{center}
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(65,22)
+\put(0,3){\line(1,0){60}}
+\qbezier(3,3)(14,3)(22,4)
+\put(22,4){\line(0,1){16}}
+\qbezier(22,20)(24,9)(36,6)
+\qbezier(36,6)(48,3)(60,2)
+\end{picture}
+\end{center}
+The likelihood is discontinuous at $\theta=x$ and
+$\sqrt{n}(\hat{\theta}_n-\theta_0)$ has a non-normal limit (Ex Sheet).
+
+\medskip
+\noindent (3) It is also necessary that $\theta_0\in\operatorname{int}(\Theta)$.
+
+\medskip
+\noindent\underline{Ex}\quad $X\sim N(\theta,1)$, where $\Theta=[0,\infty)$.
+
+Here the MLE $\hat{\theta}_n=\max(0,\overline{X}_n)$.
+Under $P_{\theta_0}$ where $\theta_0=0$ (on the boundary of $[0,\infty)$),
+we can show that $\sqrt{n}(\hat{\theta}_n-\theta_0)$ has a non-normal limit (Ex Sheet).
+
+\medskip
+\noindent (4) Cramer Rao lower bound says that $I^{-1}(\theta_0)$ is
+best variance for $\sqrt{n}(\hat{\theta}_n-\theta_0)$ for unbiased
+$\hat{\theta}_n$, for any finite $n$.
+
+\medskip
+\noindent\underline{Le Cam theory}\quad
+In models with the ``local asymptotic normality'', any estimator
+$\tilde{\theta}_n$ which is ``regular'' has asymptotic variance
+$\geq I^{-1}(\theta_0)$.
+Non-regular estimators can have better asymptotic variance for certain values of $\theta_0$.
+
+\medskip
+\noindent\underline{Ex}\quad Hodge's estimator
+
+Let $\hat{\theta}_n$ be the MLE in a regular model s.t.
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))
+\qquad\forall\theta_0\in\operatorname{int}(\Theta).
+\]
+Define
+\[
+\tilde{\theta}_n=
+\begin{cases}
+0&\text{if }|\hat{\theta}_n|<n^{-1/4},\\
+\hat{\theta}_n&\text{o.w.}
+\end{cases}
+\]
+If $\theta_0\neq0$, under $P_{\theta_0}$,
+\[
+\begin{aligned}
+\mathbb{P}(\tilde{\theta}_n\neq\hat{\theta}_n)
+&=\mathbb{P}\bigl(\underbrace{|\hat{\theta}_n|}
+_{|\theta_0|-|\hat{\theta}_n-\theta_0|\leq}<n^{-1/4}\bigr)\\
+&\leq\mathbb{P}\bigl(|\theta_0|-|\hat{\theta}_n-\theta_0|<n^{-1/4}\bigr)\\
+&=\mathbb{P}\bigl(|\hat{\theta}_n-\theta_0|>|\theta_0|-n^{-1/4}\bigr)
+\xrightarrow{n\to\infty}0
+\qquad\text{as }\hat{\theta}_n\text{ consistent}.
+\end{aligned}
+\]
+Therefore, under $P_{\theta_0}$,
+$\sqrt{n}(\tilde{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+However, if $\theta_0=0$,
+\[
+\begin{aligned}
+\mathbb{P}(\hat{\theta}_n=\tilde{\theta}_n)
+&=\mathbb{P}(|\hat{\theta}_n|\geq n^{-1/4})\\
+&=\mathbb{P}\bigl(\sqrt{n}\,|\hat{\theta}_n-\theta_0|\geq n^{1/4}\bigr).
+\end{aligned}
+\]
+Recall that by Prop 1 in lecture 4,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)=O_{\mathbb{P}}(1)$, which implies
+the RHS $\xrightarrow{n\to\infty}0$.
+In other words,
+\[
+\mathbb{P}(\tilde{\theta}_n=0)\xrightarrow{n\to\infty}1
+\quad\text{or}\quad
+\sqrt{n}(\tilde{\theta}_n-\theta_0)\xrightarrow{d}0.
+\]
+Hence the asymptotic variance is $0<I^{-1}(\theta_0)$ in general.
+
+\medskip
+\noindent\underline{Mean squared error}
+
+\begin{center}
+\setlength{\unitlength}{0.9mm}
+\begin{picture}(140,60)
+\put(36,9){\vector(1,0){100}}
+\put(84,8){\vector(0,1){48}}
+\put(84,4){\makebox(0,0){$0$}}
+\put(135,4){\makebox(0,0){$\theta$}}
+\put(65,40){\makebox(0,0){$n^{-1}$}}
+\put(36,27){\line(1,0){100}}
+\put(8,32){\makebox(0,0){$\mathbb{E}_\theta(|\hat{\theta}_n-\theta|^2)$}}
+\qbezier(36,27)(54,26)(59,31)
+\qbezier(59,31)(65,37)(68,47)
+\qbezier(68,47)(73,54)(76,25)
+\qbezier(76,25)(80,9)(84,9)
+\qbezier(84,9)(89,9)(94,35)
+\qbezier(94,35)(99,64)(106,41)
+\qbezier(106,41)(112,27)(122,28)
+\qbezier(122,28)(130,29)(136,27)
+\put(119,47){\makebox(0,0){$\mathbb{E}_\theta[(\tilde{\theta}_n-\theta)^2]$}}
+\end{picture}
+\end{center}
+By a ``minimax'' criterion, the Hodges estimator is suboptimal.
+
+\begin{center}
+\textbf{End of Lecture 7}
+\end{center}
+
+\end{document}

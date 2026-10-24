@@ -1,0 +1,220 @@
+\noindent\underline{Theorem 4}\quad
+If $(X_i)$ iid $P_{\theta_0}$, under regularity conditions,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0)).
+\]
+
+\noindent\underline{Proof}\quad
+Define $E_n=\{\hat{\theta}_n\in K\}$, for a ``regular'' neighbourhood of $\theta_0$.
+By consistency $\mathbb{P}(E_n)\to1$ as $n\to\infty$.
+Working on $E_n$, a Taylor series gives
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=-(\overline{A}_n)^{-1}
+\underbrace{\sqrt{n}\,\nabla_\theta\overline{\ell}_n(\theta_0)}
+_{\xrightarrow{d}N(0,I(\theta_0))\text{ by a CLT}}
+=:Z_n,
+\]
+where
+\[
+(\overline{A}_n)_{j,k}
+=\frac1n\sum_{i=1}^n
+\underbrace{\frac{\partial^2}{\partial\theta_j\partial\theta_k}
+\log f(X_i,\theta^{(j)})}_{=:g(X_i,\theta^{(j)})},
+\qquad\theta^{(j)}\in[\hat{\theta}_n,\theta_0].
+\]
+\noindent\underline{Claim}\quad
+$\overline{A}_n\xrightarrow{P}-I(\theta_0)$.
+
+Several applications of Slutsky's Lemma and CMT show that
+$Z_n\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+
+Why can we work on $E_n$? On $E_n$,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)=Z_n$. Hence,
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)
+=\underbrace{Z_n}_{\xrightarrow{d}N(0,I^{-1}(\theta_0))}
++\underbrace{\bigl(\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\bigr)}
+_{\xrightarrow{P}0},
+\]
+as
+\[
+\mathbb{P}\bigl(\lvert\sqrt{n}(\hat{\theta}_n-\theta_0)-Z_n\rvert<\varepsilon\bigr)
+\geq\mathbb{P}(E_n)\xrightarrow{n\to\infty}1.
+\]
+By Slutsky,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+
+\medskip
+\noindent\underline{Proof of Claim}\quad
+We need to show, $\forall j,k$,
+\[
+\lvert(\overline{A}_n)_{j,k}-(-I(\theta_0))_{j,k}\rvert\xrightarrow{P}0.
+\]
+Let $g(\theta)=\mathbb{E}_{\theta_0}[g(X,\theta)]$.
+Recall that $I(\theta_0)=-g(\theta_0)$ (under reg conditions).
+Note
+\[
+(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}
+=\frac1n\sum_{i=1}^n g(X_i,\theta^{(j)})-g(\theta^{(j)})
++g(\theta^{(j)})-g(\theta_0).
+\]
+Then,
+\[
+\begin{aligned}
+\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert
+&\leq\underbrace{\sup_{\theta\in K}
+\left\lvert\frac1n\sum_{i=1}^n g(X_i,\theta)-g(\theta)\right\rvert}_{\text{(I)}}
++\underbrace{\lvert g(\theta^{(j)})-g(\theta_0)\rvert}_{\text{(II)}}.
+\end{aligned}
+\]
+By a ULLN, $\text{(I)}\xrightarrow{\mathrm{a.s.}}0$, using
+\[
+\theta\longmapsto g(x,\theta)
+=\frac{\partial^2}{\partial\theta_j\partial\theta_k}\log f(x,\theta)
+\quad\text{is continuous},
+\]
+$K$ is compact, and
+$\mathbb{E}_{\theta_0}\sup_{\theta\in K}|g(X,\theta)|<\infty$.
+Also, we know $\hat{\theta}_n\xrightarrow{P}\theta_0$ by consistency,
+thus $\theta^{(j)}\xrightarrow{P}\theta_0$, and an application of the
+dominated convergence theorem shows that $g$ is continuous in $K$.
+Hence, by the CMT,
+$\text{(II)}\xrightarrow{P}0$.
+Therefore,
+\[
+\lvert(\overline{A}_n)_{j,k}+I(\theta_0)_{j,k}\rvert\xrightarrow{P}0.
+\qquad\square
+\]
+
+\noindent (1) The continuous derivatives of
+$\theta\mapsto\log f(x,\theta)$ are \underline{not} necessary for asymptotic normality.
+Le Cam theory relaxes this for models with a single weak derivative.
+
+\medskip
+\noindent\underline{Ex}\quad Laplace model
+\[
+f(x,\theta)=\frac12\exp\{-|x-\theta|\},\qquad x\in\mathbb{R}.
+\]
+\noindent (2) One weak derivative is necessary.
+
+\medskip
+\noindent\underline{Ex}\quad $X\sim\operatorname{Unif}([0,\theta])$, $\theta>0$.
+
+The MLE is $\hat{\theta}_n=\max_{1\leq i\leq n}X_i$, and
+\[
+f(x,\theta)=\frac1\theta\,\mathbf{1}_{\{x\leq\theta\}}.
+\]
+\begin{center}
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(65,22)
+\put(0,3){\line(1,0){60}}
+\qbezier(3,3)(14,3)(22,4)
+\put(22,4){\line(0,1){16}}
+\qbezier(22,20)(24,9)(36,6)
+\qbezier(36,6)(48,3)(60,2)
+\end{picture}
+\end{center}
+The likelihood is discontinuous at $\theta=x$ and
+$\sqrt{n}(\hat{\theta}_n-\theta_0)$ has a non-normal limit (Ex sheet).
+
+\medskip
+\noindent (3) It is also necessary that $\theta_0\in\operatorname{int}(\Theta)$.
+
+\medskip
+\noindent\underline{Ex}\quad $X\sim N(\theta,1)$, where $\Theta=[0,\infty)$.
+
+Here the MLE $\hat{\theta}_n=\max(0,\overline{X}_n)$.
+Under $P_{\theta_0}$ where $\theta_0=0$ (on the boundary of $[0,\infty)$),
+we can show that $\sqrt{n}(\hat{\theta}_n-\theta_0)$ has a non-normal limit (Ex sheet).
+
+\medskip
+\noindent (4) Cramer Rao lower bound says that $I^{-1}(\theta_0)$ is
+best variance for $\sqrt{n}(\hat{\theta}_n-\theta_0)$ for unbiased
+$\hat{\theta}_n$, for any finite $n$.
+
+\medskip
+\noindent\underline{Le Cam theory}\quad
+In models with the ``local asymptotic normality'', any estimator
+$\tilde{\theta}_n$ which is ``regular'' has asymptotic variance
+$\geq I^{-1}(\theta_0)$.
+Non-regular estimators can have better asymptotic variance for certain values of $\theta_0$.
+
+\medskip
+\noindent\underline{Ex}\quad Hodge's estimator
+
+Let $\hat{\theta}_n$ be the MLE in a regular model s.t.
+\[
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))
+\qquad\forall\theta_0\in\operatorname{int}(\Theta).
+\]
+Define
+\[
+\tilde{\theta}_n=
+\begin{cases}
+0&\text{if }|\hat{\theta}_n|<n^{-1/4},\\
+\hat{\theta}_n&\text{o.w.}
+\end{cases}
+\]
+If $\theta_0\neq0$, under $P_{\theta_0}$,
+\[
+\begin{aligned}
+\mathbb{P}(\tilde{\theta}_n\neq\hat{\theta}_n)
+&=\mathbb{P}\bigl(\underbrace{|\hat{\theta}_n|}
+_{|\theta_0|-|\hat{\theta}_n-\theta_0|\leq}<n^{-1/4}\bigr)\\
+&\leq\mathbb{P}\bigl(|\theta_0|-|\hat{\theta}_n-\theta_0|<n^{-1/4}\bigr)\\
+&=\mathbb{P}\bigl(|\hat{\theta}_n-\theta_0|>|\theta_0|-n^{-1/4}\bigr)
+\xrightarrow{n\to\infty}0
+\qquad\text{as }\hat{\theta}_n\text{ consistent}.
+\end{aligned}
+\]
+Therefore, under $P_{\theta_0}$,
+$\sqrt{n}(\tilde{\theta}_n-\theta_0)\xrightarrow{d}N(0,I^{-1}(\theta_0))$.
+However, if $\theta_0=0$,
+\[
+\begin{aligned}
+\mathbb{P}(\hat{\theta}_n=\tilde{\theta}_n)
+&=\mathbb{P}(|\hat{\theta}_n|\geq n^{-1/4})\\
+&=\mathbb{P}\bigl(\sqrt{n}\,|\hat{\theta}_n-\theta_0|\geq n^{1/4}\bigr).
+\end{aligned}
+\]
+Recall that by Prop 1 in lecture 4,
+$\sqrt{n}(\hat{\theta}_n-\theta_0)=O_{\mathbb{P}}(1)$, which implies
+the RHS $\xrightarrow{n\to\infty}0$.
+In other words,
+\[
+\mathbb{P}(\tilde{\theta}_n=0)\xrightarrow{n\to\infty}1
+\quad\text{or}\quad
+\sqrt{n}(\tilde{\theta}_n-\theta_0)\xrightarrow{d}0.
+\]
+Hence the asymptotic variance is $0<I^{-1}(\theta_0)$ in general.
+
+\medskip
+\noindent\underline{Mean squared error}
+
+\begin{center}
+\setlength{\unitlength}{0.9mm}
+\begin{picture}(140,60)
+\put(36,9){\vector(1,0){100}}
+\put(84,8){\vector(0,1){48}}
+\put(84,4){\makebox(0,0){$0$}}
+\put(135,4){\makebox(0,0){$\theta$}}
+\put(65,40){\makebox(0,0){$n^{-1}$}}
+\put(36,27){\line(1,0){100}}
+\put(8,32){\makebox(0,0){$\mathbb{E}_\theta(|\hat{\theta}_n-\theta|^2)$}}
+\qbezier(36,27)(54,26)(59,31)
+\qbezier(59,31)(65,37)(68,47)
+\qbezier(68,47)(73,54)(76,25)
+\qbezier(76,25)(80,9)(84,9)
+\qbezier(84,9)(89,9)(94,35)
+\qbezier(94,35)(99,64)(106,41)
+\qbezier(106,41)(112,27)(122,28)
+\qbezier(122,28)(130,29)(136,27)
+\put(119,47){\makebox(0,0){$\mathbb{E}_\theta[(\tilde{\theta}_n-\theta)^2]$}}
+\end{picture}
+\end{center}
+By a ``minimax'' criterion, the Hodges estimator is suboptimal.
+
+\begin{center}
+\textbf{End of Lecture 7}
+\end{center}

@@ -1,0 +1,199 @@
+\newpage
+% Lecture 7, source PDF page 1 (handwritten page 26).
+\noindent\underline{Note}:
+\begin{itemize}
+\setlength{\itemsep}{3pt}
+\item[$\ast$] If $E^s$ \& $E^u$ are not aligned with the coordinate axes, one can
+either transform the coordinates to get alignment, or consider functions $S$ \& $U$
+tangent to the relevant eigenvector. E.g.\ for $\bar e=\binom{1}{k}$ use
+$y=kx+a_2x^2+a_3x^3+\cdots$.
+\item[$\ast$] In higher dimensions use multi-coordinate versions of $S$ \& $U$.
+E.g.\ for a 2D $E^s$ in 3D use $S$: $z=S(x,y)$ and
+$\dot z=\dot x\dfrac{\partial S}{\partial x}+\dot y\dfrac{\partial S}{\partial y}$
+and expand in both coordinates $x,y$.
+\end{itemize}
+
+\medskip
+\noindent\underline{\S 2.2.2\quad Non-linear terms in non-hyperbolic cases}
+
+\medskip
+\noindent
+Suppose at least one eigenvalue has $\operatorname{Re}(\lambda)=0$.
+Have many possibilities.
+
+\medskip
+\noindent (a) $\lambda=\pm i\omega$, linear system has a \underline{centre}.
+In nonlinear case multiple possible outcomes, e.g.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.70\textwidth}
+$\ast\quad\begin{aligned}\dot x&=-y-x^3,\\\dot y&=x-y^3,\end{aligned}$
+\quad $\Rightarrow\quad\dot r=-\dfrac{x^4+y^4}{r}\leq0$,
+\[
+\dot\theta=1-\frac{xy^3-yx^3}{r^2}\to1\quad\text{as }r\to0.
+\]
+\noindent\hspace*{1em}$H=-\frac12(x^2+y^2)$ for linear.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}
+% Snapshot citation: Lecture7.pdf, page 1, stable focus.
+\includegraphics[width=\linewidth]{lecture7-stable-focus.png}
+\end{minipage}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.70\textwidth}
+$\ast\quad\begin{aligned}\dot x&=-y+x^3,\\\dot y&=x+y^3,\end{aligned}$
+\quad $\Rightarrow\quad\dot r=\dfrac{x^4+y^4}{r}\geq0$,
+\[
+\dot\theta\to1\quad\text{as }r\to0.
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}
+% Snapshot citation: Lecture7.pdf, page 1, unstable focus.
+\includegraphics[width=\linewidth]{lecture7-unstable-focus.png}
+\end{minipage}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.70\textwidth}
+$\ast\quad\begin{aligned}\dot x&=-y-2x^2y,\\\dot y&=x+2y^2x\end{aligned}$
+\quad Hamiltonian system,
+\[
+\dot x=\frac{\partial H}{\partial y},\qquad
+\dot y=-\frac{\partial H}{\partial x},
+\]
+with $H=-\frac12(x^2+y^2)-x^2y^2$ --- centrelines are orbits.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}
+% Snapshot citation: Lecture7.pdf, page 1, nonlinear centre.
+\includegraphics[width=\linewidth]{lecture7-nonlinear-centre.png}
+\end{minipage}
+
+\newpage
+% Lecture 7, source PDF page 2 (handwritten page 27).
+\noindent
+(b) $\lambda_1=0$, $\lambda_2\neq0$, \underline{linearized --- line of fixed points}.
+
+\medskip
+\noindent Some possibilities:
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.64\textwidth}
+$\ast\quad\begin{aligned}\dot x&=x^2,\\\dot y&=-y,\end{aligned}$
+\quad linearized $\begin{pmatrix}0&0\\0&-1\end{pmatrix}$,
+\[
+\operatorname{Det}\hat A=0,\quad\operatorname{Tr}\hat A=-1.
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.34\textwidth}
+% Snapshot citation: Lecture7.pdf, page 2, linearized line of fixed points.
+\includegraphics[width=\linewidth]{lecture7-line-fixed-points.png}
+\end{minipage}
+
+\noindent
+\begin{minipage}[c]{0.57\textwidth}
+Full solution:
+\[
+y\propto\exp\left(\frac1x\right),\quad
+\dot x>0,\quad y\propto e^{-t}.
+\]
+\underline{Note}: $E^c=\{y=0\}$.
+
+\medskip
+In the nonlinear case have multiple (non-unique) manifolds tangent to $E^c$
+at $(0,0)$ --- no analogue of stable manifold theorem for centre manifolds.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\textwidth}
+% Snapshot citation: Lecture7.pdf, page 2, saddle-node.
+\includegraphics[width=\linewidth]{lecture7-saddle-node.png}
+\end{minipage}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.57\textwidth}
+$\ast\quad\begin{aligned}\dot x&=x^3,\\\dot y&=-y,\end{aligned}$
+\quad $y\propto\exp\left(\dfrac1{2x^2}\right)$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\textwidth}
+% Snapshot citation: Lecture7.pdf, page 2, nonlinear saddle.
+\includegraphics[width=\linewidth]{lecture7-nonlinear-saddle.png}
+\end{minipage}
+
+\medskip
+\noindent
+(c) $\lambda_1=\lambda_2=0$, \underline{linearized --- plane or line of fixed points}.
+
+\medskip
+\noindent
+Almost anything is possible! Change to polars, find rays $\dot\theta=0$,
+between them can have
+
+\smallskip
+\noindent
+% Snapshot citation: Lecture7.pdf, page 2, three sectors in polar coordinates.
+\includegraphics[width=\textwidth]{lecture7-polar-sectors.png}
+
+\newpage
+% Lecture 7, source PDF page 3 (handwritten page 28).
+\noindent\underline{\S 2.3\quad Sketching phase portraits}
+
+\medskip
+\noindent\fbox{Example}\quad
+$\begin{aligned}\dot x&=x(1-y),\\\dot y&=-y+x^2,\end{aligned}$
+\quad $x\mapsto-x$ symmetry, $\Rightarrow$ only $x\geq0$ is enough.
+
+\medskip
+\noindent
+Fixed points $(0,0)$, $(1,1)$, $(-1,1)$. FP at $(0,0)$ is a \underline{saddle},
+studied before. Focus on $(1,1)$.
+
+\medskip
+\noindent Linearize:
+\[
+\hat A=\begin{pmatrix}1-y&-x\\2x&-1\end{pmatrix},\qquad
+\hat A_{(1,1)}=\begin{pmatrix}0&-1\\2&-1\end{pmatrix},
+\]
+\[
+\operatorname{Tr}\hat A=-1,\quad\operatorname{Det}\hat A=2,\quad
+(\operatorname{Tr}\hat A)^2<4\operatorname{Det}\hat A\quad\Rightarrow\quad
+\underline{\text{focus}},
+\]
+\[
+\lambda=\rho\pm i\omega\quad\text{and}\quad
+\rho=\tfrac12\operatorname{Tr}\hat A<0\quad\Rightarrow\quad
+\underline{\text{stable focus}}.
+\]
+\noindent
+Nullclines (where $\dot x=0$, $\dot y=0$ separately) get signs of $\dot y$, $\dot x$ on them.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.46\textwidth}
+% Snapshot citation: Lecture7.pdf, page 3, nullclines and flow directions.
+\includegraphics[width=\linewidth]{lecture7-nullclines.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.52\textwidth}
+% Snapshot citation: Lecture7.pdf, page 3, combined phase portrait.
+\includegraphics[width=\linewidth]{lecture7-phase-portrait.png}
+\end{minipage}
+
+\medskip
+\noindent\underline{General strategy}
+\begin{enumerate}
+\setlength{\itemsep}{2pt}
+\item[(1)] Check for symmetries, find fixed points
+\item[(2)] Calculate Jacobian, classify fixed points
+\item[(3)] For saddles, find eigenvectors of Jacobian
+\item[(4)] Find nullclines (where $\dot x$ or $\dot y=0$) and determine flow direction on them and around
+\item[(5)] Use knowledge of stable/unstable manifolds
+\item[(6)] Combine these features into a global picture
+\item[(7)] \underline{Trajectories cannot cross!}
+\item[(8)] Search for periodic orbits (see Chapter 4)
+\end{enumerate}
+
+\begin{center}
+\textbf{End of Lecture 7}
+\end{center}
+

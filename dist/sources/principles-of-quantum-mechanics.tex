@@ -1365,4 +1365,262 @@ with
 \begin{center}
     \textbf{End of Lecture 6}
 \end{center}
+
+\noindent
+\S\,2.1 Sch. eqn \& Sch picture
+
+\[
+    i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle=H|\psi\rangle
+\]
+\[
+    |\psi(t)\rangle=U(t)|\psi(0)\rangle
+\]
+where
+\begin{align*}
+    U(t)&=e^{-iHt/\hbar}
+    \qquad(H\text{ indep of }t)\\
+    &=\sum_{n=0}^{\infty}\frac{1}{n!}
+      \left(-\frac{it}{\hbar}H\right)^n
+\end{align*}
+
+If
+\[
+    |\psi(0)\rangle=\sum_n\alpha_n|n\rangle
+\]
+where
+\[
+    H|n\rangle=E_n|n\rangle
+\]
+then
+\[
+    |\psi(t)\rangle=\sum_n\alpha_n e^{-iE_nt/\hbar}|n\rangle
+\]
+
+\medskip
+\noindent
+\underline{Example}\qquad system with two energy eigenstates
+\[
+    \begin{array}{cc}
+        |1\rangle&|2\rangle\\
+        E_1&E_2
+    \end{array}
+\]
+Consider measuring $Q$ defined by
+\[
+    Q|1\rangle=|2\rangle,\qquad Q|2\rangle=|1\rangle
+\]
+So
+\[
+    [Q,H]\neq0
+\]
+Eigenstates of $Q$:
+\[
+    |\pm\rangle=\frac{1}{\sqrt{2}}\bigl(|1\rangle\pm|2\rangle\bigr)
+    \qquad\text{evals }q_\pm=\pm1
+\]
+Take initial state $|\psi(0)\rangle=|+\rangle$
+\[
+    \Rightarrow\qquad
+    |\psi(t)\rangle=\frac{1}{\sqrt{2}}
+    \left(e^{-iE_1t/\hbar}|1\rangle+e^{-iE_2t/\hbar}|2\rangle\right)
+\]
+Probability of measuring $Q$ at time $t$ \& getting $\pm1$ is
+\begin{align*}
+    &|\langle\pm|\psi(t)\rangle|^2\\
+    &\quad=\left|\frac{1}{2}(\langle1|\pm\langle2|)
+    \left(e^{-iE_1t/\hbar}|1\rangle+e^{-iE_2t/\hbar}|2\rangle\right)\right|^2\\
+    &\quad=\left|\frac{1}{2}\left(e^{-iE_1t/\hbar}\pm e^{-iE_2t/\hbar}\right)\right|^2
+    =\left\{\begin{aligned}
+        &\cos^2\bigl((E_1-E_2)t/2\hbar\bigr)\\
+        &\sin^2\bigl((E_1-E_2)t/2\hbar\bigr)
+    \end{aligned}\right.
+\end{align*}
+
+In basis
+\[
+    \begin{aligned}
+        |1\rangle&\to\begin{pmatrix}1\\0\end{pmatrix}\\
+        |2\rangle&\to\begin{pmatrix}0\\1\end{pmatrix}
+    \end{aligned}
+    \qquad H\to\begin{pmatrix}E_1&0\\0&E_2\end{pmatrix}
+\]
+\[
+    U=e^{-iHt/\hbar}\quad\to\quad
+    \begin{pmatrix}e^{-iE_1t/\hbar}&0\\0&e^{-iE_2t/\hbar}\end{pmatrix}
+\]
+In alternative basis
+\[
+    \begin{aligned}
+        |+\rangle&\to\begin{pmatrix}1\\0\end{pmatrix}\\
+        |-\rangle&\to\begin{pmatrix}0\\1\end{pmatrix}
+    \end{aligned}
+\]
+\[
+    H|\pm\rangle=\frac{1}{\sqrt{2}}\bigl(E_1|1\rangle+E_2|2\rangle\bigr)
+\]
+\[
+    \left.\begin{aligned}
+        \langle\pm|H|\pm\rangle&=\frac{1}{2}(E_1+E_2)=\mathcal{E}\\
+        \langle\mp|H|\pm\rangle&=\frac{1}{2}(E_1-E_2)=\hbar\lambda
+    \end{aligned}\right\}\quad\text{def }\mathcal{E}\ \&\ \lambda\text{ consts.}
+\]
+\[
+    H\to\begin{pmatrix}\mathcal{E}&\hbar\lambda\\\hbar\lambda&\mathcal{E}\end{pmatrix}
+    =\mathcal{E}I+\hbar\lambda M
+\]
+\[
+    I\quad 2\times2\text{ identity}
+    \qquad\&\qquad M=\begin{pmatrix}0&1\\1&0\end{pmatrix}
+\]
+Now
+\begin{align*}
+    U(t)=\exp(-iHt/\hbar)&\to e^{-\frac{i}{\hbar}t(\mathcal{E}I+\lambda\hbar M)}\\
+    &=e^{-\frac{i}{\hbar}t\mathcal{E}}e^{-it\lambda M}
+\end{align*}
+Note $M^2=I$ \& hence
+\begin{align*}
+    \exp(-it\lambda M)
+    &=\sum_{r=0}^{\infty}\frac{1}{(2r)!}(-i\lambda t)^{2r}I
+      +\sum_{r=0}^{\infty}\frac{1}{(2r+1)!}(-i\lambda t)^{2r+1}M\\
+    &=(\cos\lambda t)I-i(\sin\lambda t)M.
+\end{align*}
+\[
+    |\psi(0)\rangle=|+\rangle\to\begin{pmatrix}1\\0\end{pmatrix}
+\]
+\[
+    |\psi(t)\rangle=e^{-iHt/\hbar}|+\rangle
+    \to\left(e^{-it\mathcal{E}/\hbar}\right)
+    \begin{pmatrix}\cos\lambda t\\-i\sin\lambda t\end{pmatrix}
+\]
+\[
+    e^{-it\mathcal{E}/\hbar}
+    \bigl(\cos\lambda t\,|+\rangle-i\sin\lambda t\,|-\rangle\bigr)
+    \qquad\longleftarrow
+\]
+Now compare with previous results for prob.\ of measuring $Q$ \& finding $\pm1$
+
+\subsection*{2.2 Heisenberg Picture \& Heisenberg Equations}
+
+\noindent
+(a) \underline{Unitary operators}
+
+Physical predictions in QM are given by probability amplitudes,
+eigenvalues, expectation values, etc., hence by expressions like
+\[
+    \langle\phi|\psi\rangle,\quad\langle\phi|A|\psi\rangle,\quad\text{etc.}
+\]
+An operator $U$ is called \underline{unitary} if
+\[
+    UU^\dagger=U^\dagger U=1\quad\text{or}\quad U^\dagger=U^{-1}.
+\]
+Given any such $U$, consider a map on states \& operators
+\[
+    \begin{aligned}
+        |\psi\rangle&\longrightarrow |\psi'\rangle=U|\psi\rangle\\
+        \langle\psi|&\longrightarrow\langle\psi'|=\langle\psi|U^\dagger\\
+        A&\longrightarrow A'=UAU^\dagger
+    \end{aligned}
+\]
+Under this, all physical predictions remain unchanged
+\begin{align*}
+    \text{e.g.}\qquad
+    \langle\phi|\psi\rangle&\to\langle\phi'|\psi'\rangle
+    =\langle\phi|U^\dagger U|\psi\rangle=\langle\phi|\psi\rangle\\
+    \langle\phi|A|\psi\rangle&\to\langle\phi'|A'|\psi'\rangle
+    =\langle\phi|U^\dagger UAU^\dagger U|\psi\rangle\\
+    &=\langle\phi|A|\psi\rangle.
+\end{align*}
+Furthermore
+\[
+    \begin{aligned}
+        C=AB&\longrightarrow C'=A'B'\\
+        C=[A,B]&\longrightarrow C'=[A',B']
+    \end{aligned}
+\]
+\[
+    Q^\dagger=Q\quad\Rightarrow\quad Q'=UQU^\dagger
+    \quad\text{also satisfies }(Q')^\dagger=Q'
+\]
+\[
+    Q|\psi\rangle=\lambda|\psi\rangle
+    \quad\Rightarrow\quad
+    \underset{\text{same eigenvalue.}}{Q'|\psi'\rangle=\lambda|\psi'\rangle}
+\]
+
+\medskip
+\noindent
+(b) \underline{Changing Pictures}
+
+In the \underline{Schr\"odinger picture}
+\[
+    i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle=H|\psi(t)\rangle
+    \qquad\left(\begin{gathered}\text{all for }H\text{ indep of }t\\\&\ H=H^\dagger\end{gathered}\right)
+\]
+\[
+    \Rightarrow\qquad |\psi(t)\rangle=U(t)|\psi(0)\rangle
+\]
+where $U(t)=\exp(-iHt/\hbar)$ is unitary. In fact
+\[
+    U(t)^\dagger=U(t)^{-1}=U(-t)
+\]
+\[
+    \&\qquad U(t_1)U(t_2)=U(t_1+t_2)
+\]
+The states depend on $t$ but observables do not, in S-picture.
+
+To pass to Heisenberg picture we shift $t$-dependence from states to
+operators as follows
+\[
+    \begin{array}{c@{\quad}c@{\quad}l}
+        &\text{Schr\"odinger}&\text{Heisenberg}\\[6pt]
+        \text{states}&|\psi(t)\rangle_S
+        &|\psi\rangle_H=U^\dagger|\psi(t)\rangle_S
+        =e^{itH/\hbar}|\psi(t)\rangle_S=|\psi(0)\rangle_S\\[8pt]
+        \text{ops}&A_S&A_H(t)=U^\dagger A_SU=e^{itH/\hbar}A_Se^{-itH/\hbar}
+    \end{array}
+\]
+Because the transformation $U(t)$ is unitary
+\[
+    {}_S\langle\phi(t)|A_S|\psi(t)\rangle_S
+    ={}_H\langle\phi|A_H(t)|\psi\rangle_H
+\]
+Note
+\[
+    H_H=H_S=H
+\]
+To specify dynamics in H-picture, consider
+\begin{align*}
+    \frac{d}{dt}A_H(t)
+    &=\frac{d}{dt}\left(e^{iHt/\hbar}A_Se^{-iHt/\hbar}\right)\\
+    &=\frac{iH}{\hbar}e^{iHt/\hbar}A_Se^{-iHt/\hbar}
+      -e^{iHt/\hbar}A_Se^{-iHt/\hbar}\frac{iH}{\hbar}\\
+    &=\frac{i}{\hbar}[H,A_H(t)]
+\end{align*}
+\underline{or}
+\[
+    i\hbar\frac{d}{dt}A_H(t)=[A_H(t),H]
+    \qquad\underline{\text{Heisenberg equations of motion}}
+\]
+e.g.\ particle in one dimension $\hat{x}(t)$, $\hat{p}(t)$ in H-picture
+
+consider
+\[
+    H=\frac{\hat{p}^2}{2m}+V(\hat{x})
+\]
+\[
+    \frac{d}{dt}\hat{x}(t)=\frac{1}{i\hbar}[\hat{x}(t),H]
+    =\frac{1}{m}\hat{p}(t)
+\]
+\[
+    \frac{d}{dt}\hat{p}(t)=\frac{1}{i\hbar}[\hat{p}(t),H]
+    =-V'(\hat{x}(t))
+\]
+using
+\[
+    [\hat{x}(t),\hat{p}(t)]=i\hbar
+\]
+
+\begin{center}
+    \textbf{End of Lecture 7}
+\end{center}
 \end{document}
