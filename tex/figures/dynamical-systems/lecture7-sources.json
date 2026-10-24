@@ -1,0 +1,142 @@
+[
+  {
+    "file": "lecture7-stable-focus.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 1,
+    "handwritten_page": 26,
+    "crop_pixels": [
+      1340,
+      1694,
+      1942,
+      2038
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-unstable-focus.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 1,
+    "handwritten_page": 26,
+    "crop_pixels": [
+      1452,
+      2080,
+      1942,
+      2347
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-nonlinear-centre.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 1,
+    "handwritten_page": 26,
+    "crop_pixels": [
+      1426,
+      2347,
+      1942,
+      2863
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-line-fixed-points.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 27,
+    "crop_pixels": [
+      1409,
+      189,
+      1942,
+      507
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-saddle-node.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 27,
+    "crop_pixels": [
+      1117,
+      507,
+      1924,
+      1126
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        845,
+        295,
+        1120,
+        345
+      ]
+    ]
+  },
+  {
+    "file": "lecture7-nonlinear-saddle.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 27,
+    "crop_pixels": [
+      808,
+      1341,
+      1907,
+      1780
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        470,
+        780,
+        740,
+        970
+      ]
+    ]
+  },
+  {
+    "file": "lecture7-polar-sectors.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 27,
+    "crop_pixels": [
+      95,
+      2123,
+      1924,
+      2863
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-nullclines.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 3,
+    "handwritten_page": 28,
+    "crop_pixels": [
+      60,
+      1178,
+      885,
+      1728
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  },
+  {
+    "file": "lecture7-phase-portrait.png",
+    "source": "Lecture7.pdf",
+    "pdf_page": 3,
+    "handwritten_page": 28,
+    "crop_pixels": [
+      928,
+      1161,
+      1907,
+      1857
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": []
+  }
+]
