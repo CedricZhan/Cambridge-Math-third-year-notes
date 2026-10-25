@@ -342,16 +342,6 @@ h1 {
   font: 700 1rem "Segoe UI", Arial, sans-serif;
 }
 
-.updates-icon {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  font-weight: 800;
-}
-
 .updates-show-all,
 .updates-show-recent {
   margin-left: auto;
@@ -544,7 +534,8 @@ h1 {
   transition: color 200ms ease;
 }
 
-.course-actions > a[href$=".pdf"]::after {
+.course-actions > a[href$=".pdf"]::after,
+.update-link > span {
   transition: transform 200ms ease;
 }
 
@@ -553,7 +544,8 @@ h1 {
     color: var(--cambridge-dark);
   }
 
-  .course-actions > a[href$=".pdf"]:hover::after {
+  .course-actions > a[href$=".pdf"]:hover::after,
+  .update-link:hover > span {
     transform: translate(3px, -3px);
   }
 }
@@ -794,11 +786,13 @@ footer a {
   .course-list li,
   .course-actions > a[href$=".pdf"],
   .course-actions > a[href$=".pdf"]::after,
+  .update-link > span,
   .part-seal {
     transition: none;
   }
 
-  .course-actions > a[href$=".pdf"]:hover::after {
+  .course-actions > a[href$=".pdf"]:hover::after,
+  .update-link:hover > span {
     transform: none;
   }
 }

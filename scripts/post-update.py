@@ -37,7 +37,6 @@ def render(posts):
             '        <section class="updates" aria-labelledby="updates-title">',
             '          <details class="updates-archive">',
             '            <summary class="updates-heading">',
-            '              <span class="updates-icon" aria-hidden="true">!</span>',
             '              <h2 id="updates-title">Noticeboard</h2>',
             f'              <span class="updates-show-all">View all history ({len(posts)}) <span aria-hidden="true">＋</span></span>',
             '              <span class="updates-show-recent">Back to latest five <span aria-hidden="true">−</span></span>',
