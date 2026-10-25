@@ -39,6 +39,8 @@ for the Important badge; omit it for an ordinary Update. Earlier posts remain
 saved in full. The noticeboard sits directly below Last updated and shows at
 most five recent announcements. Click its heading to expand all history; click
 again to return to the latest five. Announcement dates contain no time of day.
+Use `--archive-only` for a post that should appear only in expanded history;
+these posts do not occupy any of the five recent-announcement slots.
 
 After reviewing the changes and receiving an explicit upload request, run:
 

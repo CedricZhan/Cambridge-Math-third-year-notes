@@ -6,5 +6,14 @@
     "important": true,
     "link": "./pdfs/principles-of-statistics.pdf#page=16",
     "link_label": "Read the proof"
+  },
+  {
+    "date": "2026-10-25",
+    "title": "Past Announcement",
+    "message": "This announcement is for testing only.",
+    "important": false,
+    "link": "",
+    "link_label": "Read more",
+    "archive_only": true
   }
 ]

@@ -31,6 +31,7 @@ def render_post(post):
 
 def render(posts):
     posts = sorted(posts, key=lambda p: p["date"], reverse=True)
+    recent = [post for post in posts if not post.get("archive_only", False)][:5]
     lines = [START]
     if posts:
         lines += [
@@ -48,7 +49,7 @@ def render(posts):
             '          </details>',
             '          <div class="updates-list">',
             '            <p class="updates-caption">Latest announcements</p>',
-            *[render_post(post) for post in posts[:5]],
+            *[render_post(post) for post in recent],
             '          </div>',
             '        </section>',
         ]
@@ -61,6 +62,8 @@ def main():
     parser.add_argument("--message", required=True)
     parser.add_argument("--date", default=date.today().isoformat())
     parser.add_argument("--important", action="store_true")
+    parser.add_argument("--archive-only", action="store_true",
+                        help="Show this post only in expanded history.")
     parser.add_argument("--link", default="")
     parser.add_argument("--link-label", default="Read more")
     args = parser.parse_args()
@@ -80,7 +83,8 @@ def main():
         parser.error("Expected exactly one announcement region in index.html.")
     posts = json.loads(posts_path.read_text(encoding="utf-8")) if posts_path.exists() else []
     post = {"date": args.date, "title": args.title, "message": args.message,
-            "important": args.important, "link": args.link, "link_label": args.link_label}
+            "important": args.important, "link": args.link, "link_label": args.link_label,
+            "archive_only": args.archive_only}
     if any(p["title"] == post["title"] and p["date"] == post["date"] for p in posts):
         parser.error("A post with this title and date already exists.")
     posts = sorted([post, *posts], key=lambda p: p["date"], reverse=True)
