@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2026-10-26",
+    "title": "Principles of Statistics: a clearer proof of Theorem 4",
+    "message": "I've rewritten the proof of Theorem 4 (Asymptotic Normality of the MLE) into a readable, step-by-step argument. You'll find the complete proof just below End of lecture 6 in the notes. Take a look!",
+    "important": true,
+    "link": "./pdfs/principles-of-statistics.pdf#page=16",
+    "link_label": "Read the proof"
+  }
+]
