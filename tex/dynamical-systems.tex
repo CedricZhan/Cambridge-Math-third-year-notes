@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \graphicspath{{figures/dynamical-systems/}}
 \title{Dynamical Systems}
 \begin{document}
@@ -162,7 +163,7 @@ r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan}\frac{y}{x},
 \end{center}
 
 \begin{center}
-    \textbf{End of Lecture 1}
+    \textbf{End of lecture 1}
 \end{center}
 
 
@@ -667,7 +668,7 @@ and time-increasing function $\tau(\bar x,t)$ such that for any $t,\bar x$
 \end{center}
 
 \begin{center}
-\textbf{End of Lecture 3}
+\textbf{End of lecture 3}
 \end{center}
 
 \newpage
@@ -879,7 +880,7 @@ y_2&=y_{2,0}e^{\lambda_2t}
 \end{minipage}
 
 \begin{center}
-\textbf{End of Lecture 4}
+\textbf{End of lecture 4}
 \end{center}
 
 \newpage
@@ -1129,7 +1130,7 @@ of $H(x,y)$\\
 in \underline{autonomous Hamiltonian} systems.
 
 \begin{center}
-\textbf{End of Lecture 5}
+\textbf{End of lecture 5}
 \end{center}
 
 \newpage
@@ -1360,7 +1361,7 @@ $W^s_{\mathrm{loc}}$ has to be symmetric w.r.t.\ $y$-axis \& tangent to it,
 \end{minipage}
 
 \begin{center}
-\textbf{End of Lecture 6}
+\textbf{End of lecture 6}
 \end{center}
 
 \newpage
@@ -1559,7 +1560,268 @@ Nullclines (where $\dot x=0$, $\dot y=0$ separately) get signs of $\dot y$, $\do
 \end{enumerate}
 
 \begin{center}
-\textbf{End of Lecture 7}
+\textbf{End of lecture 7}
+\end{center}
+
+\newpage
+% Lecture 8, source PDF page 1 (handwritten page 29).
+\noindent\underline{\S 3.\quad Stability}
+
+\medskip
+\noindent
+If we found a fixed point, or more generally an invariant set $\Lambda$, we know
+that starting at $\Lambda$ system will remain there. But what happens if we
+slightly perturb the system away from $\Lambda$? Does the system remain near
+$\Lambda$? Or does it converge back to or away from $\Lambda$? These are the
+issues of system's \underline{stability}, for which there are several definitions.
+
+\medskip
+\noindent\underline{\S 3.1\quad Definitions}
+
+\medskip
+\noindent
+Let $\Lambda$ be an invariant set (a fixed point, periodic orbit, etc.) of a
+general (autonomous) system described by a flow $\phi_t$.
+
+\medskip
+\noindent\fbox{Definition}\quad\underline{Neighborhood of a set $\Lambda$}
+
+\medskip
+\noindent For $\delta>0$ the \underline{neighborhood} of $\Lambda$ is defined as
+\[
+N_\delta(\Lambda)=\{\bar x:\exists\,\bar y\in\Lambda
+\text{ such that }|\bar x-\bar y|<\delta\}.
+\]
+
+\noindent\fbox{Definition}\quad\underline{Flow tending to $\Lambda$}
+
+\medskip
+\noindent The flow $\phi_t\to\Lambda$ if
+\[
+\inf_{\bar y\in\Lambda}|\phi_t(\bar x)-\bar y|\to0
+\quad\text{as }t\to\infty.
+\]
+
+\noindent\fbox{Definition}\quad\underline{Lyapunov stability}
+
+\medskip
+\noindent The set $\Lambda$ is \underline{Lyapunov stable} if
+$\forall\,\varepsilon>0\ \exists\,\delta>0$ such that if
+$\bar x\in N_\delta(\Lambda)$ then
+$\phi_t(\bar x)\in N_\varepsilon(\Lambda)\quad\forall\,t\geq0$.
+
+\smallskip
+\noindent\textcolor{red}{``Start near, stay near''}
+
+\medskip
+\noindent\fbox{Definition}\quad\underline{Quasi-asymptotic stability (QAS)}
+
+\medskip
+\noindent The set $\Lambda$ is \underline{quasi-asymptotically stable} if
+$\exists\,\delta>0$ such that if $\bar x\in N_\delta(\Lambda)$ then
+$\phi_t(\bar x)\to\Lambda$ as $t\to\infty$.
+
+\smallskip
+\noindent\textcolor{red}{``Get close eventually''}
+
+\newpage
+% Lecture 8, source PDF page 2 (handwritten page 30).
+\noindent\fbox{Definition}\quad\underline{Asymptotic stability}
+
+\medskip
+\noindent The set $\Lambda$ is \underline{asymptotically stable} if it is both
+\underline{Lyapunov stable} and \underline{quasi-asymptotically stable}.
+
+\smallskip
+\noindent\textcolor{red}{``Stays near and converges to $\Lambda$''}
+
+\medskip
+\noindent\fbox{Example}\quad\underline{$\Lambda$ is LS but not QAS}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.62\textwidth}
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}-y\\x\end{pmatrix}
+\]
+Hamiltonian system with circular orbits. For $\forall\,\varepsilon$ take
+$\delta=\zeta\varepsilon$, $0<\zeta<1$, then for $|\bar x|<\delta$ always have
+$|\phi_t(\bar x)|<\varepsilon$, $\Rightarrow$ \underline{origin is LS}.
+But no convergence to $\bar x=\bar0$, so \underline{not QAS}, and \underline{not AS}.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\textwidth}
+% Snapshot citation: Lecture8.pdf, page 2 (handwritten page 30), circular orbits.
+\includegraphics[width=\linewidth]{lecture8-circular-orbits.png}
+\end{minipage}
+
+\medskip
+\noindent\fbox{Example}\quad\underline{$\Lambda$ is QAS but not LS}
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.42\textwidth}
+\[
+\begin{pmatrix}\dot r\\\dot\theta\end{pmatrix}
+=\begin{pmatrix}r(1-r^2)\\\sin^2\dfrac\theta2\end{pmatrix}
+\]
+Linearized has one $\lambda=0$, line of fixed points $\parallel$ to $y$-axis
+starting at $(1,0)$.
+
+\medskip
+Nonlinear terms turn $(1,0)$ into a saddle-node.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.56\textwidth}
+% Snapshot citation: Lecture8.pdf, page 2 (handwritten page 30), homoclinic orbit.
+\includegraphics[width=\linewidth]{lecture8-homoclinic-orbit.png}
+\end{minipage}
+
+\medskip
+\noindent
+For $\varepsilon<1$ cannot find $\delta>0$ such that trajectory is in
+$N_\varepsilon((1,0))$ --- it will leave it. So, not LS!
+But is \underline{QAS} as all trajectories eventually converge at FP $(1,0)$.
+So, \underline{not AS}.
+
+\newpage
+% Lecture 8, source PDF page 3 (handwritten page 31).
+\noindent\fbox{Example}\quad\underline{AS with non-monotonic convergence}
+
+\medskip
+\noindent\underline{Stable focus}, elongated in shape.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.40\textwidth}
+% Snapshot citation: Lecture8.pdf, page 3 (handwritten page 31), elongated stable focus.
+\includegraphics[width=\linewidth]{lecture8-elongated-focus.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.58\textwidth}
+\underline{LS} since for any $\varepsilon>0$ can always find $\delta>0$ such that
+$\phi_t(\bar x)$ with $\bar x\in N_\delta(\bar0)$ always fits in
+$N_\varepsilon(\bar0)$. Also \underline{QAS}, obviously, and thus \underline{AS}.
+\end{minipage}
+
+\medskip
+\noindent But \underline{approaches} FP non-monotonically!
+
+\medskip
+\noindent\fbox{Definition}\quad\underline{Basin of attraction}
+
+\medskip
+\noindent
+If $\Lambda$ is an asymptotically stable invariant set, its \underline{basin of attraction} is
+\[
+B(\Lambda)=\{\bar x:\phi_t(\bar x)\to\Lambda\text{ as }t\to\infty\}.
+\]
+If $B(\Lambda)=\mathbb R^n$ then $\Lambda$ is \underline{globally attracting}
+(or globally stable).
+
+\medskip
+\noindent\fbox{Example}\quad
+In last two examples FPs were globally attracting (with some caveats in the saddle-node case).
+
+\medskip
+\noindent\fbox{Example}\quad Basin of stability can be \underline{non-trivial}.
+
+\medskip
+\noindent
+\begin{minipage}[c]{0.53\textwidth}
+E.g.\ double potential well with weak friction.
+
+\medskip
+\noindent\textcolor{green!55!black}{Hamiltonian contours w/o friction}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.45\textwidth}
+% Snapshot citation: Lecture8.pdf, page 3 (handwritten page 31), double potential well.
+\includegraphics[width=\linewidth]{lecture8-double-well.png}
+\end{minipage}
+
+\medskip
+\noindent For isolated FPs can use linearized system in some cases.
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Stability of hyperbolic fixed points.}
+
+\medskip
+\noindent
+If $\bar x_0$ is a hyperbolic \underline{stable focus} or \underline{stable node}
+then it is \underline{asymptotically stable} (all hyperbolic sinks are AS).
+If $\bar x_0$ is a hyperbolic fixed point with at least one
+$\operatorname{Re}(\lambda_i)>0$, then it is \underline{unstable}.
+
+\newpage
+% Lecture 8, source PDF page 4 (handwritten page 32).
+\noindent\underline{\S 3.2\quad Lyapunov functions}
+
+\medskip
+\noindent
+We can prove important results about the stability of fixed points of a given
+flow $\phi_t(\bar x)$ if we can find some functions that behave in a certain way under the flow.
+
+\medskip
+\noindent\fbox{Definition}\quad
+A continuously differentiable $(C^1)$ function $V(\bar x):\mathbb R^n\to\mathbb R$
+is a \underline{Lyapunov function} for a flow $\phi_t(\bar x)$ on a domain $D$
+containing the origin (fixed point) if
+\begin{enumerate}
+\setlength{\itemsep}{3pt}
+\item[(i)] $V(\bar0)=0$ and $V(\bar x)>0$ for $\bar x\neq\bar0$ in $D$ and
+\item[(ii)] $\dot V=\bar f\cdot\nabla V\leq0$ in $D$
+\quad (or $V(\phi_t(\bar x))\leq V(\bar x)$ for $\forall\,t\geq0$).
+\end{enumerate}
+\noindent Then we have these 2 theorems.
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Lyapunov's 1st theorem}
+
+\medskip
+\noindent
+Suppose that a dynamical system $\dot{\bar x}=\bar f(\bar x)$ has a fixed point at
+the origin. If a Lyapunov function exists, then the origin is Lyapunov stable.
+
+\medskip
+\noindent\fbox{Proof}\quad
+Let's take small enough $\varepsilon>0$ such that $\{|\bar x|<\varepsilon\}\subset D$.
+Let
+\[
+\alpha=\min\bigl(V(\bar x),\ |\bar x|=\varepsilon\bigr)>0
+\quad (V(\bar x)=0\text{ only at the origin!}).
+\]
+
+\noindent
+\begin{minipage}[c]{0.42\textwidth}
+% Snapshot citation: Lecture8.pdf, page 4 (handwritten page 32), Lyapunov sublevel set.
+\includegraphics[width=\linewidth]{lecture8-lyapunov-sublevel.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.56\textwidth}
+Now choose $\delta$:
+\[
+\{|\bar x|<\delta\}\subset C_{\alpha,\varepsilon}
+\]
+\[
+=\{\bar x:V(\bar x)<\alpha,\ |\bar x|<\varepsilon\},
+\]
+then
+\[
+(|\bar x|<\delta)\subset C_{\alpha,\varepsilon}
+\subseteq\{|\bar x|<\varepsilon\}.
+\]
+Then if $\bar x\in\{|\bar x|<\delta\}$, we have
+\[
+V(\phi_t(\bar x))\leq V(\bar x)<\alpha,
+\]
+\[
+\Rightarrow\quad\underline{\phi_t(\bar x)\in\{|\bar x|<\varepsilon\}}.
+\]
+\end{minipage}
+
+\medskip
+\noindent Thus, for $\forall\,\varepsilon>0$ found $\delta>0$:
+$\phi_t(\bar x)\in N_\varepsilon(\bar0)$ if $\bar x\in N_\delta(\bar0)$.
+
+\begin{center}
+\textbf{End of Lecture 8}
 \end{center}
 
 \end{document}

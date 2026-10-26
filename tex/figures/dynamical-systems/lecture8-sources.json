@@ -1,0 +1,130 @@
+[
+  {
+    "file": "lecture8-circular-orbits.png",
+    "source": "Lecture8.pdf",
+    "source_path": "C:\\Users\\cedri\\Desktop\\dynamical systems lecture notes\\Lecture8.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 30,
+    "crop_pixels": [
+      1346,
+      580,
+      1915,
+      1162
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        875,
+        377,
+        950,
+        418
+      ]
+    ]
+  },
+  {
+    "file": "lecture8-homoclinic-orbit.png",
+    "source": "Lecture8.pdf",
+    "source_path": "C:\\Users\\cedri\\Desktop\\dynamical systems lecture notes\\Lecture8.pdf",
+    "pdf_page": 2,
+    "handwritten_page": 30,
+    "crop_pixels": [
+      769,
+      1462,
+      1938,
+      2269
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        500,
+        950,
+        880,
+        980
+      ],
+      [
+        500,
+        1105,
+        635,
+        1475
+      ]
+    ]
+  },
+  {
+    "file": "lecture8-elongated-focus.png",
+    "source": "Lecture8.pdf",
+    "source_path": "C:\\Users\\cedri\\Desktop\\dynamical systems lecture notes\\Lecture8.pdf",
+    "pdf_page": 3,
+    "handwritten_page": 31,
+    "crop_pixels": [
+      161,
+      312,
+      769,
+      877
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        475,
+        515,
+        500,
+        570
+      ]
+    ]
+  },
+  {
+    "file": "lecture8-double-well.png",
+    "source": "Lecture8.pdf",
+    "source_path": "C:\\Users\\cedri\\Desktop\\dynamical systems lecture notes\\Lecture8.pdf",
+    "pdf_page": 3,
+    "handwritten_page": 31,
+    "crop_pixels": [
+      1130,
+      1846,
+      1846,
+      2246
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        735,
+        1435,
+        900,
+        1460
+      ],
+      [
+        1145,
+        1425,
+        1200,
+        1460
+      ]
+    ]
+  },
+  {
+    "file": "lecture8-lyapunov-sublevel.png",
+    "source": "Lecture8.pdf",
+    "source_path": "C:\\Users\\cedri\\Desktop\\dynamical systems lecture notes\\Lecture8.pdf",
+    "pdf_page": 4,
+    "handwritten_page": 32,
+    "crop_pixels": [
+      62,
+      2046,
+      792,
+      2792
+    ],
+    "dpi": 250,
+    "excluded_adjacent_text_rectangles": [
+      [
+        235,
+        1330,
+        285,
+        1340
+      ],
+      [
+        503,
+        1740,
+        515,
+        1815
+      ]
+    ]
+  }
+]

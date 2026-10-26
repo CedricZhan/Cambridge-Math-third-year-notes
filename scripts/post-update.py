@@ -40,7 +40,7 @@ def render(posts):
             '            <summary class="updates-heading">',
             '              <h2 id="updates-title">Noticeboard</h2>',
             f'              <span class="updates-show-all">View all history ({len(posts)}) <span aria-hidden="true">＋</span></span>',
-            '              <span class="updates-show-recent">Back to latest five <span aria-hidden="true">−</span></span>',
+            '              <span class="updates-show-recent">Back to latest <span aria-hidden="true">−</span></span>',
             '            </summary>',
             '            <div class="updates-history">',
             '              <p class="updates-caption">All announcements · newest first</p>',
