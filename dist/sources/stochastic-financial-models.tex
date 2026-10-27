@@ -1463,9 +1463,17 @@ Letting $R\to\infty$ gives
 \[
 \widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]=V_n\geq0.
 \]
-The tower property now gives
+Since $\mathcal F_n\subseteq\mathcal F_{n+1}$, the tower property and
+the backwards-induction hypothesis give
 \[
-\widetilde{\mathbb E}[D\mid\mathcal F_n]=V_n.
+\begin{aligned}
+\widetilde{\mathbb E}[D\mid\mathcal F_n]
+&=\widetilde{\mathbb E}\!\left[
+\widetilde{\mathbb E}[D\mid\mathcal F_{n+1}]
+\mid\mathcal F_n\right]\\
+&=\widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]\\
+&=V_n.
+\end{aligned}
 \]
 Thus, by backwards induction,
 \[
@@ -1477,19 +1485,7 @@ At time $0$, $V_0$ is deterministic and finite, so
 \widetilde{\mathbb E}(D)=V_0.
 \]
 In particular, $D$ and all the $V_n$ are integrable under
-$\widetilde{\mathbb P}$. The one-step calculation can therefore be
-written as
-\[
-\begin{aligned}
-\widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]
-&=V_n+\widetilde{\mathbb E}[
-\Theta_{n+1}\cdot(X_{n+1}-X_n)
-\mid\mathcal F_n]\\
-&=V_n+\Theta_{n+1}\cdot
-\widetilde{\mathbb E}[X_{n+1}-X_n\mid\mathcal F_n]\\
-&=V_n.
-\end{aligned}
-\]
+$\widetilde{\mathbb P}$.
 Hence the discounted wealth process is a martingale, with
 $V_0=\widetilde{\mathbb E}(C/S_T^0)$ as claimed.
 \hfill$\square$
