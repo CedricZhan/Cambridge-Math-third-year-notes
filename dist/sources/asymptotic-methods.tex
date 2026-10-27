@@ -1317,5 +1317,293 @@ For now, we generate the leading-order term:
     \textbf{End of lecture 5}
 \end{center}
 
+\noindent\textbf{Laplace's method: an interior maximum (continued).}
+In case (b), put
+\[
+    s=\sqrt{-x\phi''(c)}\,(t-c),\qquad
+    A=\epsilon\sqrt{-x\phi''(c)}.
+\]
+We use $A$ for the quantity denoted by $a$ on the blackboard, to distinguish
+it from the lower endpoint of the original integral. The leading local
+approximation becomes
+\[
+    I_1(x)\sim\frac{f(c)e^{x\phi(c)}}{\sqrt{-x\phi''(c)}}
+    \int_{-A}^{A}e^{-s^2/2}\,ds.
+\]
+Let $x\to\infty$, keeping $\epsilon>0$ fixed. Then $A\to\infty$, and
+\begin{align*}
+    I_1(x)&\sim\frac{f(c)e^{x\phi(c)}}{\sqrt{-x\phi''(c)}}
+    \int_{-\infty}^{\infty}e^{-s^2/2}\,ds\\
+    &=f(c)e^{x\phi(c)}\left(\frac{2\pi}{-x\phi''(c)}\right)^{1/2}.
+\end{align*}
+Since $I_2\ll I_1$ as $x\to\infty$, we obtain
+\[
+    \boxed{I(x)\sim f(c)e^{x\phi(c)}
+    \left(\frac{2\pi}{-x\phi''(c)}\right)^{1/2}}
+    \qquad\text{as }x\to\infty.
+\]
+
+\noindent\textbf{Error from extending the Gaussian limits.}
+Recall that
+\[
+    \int_z^\infty e^{-t^2/2}\,dt
+    \sim\frac{1}{z}e^{-z^2/2}
+    \qquad\text{as }z\to\infty.
+\]
+The blackboard records the error from replacing $A$ by $\infty$ as
+\[
+    \text{error}=O\!\left(x^{-1/2}e^{-\alpha x^2}\right)
+    \qquad\text{for some }\alpha>0.
+\]
+\emph{Transcription note (photograph 2):} the displayed error is retained
+as written. With fixed $\epsilon$, however, $A^2=-\epsilon^2x\phi''(c)$
+is proportional to $x$. The omitted Gaussian tails, before multiplication
+by the outer prefactor, therefore have size
+$O(x^{-1/2}e^{-\alpha x})$, where
+$\alpha=-\epsilon^2\phi''(c)/2>0$. This concerns only the extension of the
+Gaussian limits; the higher-order Taylor terms give separate corrections.
+
+For an alternative derivation, see Miller, Sections 3.3--3.4.
+For higher-order terms, see Chapling, Section 3.3.1, and B\&O, Section 6.4.
+
+\medskip
+\noindent\textbf{Example 1.}
+Consider
+\[
+    I(x)=\int_{-\infty}^{\infty}e^{-xt^2}e^{at}\,dt,
+    \qquad x\to\infty,
+\]
+where $a$ is fixed. Take $f(t)=e^{at}$ and $\phi(t)=-t^2$. Then
+\[
+    c=0,\quad \phi'(0)=0,\quad \phi''(0)=-2,\quad
+    f(0)=1,\quad \phi(0)=0.
+\]
+Hence
+\[
+    I(x)\sim\sqrt{\frac{\pi}{x}}.
+\]
+Indeed, completing the square gives the exact value
+\[
+    I(x)=e^{a^2/(4x)}\sqrt{\frac{\pi}{x}}.
+\]
+
+\medskip
+\noindent\textbf{Example 2.}
+The integral written on the blackboard is
+\[
+    K_0(x)=\int_0^\infty e^{-t-x^2/(4t)}\,dt,
+    \qquad x\to\infty.
+\]
+\emph{Transcription note (photographs 5--6):} both the symbol $K_0(x)$
+and the measure $dt$ are retained from the blackboard. This definition
+should be checked against the usual special-function notation; the
+calculation below applies to the integral displayed here.
+
+One might try $f(t)=e^{-t}$ and $\phi(t)=-1/(4t)$, with large parameter
+$x^2$. But $\phi'(t)>0$ for all $t>0$, so this does not give an interior
+maximum of $\phi$. Instead, consider the whole exponent
+\[
+    \psi(t)=-t-\frac{x^2}{4t},\qquad
+    \psi'(t)=-1+\frac{x^2}{4t^2}.
+\]
+Its maximum occurs at $t_{\max}=x/2$. This suggests rescaling by
+\[
+    xu=2t,\qquad x\,du=2\,dt.
+\]
+Then
+\[
+    K_0(x)=\frac{x}{2}\int_0^\infty e^{x\phi(u)}\,du,
+    \qquad \phi(u)=-\frac{u}{2}-\frac{1}{2u}.
+\]
+Now
+\[
+    \phi'(u)=-\frac12+\frac{1}{2u^2}=0
+    \quad\Longrightarrow\quad u=1=c,
+    \qquad \phi(1)=-1,\quad\phi''(1)=-1.
+\]
+Therefore, for the integral as written,
+\[
+    K_0(x)\sim\frac{x}{2}e^{-x}\sqrt{\frac{2\pi}{x}}
+    =\frac{\sqrt{2\pi x}}{2}e^{-x}
+    \qquad\text{as }x\to\infty.
+\]
+
+\medskip
+\noindent\textbf{(c) Equal absolute maxima at an interior point and an endpoint.}
+Suppose
+\[
+    \phi(b)=\phi(c)=\max_{t\in[a,b]}\phi(t),\qquad a<c<b,
+\]
+with
+\[
+    \phi'(c)=0,\quad\phi''(c)<0,\quad\phi'(b)\neq0,
+    \qquad f(c)\neq0,\quad f(b)\neq0.
+\]
+Figure~\ref{fig:am-lecture6-interior-endpoint} shows the situation.
+The nonstationary endpoint contributes a term of order
+$e^{x\phi(b)}/x$, as in case (a), whereas the interior maximum contributes
+a term of order $e^{x\phi(c)}/\sqrt{x}$, as in case (b). Since
+\[
+    \frac{e^{x\phi(b)}/x}{e^{x\phi(c)}/\sqrt{x}}
+    =x^{-1/2}\to0,
+\]
+the interior point dominates the integral.
+\begin{figure}[htbp]
+    \centering
+    \pdfximage width 0.27\linewidth {figures/asymptotic-lecture6/interior-and-endpoint.jpg}
+    \pdfrefximage\pdflastximage
+    \caption{Equal maxima at an interior stationary point $c$ and a
+    nonstationary endpoint $b$. Source: direct crop of supplied blackboard
+    photograph 6, archived as \texttt{source-06.jpg}.}
+    \label{fig:am-lecture6-interior-endpoint}
+\end{figure}
+
+\medskip
+\noindent\textbf{(d) Several interior local maxima.}
+Suppose the interior local maxima $c_i$, $i=1,\ldots,n$, satisfy
+\[
+    \phi'(c_i)=0,\qquad\phi''(c_i)<0,\qquad f(c_i)\neq0.
+\]
+Only the absolute maxima matter at leading order. For instance, if
+$\phi(c_3)>\phi(c_i)$ for $i=1,2,4,5$, then
+\[
+    \frac{e^{x\phi(c_3)}}{\sqrt{x}}
+    \gg\frac{e^{x\phi(c_i)}}{\sqrt{x}}
+    \qquad\text{as }x\to\infty.
+\]
+This is illustrated in Figure~\ref{fig:am-lecture6-multiple-maxima}(a).
+If instead two maxima have equal height,
+$\phi(c_1)=\phi(c_2)=\max\phi$, both contributions must be included:
+\begin{align*}
+    I(x)&\sim e^{x\phi(c_1)}
+    \sqrt{\frac{2\pi}{-x\phi''(c_1)}}\\
+    &\quad+e^{x\phi(c_2)}
+    \sqrt{\frac{2\pi}{-x\phi''(c_2)}}.
+\end{align*}
+\emph{Transcription note (photograph 8):} this is the formula as written
+on the blackboard. For general $f$, the two terms must also be multiplied
+by $f(c_1)$ and $f(c_2)$, respectively; the displayed formula applies when
+$f\equiv1$. If the leading coefficients cancel, further terms are needed
+before asserting an asymptotic equivalence.
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \pdfximage width \linewidth {figures/asymptotic-lecture6/unequal-maxima.jpg}
+        \pdfrefximage\pdflastximage
+        \par\smallskip (a) One highest maximum.
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \pdfximage width \linewidth {figures/asymptotic-lecture6/equal-maxima.jpg}
+        \pdfrefximage\pdflastximage
+        \par\smallskip (b) Two equal maxima.
+    \end{minipage}
+    \caption{Several interior maxima: lower maxima are exponentially
+    smaller, while equal absolute maxima contribute together. Source:
+    direct crops of supplied blackboard photograph 8, archived as
+    \texttt{source-08.jpg}.}
+    \label{fig:am-lecture6-multiple-maxima}
+\end{figure}
+
+\medskip
+\noindent\textbf{(e) A stationary endpoint maximum.}
+Suppose the endpoint $b$ is a local and absolute maximum, with
+\[
+    \phi'(b)=0,\qquad\phi''(b)<0,\qquad f(b)\neq0.
+\]
+Proceed as in case (b), but the local integral now covers only one side
+of the maximum:
+\begin{align*}
+    I_1(x)&=\int_{b-\epsilon}^{b}f(t)e^{x\phi(t)}\,dt\\
+    &\sim\frac{f(b)e^{x\phi(b)}}{\sqrt{-x\phi''(b)}}
+    \int_{-\infty}^0 e^{-s^2/2}\,ds\\
+    &=\frac12 f(b)e^{x\phi(b)}
+    \sqrt{\frac{2\pi}{-x\phi''(b)}}
+    \qquad\text{as }x\to\infty.
+\end{align*}
+Thus a stationary endpoint gives half the corresponding full Gaussian
+contribution. The same conclusion holds at a stationary left endpoint.
+
+\medskip
+\noindent\textbf{Example.}
+Consider
+\[
+    I(x)=\int_0^{3\pi/2}e^{x\sin^2t}\,dt,
+    \qquad f(t)=1,\quad\phi(t)=\sin^2t.
+\]
+The absolute maxima are at $t=\pi/2$ (interior) and $t=3\pi/2$
+(endpoint), as shown in Figure~\ref{fig:am-lecture6-sin-squared}.
+At both points,
+\[
+    \phi=1,\qquad\phi'=0,\qquad\phi''=2\cos(2t)=-2.
+\]
+Hence
+\begin{align*}
+    I(x)&\sim\frac{e^x}{\sqrt{2x}}\sqrt{2\pi}
+    +\frac12\frac{e^x}{\sqrt{2x}}\sqrt{2\pi}\\
+    &=\frac32\sqrt{\frac{\pi}{x}}\,e^x
+    \qquad\text{as }x\to\infty.
+\end{align*}
+\begin{figure}[htbp]
+    \centering
+    \pdfximage width 0.28\linewidth {figures/asymptotic-lecture6/sin-squared.jpg}
+    \pdfrefximage\pdflastximage
+    \caption{The phase $\phi(t)=\sin^2t$ on $[0,3\pi/2]$, with one
+    interior maximum and one stationary endpoint maximum. Source: direct
+    crop of supplied blackboard photograph 9, archived as
+    \texttt{source-09.jpg}.}
+    \label{fig:am-lecture6-sin-squared}
+\end{figure}
+
+\medskip
+\noindent\textbf{(f) A higher-order interior maximum.}
+Suppose $c$ is the dominant interior maximum and
+\[
+    \phi'(c)=\phi''(c)=\cdots=\phi^{(p-1)}(c)=0,
+    \qquad\phi^{(p)}(c)<0,
+\]
+where $p$ is an even positive integer, and $f(c)\neq0$.
+Proceed as in case (b), now using
+\[
+    \phi(t)=\phi(c)+\frac{\phi^{(p)}(c)}{p!}(t-c)^p+\cdots.
+\]
+Then
+\[
+    I(x)\sim f(c)e^{x\phi(c)}
+    \int_{c-\epsilon}^{c+\epsilon}
+    \exp\!\left[\frac{x\phi^{(p)}(c)}{p!}(t-c)^p\right]dt.
+\]
+Use the rescaling
+\[
+    s=\left[\frac{-x\phi^{(p)}(c)}{p!}\right]^{1/p}(t-c).
+\]
+As $x\to\infty$, this gives
+\[
+    I(x)\sim f(c)e^{x\phi(c)}
+    \left[\frac{p!}{-x\phi^{(p)}(c)}\right]^{1/p}
+    \int_{-\infty}^{\infty}e^{-s^p}\,ds.
+\]
+To evaluate the remaining integral, put $u=s^p$ on $s\geq0$:
+\begin{align*}
+    \int_0^\infty e^{-s^p}\,ds
+    &=\frac1p\int_0^\infty e^{-u}u^{1/p-1}\,du\\
+    &=\frac1p\Gamma\!\left(\frac1p\right)
+    =\Gamma\!\left(1+\frac1p\right).
+\end{align*}
+Since $p$ is even, the full integral is twice this value. Therefore
+\[
+    \boxed{I(x)\sim2f(c)e^{x\phi(c)}
+    \left[\frac{p!}{-x\phi^{(p)}(c)}\right]^{1/p}
+    \Gamma\!\left(1+\frac1p\right)}
+    \qquad\text{as }x\to\infty.
+\]
+In particular, the algebraic factor is $x^{-1/p}$, so the contribution
+is proportional to $x^{-1/p}e^{x\phi(c)}$.
+
+\begin{center}
+    \textbf{End of lecture 6}
+\end{center}
+
 \end{document}
 

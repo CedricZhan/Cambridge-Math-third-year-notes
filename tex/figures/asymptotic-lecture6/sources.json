@@ -1,0 +1,154 @@
+{
+  "sources": [
+    {
+      "photograph": 1,
+      "original_filename": "402607712578f19e98d587222a997676.jpg",
+      "saved_as": "source-01.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 2,
+      "original_filename": "c17297afc97c3b8e724484e74285c330.jpg",
+      "saved_as": "source-02.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 3,
+      "original_filename": "18f44764f33f931cf0409bd53e851544.jpg",
+      "saved_as": "source-03.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 4,
+      "original_filename": "0c0433263666b6fc46631df28d954162.jpg",
+      "saved_as": "source-04.jpg",
+      "size": [
+        1707,
+        1280
+      ]
+    },
+    {
+      "photograph": 5,
+      "original_filename": "3e59b3dc7ac6142618fa48c860cd7ca3.jpg",
+      "saved_as": "source-05.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 6,
+      "original_filename": "b4f3302ff52a29be432a378ce1cb98da.jpg",
+      "saved_as": "source-06.jpg",
+      "size": [
+        1707,
+        1280
+      ]
+    },
+    {
+      "photograph": 7,
+      "original_filename": "480040e20de9bc16a45a8aceb862dc23.jpg",
+      "saved_as": "source-07.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 8,
+      "original_filename": "2a7558ed0702c7160ecaf2b69db41fc4.jpg",
+      "saved_as": "source-08.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 9,
+      "original_filename": "27bac8973c619937d67a3f58ac3369a7.jpg",
+      "saved_as": "source-09.jpg",
+      "size": [
+        1707,
+        1280
+      ]
+    },
+    {
+      "photograph": 10,
+      "original_filename": "0b183591e5ad10e5d987187b92b9bbd2.jpg",
+      "saved_as": "source-10.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 11,
+      "original_filename": "7bde4fb4f9ddbb7ffbd01092d6aa161d.jpg",
+      "saved_as": "source-11.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    },
+    {
+      "photograph": 12,
+      "original_filename": "fdeda8f21dac50b61033dd01f3bc9ca6.jpg",
+      "saved_as": "source-12.jpg",
+      "size": [
+        1280,
+        1707
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "filename": "interior-and-endpoint.jpg",
+      "photograph": 6,
+      "box_xyxy": [
+        970,
+        803,
+        1215,
+        1035
+      ]
+    },
+    {
+      "filename": "unequal-maxima.jpg",
+      "photograph": 8,
+      "box_xyxy": [
+        292,
+        573,
+        715,
+        822
+      ]
+    },
+    {
+      "filename": "equal-maxima.jpg",
+      "photograph": 8,
+      "box_xyxy": [
+        300,
+        824,
+        683,
+        1064
+      ]
+    },
+    {
+      "filename": "sin-squared.jpg",
+      "photograph": 9,
+      "box_xyxy": [
+        220,
+        390,
+        590,
+        705
+      ]
+    }
+  ]
+}
