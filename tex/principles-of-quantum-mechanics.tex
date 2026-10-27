@@ -1623,4 +1623,276 @@ using
 \begin{center}
     \textbf{End of lecture 7}
 \end{center}
+
+Taking expectation values in any state $|\psi\rangle$ (independent of $t$
+in the Heisenberg picture) gives
+\[
+    \frac{d}{dt}\langle\hat{x}\rangle=\frac{1}{m}\langle\hat{p}\rangle,
+    \qquad
+    \frac{d}{dt}\langle\hat{p}\rangle=-\langle V'(\hat{x})\rangle.
+\]
+These are \underline{Ehrenfest's theorem}, true in all pictures.
+
+For some potentials we can solve the Heisenberg equations explicitly.
+
+\medskip
+\noindent
+\underline{Free particle: $V=0$}
+\[
+    \frac{d}{dt}\hat{p}(t)=0
+    \quad\Rightarrow\quad
+    \hat{p}(t)=\hat{p}(0)
+    \qquad\text{(constant operator).}
+\]
+Then
+\[
+    \frac{d}{dt}\hat{x}(t)=\frac{1}{m}\hat{p}(0)
+    \quad\Rightarrow\quad
+    \hat{x}(t)=\hat{x}(0)+\frac{\hat{p}(0)}{m}t,
+\]
+just as in classical dynamics.
+
+\medskip
+\noindent
+\underline{Harmonic oscillator: $V=\frac{1}{2}m\omega^2x^2$}
+\[
+    \frac{d}{dt}\hat{x}(t)=\frac{1}{m}\hat{p}(t),
+    \qquad
+    \frac{d}{dt}\hat{p}(t)=-m\omega^2\hat{x}(t).
+\]
+Hence
+\[
+    \frac{d^2}{dt^2}\hat{x}(t)+\omega^2\hat{x}(t)=0,
+    \qquad
+    \frac{d^2}{dt^2}\hat{p}(t)+\omega^2\hat{p}(t)=0.
+\]
+The solutions are
+\begin{align*}
+    \hat{x}(t)&=\hat{x}(0)\cos\omega t
+        +\frac{\hat{p}(0)}{m\omega}\sin\omega t,\\
+    \hat{p}(t)&=\hat{p}(0)\cos\omega t
+        -m\omega\hat{x}(0)\sin\omega t.
+\end{align*}
+Or equivalently,
+\begin{align*}
+    \hat{x}(t)&=\left(\frac{\hbar}{2m\omega}\right)^{1/2}
+        \left(ae^{-i\omega t}+a^\dagger e^{i\omega t}\right),\\
+    \hat{p}(t)&=\left(\frac{\hbar m\omega}{2}\right)^{1/2}\frac{1}{i}
+        \left(ae^{-i\omega t}-a^\dagger e^{i\omega t}\right),
+\end{align*}
+where $a$, $a^\dagger$ are defined from the Schr\"odinger-picture operators
+$\hat{x}(0)$, $\hat{p}(0)$.
+
+\medskip
+\noindent
+\underline{Why do the ladder operators acquire these phases?}
+
+For the harmonic oscillator,
+\[
+    H=\hbar\omega\left(a^\dagger a+\frac{1}{2}\right),
+    \qquad [a,a^\dagger]=1.
+\]
+Using $[AB,C]=A[B,C]+[A,C]B$, we find
+\begin{align*}
+    [a^\dagger a,a]&=a^\dagger[a,a]+[a^\dagger,a]a=-a,\\
+    [a^\dagger a,a^\dagger]
+        &=a^\dagger[a,a^\dagger]+[a^\dagger,a^\dagger]a=a^\dagger.
+\end{align*}
+The constant term in $H$ commutes with every operator, so
+\[
+    [H,a]=-\hbar\omega a,
+    \qquad [H,a^\dagger]=\hbar\omega a^\dagger.
+\]
+Define
+\[
+    a_H(t)=U^\dagger(t)aU(t),
+    \qquad a_H^\dagger(t)=U^\dagger(t)a^\dagger U(t).
+\]
+Since $H$ commutes with $U(t)$, the same commutator relations hold for
+the Heisenberg-picture operators. Their equations of motion are therefore
+\begin{align*}
+    \frac{d}{dt}a_H(t)&=\frac{i}{\hbar}[H,a_H(t)]
+        =-i\omega a_H(t),\\
+    \frac{d}{dt}a_H^\dagger(t)&=\frac{i}{\hbar}[H,a_H^\dagger(t)]
+        =i\omega a_H^\dagger(t).
+\end{align*}
+With $a_H(0)=a$ and $a_H^\dagger(0)=a^\dagger$, this gives
+\[
+    \boxed{a_H(t)=ae^{-i\omega t},\qquad
+           a_H^\dagger(t)=a^\dagger e^{i\omega t}.}
+\]
+The two phase factors have opposite signs because the commutators of $H$
+with the lowering and raising operators have opposite signs. The second
+result also follows by taking the adjoint of the first.
+Substituting these results into
+\[
+    \hat{x}(t)=\sqrt{\frac{\hbar}{2m\omega}}
+        \bigl(a_H(t)+a_H^\dagger(t)\bigr),
+    \qquad
+    \hat{p}(t)=\frac{1}{i}\sqrt{\frac{\hbar m\omega}{2}}
+        \bigl(a_H(t)-a_H^\dagger(t)\bigr)
+\]
+recovers the expressions above. Here $a$ and $a^\dagger$ without a time
+argument denote the fixed operators at $t=0$.
+
+\subsection*{2.3 Canonical Quantisation}
+
+\noindent
+$\ast$ \underline{Non-examinable material}
+
+This is the final step in Dirac's approach to constructing QM:
+how does one pass from a general classical system to its quantum version?
+
+A classical system can be described by a set of generalised positions
+$x_i(t)$ and momenta $p_i(t)$, $1\leq i\leq N$ (which may include angles
+and angular momenta). These are coordinates on \underline{phase space}.
+The dynamics are governed by a Hamiltonian $H(x_i,p_i)$.
+
+The \underline{Poisson bracket} of two functions $f(x_i,p_i)$,
+$g(x_i,p_i)$ is defined by
+\[
+    \{f,g\}=\sum_{i=1}^{N}\left(
+        \frac{\partial f}{\partial x_i}\frac{\partial g}{\partial p_i}
+        -\frac{\partial f}{\partial p_i}\frac{\partial g}{\partial x_i}
+    \right),
+\]
+which is another function on phase space. In particular,
+\[
+    \{x_i,p_j\}=\delta_{ij}.
+\]
+Properties of Poisson brackets closely resemble those of commutators
+(linearity, the Jacobi identity, etc.). Dynamics in this formulation are
+given by Hamilton's equation
+\[
+    \frac{df}{dt}=\{f,H\}
+    \qquad\text{for }f\text{ with no explicit time dependence.}
+\]
+In \underline{canonical quantisation}, classical functions are promoted
+to quantum operators,
+\[
+    f,g\quad\longrightarrow\quad\hat{f},\hat{g},
+\]
+and Poisson brackets determine commutators through Dirac's formal rule
+\[
+    [\hat{f},\hat{g}]=i\hbar\,\widehat{\{f,g\}}.
+\]
+In particular, this recovers
+\[
+    [\hat{x}_i,\hat{p}_j]=i\hbar\delta_{ij},
+\]
+and the correspondence with Hamilton's equation gives the Heisenberg
+equation
+\[
+    i\hbar\frac{d\hat{f}}{dt}=[\hat{f},H].
+\]
+The rule is a quantisation prescription; for general functions, operator
+ordering must be specified and the rule cannot hold exactly for every
+pair of functions simultaneously.
+
+\noindent
+$\ast$ \underline{End of non-examinable material}
+
+\subsection*{Tensor Products}
+
+Given state spaces $V_1$ and $V_2$, their \underline{tensor product}
+$V=V_1\otimes V_2$ is spanned by tensor product states
+\[
+    |\psi\rangle\otimes|\phi\rangle,
+    \qquad |\psi\rangle\in V_1,\quad |\phi\rangle\in V_2,
+\]
+with duals $\langle\psi|\otimes\langle\phi|$, subject to
+\begin{align*}
+    (|\psi\rangle+|\psi'\rangle)\otimes|\phi\rangle
+        &=|\psi\rangle\otimes|\phi\rangle
+          +|\psi'\rangle\otimes|\phi\rangle,\\
+    |\psi\rangle\otimes(|\phi\rangle+|\phi'\rangle)
+        &=|\psi\rangle\otimes|\phi\rangle
+          +|\psi\rangle\otimes|\phi'\rangle,\\
+    (\alpha|\psi\rangle)\otimes|\phi\rangle
+        &=|\psi\rangle\otimes(\alpha|\phi\rangle)
+          =\alpha\bigl(|\psi\rangle\otimes|\phi\rangle\bigr),
+\end{align*}
+and similarly for duals.
+
+The inner product on $V$ satisfies
+\[
+    \bigl(\langle\psi'|\otimes\langle\phi'|\bigr)
+    \bigl(|\psi\rangle\otimes|\phi\rangle\bigr)
+    =\langle\psi'|\psi\rangle\langle\phi'|\phi\rangle,
+\]
+extended sesquilinearly to arbitrary states (conjugate linear in the
+first state and linear in the second).
+
+Given operators $A$ on $V_1$ and $B$ on $V_2$, define an operator
+$A\otimes B$ on $V$ by
+\[
+    (A\otimes B)\bigl(|\psi\rangle\otimes|\phi\rangle\bigr)
+    =(A|\psi\rangle)\otimes(B|\phi\rangle),
+\]
+and extend by linearity. In particular,
+\[
+    A\longleftrightarrow A\otimes 1
+    \quad\text{acting only on }V_1,
+    \qquad
+    B\longleftrightarrow 1\otimes B
+    \quad\text{acting only on }V_2.
+\]
+Operators acting on different factors commute for any $A,B$:
+\[
+    [A\otimes 1,1\otimes B]=0.
+\]
+
+\medskip
+\noindent
+\underline{Example: a particle in two dimensions}
+
+Consider the position operators $\hat{x}_1$, $\hat{x}_2$.
+A basis of joint eigenstates is constructed as
+\[
+    \underbrace{|x_1,x_2\rangle}_{\in V}
+    =\underbrace{|x_1\rangle}_{\in V_1}
+       \otimes\underbrace{|x_2\rangle}_{\in V_2},
+\]
+where $V_1$, $V_2$ are the state spaces for a particle in one dimension.
+The position operators are identified with
+\[
+    \hat{x}_1\longleftrightarrow\hat{x}_1\otimes 1,
+    \qquad
+    \hat{x}_2\longleftrightarrow 1\otimes\hat{x}_2.
+\]
+The wavefunction for a product state $|\psi\rangle\otimes|\phi\rangle$
+is given by
+\begin{align*}
+    \langle x_1,x_2|\bigl(|\psi\rangle\otimes|\phi\rangle\bigr)
+        &=(\langle x_1|\otimes\langle x_2|)
+          (|\psi\rangle\otimes|\phi\rangle)\\
+        &=\langle x_1|\psi\rangle\langle x_2|\phi\rangle\\
+        &=\psi(x_1)\phi(x_2).
+\end{align*}
+Thus
+\[
+    \begin{aligned}
+        \text{tensor product states}
+            &\longleftrightarrow\text{separable wavefunctions},\\
+        \text{tensor product space}
+            &\longleftrightarrow\text{all linear combinations of such wavefunctions}.
+    \end{aligned}
+\]
+
+\medskip
+\noindent
+\underline{Note.}
+If $\{|n\rangle\}$ is a basis for $V_1$ and $\{|m\rangle\}$ is a basis
+for $V_2$, then
+\[
+    \{|n\rangle\otimes|m\rangle\}
+\]
+is a basis for $V$. If both bases are finite,
+\[
+    \dim V=(\dim V_1)(\dim V_2).
+\]
+
+\begin{center}
+    \textbf{End of lecture 8}
+\end{center}
 \end{document}

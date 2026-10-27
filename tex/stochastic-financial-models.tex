@@ -1166,4 +1166,284 @@ For any asset price model $(\bar S_n)_{0\leq n\leq T}$ the following are equival
 \begin{center}
 \textbf{End of lecture 5}
 \end{center}
+
+\subsubsection*{Recap of the basic framework}
+
+Let $(\bar S_n)_{0\leq n\leq T}$ be an asset price model in
+$\mathbb R^{d+1}$, with numeraire $S_n^0>0$, and put
+\[
+X_n=\frac{S_n}{S_n^0},\qquad \bar X_n=(1,X_n).
+\]
+Given an initial discounted wealth $V_0$ and a previsible process
+$(\Theta_n)_{1\leq n\leq T}$ in $\mathbb R^d$, there is an associated
+self-financing portfolio $(\bar\Theta_n)_{1\leq n\leq T}$ with
+\[
+V_T=\bar\Theta_T\cdot\bar X_T
+=V_0+\sum_{n=1}^T\Theta_n\cdot(X_n-X_{n-1}).
+\]
+Recall that $\Theta$ is an arbitrage if
+\[
+V_0=0,\qquad V_T\geq0\ \text{a.s.},\qquad
+\mathbb P(V_T>0)>0.
+\]
+An \emph{equivalent martingale measure} is a probability measure
+$\widetilde{\mathbb P}\sim\mathbb P$ under which $X$ is a martingale.
+
+\subsubsection*{Proof of the Fundamental Theorem of Asset Pricing}
+
+The theorem says that the following are equivalent:
+\begin{enumerate}
+    \item[(a)] $X$ has no arbitrage.
+    \item[(b)] There exists an equivalent martingale measure.
+\end{enumerate}
+
+\noindent\textbf{Proof of (b) $\Rightarrow$ (a).}
+By the proposition in Section 2.4, a martingale price process has no
+arbitrage under $\widetilde{\mathbb P}$. Equivalence means that
+$\mathbb P$ and $\widetilde{\mathbb P}$ have the same null events, so the
+conditions defining an arbitrage are the same under either measure.
+Hence there is no arbitrage under $\mathbb P$.
+\hfill$\square$
+
+\medskip
+\noindent\textbf{Proof of (a) $\Rightarrow$ (b) in the single-period case.}
+We prove this direction here when $T=1$ and
+$\mathcal F_0=\{\varnothing,\Omega\}$.
+Write
+\[
+\Theta=\Theta_1\in\mathbb R^d,\qquad Y=X_1-X_0.
+\]
+Since $\mathcal F_0$ is trivial, $X_0$ and $\Theta_1$ are deterministic
+(up to null sets). Thus (a) says that there is no $\Theta\in\mathbb R^d$
+such that
+\[
+\Theta\cdot Y\geq0\ \text{a.s.},\qquad
+\mathbb P(\Theta\cdot Y>0)>0.
+\]
+Condition (b) asks for $\widetilde{\mathbb P}\sim\mathbb P$ such that
+$Y$ is integrable and
+\[
+\widetilde{\mathbb E}(Y)=0.
+\]
+Indeed, this is precisely the martingale condition
+$\widetilde{\mathbb E}(X_1\mid\mathcal F_0)=X_0$ in this setting.
+
+\paragraph{Step 1: ensure finite exponential moments.}
+Set
+\[
+\phi(\Theta)=\mathbb E\!\left(e^{\Theta\cdot Y}\right),
+\qquad \Theta\in\mathbb R^d.
+\]
+We may reduce to the case $\phi(\Theta)<\infty$ for every $\Theta$ by
+first switching to the equivalent probability measure
+$\widehat{\mathbb P}$ given by
+\[
+\frac{d\widehat{\mathbb P}}{d\mathbb P}
+=\frac{e^{-|Y|^2}}{\mathbb E(e^{-|Y|^2})}.
+\]
+The denominator is strictly positive and finite, and the density is
+strictly positive. Moreover,
+\[
+\Theta\cdot Y-|Y|^2
+=-\left|Y-\frac{\Theta}{2}\right|^2+\frac{|\Theta|^2}{4}
+\leq\frac{|\Theta|^2}{4},
+\]
+so
+\[
+\widehat{\mathbb E}\!\left(e^{\Theta\cdot Y}\right)
+\leq\frac{e^{|\Theta|^2/4}}{\mathbb E(e^{-|Y|^2})}<\infty.
+\]
+No arbitrage is preserved under this change of measure. A measure
+equivalent to $\widehat{\mathbb P}$ will also be equivalent to the
+original $\mathbb P$. We therefore relabel $\widehat{\mathbb P}$ as
+$\mathbb P$ for the remainder of the proof and assume all exponential
+moments are finite.
+
+Under this assumption $Y$ is integrable and $\phi$ is differentiable,
+with
+\[
+\nabla\phi(\Theta)
+=\mathbb E\!\left(Y e^{\Theta\cdot Y}\right).
+\]
+To justify differentiation under the expectation, on a bounded set of
+$\Theta$ the derivatives are dominated by an integrable multiple of
+$e^{a\sum_{i=1}^d|Y^i|}$ for a sufficiently large $a$. This is integrable
+because
+\[
+e^{a\sum_{i=1}^d|Y^i|}
+\leq\sum_{s\in\{-1,1\}^d}e^{a s\cdot Y},
+\]
+and every term has finite expectation.
+
+\paragraph{Step 2: reduce the existence of a minimum to relevant directions.}
+We will show that $\phi$ attains a minimum on $\mathbb R^d$.
+Let
+\[
+E_0=\{\Theta\in\mathbb R^d:\Theta\cdot Y=0\ \text{a.s.}\},
+\qquad E_1=E_0^\perp,
+\qquad \mathbb R^d=E_0\oplus E_1.
+\]
+For $\Theta_0\in E_0$ and $\Theta_1\in E_1$,
+\[
+\phi(\Theta_0+\Theta_1)=\phi(\Theta_1).
+\]
+Thus it suffices to find a minimum on $E_1$. If $E_1=\{0\}$, then
+$\phi\equiv1$ and the minimum is already attained. Otherwise, since
+$\phi(0)=1$, it will suffice to show that
+\[
+\phi(\Theta)>1
+\qquad\text{for all }\Theta\in E_1\text{ with }|\Theta|
+\text{ sufficiently large}.
+\]
+
+Define
+\[
+\psi(t)=\min\{1,\max\{0,t\}\},\qquad
+f(\Theta)=\mathbb E\!\left(\psi(\Theta\cdot Y)\right).
+\]
+The function $\psi$ is Lipschitz with constant $1$. Also, $f$ is
+continuous by bounded convergence, since $0\leq\psi\leq1$.
+
+Let
+\[
+\mathcal S=\{\Theta\in E_1:|\Theta|=1\}.
+\]
+For $\Theta\in\mathcal S$ we have
+$\mathbb P(\Theta\cdot Y\neq0)>0$, since
+$E_0\cap E_1=\{0\}$. No arbitrage, applied to $-\Theta$, implies
+\[
+\mathbb P(\Theta\cdot Y>0)>0.
+\]
+Otherwise $\Theta\cdot Y\leq0$ a.s., and $-\Theta$ would give a
+non-negative gain which is strictly positive with positive probability.
+It follows that $f(\Theta)>0$ on $\mathcal S$.
+
+Since $\mathcal S$ is compact and $f$ is continuous, set
+\[
+\varepsilon=\frac12\min_{\Theta\in\mathcal S}f(\Theta)>0.
+\]
+For every $\Theta\in\mathcal S$, using the Lipschitz property of $\psi$,
+\[
+\begin{aligned}
+\mathbb P(\Theta\cdot Y\geq\varepsilon)
+&\geq\mathbb E\!\left(\psi(\Theta\cdot Y-\varepsilon)\right)\\
+&\geq\mathbb E\!\left(\psi(\Theta\cdot Y)\right)-\varepsilon\\
+&=f(\Theta)-\varepsilon\geq\varepsilon.
+\end{aligned}
+\]
+The first inequality holds because
+$\psi(z-\varepsilon)\leq\mathbf1_{\{z\geq\varepsilon\}}$.
+Consequently, for $t\geq0$,
+\[
+\begin{aligned}
+\phi(t\Theta)
+&=\mathbb E\!\left(e^{t\Theta\cdot Y}\right)\\
+&\geq e^{t\varepsilon}
+   \mathbb P(\Theta\cdot Y\geq\varepsilon)
+\geq\varepsilon e^{t\varepsilon}
+\longrightarrow\infty\qquad(t\to\infty).
+\end{aligned}
+\]
+The lower bound is uniform over $\Theta\in\mathcal S$. Writing any
+non-zero $\Theta\in E_1$ as $|\Theta|(\Theta/|\Theta|)$ therefore shows
+that $\phi(\Theta)>1$ outside a sufficiently large ball in $E_1$.
+By continuity, $\phi$ attains a minimum on the compact ball, hence on
+$E_1$ and on $\mathbb R^d$. Denote a minimizer by $\Theta^*$.
+
+\paragraph{Step 3: construct the equivalent martingale measure.}
+Set
+\[
+Z=\phi(\Theta^*)\in(0,\infty),\qquad
+\frac{d\widetilde{\mathbb P}}{d\mathbb P}
+=\frac{e^{\Theta^*\cdot Y}}{Z}.
+\]
+This is a strictly positive density with expectation $1$, so
+$\widetilde{\mathbb P}\sim\mathbb P$.
+Since $\Theta^*$ minimizes the differentiable function $\phi$,
+\[
+\nabla\phi(\Theta^*)
+=\mathbb E\!\left(Y e^{\Theta^*\cdot Y}\right)=0.
+\]
+The same exponential-moment bounds used above give
+\[
+\widetilde{\mathbb E}(|Y|)
+=\frac{\mathbb E\!\left(|Y|e^{\Theta^*\cdot Y}\right)}{Z}
+<\infty,
+\qquad
+\widetilde{\mathbb E}(Y)
+=\frac{\nabla\phi(\Theta^*)}{Z}=0.
+\]
+For example, coordinatewise integrability follows from
+$|x|\leq e^x+e^{-x}$ and the finiteness of the exponential moments at
+$\Theta^*+e_i$ and $\Theta^*-e_i$.
+Thus $X$ is a martingale under $\widetilde{\mathbb P}$, proving (b)
+in the single-period case.
+\hfill$\square$
+
+\subsection*{2.6 Pricing attainable claims}
+
+Let $C$ be a time-$T$ contingent claim: $C$ is non-negative and
+$\mathcal F_T$-measurable. Its \emph{discounted value} is
+\[
+D=\frac{C}{S_T^0}.
+\]
+We say that $C$ is \emph{attainable} if there is a previsible
+self-financing portfolio $(\bar\Theta_n)_{1\leq n\leq T}$ such that
+\[
+C=\bar\Theta_T\cdot\bar S_T.
+\]
+Equivalently, there exist an $\mathcal F_0$-measurable initial
+discounted wealth $V_0$ and a previsible process
+$(\Theta_n)_{1\leq n\leq T}$ in $\mathbb R^d$ such that
+\[
+D=V_0+\sum_{n=1}^T\Theta_n\cdot(X_n-X_{n-1}).
+\]
+Then $V_0$ is called the \emph{fair price} of $C$ in discounted units,
+and $\bar\Theta$ is called a \emph{replicating} or \emph{hedging
+portfolio}. In currency units the initial price is $S_0^0V_0$.
+
+\medskip
+\noindent\textbf{Proposition.}
+Assume that
+\[
+\mathcal F_0=\{\varnothing,\Omega\},\qquad
+\mathcal F_T=\sigma(\bar S_1,\ldots,\bar S_T).
+\]
+Let $C$ be an attainable contingent claim and let
+$\widetilde{\mathbb P}$ be any equivalent martingale measure. Then
+\[
+\boxed{\displaystyle
+V_0=\widetilde{\mathbb E}\!\left(\frac{C}{S_T^0}\right).}
+\]
+
+\noindent\textbf{Proof.}
+Since $C$ is attainable, there is a previsible process $\Theta$ with
+\[
+D=\frac{C}{S_T^0}
+=V_0+\sum_{n=1}^T\Theta_n\cdot(X_n-X_{n-1}).
+\]
+Since $D\geq0$, the backwards conditional-expectation argument used in
+the proposition in Section 2.4 gives
+\[
+\widetilde{\mathbb E}(D\mid\mathcal F_n)=V_n,
+\qquad 0\leq n\leq T.
+\]
+Here non-negativity of the terminal value allows the same localization
+argument even if the previsible holdings are unbounded. At time $0$,
+$V_0$ is deterministic, so
+\[
+\widetilde{\mathbb E}(D)=V_0.
+\]
+In particular $D$ is integrable under $\widetilde{\mathbb P}$.
+\hfill$\square$
+
+\medskip
+\noindent\textbf{Interpretation.}
+For an attainable claim, every equivalent martingale measure gives the
+same discounted expected payoff: it equals the initial cost of a
+replicating portfolio.
+
+\begin{center}
+\textbf{End of lecture 6}
+\end{center}
 \end{document}
