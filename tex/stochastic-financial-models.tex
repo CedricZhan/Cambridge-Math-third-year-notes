@@ -1422,19 +1422,76 @@ Since $C$ is attainable, there is a previsible process $\Theta$ with
 D=\frac{C}{S_T^0}
 =V_0+\sum_{n=1}^T\Theta_n\cdot(X_n-X_{n-1}).
 \]
-Since $D\geq0$, the backwards conditional-expectation argument used in
-the proposition in Section 2.4 gives
+Put
+\[
+V_n=V_0+\sum_{k=1}^n\Theta_k\cdot(X_k-X_{k-1}),
+\qquad 0\leq n\leq T,
+\]
+so that $V_T=D\geq0$. We spell out the backwards
+conditional-expectation argument from the proposition in Section 2.4.
+At time $T$,
+\[
+\widetilde{\mathbb E}[D\mid\mathcal F_T]=V_T\geq0.
+\]
+Suppose that
+\[
+\widetilde{\mathbb E}[D\mid\mathcal F_{n+1}]=V_{n+1}\geq0.
+\]
+To justify taking out the possibly unbounded holdings, fix $R<\infty$
+and set
+\[
+A_R=\{|V_n|\leq R,\ |\Theta_{n+1}|\leq R\}\in\mathcal F_n.
+\]
+The identity
+\[
+\mathbf1_{A_R}V_{n+1}
+=\mathbf1_{A_R}V_n
++(\mathbf1_{A_R}\Theta_{n+1})\cdot(X_{n+1}-X_n)
+\]
+shows that $\mathbf1_{A_R}V_{n+1}$ is integrable. Since $X$ is a
+martingale under $\widetilde{\mathbb P}$,
+\[
+\begin{aligned}
+\mathbf1_{A_R}\widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]
+&=\mathbf1_{A_R}V_n
++(\mathbf1_{A_R}\Theta_{n+1})\cdot
+\widetilde{\mathbb E}[X_{n+1}-X_n\mid\mathcal F_n]\\
+&=\mathbf1_{A_R}V_n.
+\end{aligned}
+\]
+Letting $R\to\infty$ gives
+\[
+\widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]=V_n\geq0.
+\]
+The tower property now gives
+\[
+\widetilde{\mathbb E}[D\mid\mathcal F_n]=V_n.
+\]
+Thus, by backwards induction,
 \[
 \widetilde{\mathbb E}(D\mid\mathcal F_n)=V_n,
 \qquad 0\leq n\leq T.
 \]
-Here non-negativity of the terminal value allows the same localization
-argument even if the previsible holdings are unbounded. At time $0$,
-$V_0$ is deterministic, so
+At time $0$, $V_0$ is deterministic and finite, so
 \[
 \widetilde{\mathbb E}(D)=V_0.
 \]
-In particular $D$ is integrable under $\widetilde{\mathbb P}$.
+In particular, $D$ and all the $V_n$ are integrable under
+$\widetilde{\mathbb P}$. The one-step calculation can therefore be
+written as
+\[
+\begin{aligned}
+\widetilde{\mathbb E}[V_{n+1}\mid\mathcal F_n]
+&=V_n+\widetilde{\mathbb E}[
+\Theta_{n+1}\cdot(X_{n+1}-X_n)
+\mid\mathcal F_n]\\
+&=V_n+\Theta_{n+1}\cdot
+\widetilde{\mathbb E}[X_{n+1}-X_n\mid\mathcal F_n]\\
+&=V_n.
+\end{aligned}
+\]
+Hence the discounted wealth process is a martingale, with
+$V_0=\widetilde{\mathbb E}(C/S_T^0)$ as claimed.
 \hfill$\square$
 
 \medskip
