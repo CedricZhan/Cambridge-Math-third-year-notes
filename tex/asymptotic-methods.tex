@@ -820,14 +820,14 @@ Consider instead
     &=\sum_{n=0}^N(-1)^n x^n
     \underbrace{\int_0^\infty t^n e^{-t}\,dt}_{=n!}+R_N\\
     &=\sum_{n=0}^N(-1)^n n!\,x^n+R_N\\
-    &=\sum c_n\phi_n(x)+R_N.
+    &=\sum_{n=0}^N c_n\phi_n(x)+R_N.
 \end{align*}
 $\phi_n=x^n$ as $x\to0^+$, so is a.\ sequence!
 
 Need to show $R_N=o(x^N)$ as $x\to0^+$.
 \[
     \begin{aligned}
-        \frac{R_N}{x^N}
+        \left|\frac{R_N}{x^N}\right|
         &=\frac{x^{N+1}}{x^N}\int_0^\infty
         \frac{t^{N+1}e^{-t}}{1+xt}\,dt\\
         &\leq x\int_0^\infty t^{N+1}e^{-t}\,dt
@@ -835,8 +835,8 @@ Need to show $R_N=o(x^N)$ as $x\to0^+$.
         \quad\text{as }x\to0^+.
     \end{aligned}
 \]
-Note $1+xt>1$.
-True $\forall N$.
+Note $1+xt\geq1$ for $x,t\geq0$.
+True for every fixed $N\geq0$.
 \[
     \Rightarrow\quad I(x)\sim\sum_{n=0}^\infty(-1)^n n!\,x^n
     \qquad\text{as }x\to0^+.
@@ -869,9 +869,9 @@ behave as $x\to\infty$?
 \begin{align*}
     F(x)&=\int_x^\infty\frac{te^{-t^2/2}}{t}\,dt\\
     &=\left[-\frac{1}{t}e^{-t^2/2}\right]_x^\infty
-    +\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt\\
+    -\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt\\
     &=\underbrace{\frac{e^{-x^2/2}}{x}}_{\text{a.\ approximation}}
-    +\underbrace{\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt}_{\text{error}}.
+    +\underbrace{\left(-\int_x^\infty\frac{e^{-t^2/2}}{t^2}\,dt\right)}_{\text{error}}.
 \end{align*}
 Need to check that
 \[
@@ -879,7 +879,7 @@ Need to check that
     \qquad\text{as }x\to\infty.
 \]
 \begin{align*}
-    \text{error}&=\int_x^\infty\frac{te^{-t^2/2}}{t^3}\,dt
+    |\text{error}|&=\int_x^\infty\frac{te^{-t^2/2}}{t^3}\,dt
     \qquad(\text{note }t\geq x)\\
     &\leq\frac{1}{x^3}\int_x^\infty te^{-t^2/2}\,dt
     =\frac{1}{x^3}e^{-x^2/2}\\
@@ -898,7 +898,8 @@ In fact we find
     \qquad\text{as }x\to\infty.
 \]
 \[
-    (2n-1)!!=(2n-1)(2n-3)(2n-5)\cdots3\cdot1.
+    (2n-1)!!=(2n-1)(2n-3)(2n-5)\cdots3\cdot1
+    \quad(n\geq1),\qquad (-1)!!=1.
 \]
 Exercise: Show this.
 
@@ -1603,6 +1604,228 @@ is proportional to $x^{-1/p}e^{x\phi(c)}$.
 
 \begin{center}
     \textbf{End of lecture 6}
+\end{center}
+
+\subsection*{Laplace's method (continued): higher-order terms}
+
+\noindent\textbf{(g) How do we obtain higher-order terms?}
+For
+\[
+    I(x)=\int_a^b f(t)e^{x\phi(t)}\,dt,
+\]
+retain more terms in the Taylor expansions of both $f$ and $\phi$ about
+the absolute maximum $t=c$. For general $f$ and $\phi$ the algebra becomes
+lengthy; see Section 3.4.4 of Chapling for the general treatment.
+If $f(c)=0$, higher-order terms may be needed even to find the leading
+nonzero contribution.
+
+\medskip
+\noindent\textbf{Example 1.}
+Consider
+\[
+    J(x)=\int_0^\pi e^{x\sin t}\,dt,\qquad x\to\infty.
+\]
+Here $f=1$ and $\phi(t)=\sin t$, whose unique absolute maximum is the
+interior point $c=\pi/2$. Since $\phi(c)=1$ and $\phi''(c)=-1$,
+\[
+    J(x)\sim\sqrt{\frac{2\pi}{x}}\,e^x.
+\]
+To obtain the next term, localise to $|t-\pi/2|<\epsilon$ and put
+$u=t-\pi/2$. Then $\sin t=\cos u$, and the local integral is
+\[
+    e^x\int_{-\epsilon}^{\epsilon}e^{-xu^2/2}
+    \exp\!\left(\frac{xu^4}{4!}-\frac{xu^6}{6!}+\cdots\right)du.
+\]
+With $s=\sqrt{x}\,u$, this becomes
+\[
+    \frac{e^x}{\sqrt{x}}
+    \int_{-\epsilon\sqrt{x}}^{\epsilon\sqrt{x}}e^{-s^2/2}
+    \exp\!\left(\frac{s^4}{24x}-\frac{s^6}{720x^2}+\cdots\right)ds.
+\]
+Expanding the second exponential and extending the Gaussian integrals
+to the whole real line gives
+\begin{align*}
+    J(x)&=\frac{e^x}{\sqrt{x}}\left[
+    \int_{-\infty}^{\infty}e^{-s^2/2}\,ds
+    +\frac{1}{24x}\int_{-\infty}^{\infty}s^4e^{-s^2/2}\,ds
+    +O(x^{-2})\right]\\
+    &=\boxed{\sqrt{\frac{2\pi}{x}}\,e^x
+    \left[1+\frac{1}{8x}+O(x^{-2})\right]}.
+\end{align*}
+We used
+\[
+    \int_{-\infty}^{\infty}e^{-s^2/2}\,ds=\sqrt{2\pi},
+    \qquad
+    \int_{-\infty}^{\infty}s^4e^{-s^2/2}\,ds=3\sqrt{2\pi}.
+\]
+\noindent\textbf{Exercise.}
+Bound the next largest term and hence justify the asymptotic expansion.
+The exponential expansion is not uniform on the full expanding interval:
+one can first restrict to $|s|\leq x^\delta$ with $0<\delta<1/4$,
+bound the integrated Taylor remainder by $O(x^{-2})$, and estimate the
+remaining Gaussian tails separately. The contribution outside the
+original neighbourhood of $c$ is exponentially smaller.
+
+\medskip
+\noindent\textbf{Example 2. A stationary endpoint.}
+Consider
+\[
+    I(x)=\int_x^\infty e^{-t-x^2/t}\,dt,\qquad x\to\infty.
+\]
+As in the earlier example involving $K_0(x)$, use a co-moving variable
+$t=xu$. Then
+\[
+    I(x)=x\int_1^\infty e^{x\phi(u)}\,du,
+    \qquad\phi(u)=-u-u^{-1}.
+\]
+The maximum is at the endpoint $u=1$, where
+\[
+    \phi(1)=-2,\quad\phi'(1)=0,\quad
+    \phi''(1)=-2,\quad\phi'''(1)=6.
+\]
+Writing $v=u-1$, we have
+\[
+    \phi(1+v)=-2-v^2+v^3-v^4+\cdots.
+\]
+Localise to $1\leq u\leq1+\epsilon$, and set $s=(u-1)\sqrt{x}$.
+The local integral becomes
+\[
+    \sqrt{x}\,e^{-2x}\int_0^{\epsilon\sqrt{x}}e^{-s^2}
+    \exp\!\left(\frac{s^3}{\sqrt{x}}-\frac{s^4}{x}+\cdots\right)ds.
+\]
+Expanding and integrating term by term, with the remainder controlled
+after integration, gives
+\begin{align*}
+    I(x)&=\sqrt{x}\,e^{-2x}\left[
+    \int_0^\infty e^{-s^2}\,ds
+    +x^{-1/2}\int_0^\infty s^3e^{-s^2}\,ds+O(x^{-1})\right]\\
+    &=\sqrt{x}\,e^{-2x}\left[
+    \frac{\sqrt{\pi}}{2}+\frac{1}{2\sqrt{x}}+O(x^{-1})\right]\\
+    &=\boxed{\frac{\sqrt{\pi x}}{2}e^{-2x}
+    \left[1+\frac{1}{\sqrt{\pi x}}+O(x^{-1})\right]}.
+\end{align*}
+The useful Gaussian moment identity is
+\[
+    \int_0^\infty t^{2n+1}e^{-t^2/a^2}\,dt
+    =\frac{n!\,a^{2n+2}}{2},\qquad a>0,\quad n=0,1,2,\ldots.
+\]
+Unlike at a symmetric interior maximum, the odd cubic correction does
+not integrate to zero on the half-line. Thus the first relative
+correction has order $x^{-1/2}$.
+
+\section*{3.6 Oscillatory integrals and the method of stationary phase}
+
+Consider the Fourier-type integral
+\[
+    F(x)=\int_a^b f(t)e^{ix\phi(t)}\,dt,
+    \qquad x\to\infty,
+\]
+where $\phi$ is real. The function $f$ is the \emph{amplitude} or
+\emph{envelope}, $x\phi(t)$ is the \emph{phase}, and
+\[
+    k(t)=x\phi'(t)
+\]
+is the local wavenumber (or angular frequency). Wherever $\phi'(t)\neq0$,
+the local wavelength is
+\[
+    \lambda(t)=\frac{2\pi}{|x\phi'(t)|}.
+\]
+Although $|e^{ix\phi(t)}|=1$, the integrand oscillates increasingly
+rapidly as $x\to\infty$. Away from stationary points, $\lambda$ becomes
+much smaller than the lengthscale on which $f$ varies. Locally $f$ then
+looks nearly constant over a wavelength, so positive and negative
+contributions almost cancel.
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[t]{0.61\linewidth}
+        \centering
+        \pdfximage width \linewidth {figures/asymptotic-lecture7/oscillations.jpg}
+        \pdfrefximage\pdflastximage
+        \par\smallskip (a) Rapid oscillations within the envelope.
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.34\linewidth}
+        \centering
+        \pdfximage width \linewidth {figures/asymptotic-lecture7/one-wavelength.jpg}
+        \pdfrefximage\pdflastximage
+        \par\smallskip (b) Cancellation over one wavelength.
+    \end{minipage}
+    \caption{Oscillatory cancellation. Direct crops of supplied
+    blackboard photographs 7 and 8, archived as
+    \texttt{source-07.png} and \texttt{source-08.png}.}
+    \label{fig:am-lecture7-cancellation}
+\end{figure}
+
+\subsection*{(a) The Riemann--Lebesgue lemma}
+For the linear phase $\phi(t)=t$, if
+\[
+    \int_a^b|f(t)|\,dt<\infty,
+    \qquad-\infty\leq a<b\leq\infty,
+\]
+then
+\[
+    \boxed{F(x)=\int_a^b f(t)e^{ixt}\,dt\longrightarrow0
+    \quad\text{as }|x|\to\infty.}
+\]
+See Appendix A of Chapling for a proof. The lemma gives convergence to
+zero, but by itself does not specify a decay rate.
+
+\medskip
+\noindent\textbf{A first decay estimate.}
+Suppose initially that $a,b$ are finite, $f$ is absolutely continuous
+on $[a,b]$, $f'\in L^1(a,b)$, and $f(a),f(b)\neq0$.
+Integration by parts gives
+\begin{align*}
+    F(x)&=\left[\frac{f(t)e^{ixt}}{ix}\right]_a^b
+    -\frac{1}{ix}\int_a^b f'(t)e^{ixt}\,dt\\
+    &=\frac{1}{ix}\left[f(b)e^{ixb}-f(a)e^{ixa}
+    -\int_a^b f'(t)e^{ixt}\,dt\right].
+\end{align*}
+By the Riemann--Lebesgue lemma applied to $f'$, the last integral tends
+to zero. Therefore
+\[
+    \boxed{F(x)=\frac{f(b)e^{ixb}-f(a)e^{ixa}}{ix}
+    +o(x^{-1})=O(x^{-1}).}
+\]
+The leading contribution is controlled by the boundary values of $f$:
+cancellation is imperfect at the endpoints. An additive remainder is
+used here because the oscillatory boundary term can vanish for some
+values of $x$, so a ratio statement using $\sim$ need not hold.
+
+\medskip
+\noindent\textbf{Vanishing boundary terms and faster decay.}
+Repeated integration by parts gives, under the corresponding
+regularity and integrability assumptions,
+\[
+    F(x)=\sum_{k=0}^{N-1}\frac{(-1)^k}{(ix)^{k+1}}
+    \left[f^{(k)}(t)e^{ixt}\right]_a^b
+    +\frac{(-1)^N}{(ix)^N}\int_a^b f^{(N)}(t)e^{ixt}\,dt.
+\]
+Thus faster decay depends on vanishing boundary values of successive
+derivatives. In particular, if $f$ is smooth on a finite interval and
+\emph{all} of its derivatives vanish at both endpoints, then
+\[
+    F(x)=O(x^{-N})\qquad\text{for every }N\in\mathbb Z_{>0}.
+\]
+This is decay beyond all algebraic orders in $x^{-1}$.
+
+For the whole-line Fourier integral,
+\[
+    F(x)=\int_{-\infty}^{\infty}f(t)e^{ixt}\,dt,
+\]
+the same conclusion holds, for example, if $f\in C^\infty(\mathbb R)$,
+each derivative $f^{(k)}$ is integrable, and
+$f^{(k)}(t)\to0$ as $t\to\pm\infty$ for every $k\geq0$:
+\[
+    |F(x)|\leq |x|^{-N}
+    \int_{-\infty}^{\infty}|f^{(N)}(t)|\,dt.
+\]
+\emph{Qualification of the blackboard statement:} $f(a)=f(b)=0$ alone
+does not imply decay beyond all orders. Likewise, smoothness and
+$f(t)\to0$ at infinity alone do not guarantee this rate; the derivatives
+must allow the repeated integrations by parts and control the remainders.
+
+\begin{center}
+    \textbf{End of lecture 7}
 \end{center}
 
 \end{document}

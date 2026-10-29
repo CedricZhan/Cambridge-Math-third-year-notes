@@ -1895,4 +1895,222 @@ is a basis for $V$. If both bases are finite,
 \begin{center}
     \textbf{End of lecture 8}
 \end{center}
+\medskip
+\noindent
+\underline{Example: the two-dimensional isotropic oscillator}
+
+The Hamiltonian is
+\[
+    H=\frac{1}{2m}\left(\hat{p}_1^2+\hat{p}_2^2\right)
+      +\frac{1}{2}m\omega^2\left(\hat{x}_1^2+\hat{x}_2^2\right)
+      =H_1+H_2,
+\]
+where
+\[
+    H_i=\frac{\hat{p}_i^2}{2m}+\frac{1}{2}m\omega^2\hat{x}_i^2
+       =\hbar\omega\left(N_i+\frac{1}{2}\right),
+    \qquad i=1,2.
+\]
+Here $N_i=a_i^\dagger a_i$, with
+\[
+    [a_i,a_j^\dagger]=\delta_{ij}.
+\]
+Since $[N_1,N_2]=0$, we construct simultaneous eigenstates
+\[
+    |n_1,n_2\rangle=|n_1\rangle\otimes|n_2\rangle,
+    \qquad n_1,n_2=0,1,2,\ldots.
+\]
+Then
+\begin{align*}
+    H|n_1,n_2\rangle
+        &=(H_1|n_1\rangle)\otimes|n_2\rangle
+          +|n_1\rangle\otimes(H_2|n_2\rangle)\\
+        &=E_{n_1n_2}|n_1,n_2\rangle,
+\end{align*}
+where
+\[
+    E_{n_1n_2}=\hbar\omega(n_1+n_2+1).
+\]
+The corresponding wavefunctions factorise:
+\begin{align*}
+    \psi_{n_1n_2}(x_1,x_2)
+        &=\langle x_1,x_2|n_1,n_2\rangle\\
+        &=\psi_{n_1}(x_1)\psi_{n_2}(x_2),
+\end{align*}
+where $\psi_n(x)=\langle x|n\rangle$ is the wavefunction of the
+one-dimensional oscillator.
+
+\noindent
+\underline{Notation.}
+It is common to suppress the tensor product symbol and write
+$|n_1\rangle|n_2\rangle$ for $|n_1\rangle\otimes|n_2\rangle$.
+
+\subsection*{3.2 Spin}
+
+Experiment shows that particles generally carry an internal degree of
+freedom called \underline{spin}, or \underline{intrinsic angular momentum}.
+Even if a particle appears to be elementary or point-like, its state
+space has the form
+\[
+    V=V_{\mathrm{space}}\otimes V_{\mathrm{spin}},
+\]
+with basis states
+\[
+    |\mathbf{x},r\rangle=|\mathbf{x}\rangle\otimes|r\rangle,
+\]
+where $r$ takes a finite set of values.
+
+The position operators alone do not, in general, form a complete
+commuting set: there are other observables $Q$ acting only on
+$V_{\mathrm{spin}}$, with
+\[
+    [\hat{x}_i,Q]=0.
+\]
+We return to these operators in Chapter 5; for now we focus on states.
+
+Each kind of particle has a definite total spin $s$, a non-negative
+integer or half-integer,
+\[
+    s=0,\frac{1}{2},1,\frac{3}{2},\ldots.
+\]
+This is part of its nature, like mass or charge. For a massive particle
+of spin $s$, the spin space has $2s+1$ basis states, labelled by
+\[
+    r=s,s-1,\ldots,-s.
+\]
+For example,
+\[
+\begin{array}{c|l}
+    s & \text{basis states in }V_{\mathrm{spin}}\\ \hline
+    0 & |0\rangle\\[3pt]
+    \frac{1}{2} & |\frac{1}{2}\rangle,\ |{-\frac{1}{2}}\rangle
+        \quad\text{also written }|\uparrow\rangle,\ |\downarrow\rangle
+        \quad\text{(up, down)}\\[3pt]
+    1 & |1\rangle,\ |0\rangle,\ |{-1}\rangle
+\end{array}
+\]
+
+The existence of spin states is revealed, for example, by the
+\underline{Stern--Gerlach experiment}. A magnet produces an inhomogeneous
+magnetic field, which exerts different forces on different spin states.
+For $s=\frac{1}{2}$, the beam splits into two:
+\begin{center}
+\setlength{\unitlength}{1mm}
+\begin{picture}(135,49)
+    \put(5,25){\vector(1,0){26}}
+    \put(1,17){\makebox(28,4){beam of particles}}
+    \put(36,34){\framebox(25,8){magnet}}
+    \put(36,8){\framebox(25,8){magnet}}
+    \put(31,25){\line(1,0){25}}
+    \qbezier(56,25)(69,25)(88,40)
+    \qbezier(56,25)(69,25)(88,10)
+    \put(88,40){\vector(4,3){8}}
+    \put(88,10){\vector(4,-3){8}}
+    \put(100,40){\makebox(28,4)[l]{$|\uparrow\rangle$}}
+    \put(100,3){\makebox(28,4)[l]{$|\downarrow\rangle$}}
+    \put(20,0){\makebox(66,4){inhomogeneous magnetic field}}
+\end{picture}
+\end{center}
+
+A general state $|\psi\rangle\in V$ has a $(2s+1)$-component
+wavefunction
+\[
+    \psi(\mathbf{x},r)=\langle\mathbf{x},r|\psi\rangle.
+\]
+Here $|\psi(\mathbf{x},r)|^2$ is the probability density for the
+particle's position with spin state $r$. A mixed or hybrid notation
+is also common:
+\[
+    \sum_r\psi(\mathbf{x},r)|r\rangle,
+\]
+which is a spin-space-valued function of position.
+
+\subsection*{3.3 Multiparticle: bosons \& fermions}
+
+Consider particles labelled by $a=1,2,\ldots,N$. Let $V_a$ be the
+state space for each particle, with basis
+$\{|\mathbf{x}_a,r_a\rangle\}$. General multiparticle states belong to
+\[
+    V_1\otimes V_2\otimes\cdots\otimes V_N,
+\]
+with basis states
+\begin{align*}
+    &|\mathbf{x}_1,r_1,\mathbf{x}_2,r_2,\ldots,\mathbf{x}_N,r_N\rangle\\
+    &\qquad=|\mathbf{x}_1,r_1\rangle\otimes|\mathbf{x}_2,r_2\rangle
+        \otimes\cdots\otimes|\mathbf{x}_N,r_N\rangle.
+\end{align*}
+
+\medskip
+\noindent
+\underline{(a) Identical particles: Bose--Einstein \& Fermi--Dirac statistics}
+
+If the particles are identical, then $V_a\cong V$ for each $a$.
+Consider first $N=2$. Define an exchange operator $U$ by its action
+on basis states:
+\[
+    U|\mathbf{x}_1,r_1,\mathbf{x}_2,r_2\rangle
+      =|\mathbf{x}_2,r_2,\mathbf{x}_1,r_1\rangle.
+\]
+For a physical two-particle state,
+\[
+    U|\Psi\rangle=\eta|\Psi\rangle,
+\]
+because $|\Psi\rangle$ and $U|\Psi\rangle$ are physically equivalent
+states. But $U^2=1$, as follows from its action on basis states, so
+\[
+    \eta^2=1,\qquad\eta=\pm1.
+\]
+Thus physical states lie in one of the two subspaces of $V\otimes V$:
+\begin{align*}
+    (V\otimes V)_{\mathrm{S}}
+        &=\operatorname{span}\bigl\{
+          |\psi\rangle\otimes|\phi\rangle
+          +|\phi\rangle\otimes|\psi\rangle\bigr\},
+        &&\eta=+1,\\
+    (V\otimes V)_{\mathrm{A}}
+        &=\operatorname{span}\bigl\{
+          |\psi\rangle\otimes|\phi\rangle
+          -|\phi\rangle\otimes|\psi\rangle\bigr\},
+        &&\eta=-1,
+\end{align*}
+where $|\psi\rangle,|\phi\rangle$ range over $V$. These are the
+\underline{symmetric} and \underline{antisymmetric} subspaces,
+respectively; the displayed spanning states need not be normalised.
+
+Similarly, for $N\geq2$, define $U_{(a,b)}$ to exchange the labels
+$(\mathbf{x}_a,r_a)$ and $(\mathbf{x}_b,r_b)$ in a basis state.
+For a physical $N$-particle state,
+\[
+    U_{(a,b)}|\Psi\rangle=\eta_{(a,b)}|\Psi\rangle,
+    \qquad\eta_{(a,b)}=\pm1,
+\]
+since $U_{(a,b)}^2=1$.
+
+For any permutation $\pi$ of $\{1,2,\ldots,N\}$, define
+\begin{align*}
+    &U_\pi|\mathbf{x}_1,r_1,\mathbf{x}_2,r_2,\ldots,\mathbf{x}_N,r_N\rangle\\
+    &\qquad=|\mathbf{x}_{\pi(1)},r_{\pi(1)},
+        \mathbf{x}_{\pi(2)},r_{\pi(2)},\ldots,
+        \mathbf{x}_{\pi(N)},r_{\pi(N)}\rangle.
+\end{align*}
+On a physical state,
+\[
+    U_\pi|\Psi\rangle=\eta_\pi|\Psi\rangle.
+\]
+The algebra of swaps (transpositions) requires $\eta_{(a,b)}$ to
+have the same value for every pair $(a,b)$. Every permutation can
+be expressed as a sequence of swaps, so there are two possibilities:
+\[
+    \eta_\pi=
+    \begin{cases}
+        1 & \text{for all }\pi\quad\text{(bosons)},\\[3pt]
+        \operatorname{sgn}(\pi)=(-1)^{\text{number of swaps in }\pi}
+          & \text{for all }\pi\quad\text{(fermions)}.
+    \end{cases}
+\]
+The same alternative must be chosen for all permutations.
+
+\begin{center}
+    \textbf{End of lecture 9}
+\end{center}
 \end{document}

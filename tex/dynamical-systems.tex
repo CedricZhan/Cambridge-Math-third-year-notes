@@ -1782,11 +1782,9 @@ the origin. If a Lyapunov function exists, then the origin is Lyapunov stable.
 
 \medskip
 \noindent\fbox{Proof}\quad
-Let's take small enough $\varepsilon>0$ such that $\{|\bar x|<\varepsilon\}\subset D$.
-Let
+Take $\varepsilon>0$ such that $\{|\bar x|<\varepsilon\}\subseteq D$. Let
 \[
-\alpha=\min\bigl(V(\bar x),\ |\bar x|=\varepsilon\bigr)>0
-\quad (V(\bar x)=0\text{ only at the origin!}).
+\alpha=\min\{V(\bar x):|\bar x|=\varepsilon\}.
 \]
 
 \noindent
@@ -1795,33 +1793,258 @@ Let
 \includegraphics[width=\linewidth]{lecture8-lyapunov-sublevel.png}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.56\textwidth}
-Now choose $\delta$:
+Choose $\delta>0$ such that
 \[
 \{|\bar x|<\delta\}\subset C_{\alpha,\varepsilon}
 \]
 \[
 =\{\bar x:V(\bar x)<\alpha,\ |\bar x|<\varepsilon\},
 \]
-then
-\[
-(|\bar x|<\delta)\subset C_{\alpha,\varepsilon}
-\subseteq\{|\bar x|<\varepsilon\}.
-\]
-Then if $\bar x\in\{|\bar x|<\delta\}$, we have
+Then if $|\bar x|<\delta$,
 \[
 V(\phi_t(\bar x))\leq V(\bar x)<\alpha,
 \]
 \[
-\Rightarrow\quad\underline{\phi_t(\bar x)\in\{|\bar x|<\varepsilon\}}.
+\Rightarrow\quad\underline{|\phi_t(\bar x)|<\varepsilon}.
 \]
 \end{minipage}
 
 \medskip
-\noindent Thus, for $\forall\,\varepsilon>0$ found $\delta>0$:
-$\phi_t(\bar x)\in N_\varepsilon(\bar0)$ if $\bar x\in N_\delta(\bar0)$.
+\noindent So the origin is \underline{Lyapunov stable (LS)}.
 
 \begin{center}
 \textbf{End of Lecture 8}
+\end{center}
+
+\newpage
+% Lecture 9 source archive: figures/dynamical-systems/lecture9/Lecture9.pdf.
+% Full-page screenshots: lecture9/page-1.png through lecture9/page-5.png.
+% Source page 1 (handwritten page 32), saved as lecture9/page-1.png,
+% repeats the definition and first theorem already transcribed at the end of Lecture 8.
+% Source page 2 (handwritten page 33): lecture9/page-2.png.
+\noindent\fbox{Theorem}\quad\underline{Lyapunov's 2nd theorem}
+
+\medskip
+\noindent
+If, in addition, $\dot V(\bar x)<0$ for $\bar x\neq\bar0$ in $D$, then $V$ is a
+\underline{strict Lyapunov function} and the origin is \underline{asymptotically stable}.
+
+\medskip
+\noindent\fbox{Proof}\quad
+By the first theorem, trajectories starting sufficiently near the origin stay
+in a compact neighbourhood $K\subset D$. For such an initial point $\bar x_0$,
+$V(\phi_t(\bar x_0))$ decreases and is bounded below by zero, so
+\[
+V(\phi_t(\bar x_0))\longrightarrow V_0\geq0.
+\]
+Suppose $V_0>0$. By continuity at the origin, the trajectory is bounded away
+from $\bar0$. On the resulting compact subset of $K$, strict negativity and
+continuity of $\dot V$ give a constant $\beta>0$ such that
+\[
+\dot V(\phi_t(\bar x_0))\leq-\beta<0.
+\]
+But then
+\[
+V(\phi_t(\bar x_0))
+=V(\bar x_0)+\int_0^t\dot V(\phi_s(\bar x_0))\,ds
+\leq V(\bar x_0)-\beta t,
+\]
+which eventually becomes negative, a contradiction. Thus $V_0=0$.
+Since $V$ is positive away from $\bar0$ and the trajectory stays in $K$,
+$\phi_t(\bar x_0)\to\bar0$. Together with Lyapunov stability, this proves AS.
+
+\medskip
+\noindent\fbox{Example}\quad\underline{Stability of the origin}
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}-2x\\x-y\end{pmatrix}.
+\]
+This is a linear system with Jacobian
+\[
+A=\begin{pmatrix}-2&0\\1&-1\end{pmatrix},
+\qquad \lambda_1=-1,\quad\lambda_2=-2,
+\]
+so the origin is a \underline{stable node}. Let us illustrate stability using
+a Lyapunov function.
+
+\medskip
+\noindent Try $V(x,y)=ax^2+by^2$, where $a,b>0$. Clearly $V\geq0$ and $V=0$
+only at the origin. Compute
+\[
+\dot V=V_x\dot x+V_y\dot y
+=2ax(-2x)+2by(x-y)
+=-2b\left(\frac{2a}{b}x^2-xy+y^2\right).
+\]
+
+\newpage
+% Source page 3 (handwritten page 34): lecture9/page-3.png.
+\noindent
+(i) Take $b=8a$. Then
+\[
+\dot V=-2b\left(\frac{x}{2}-y\right)^2\leq0.
+\]
+This is a Lyapunov function, but is \underline{not strict}, since $\dot V=0$
+on $\{y=x/2\}$, which extends beyond the origin. Still, Lyapunov's first
+theorem establishes \underline{Lyapunov stability (LS)}.
+
+\medskip
+\noindent
+(ii) Take $b=2a$. Then
+\[
+\dot V=-2b\left[\frac34x^2+\left(\frac{x}{2}-y\right)^2\right]<0
+\qquad\text{for }(x,y)\neq(0,0).
+\]
+A \underline{strict Lyapunov function} has been found, so the second theorem
+shows that the origin is \underline{asymptotically stable (AS)}.
+
+\medskip
+\noindent Even when the conditions of the second theorem are not fulfilled,
+we can sometimes demonstrate asymptotic stability of the origin.
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{LaSalle's Invariance Principle}
+
+\medskip
+\noindent
+Let $D$ be a compact (closed and bounded), positively invariant set, and let
+$V$ be continuously differentiable on a neighbourhood of $D$, with $\dot V\leq0$
+in $D$. Then for each $\bar x\in D$ the orbit is bounded, and there exists $c$
+such that
+\[
+\omega(\bar x)\subseteq M_c
+=\{\bar z\in D:V(\phi_t(\bar z))=c\ \text{for all }t\geq0\}.
+\]
+Equivalently, $\phi_t(\bar x)$ tends to an invariant subset of
+\[
+E=\{\bar z\in D:\dot V(\bar z)=0\}.
+\]
+% The compact domain in the handwritten statement must be positively invariant;
+% this hypothesis also supplies the boundedness used in the proof.
+
+\medskip
+\noindent\fbox{Proof}\quad Choose $\bar x\in D$ and let
+\[
+c=\inf_{t\geq0}V(\phi_t(\bar x)).
+\]
+Since $D$ is compact and positively invariant, the $\omega$-limit set exists.
+Take $\bar y\in\omega(\bar x)$. By definition, there is a sequence $t_n\to\infty$
+such that $\phi_{t_n}(\bar x)\to\bar y$. Since $V$ is continuous and
+non-increasing along orbits,
+\[
+V(\bar y)=\lim_{n\to\infty}V(\phi_{t_n}(\bar x))=c.
+\]
+
+\newpage
+% Source page 4 (handwritten page 35): lecture9/page-4.png.
+\noindent
+Now show that $V(\phi_t(\bar y))=c$. Suppose instead that
+$V(\phi_T(\bar y))<c$ for some $T\geq0$. By continuity of the flow,
+\[
+V(\phi_{t_n+T}(\bar x))
+=V(\phi_T(\phi_{t_n}(\bar x)))
+\longrightarrow V(\phi_T(\bar y))<c.
+\]
+Thus there would be a time $\tau=t_n+T$ with
+$V(\phi_\tau(\bar x))<c$, contradicting the definition of $c$.
+Hence $V(\phi_t(\bar y))=c$ for all $t\geq0$.
+Every point of $\omega(\bar x)$ therefore lies on an orbit on which $V$ is
+constant; this gives the invariant subset of $E$ claimed above.
+
+\medskip
+\noindent\underline{Notes}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+\item The $\omega$-limit set need not be a fixed point. This is a more general
+statement than Lyapunov's first or second theorem. In practice, we will use
+LaSalle's principle to determine the stability of fixed points.
+\item If $V$ is positive definite near the origin and the largest invariant
+subset of $\{\bar z:\dot V(\bar z)=0\}$ in a suitable compact neighbourhood
+is $\{\bar0\}$, then the origin is asymptotically stable. This strengthens
+the conclusion of the first theorem without requiring a strict Lyapunov function.
+\end{itemize}
+
+\medskip
+\noindent\fbox{Example}\quad\underline{Explore stability of the origin}
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}y-xy^2\\-x^3\end{pmatrix}.
+\]
+Without the $-xy^2$ term, this system would be Hamiltonian, with
+\[
+H(x,y)=\frac12y^2+\frac14x^4.
+\]
+Take $V(x,y)=H(x,y)$. Then
+\[
+\dot V=H_x\dot x+H_y\dot y
+=x^3(y-xy^2)+y(-x^3)=-x^4y^2\leq0.
+\]
+Thus $H$ is a Lyapunov function on $\mathbb R^2$. It is not strict, since
+\[
+\dot V=0\quad\text{on }\{x=0\}\cup\{y=0\}.
+\]
+
+\newpage
+% Source page 5 (handwritten page 36): lecture9/page-5.png.
+\noindent
+\begin{minipage}[c]{0.63\textwidth}
+The zero-derivative set extends beyond the origin, so the second theorem
+cannot be applied directly. But none of its nonzero points remains in the set:
+\[
+x=0,\ y\neq0\ \Rightarrow\ \dot x=y\neq0,
+\]
+\[
+y=0,\ x\neq0\ \Rightarrow\ \dot y=-x^3\neq0.
+\]
+Thus the largest invariant subset of $\{\dot V=0\}$ is $\{\bar0\}$.
+By LaSalle's principle, the origin is \underline{asymptotically stable}.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.34\textwidth}
+% Snapshot citation: Lecture9.pdf, page 5 (handwritten page 36),
+% cropped from saved full-page screenshot lecture9/page-5.png.
+\includegraphics[width=\linewidth]{lecture9/zero-derivative-set.png}
+\end{minipage}
+
+\medskip
+\noindent To apply the compact-set version of the theorem, take any sublevel
+set $\{H\leq k\}$, $k>0$. It is compact and positively invariant since
+$\dot H\leq0$.
+
+\medskip
+\noindent\underline{Estimating a basin of attraction}
+
+\medskip
+\noindent We can use Lyapunov's theorems and LaSalle's principle to establish
+a basin of attraction (\underline{domain of stability}, DoS) of a fixed point.
+Here is an algorithm:
+\begin{enumerate}
+\setlength{\itemsep}{9pt}
+\item Choose a function $V(\bar x):\mathbb R^n\to\mathbb R$ and a domain $D$
+such that
+\[
+V(\bar x)\geq0\ \text{in }D,\qquad
+V(\bar x)=0\ \text{only for }\bar x=\bar0,
+\]
+and $\dot V(\bar x)\leq0$ in $D$. The latter condition may limit $D$.
+\item Find $k>0$ such that the sublevel set
+\[
+C_k=\{\bar x:V(\bar x)<k\}\subseteq D.
+\]
+For the compact-set theorem, choose a sublevel region around the origin
+whose closure is compact and contained in $D$.
+\item Adjust $k$ (or $V$) so that the largest invariant subset of
+\[
+\overline{C_k}\cap\{\bar z:\dot V(\bar z)=0\}
+\]
+is the origin. LaSalle's principle then gives
+\[
+C_k\subseteq\operatorname{DoS}(\bar0).
+\]
+\item Take different functions $V$ to obtain other such regions $C_k$.
+Their union forms a better (larger) estimate of $\operatorname{DoS}(\bar0)$.
+\end{enumerate}
+
+\begin{center}
+\textbf{End of lecture 9}
 \end{center}
 
 \end{document}

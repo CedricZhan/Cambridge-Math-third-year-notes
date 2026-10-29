@@ -2127,4 +2127,202 @@ $\lambda_n\xrightarrow{d}\chi_{p-p_0}^2$ as $n\to\infty$ if $\theta_0\in\Theta_0
 \textbf{End of lecture 8}
 \end{center}
 
+\subsection*{6. The Delta Method}
+
+Let $\hat\theta$ be a MLE. We wish to estimate $\phi(\theta_0)$ for some
+(possibly non-linear, non-injective) function $\phi:\Theta\to\mathbb R^m$.
+A \underline{profile likelihood estimator} of $\phi(\theta_0)$ maximises
+\[
+L^*(\psi)=\sup_{\substack{\theta\in\Theta\\\phi(\theta)=\psi}}L(\theta)
+\]
+over $\psi\in\phi(\Theta)$.
+
+\medskip
+\noindent\underline{Lemma}\quad The plug-in MLE, $\phi(\hat\theta)$,
+maximises $L^*$.
+
+\noindent\underline{Proof}\quad Suppose $\exists\,\tilde\psi$ s.t.
+\[
+L^*(\tilde\psi)>L^*(\phi(\hat\theta))+\varepsilon
+\qquad\text{for some }\varepsilon>0.
+\]
+By definition of $L^*$, $\exists\,\tilde\theta$ s.t.
+\[
+L(\tilde\theta)>L^*(\tilde\psi)-\varepsilon
+>L^*(\phi(\hat\theta))\geq L(\hat\theta),
+\]
+which contradicts the maximality of the MLE $\hat\theta$.\hfill$\square$
+
+The Delta Method allows us to characterise the asymptotic distribution of
+fluctuations $(\phi(\hat\theta)-\phi(\theta_0))\sqrt n$, which can be used
+for inference of $\phi(\theta_0)$.
+
+\medskip
+\noindent\underline{Theorem 7}\quad Let $\hat\theta_n$ be an estimator s.t.
+\[
+r_n(\hat\theta_n-\theta_0)\xrightarrow{d}Z
+\]
+for some random variable $Z$ and a deterministic rate $r_n\xrightarrow{n\to\infty}\infty$
+(e.g.\ $r_n=\sqrt n$). [$\hat\theta_n$ need not be the MLE!]
+Let $\phi:\Theta\to\mathbb R^m$ be a continuously differentiable function. Then
+\[
+r_n\bigl(\phi(\hat\theta_n)-\phi(\theta_0)\bigr)
+\xrightarrow{d}
+\begin{pmatrix}
+\nabla\phi_1(\theta_0)^T\\
+\vdots\\
+\nabla\phi_m(\theta_0)^T
+\end{pmatrix}Z
+\qquad\text{as }n\to\infty.
+\]
+
+\noindent\underline{Proof}\quad By the mean value theorem,
+\[
+r_n\bigl(\phi(\hat\theta_n)-\phi(\theta_0)\bigr)
+=\underbrace{\begin{pmatrix}
+\nabla\phi_1(\tilde\theta_n^{(1)})^T\\
+\vdots\\
+\nabla\phi_m(\tilde\theta_n^{(m)})^T
+\end{pmatrix}}_{=:D_n}
+\underbrace{(\hat\theta_n-\theta_0)r_n}_{\xrightarrow{d}Z},
+\]
+where $\tilde\theta_n^{(i)}$ is on the segment between $\theta_0$ and
+$\hat\theta_n$ for each $i=1,\ldots,m$.
+Note that $r_n(\hat\theta_n-\theta_0)=O_{\mathbb P}(1)$ (by Prop 1(4));
+as $r_n\to\infty$, this shows that $\hat\theta_n\xrightarrow{P}\theta_0$
+(Ex Sheet). Therefore $\tilde\theta_n^{(i)}\xrightarrow{P}\theta_0$
+for all $i=1,\ldots,m$.
+As $\phi$ is continuously differentiable, by the CMT we have
+$D_n\xrightarrow{P}\nabla\phi(\theta_0)$.
+Finally, Slutsky's lemma gives the desired conclusion.\hfill$\square$
+
+\medskip
+\noindent\underline{Notation (supplement):}\quad
+Here the board's $\nabla\phi(\theta_0)$ denotes the Jacobian matrix
+\[
+J_\phi(\theta_0):=
+\begin{pmatrix}
+\nabla\phi_1(\theta_0)^T\\
+\vdots\\
+\nabla\phi_m(\theta_0)^T
+\end{pmatrix},
+\]
+with one transposed component gradient per row, just as in $D_n$
+(with $k$ outputs and $m$ input coordinates, the supplement writes these
+matrices as elements of $\mathbb R^{k\times m}$).
+
+\medskip
+\noindent\underline{Corollary}\quad If $\hat\theta_n$ is an asymptotically normal MLE,
+\[
+\sqrt n(\hat\theta_n-\theta_0)\xrightarrow{d}
+N(0,I^{-1}(\theta_0)),
+\]
+then
+\[
+\sqrt n\bigl(\phi(\hat\theta_n)-\phi(\theta_0)\bigr)
+\xrightarrow{d}N\bigl(0,
+\nabla\phi(\theta_0)^T I^{-1}(\theta_0)\nabla\phi(\theta_0)\bigr).
+\]
+Recall that by the Cram\'er--Rao lower bound for $\phi:\Theta\to\mathbb R$,
+any unbiased estimate $\hat\phi$
+($\mathbb E_{\theta_0}\hat\phi=\phi(\theta_0)$ for all $\theta_0$) has
+\[
+\operatorname{Var}(\hat\phi)\geq\frac1n
+\nabla\phi(\theta_0)^T I^{-1}(\theta_0)\nabla\phi(\theta_0)
+\qquad\text{for any finite }n.
+\]
+We see that the plug-in MLE $\phi(\hat\theta_n)$ attains or matches this
+lower bound asymptotically.
+
+\medskip
+\noindent\underline{Notation (supplement):}\quad
+The board's formulas above are retained: their $\nabla\phi(\theta_0)$
+is the transpose of the Jacobian $J_\phi(\theta_0)$ defined in the proof,
+so the covariance is $J_\phi I^{-1}J_\phi^T$.
+For scalar $\phi$, this is the column gradient, explaining the transpose
+on the left and its absence on the right in the Cram\'er--Rao bound.
+
+\medskip
+\noindent\underline{Example}\quad Suppose $(X_i)\overset{\mathrm{iid}}{\sim}N(\mu,1)$.
+We wish to estimate $\mu_0^2$ with the plug-in MLE $(\bar X_n)^2$.
+In this case we know
+\[
+\sqrt n(\bar X_n-\mu_0)\xrightarrow{d}N(0,1)
+\qquad\text{by the CLT}.
+\]
+By Theorem 7, we have
+\[
+\sqrt n(\bar X_n^2-\mu_0^2)\xrightarrow{d}N(0,4\mu_0^2).
+\]
+When $\mu_0=0$, the limit has variance $0$
+($\bar X_n^2-\mu_0^2$ converges ``faster'' than $\sqrt n$).
+We can instead scale the fluctuations $\bar X_n^2-\mu_0^2$ by $r_n=n$:
+\[
+n(\bar X_n^2-0)
+=\bigl(\underbrace{\sqrt n\,\bar X_n}_{\xrightarrow{d}N(0,1)\text{ by CLT}}\bigr)^2
+\xrightarrow{d}\chi_1^2
+\qquad\text{by continuous mapping}.
+\]
+
+\section*{II. BAYESIAN INFERENCE}
+
+Suppose observation $X$ comes from a statistical model
+$\{f(\cdot,\theta):\theta\in\Theta\}$ on a sample space $\mathcal X$.
+We assign a \underline{prior distribution} $\pi$ on $\Theta$, which expresses
+subjective opinions about $\theta$.
+Then we consider $X,\theta$ to be random variables with joint pdf (pmf)
+\[
+\pi(\theta)f(x,\theta)\qquad\text{on }\mathcal X\times\Theta,
+\]
+i.e.\ $\theta\sim\pi$, and $X\mid\theta\sim f(\cdot,\theta)$.
+The \underline{posterior distribution} is the conditional distribution of
+$\theta\mid X$, with pdf
+\[
+\pi(\theta\mid x)=
+\frac{\pi(\theta)f(x,\theta)}
+{\displaystyle\int_\Theta\pi(\theta)f(x,\theta)\,d\theta}
+\qquad\text{``Bayes' rule''}.
+\]
+
+\noindent\underline{Notation (supplement):}\quad
+The board's $f(x,\theta)$ means $f(x\mid\theta)$, the conditional pdf
+(or pmf) of $X$ given $\theta$; the joint pdf (or pmf) is
+$\pi(\theta)f(x,\theta)$.
+
+When $X=(X_1,\ldots,X_n)$ are iid and $f(\cdot,\theta)$ denotes the pdf
+of a single observation, then
+\[
+\pi(\theta\mid x_1,\ldots,x_n)=
+\frac{\displaystyle\pi(\theta)\prod_{i=1}^n f(x_i,\theta)}
+{\displaystyle\int_\Theta\pi(\theta)\prod_{i=1}^n f(x_i,\theta)\,d\theta}.
+\]
+The posterior can be used to make decisions under uncertainty
+\underline{conditional} on a fixed observation.
+We use the principle of maximising expected utility
+(see von Neumann--Morgenstern theorem).
+This motivates methods for:
+\begin{enumerate}
+\item Estimation, e.g.\ let
+\[
+\hat\theta_n=\int_\Theta\theta\,\pi(\theta\mid x_1,\ldots,x_n)\,d\theta.
+\]
+\item Uncertainty quantification, e.g.\ a \underline{credible set} $\hat C_n$:
+\[
+\int_{\hat C_n}\pi(\theta\mid x_1,\ldots,x_n)\,d\theta=1-\alpha.
+\tag{$*$}
+\]
+\end{enumerate}
+For example, if $\Theta=\mathbb R$, let
+\[
+\hat C_n:=[\hat\theta_n-R_n,\,\hat\theta_n+R_n],
+\]
+with $R_n$ chosen s.t.\ $(*)$ holds.
+Note that $\hat\theta_n,\hat C_n$ are simply functions of $x_1,\ldots,x_n$.
+But we can regard these as random functions of
+$X_1,\ldots,X_n\sim P_{\theta_0}$ coming from the model with a true $\theta_0$.
+
+\begin{center}
+\textbf{End of lecture 9}
+\end{center}
+
 \end{document}

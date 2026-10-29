@@ -1499,4 +1499,237 @@ replicating portfolio.
 \begin{center}
 \textbf{End of lecture 6}
 \end{center}
+
+\subsection*{2.8 Completeness}
+
+An asset price model $(\bar S_n)_{0\leq n\leq T}$ is called
+\emph{complete} if every time-$T$ contingent claim $C$ is attainable.
+Equivalently, for every such $C$ there exist an initial discounted
+wealth $V_0$ and a previsible process $(\Theta_n)_{1\leq n\leq T}$
+such that
+\[
+\frac{C}{S_T^0}
+=V_0+\sum_{n=1}^T\Theta_n\cdot(X_n-X_{n-1}).
+\]
+
+\medskip
+\noindent\textbf{Proposition.}
+Assume that
+\[
+\mathcal F_0=\{\varnothing,\Omega\},\qquad
+\mathcal F_T=\sigma(\bar S_0,\ldots,\bar S_T),
+\]
+and that the numeraire $(S_n^0)_{0\leq n\leq T}$ is non-random.
+If the model is complete, then there is at most one equivalent
+martingale measure.
+
+\noindent\textbf{Proof.}
+Let $A\in\mathcal F_T$. The indicator $\mathbf1_A$ is a time-$T$
+contingent claim, so completeness makes it attainable. Write its
+fair value in discounted units as
+\[
+V_0(A)=\frac{\nu(A)}{S_T^0}.
+\]
+For any equivalent martingale measure $\widetilde{\mathbb P}$, the
+pricing proposition from Section 2.6 gives
+\[
+\frac{\widetilde{\mathbb P}(A)}{S_T^0}
+=\widetilde{\mathbb E}\!\left(\frac{\mathbf1_A}{S_T^0}\right)
+=V_0(A)=\frac{\nu(A)}{S_T^0}.
+\]
+Hence $\widetilde{\mathbb P}(A)=\nu(A)$ for every $A\in\mathcal F_T$,
+so the equivalent martingale measure, if it exists, is unique on
+$\mathcal F_T$.
+\hfill$\square$
+
+\subsection*{2.9 Binomial model}
+
+Fix parameters
+\[
+r,a,b\in(-1,\infty),\qquad a<b,\qquad
+p\in(0,1),\qquad S_0\in(0,\infty).
+\]
+Here $d=1$. The model $(S_n^0,S_n)_{0\leq n\leq T}$ is a
+\emph{binomial model} with interest rate $r$ and parameters $a,b,p$ if
+\[
+S_n^0=(1+r)^n,\qquad
+S_n=S_0\prod_{i=1}^n(1+R_i),
+\]
+where $R_1,\ldots,R_T$ are independent and identically distributed,
+with
+\[
+\mathbb P(R_n=a)=1-p,\qquad \mathbb P(R_n=b)=p.
+\]
+We use the natural filtration
+$\mathcal F_n=\sigma(S_0,\ldots,S_n)$ and write
+$X_n=S_n/S_n^0$ for the discounted risky asset price.
+
+\medskip
+\noindent\textbf{Proposition.}
+A binomial model has arbitrage unless $r\in(a,b)$.
+
+\noindent\textbf{Proof.}
+Consider the self-financing portfolio with discounted initial wealth
+$V_0=0$ and risky holdings
+\[
+\Theta_1=1,\qquad \Theta_n=0\quad(n\geq2).
+\]
+Its terminal discounted wealth is
+\[
+V_T=X_1-X_0
+=\frac{S_0(1+R_1)}{1+r}-S_0
+=\frac{S_0(R_1-r)}{1+r}.
+\]
+If $r\leq a$, then $V_T\geq0$ and $V_T>0$ on $\{R_1=b\}$,
+which has probability $p>0$. Thus this portfolio is an arbitrage.
+If $r\geq b$, then $-V_T\geq0$ and $-V_T>0$ on $\{R_1=a\}$,
+which has probability $1-p>0$. The opposite portfolio is therefore
+an arbitrage.
+\hfill$\square$
+
+\subsubsection*{The risk-neutral measure}
+
+\noindent\textbf{Proposition.}
+Suppose that $r\in(a,b)$ and define
+\[
+p^*=\frac{r-a}{b-a}\in(0,1),\qquad
+r=(1-p^*)a+p^*b.
+\]
+Let
+\[
+U_T=\#\{1\leq n\leq T:R_n=b\},\qquad
+D_T=\#\{1\leq n\leq T:R_n=a\}=T-U_T,
+\]
+and define $\mathbb P^*$ by
+\[
+\frac{d\mathbb P^*}{d\mathbb P}
+=\left(\frac{p^*}{p}\right)^{U_T}
+ \left(\frac{1-p^*}{1-p}\right)^{D_T}.
+\]
+Then $\mathbb P^*$ is an equivalent martingale measure. Under
+$\mathbb P^*$ the model is binomial with up probability $p^*$.
+In particular, the binomial model has no arbitrage when $r\in(a,b)$.
+
+\noindent\textbf{Proof.}
+For a fixed return path $(r_1,\ldots,r_T)\in\{a,b\}^T$, put
+\[
+u=\#\{1\leq n\leq T:r_n=b\},\qquad d=T-u.
+\]
+Then
+\[
+\begin{aligned}
+\mathbb P^*(R_1=r_1,\ldots,R_T=r_T)
+&=(1-p)^d p^u
+  \left(\frac{p^*}{p}\right)^u
+  \left(\frac{1-p^*}{1-p}\right)^d\\
+&=(1-p^*)^d(p^*)^u.
+\end{aligned}
+\]
+These probabilities sum to $1$, and the density is strictly positive.
+Thus $\mathbb P^*\sim\mathbb P$, and under $\mathbb P^*$ the returns
+are i.i.d.\ with up probability $p^*$. Moreover,
+\[
+\mathbb E^*\!\left(\frac{1+R_n}{1+r}\right)
+=\frac{(1+a)(1-p^*)+(1+b)p^*}{1+r}
+=\frac{1+(1-p^*)a+p^*b}{1+r}=1.
+\]
+Since
+\[
+X_n=S_0\prod_{i=1}^n\frac{1+R_i}{1+r},
+\]
+independence gives
+\[
+\mathbb E^*(X_n\mid\mathcal F_{n-1})=X_{n-1}.
+\]
+The process $X$ is integrable (there are only finitely many return
+paths), so it is a martingale under $\mathbb P^*$, as required.
+The Fundamental Theorem of Asset Pricing implies no arbitrage.
+\hfill$\square$
+
+\subsubsection*{Pricing claims in the binomial model}
+
+The binomial model will also be shown to be complete. For now, suppose
+that a time-$T$ claim $C=f(S_T)$ is attainable, with discounted fair
+value $V_0$. Then
+\[
+\begin{aligned}
+V_0
+&=\mathbb E^*\!\left(\frac{C}{S_T^0}\right)\\
+&=\frac{1}{(1+r)^T}\sum_{k=0}^T
+  \binom{T}{k}(1-p^*)^{T-k}(p^*)^k
+  f\!\left(S_0(1+a)^{T-k}(1+b)^k\right).
+\end{aligned}
+\]
+More generally, for an attainable path-dependent claim
+$C=f(S_0,S_1,\ldots,S_T)$,
+\[
+V_0=\frac{1}{(1+r)^T}
+\sum_{\text{all price paths }(s_0,\ldots,s_T)}
+f(s_0,\ldots,s_T)(1-p^*)^d(p^*)^u,
+\]
+where $s_0=S_0$ and
+\[
+u=\#\{1\leq n\leq T:s_n=(1+b)s_{n-1}\},\qquad d=T-u.
+\]
+The sum runs over the $2^T$ possible price paths starting from $S_0$.
+
+\subsubsection*{Backward recursion on the price tree}
+
+The path sum can be organized as a backward recursion on a binary
+tree. Set
+\[
+f_T(s_0,\ldots,s_T)=f(s_0,\ldots,s_T).
+\]
+For $n=T-1,\ldots,0$, define
+\[
+\begin{aligned}
+f_n(s_0,\ldots,s_n)
+={}&(1-p^*)f_{n+1}(s_0,\ldots,s_n,(1+a)s_n)\\
+&+p^*f_{n+1}(s_0,\ldots,s_n,(1+b)s_n).
+\end{aligned}
+\]
+At each node, this averages the two successor values with their
+risk-neutral probabilities. The functions $f_n$ give expected
+terminal payoffs; the discount factor is applied separately.
+
+\medskip
+\noindent\textbf{Proposition.}
+For $n=0,1,\ldots,T$,
+\[
+\mathbb E^*\!\left[f(S_0,\ldots,S_T)\mid\mathcal F_n\right]
+=f_n(S_0,\ldots,S_n)\qquad\text{a.s.}
+\]
+In particular,
+\[
+\mathbb E^*(C)=f_0(S_0),\qquad
+V_0=\frac{f_0(S_0)}{(1+r)^T}.
+\]
+
+\noindent\textbf{Proof.}
+The assertion holds for $n=T$. Suppose inductively that it holds
+for $n+1$, where $n\leq T-1$. Fix a possible price history
+$(s_0,\ldots,s_n)$ and let
+\[
+A=\{S_0=s_0,\ldots,S_n=s_n\}.
+\]
+By the tower property and the induction hypothesis,
+\[
+\begin{aligned}
+\mathbb E^*\!\left[f(S_0,\ldots,S_T)\mid A\right]
+&=\mathbb E^*\!\left[f_{n+1}(S_0,\ldots,S_{n+1})\mid A\right]\\
+&=(1-p^*)f_{n+1}(s_0,\ldots,s_n,(1+a)s_n)\\
+&\quad+p^*f_{n+1}(s_0,\ldots,s_n,(1+b)s_n)\\
+&=f_n(s_0,\ldots,s_n)\\
+&=\mathbb E^*\!\left[f_n(S_0,\ldots,S_n)\mid A\right].
+\end{aligned}
+\]
+Now $f_n(S_0,\ldots,S_n)$ is $\mathcal F_n$-measurable, and every
+event in $\mathcal F_n$ is a finite union of such history events.
+Thus the defining property of conditional expectation gives the
+claim at time $n$, completing the backward induction.
+\hfill$\square$
+
+\begin{center}
+\textbf{End of lecture 7}
+\end{center}
 \end{document}
