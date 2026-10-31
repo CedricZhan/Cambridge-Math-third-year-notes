@@ -2325,4 +2325,199 @@ $X_1,\ldots,X_n\sim P_{\theta_0}$ coming from the model with a true $\theta_0$.
 \textbf{End of lecture 9}
 \end{center}
 
+Recall that
+\[
+\pi(\theta\mid x_1,\ldots,x_n)
+\propto\pi(\theta)\prod_{i=1}^n f(x_i,\theta).
+\]
+The posterior can be used for:
+\begin{enumerate}
+\item \underline{Estimation:} the Bayes estimator (posterior mean)
+\[
+\hat\theta_B=\int_\Theta\theta\,\pi(\theta\mid x_1,\ldots,x_n)\,d\theta.
+\]
+\item \underline{Uncertainty quantification:} a $(1-\alpha)$-credible interval
+\[
+\hat C_n=[\hat\theta_B-R_n,\,\hat\theta_B+R_n],
+\qquad
+\int_{\hat C_n}\pi(\theta\mid x_1,\ldots,x_n)\,d\theta=1-\alpha,
+\]
+where $R_n$ is chosen to satisfy the displayed equality.
+\item \underline{Model comparison:} let $\Theta_0\subseteq\Theta_1$ and
+define priors $\pi_0,\pi_1$ on $\Theta_0,\Theta_1$, respectively.
+A \underline{Bayes factor} is
+\[
+\hat B_n=
+\frac{\displaystyle\int_{\Theta_1}f(x,\theta)\pi_1(\theta)\,d\theta}
+{\displaystyle\int_{\Theta_0}f(x,\theta)\pi_0(\theta)\,d\theta},
+\qquad x=(x_1,\ldots,x_n),
+\]
+where $f(x,\theta)$ denotes the joint likelihood of the sample.
+\end{enumerate}
+
+\noindent\underline{Remark}\quad
+$\hat\theta_B,\hat C_n,\hat B_n$ are functions of a sample
+$x_1,\ldots,x_n$, which Bayesians regard as fixed.
+However, we can also regard these quantities as functions of
+\[
+X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}f(\cdot,\theta_0)
+\]
+for some ``true parameter'' $\theta_0$, and study their frequentist properties.
+For example:
+\begin{itemize}
+\item Is $\hat\theta_B$ consistent
+($\hat\theta_B\xrightarrow{P}\theta_0$), or asymptotically efficient?
+\item Is $\hat C_n$ asymptotically a $(1-\alpha)$-confidence set, i.e.
+\[
+\mathbb P_{\theta_0}(\theta_0\in\hat C_n)
+\xrightarrow{n\to\infty}1-\alpha?
+\]
+\item What are the asymptotic size and power of a test
+\[
+\psi=\mathbf1_{\{\hat B_n>\xi_{\alpha,n}\}}?
+\]
+\end{itemize}
+
+\medskip
+\noindent\underline{Example}\quad
+Let $X_1,\ldots,X_n\mid\theta\overset{\mathrm{iid}}{\sim}N(\theta,1)$,
+and place a $N(0,1)$ prior on $\theta$. Then
+\[
+\begin{aligned}
+\pi(\theta\mid x_1,\ldots,x_n)
+&\propto\pi(\theta)\prod_{i=1}^n f(x_i,\theta)\\
+&\propto\exp\left\{-\frac{\theta^2}{2}
+-\frac12\sum_{i=1}^n(x_i-\theta)^2\right\}\\
+&\propto\exp\left\{-\frac{1}{2/(n+1)}
+\left(\theta-\frac{\sum_{i=1}^n x_i}{n+1}\right)^2\right\}.
+\end{aligned}
+\]
+We deduce that the posterior distribution is
+\[
+N\left(\frac{n}{n+1}\bar X_n,\,\frac{1}{n+1}\right).
+\]
+The Bayes estimator, or posterior mean, is
+\[
+\hat\theta_B=\frac{n}{n+1}\bar X_n\xrightarrow{P}\theta_0,
+\]
+so it is consistent in a frequentist sense.
+A $(1-\alpha)$-credible interval is
+\[
+\hat C_n=
+\left[\frac{n}{n+1}\bar X_n
+\ \pm\ \Phi^{-1}\left(1-\frac\alpha2\right)\frac1{\sqrt{n+1}}\right].
+\]
+This is similar to the usual $(1-\alpha)$-confidence interval when $n$ is large.
+In this case, the prior and posterior are both normal (``conjugacy'').
+
+More generally, if the likelihood is in an exponential family,
+\[
+f(x,\theta)=\exp\{\theta^T x-M(\theta)\}\,\mu(x),
+\tag{$*$}
+\]
+and we choose a \underline{conjugate prior}
+\[
+\pi(\theta)\propto\exp\{c^T\theta-dM(\theta)\},
+\tag{$**$}
+\]
+then the posterior is
+\[
+\pi(\theta\mid x_1,\ldots,x_n)
+\propto\exp\left\{\theta^T\left(c+\sum_{i=1}^n x_i\right)
+-(d+n)M(\theta)\right\},
+\]
+which is of the same form as the prior. Examples include:
+\begin{itemize}
+\item Bernoulli likelihood, Beta prior;
+\item Poisson likelihood, Gamma prior.
+\end{itemize}
+
+\subsection*{2. How to choose a prior?}
+
+\noindent\underline{Subjectivist approach}\quad
+The prior should express subjective opinions.
+
+\medskip
+\noindent\underline{Theorem (Diaconis \& Ylvisaker, 1979)}\quad
+Suppose $f(\cdot,\theta)$ is in an exponential family $(*)$, and the
+prior on $\theta$ induces a joint distribution on $\theta,X_1,X_2,\ldots$
+with the property that
+\[
+\mathbb E[X_2\mid X_1]=aX_1+b.
+\]
+Then, under regularity, the prior has to be conjugate, of the form $(**)$ with
+\[
+c=\frac ba,\qquad d=\frac{1-a}{a}.
+\]
+
+\medskip
+\noindent\underline{Remark}\quad
+The prior and likelihood define a joint distribution on
+$\theta,X_1,X_2,\ldots$. The marginal distribution of $X_1,\ldots,X_n$
+is called the \underline{prior predictive distribution}:
+\[
+\pi(x_1,\ldots,x_n)
+=\int_\Theta\pi(\theta)\prod_{i=1}^n f(x_i,\theta)\,d\theta.
+\]
+Here $X_1,\ldots,X_n$ are not marginally iid in general.
+The conditional distribution
+\[
+\pi(x_n\mid x_1,\ldots,x_{n-1})
+=\frac{\pi(x_1,\ldots,x_n)}{\pi(x_1,\ldots,x_{n-1})}
+\]
+is called the \underline{posterior predictive distribution}.
+
+Some subjectivists argue that we can only express opinions about
+$X_1,\ldots,X_n$, not the parameter.
+\begin{itemize}
+\item How do we justify the exponential-family likelihood?
+(Pitman--Koopman--Darmois.)
+\item Why should we assume $X_1,\ldots,X_n\mid\theta$ are iid
+for some statistical model with parameter $\theta$?
+\end{itemize}
+
+\medskip
+\noindent\underline{Theorem (de Finetti)}\quad
+Let $(X_i)_{i\geq1}$ take values in $\{0,1\}$.
+Suppose that the prior predictive distribution $\pi$ is
+\underline{exchangeable}, i.e.\ for all $n\geq1$, all
+$(x_1,\ldots,x_n)\in\{0,1\}^n$ and all $\sigma\in S_n$,
+\[
+\pi(x_1,\ldots,x_n)=\pi(x_{\sigma(1)},\ldots,x_{\sigma(n)}).
+\]
+Then there exists a distribution $\Pi_\theta$ on $[0,1]$ such that
+\[
+\pi(x_1,\ldots,x_n)
+=\int_0^1
+\underbrace{\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}}
+_{\text{Bernoulli likelihood}}
+\,\Pi_\theta(d\theta).
+\]
+
+\medskip
+\noindent\underline{Theorem (Johnson)}\quad
+Let $(X_i)_{i\geq1}$ take values in $\{1,2,\ldots,k\}$, for $k\geq3$.
+Suppose $\pi$ is exchangeable and the posterior predictive distribution
+satisfies a sufficiency condition:
+\[
+\pi(X_n=i\mid x_1,\ldots,x_{n-1})
+=g\left(i,n-1,\left|\{j<n:x_j=i\}\right|\right).
+\]
+Then
+\[
+\pi(x_1,\ldots,x_n)
+=\int_\Delta\prod_{i=1}^n\theta_{x_i}\,\Pi_\theta(d\theta),
+\]
+where
+\[
+\Delta=\left\{\theta\in\mathbb R^k:
+\theta_i\geq0,\ \sum_{i=1}^k\theta_i=1\right\},
+\]
+and $\Pi_\theta$ is either a $\operatorname{Dirichlet}(\alpha_1,\ldots,\alpha_k)$
+distribution for some $\alpha_i>0$, or a point mass at some $p\in\Delta$.
+
+\begin{center}
+\textbf{End of lecture 10}
+\end{center}
+
 \end{document}
