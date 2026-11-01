@@ -2113,4 +2113,235 @@ The same alternative must be chosen for all permutations.
 \begin{center}
     \textbf{End of lecture 9}
 \end{center}
+\noindent
+\underline{Bosons and fermions}
+
+\begin{itemize}
+    \item \underline{Bosons} obey Bose--Einstein statistics: exchanging
+    two identical bosons leaves the state unchanged, $\eta=+1$.
+    Their multiparticle states belong to
+    \[
+        (V\otimes V\otimes\cdots\otimes V)_{\mathrm{S}}.
+    \]
+    \item \underline{Fermions} obey Fermi--Dirac statistics: exchanging
+    two identical fermions changes the sign of the state, $\eta=-1$.
+    Their multiparticle states belong to
+    \[
+        (V\otimes V\otimes\cdots\otimes V)_{\mathrm{A}}.
+    \]
+\end{itemize}
+These exchange conditions apply to \underline{identical particles}.
+
+\medskip
+\noindent
+\underline{(b) Spin and statistics}
+
+The spin--statistics principle states that
+\[
+    \begin{aligned}
+        \text{integer spin }s=0,1,2,\ldots
+            &\quad\Longrightarrow\quad\text{bosons},\\
+        \text{half-integer spin }s=\tfrac12,\tfrac32,\ldots
+            &\quad\Longrightarrow\quad\text{fermions}.
+    \end{aligned}
+\]
+This is confirmed experimentally. In relativistic quantum field theory
+it can be derived as the \underline{spin--statistics theorem}.
+
+\begin{itemize}
+    \item Electrons, neutrinos, quarks, muons and tau leptons are
+    spin-$\tfrac12$ elementary fermions. Protons and neutrons also have
+    spin $\tfrac12$ and are fermions, although they are composite.
+    \item The gauge bosons associated with forces have spin $1$:
+    photons (electromagnetism), $W^\pm$ and $Z$ bosons (the weak
+    interaction), and gluons (the strong interaction).
+    \item The Higgs boson has spin $0$.
+    \item The hypothetical graviton would have spin $2$.
+\end{itemize}
+The spin--statistics principle also applies to composite particles.
+
+\medskip
+\noindent
+\underline{(c) Two-particle examples}
+
+For two identical particles, physical states belong to
+$(V\otimes V)_{\mathrm{S}}$ for bosons or
+$(V\otimes V)_{\mathrm{A}}$ for fermions, where
+\[
+    V=V_{\mathrm{space}}\otimes V_{\mathrm{spin}}.
+\]
+It is convenient first to construct spatial and spin states with
+definite exchange symmetry separately, and then combine them to obtain
+the required symmetry of the \emph{total} state. The exchange signs
+of the two factors multiply.
+
+Consider a spin-independent one-particle Hamiltonian
+$H(\hat{\mathbf{x}},\hat{\mathbf{p}})$ with non-degenerate spatial
+energy levels
+\[
+    E_0<E_1<E_2<\cdots,
+    \qquad\text{wavefunctions }\psi_0(\mathbf{x}),\psi_1(\mathbf{x}),\ldots.
+\]
+For two non-interacting particles, the Hamiltonian is
+\[
+    H_{\mathrm{tot}}
+        =H(\hat{\mathbf{x}}_1,\hat{\mathbf{p}}_1)
+         +H(\hat{\mathbf{x}}_2,\hat{\mathbf{p}}_2).
+\]
+A basis of spatial energy eigenfunctions is
+\[
+    \psi_i(\mathbf{x}_1)\psi_j(\mathbf{x}_2),
+    \qquad E=E_i+E_j.
+\]
+The lowest spatial level is symmetric:
+\[
+    \Psi_0^{\mathrm{S}}(\mathbf{x}_1,\mathbf{x}_2)
+        =\psi_0(\mathbf{x}_1)\psi_0(\mathbf{x}_2),
+    \qquad E=2E_0.
+\]
+At the next level, the products
+$\psi_0(\mathbf{x}_1)\psi_1(\mathbf{x}_2)$ and
+$\psi_1(\mathbf{x}_1)\psi_0(\mathbf{x}_2)$ do not individually have
+definite exchange symmetry. Their normalised combinations do:
+\begin{align*}
+    \Psi_1^{\mathrm{S}}(\mathbf{x}_1,\mathbf{x}_2)
+        &=\frac{1}{\sqrt{2}}\bigl(
+          \psi_0(\mathbf{x}_1)\psi_1(\mathbf{x}_2)
+          +\psi_1(\mathbf{x}_1)\psi_0(\mathbf{x}_2)\bigr),\\
+    \Psi_1^{\mathrm{A}}(\mathbf{x}_1,\mathbf{x}_2)
+        &=\frac{1}{\sqrt{2}}\bigl(
+          \psi_0(\mathbf{x}_1)\psi_1(\mathbf{x}_2)
+          -\psi_1(\mathbf{x}_1)\psi_0(\mathbf{x}_2)\bigr),
+\end{align*}
+both with energy $E_0+E_1$.
+
+\medskip
+\noindent
+\underline{Spin $0$}
+
+The spin space has only one state, so its factor can be suppressed.
+Spin--statistics requires bosons, hence symmetric spatial states in
+$(V_{\mathrm{space}}\otimes V_{\mathrm{space}})_{\mathrm{S}}$.
+The lowest two levels are therefore
+\[
+    \begin{array}{c|c|c}
+        \text{spatial state} & \text{energy} & \text{degeneracy}\\ \hline
+        \Psi_0^{\mathrm{S}} & 2E_0 & 1\\
+        \Psi_1^{\mathrm{S}} & E_0+E_1 & 1
+    \end{array}
+\]
+
+\medskip
+\noindent
+\underline{Spin $\tfrac12$}
+
+For each particle, $V_{\mathrm{spin}}$ has basis
+$\{|\uparrow\rangle,|\downarrow\rangle\}$. Thus the two-particle
+spin space has product basis
+\[
+    \{|\uparrow\uparrow\rangle,
+      |\uparrow\downarrow\rangle,
+      |\downarrow\uparrow\rangle,
+      |\downarrow\downarrow\rangle\},
+\]
+where, for example,
+$|\uparrow\downarrow\rangle=|\uparrow\rangle\otimes|\downarrow\rangle$.
+A normalised basis with definite exchange symmetry consists of the
+three symmetric spin states
+\[
+    \chi_+=|\uparrow\uparrow\rangle,\qquad
+    \chi_0=\frac{|\uparrow\downarrow\rangle
+                     +|\downarrow\uparrow\rangle}{\sqrt{2}},\qquad
+    \chi_-=|\downarrow\downarrow\rangle,
+\]
+and the single antisymmetric spin state
+\[
+    \chi_{\mathrm{A}}
+       =\frac{|\uparrow\downarrow\rangle
+                     -|\downarrow\uparrow\rangle}{\sqrt{2}}.
+\]
+These are the spin triplet and singlet, respectively.
+
+Spin--statistics requires fermions and an antisymmetric total state.
+After regrouping the spatial and spin tensor factors,
+\begin{align*}
+    (V\otimes V)_{\mathrm{A}}
+    &\cong
+    \bigl[(V_{\mathrm{space}}\otimes V_{\mathrm{space}})_{\mathrm{A}}
+       \otimes(V_{\mathrm{spin}}\otimes V_{\mathrm{spin}})_{\mathrm{S}}\bigr]\\
+    &\quad\oplus
+    \bigl[(V_{\mathrm{space}}\otimes V_{\mathrm{space}})_{\mathrm{S}}
+       \otimes(V_{\mathrm{spin}}\otimes V_{\mathrm{spin}})_{\mathrm{A}}\bigr].
+\end{align*}
+Thus a symmetric spatial state must be paired with the spin singlet,
+whereas an antisymmetric spatial state must be paired with a spin
+triplet state. The lowest two energy levels are
+\[
+    \begin{array}{c|c|c}
+        \text{total states} & \text{energy} & \text{degeneracy}\\ \hline
+        \Psi_0^{\mathrm{S}}\chi_{\mathrm{A}}
+            & 2E_0 & 1\\[3pt]
+        \Psi_1^{\mathrm{S}}\chi_{\mathrm{A}},\quad
+        \Psi_1^{\mathrm{A}}\chi_m\ (m=+,0,-)
+            & E_0+E_1 & 4
+    \end{array}
+\]
+
+\subsection*{3.4 Pauli Exclusion Principle \& Atomic Structure}
+
+To construct a state of $N$ identical fermions, take $N$ one-particle
+states in $V$ and antisymmetrise their tensor product. Such
+antisymmetrised products span
+$(V\otimes\cdots\otimes V)_{\mathrm{A}}$; a general state may be a
+linear combination of them. If two of the one-particle states are
+the same, the antisymmetrised product vanishes. This gives the
+\underline{Pauli exclusion principle}: no two identical fermions can
+occupy the same complete one-particle state.
+
+\medskip
+\noindent
+\underline{Why two electrons cannot occupy the same state}
+
+For two electrons, antisymmetrisation gives a state proportional to
+\[
+    |\alpha\rangle\otimes|\beta\rangle
+        -|\beta\rangle\otimes|\alpha\rangle.
+\]
+If $|\beta\rangle=|\alpha\rangle$, then
+\[
+    |\alpha\rangle\otimes|\alpha\rangle
+        -|\alpha\rangle\otimes|\alpha\rangle=0.
+\]
+The zero vector cannot be normalised and does not represent a physical
+state. For $N$ fermions, the terms in the antisymmetrisation similarly
+cancel in pairs whenever two occupied one-particle states coincide.
+
+Here ``the same state'' means the same \emph{complete} state in
+$V_{\mathrm{space}}\otimes V_{\mathrm{spin}}$, including spin.
+Two electrons can occupy the same spatial orbital with opposite spins:
+their complete one-particle states are then different, and the total
+state is the symmetric spatial product multiplied by
+$\chi_{\mathrm{A}}$.
+
+\medskip
+\noindent
+\underline{Application to atomic structure}
+
+Consider $N$ electrons bound to a nucleus containing $Z$ protons.
+Ignoring electron--electron interactions and treating the nucleus as
+fixed, the Hamiltonian is
+\[
+    H_{\mathrm{tot}}=\sum_{a=1}^{N}
+       H(\hat{\mathbf{x}}_a,\hat{\mathbf{p}}_a),
+\]
+where the one-particle Hamiltonian is
+\[
+    H(\hat{\mathbf{x}},\hat{\mathbf{p}})
+       =\frac{\hat{\mathbf{p}}^{\,2}}{2m}
+        -\frac{Ze^2}{4\pi\varepsilon_0|\hat{\mathbf{x}}|}.
+\]
+
+\begin{center}
+    \textbf{End of lecture 10}
+\end{center}
 \end{document}
