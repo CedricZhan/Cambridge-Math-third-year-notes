@@ -2047,5 +2047,487 @@ Their union forms a better (larger) estimate of $\operatorname{DoS}(\bar0)$.
 \textbf{End of lecture 9}
 \end{center}
 
+\newpage
+% Lecture10.pdf, pages 1--5 (handwritten pages 37--41).
+\noindent\fbox{Example}\quad\underline{Estimating the domain of stability}
+\[
+\dot x=x(y^2-1),\qquad \dot y=y(x^2-1).
+\]
+The fixed points are $(0,0)$ and $(\pm1,\pm1)$. The Jacobian is
+\[
+A(x,y)=\begin{pmatrix}y^2-1&2xy\\2xy&x^2-1\end{pmatrix}.
+\]
+At the origin, $A=-I$, so the origin is a stable star node. At each of the
+other four fixed points the eigenvalues are $2$ and $-2$, so they are saddles.
+The system is symmetric under $(x,y)\mapsto(y,x)$, $x\mapsto-x$, and $y\mapsto-y$.
+
+\medskip
+\noindent (1) Try the Lyapunov function
+\[
+V(x,y)=x^2+a^2y^2,\qquad a>0.
+\]
+Then
+\[
+\dot V=2x^2(y^2-1)+2a^2y^2(x^2-1)
+=-2(x^2+a^2y^2)+2(1+a^2)x^2y^2.
+\]
+We need a domain $D$ on which $\dot V<0$ away from the origin. For example,
+the region where this holds is described by
+\[
+\begin{split}
+D={}&\left\{(x,y): |x|>\frac{a}{\sqrt{1+a^2}},\quad
+ y^2<\frac{x^2}{(1+a^2)x^2-a^2}\right\}\\
+&\quad\cup\left\{(x,y): |x|\leq\frac{a}{\sqrt{1+a^2}}\right\}.
+\end{split}
+\]
+Here $\dot V<0$ on $D\setminus\{(0,0)\}$.
+
+\medskip
+\noindent (2) Find $k$ so that $C_k=\{(x,y):V(x,y)<k\}\subset D$.
+Parametrise a contour of $V$ by
+\[
+x=\sqrt V\cos\phi,\qquad y=\frac{\sqrt V}{a}\sin\phi.
+\]
+Substitution gives
+\[
+\dot V=-2V+\frac{(1+a^2)V^2}{2a^2}\sin^2(2\phi)<0
+\quad\text{if}\quad
+0<V<\frac{4a^2}{(1+a^2)\sin^2(2\phi)}.
+\]
+Thus negativity is guaranteed uniformly in $\phi$ whenever
+\[
+0<V<V_{\max}=\frac{4a^2}{1+a^2}.
+\]
+\begin{center}
+% Original screenshots: Lecture10.pdf, page 1.
+\includegraphics[width=.47\textwidth]{lecture10/lyapunov-domain.png}\hfill
+\includegraphics[width=.30\textwidth]{lecture10/contour-parametrisation.png}
+\end{center}
+
+\newpage
+\noindent (3) Hence
+\[
+C_a=\left\{(x,y):x^2+a^2y^2<\frac{4a^2}{1+a^2}\right\}
+\subseteq\operatorname{DoS}(\bar0).
+\]
+LaSalle's principle is not needed here: $V$ is strict in $C_a$ away from the
+origin, so Lyapunov's second theorem applies. More precisely, every point of
+$C_a$ lies in a smaller compact sublevel set on which the theorem applies.
+
+\medskip
+\noindent (4) Improve the estimate by varying $a$. The ellipses become thin
+in the $x$ direction as $a\to0$, are the disc $x^2+y^2<2$ for $a=1$, and become
+thin in the $y$ direction as $a\to\infty$:
+\[
+\frac{x^2}{a^2}+y^2<\frac4{1+a^2},\qquad
+x^2+\left(\frac{y}{a^{-1}}\right)^2<\frac4{1+a^{-2}}.
+\]
+Their union is
+\[
+\bigcup_{a>0}C_a=\{(x,y):|x|+|y|<2\}.
+\]
+Indeed, writing $s=a^2>0$, the ellipse inequality becomes
+\[
+x^2+y^2+\frac{x^2}{s}+s y^2<4,
+\]
+and $\inf_{s>0}(x^2/s+s y^2)=2|xy|$.
+This diamond is the best estimate obtained from this family of Lyapunov
+functions. It is not the full domain of stability: on either coordinate
+axis, solutions tend to the origin even when $|x|>2$ or $|y|>2$.
+\begin{center}
+% Original screenshots: Lecture10.pdf, page 2.
+\includegraphics[width=.47\textwidth]{lecture10/basin-estimates.png}\hfill
+\includegraphics[width=.47\textwidth]{lecture10/basin-phase-portrait.png}
+\end{center}
+
+\newpage
+\noindent\underline{3.3 Bounding functions}
+
+\medskip
+\noindent Another use for functions decreasing along trajectories is to
+prove that trajectories eventually enter a bounded region.
+
+\medskip
+\noindent\fbox{Definition}\quad\underline{Bounding function}
+
+\medskip
+\noindent Suppose $V$ has bounded sublevel sets and there are constants
+$M$ and $\delta>0$ such that
+\[
+\dot V(\bar x)\leq-\delta<0\qquad\text{whenever }V(\bar x)\geq M.
+\]
+Then all trajectories eventually enter and remain in $\{\bar x:V(\bar x)\leq M\}$.
+Such a function is called a bounding function. While $V\geq M$, its value
+decreases at least at rate $\delta$, giving finite entry time.
+
+\medskip
+\noindent\fbox{Example}\quad Consider the polar system
+\[
+\dot r=r-r^3(1+k\sin\theta)-r^5,\qquad \dot\theta=1,
+\qquad 0<k<1.
+\]
+Take $V=\frac12r^2$. Then
+\[
+\dot V=r\dot r=r^2\bigl[1-r^2(1+k\sin\theta)-r^4\bigr]
+\leq r^2\bigl[1-r^2(1-k)-r^4\bigr].
+\]
+For $r^2\geq1/(1-k)$,
+\[
+\dot V\leq-r^6\leq-\frac1{(1-k)^3}<0.
+\]
+Thus every trajectory enters the disc
+\[
+r\leq\frac1{\sqrt{1-k}}
+\]
+and remains there. What happens within this bounded domain, where an
+$\omega$-limit set exists? Is the limit a fixed point or a periodic orbit?
+\begin{center}
+% Original screenshot: Lecture10.pdf, page 3.
+\includegraphics[width=.52\textwidth]{lecture10/bounding-disc.png}
+\end{center}
+
+\newpage
+\noindent\underline{4. Periodic orbits in $\mathbb R^2$: existence and stability}
+
+\medskip
+\noindent We first establish techniques for confirming or excluding the
+existence of periodic orbits.
+
+\medskip
+\noindent\underline{4.1 Poincar\'e index}
+
+\medskip
+\noindent Let
+\[
+\dot x=f_1(x,y),\qquad \dot y=f_2(x,y),\qquad \bar f=(f_1,f_2).
+\]
+Away from fixed points, the vector field makes an angle $\psi$ with the
+$x$ axis, with $\tan\psi=f_2/f_1$ (using a continuous choice of angle).
+Let $\Gamma$ be a simple closed curve containing no fixed point on the curve;
+it need not be a trajectory. Traverse $\Gamma$ anticlockwise and measure
+the net change in $\psi$. After one circuit the angle changes by an integer
+multiple of $2\pi$. This integer is the \underline{Poincar\'e index} $I(\Gamma)$.
+\begin{center}
+% Original screenshot: Lecture10.pdf, page 4.
+\includegraphics[width=.46\textwidth]{lecture10/field-angle.png}
+\end{center}
+\noindent Its explicit form is
+\[
+I(\Gamma)=\frac1{2\pi}\oint_\Gamma d\psi
+=\frac1{2\pi}\oint_\Gamma
+\frac{f_1\,df_2-f_2\,df_1}{f_1^2+f_2^2}.
+\]
+Any parametrisation of $\Gamma$ may be used to compute this integral. For
+example, $df_2=f_{2,x}\,dx+f_{2,y}\,dy$. On a circle,
+\[
+x=R\cos\phi,\quad y=R\sin\phi,\qquad
+ df_2=R(-f_{2,x}\sin\phi+f_{2,y}\cos\phi)\,d\phi.
+\]
+At a fixed point $f_1=f_2=0$, the angle is undefined; a curve used to compute
+$I(\Gamma)$ must avoid such points.
+
+\medskip
+\noindent\underline{Properties}
+\begin{enumerate}
+\setlength{\itemsep}{7pt}
+\item $I(\Gamma)$ is unchanged by a continuous deformation of $\Gamma$ as
+long as no fixed point is crossed. Indeed, the integral varies continuously
+under small deformations, whereas the index is integer-valued, so it must
+stay constant.
+\item If $\Gamma$ encloses no fixed points, then $I(\Gamma)=0$. Shrink it
+to a small contour on which the field is nearly uniform, with zero net
+change of angle.
+\item The index is additive: if a contour is split into $\Gamma_1$ and
+$\Gamma_2$, with the shared joins traversed in opposite directions, then
+\[
+I(\Gamma)=I(\Gamma_1)+I(\Gamma_2).
+\]
+The integrals on the shared joins cancel.
+\item Reversing time does not change $I(\Gamma)$: replacing $\bar f$ by
+$-\bar f$ adds $\pi$ to the angle but does not change its net rotation.
+\item For a closed trajectory (a periodic orbit), $I(\Gamma)=+1$, since
+the vector field is tangent to the orbit at every point and makes one
+positive turn as the curve is traversed anticlockwise.
+\item The index of an isolated fixed point is the index of any sufficiently
+small simple closed curve encircling that fixed point alone.
+\end{enumerate}
+\begin{center}
+% Original screenshots: Lecture10.pdf, page 5.
+\includegraphics[width=.34\textwidth]{lecture10/index-additivity.png}\hfill
+\includegraphics[width=.40\textwidth]{lecture10/closed-orbit-index.png}\hfill
+\includegraphics[width=.17\textwidth]{lecture10/uniform-field.png}
+\end{center}
+% Lecture11.pdf page 1 duplicates Lecture10.pdf page 5 (handwritten page 41).
+% The unfinished property (7) is continued below, once, in lecture 11.
+\begin{center}
+\textbf{End of lecture 10}
+\end{center}
+
+\newpage
+% Lecture11.pdf, pages 2--6 (handwritten pages 42--45 and proof handout).
+\noindent\underline{Poincar\'e index: further properties}
+\begin{enumerate}
+\setcounter{enumi}{6}
+\setlength{\itemsep}{8pt}
+\item For a curve encircling finitely many isolated fixed points, its index
+is the sum of the indices of those fixed points. This follows by deforming
+the curve into small loops around the individual points and using additivity.
+\item A hyperbolic sink or source has index $+1$, while a hyperbolic saddle
+has index $-1$. Non-hyperbolic fixed points must be treated case by case;
+for example, a saddle-node has index $0$.
+\end{enumerate}
+\begin{center}
+% Original screenshots: Lecture11.pdf, page 2.
+\includegraphics[width=.27\textwidth]{lecture11/index-deformation.png}
+\par\medskip
+\includegraphics[width=.70\textwidth]{lecture11/node-saddle-indices.png}
+\end{center}
+\noindent\fbox{Corollary}\quad Any periodic orbit must encircle one or more
+fixed points, and the sum of their indices must be $+1$.
+This can be used to exclude periodic orbits.
+
+\medskip
+\noindent\fbox{Example}\quad\underline{Lotka--Volterra system}
+\[
+\dot r=r(3-r-2s),\qquad \dot s=s(2-r-s).
+\]
+The fixed points $(0,0)$, $(3,0)$ and $(0,2)$ are nodes, and $(1,1)$ is a
+saddle of index $-1$. A periodic orbit with $r,s>0$ cannot cross the
+invariant coordinate axes, so it cannot encircle any of the three nodes.
+It can encircle either no fixed point, giving index $0$, or only the saddle,
+giving index $-1$. Neither is compatible with the index $+1$ of a periodic
+orbit. Thus no such periodic orbit exists.
+\begin{center}
+\includegraphics[width=.34\textwidth]{lecture11/lotka-volterra-index.png}
+\end{center}
+
+\newpage
+\noindent\underline{4.2 Dulac's criterion}
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Dulac's theorem}
+
+\medskip
+\noindent If there is a continuously differentiable function $\varphi(x,y)$
+such that
+\[
+\nabla\cdot(\varphi\bar f)>0\qquad\text{everywhere in }D,
+\]
+or $\nabla\cdot(\varphi\bar f)<0$ everywhere in $D$, where $D\subset\mathbb R^2$
+is a simply connected domain, then no periodic orbit lies entirely in $D$.
+
+\medskip
+\noindent\fbox{Proof}\quad Suppose $\nabla\cdot(\varphi\bar f)>0$ and a
+periodic orbit $\Gamma$ exists. Let $A$ be its interior and $\hat n$ the
+outward unit normal. The field is tangent to $\Gamma$, so the divergence
+theorem gives
+\[
+0=\oint_\Gamma\varphi\bar f\cdot\hat n\,d\ell
+=\iint_A\nabla\cdot(\varphi\bar f)\,dA>0,
+\]
+a contradiction. The other sign is treated similarly.
+\begin{center}
+% Original screenshot: Lecture11.pdf, page 3.
+\includegraphics[width=.34\textwidth]{lecture11/dulac-flux.png}
+\end{center}
+\begin{itemize}
+\item Taking $\varphi=1$ gives the \underline{divergence test}: if
+$\nabla\cdot\bar f$ is strictly positive or strictly negative throughout a
+simply connected domain, there is no periodic orbit in that domain.
+\item If $\nabla\cdot(\varphi\bar f)$ has a strict constant sign in a doubly
+connected domain, there is at most one periodic orbit, and it must encircle
+the hole. Otherwise, applying the divergence theorem to the region between
+two periodic orbits gives the same contradiction.
+\end{itemize}
+\begin{center}
+\includegraphics[width=.32\textwidth]{lecture11/doubly-connected-domain.png}
+\end{center}
+
+\medskip
+\noindent\fbox{Example}\quad\underline{Lotka--Volterra system}
+\[
+\dot r=r(a-br-cs),\qquad \dot s=s(d-er-fs),\qquad b,f>0.
+\]
+For $r,s>0$, take $\varphi=1/(rs)$. Then
+\[
+\nabla\cdot(\varphi\bar f)
+=\frac{\partial}{\partial r}\left(\frac{a-br-cs}{s}\right)
++\frac{\partial}{\partial s}\left(\frac{d-er-fs}{r}\right)
+=-\frac bs-\frac fr<0.
+\]
+There are no periodic orbits in the positive quadrant. In the preceding
+example, $b=f=1$.
+
+\newpage
+\noindent The divergence theorem extends to $\mathbb R^n$ and can exclude
+closed invariant hypersurfaces enclosing nonzero volume when the divergence
+has a strict constant sign throughout the enclosed region.
+
+\medskip
+\noindent\fbox{Example}\quad\underline{Lorenz system}
+\[
+\dot x=\sigma(y-x),\qquad
+\dot y=rx-y-zx,\qquad
+\dot z=-bz+xy,\qquad r,\sigma,b>0.
+\]
+Here
+\[
+\nabla\cdot\bar f=-\sigma-1-b<0.
+\]
+Hence there is no closed invariant surface of dimension $2$ enclosing a
+nonzero volume. This does not exclude one-dimensional periodic orbits.
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Gradient criterion}
+
+\medskip
+\noindent Suppose there is a positive function $\rho(x,y)$ such that
+\[
+\rho\bar f=\nabla\psi
+\]
+for a single-valued potential $\psi$ on a simply connected domain $D$.
+Then there are no periodic orbits in $D$.
+
+\medskip
+\noindent\fbox{Proof}\quad On a hypothetical nonconstant periodic orbit
+$\Gamma$, traversed in the direction of the flow,
+\[
+0<\oint_\Gamma\rho\bar f\cdot d\bar\ell
+=\oint_\Gamma\nabla\psi\cdot d\bar\ell=0.
+\]
+The last integral vanishes because the potential is single-valued. This
+contradiction excludes periodic orbits.
+
+\medskip
+\noindent\fbox{Example}\quad Does the system
+\[
+\dot x=2x+x^2y-y^3,\qquad
+\dot y=-2y-xy^2+x^3
+\]
+have periodic orbits? Notice that
+\[
+e^{xy}\bar f=\nabla\!\left[e^{xy}(x^2-y^2)\right].
+\]
+Since $\rho=e^{xy}>0$ and $\psi=e^{xy}(x^2-y^2)$ is single-valued on
+$\mathbb R^2$, the gradient criterion excludes periodic orbits.
+
+\newpage
+\noindent\underline{4.3 Poincar\'e--Bendixson theorem}
+
+\medskip
+\noindent\fbox{Theorem}\quad\underline{Poincar\'e--Bendixson}
+
+\medskip
+\noindent If the forward orbit $O^+(\bar x)$ of some point $\bar x$ remains
+in a compact set $D\subset\mathbb R^2$ containing no fixed points, then
+$\omega(\bar x)$ is a periodic orbit. A sketch proof is given below.
+\begin{itemize}
+\item This result is specific to $\mathbb R^2$; there is no corresponding
+general statement in higher dimensions.
+\item Such a trapping region must leave a hole containing a fixed point:
+a periodic orbit has index $+1$. In particular, a simply connected domain
+containing the whole interior of that orbit cannot be free of fixed points.
+\end{itemize}
+\begin{center}
+% Original screenshot: Lecture11.pdf, page 5.
+\includegraphics[width=.21\textwidth]{lecture11/annulus-topology.png}
+\end{center}
+\noindent\fbox{Example}\quad Consider
+\[
+\dot x=x-y-2x(x^2+y^2),\qquad
+\dot y=y+x-y(x^2+y^2).
+\]
+Linearising at the origin gives
+\[
+A=\begin{pmatrix}1&-1\\1&1\end{pmatrix},\qquad
+\det A=2,\quad\operatorname{tr}A=2,
+\]
+so the origin is an unstable focus. Far from the origin the cubic terms
+push trajectories inwards, suggesting a periodic orbit.
+In polar coordinates,
+\[
+\dot r=\frac{x\dot x+y\dot y}{r}
+=r\bigl[1-r^2(1+\cos^2\theta)\bigr],\qquad
+\dot\theta=1+\frac12r^2\sin(2\theta).
+\]
+The curve $\dot r=0$ away from the origin is
+\[
+r=\frac1{\sqrt{1+\cos^2\theta}},\qquad 2x^2+y^2=1.
+\]
+We have $\dot r<0$ for $r>1$ and $\dot r>0$ for $0<r<1/\sqrt2$.
+Thus the compact annulus
+\[
+D=\{(x,y):1/\sqrt2\leq r\leq1\}
+\]
+is positively invariant. Moreover $\dot\theta\geq1/2>0$ on $D$, so there
+are no fixed points in $D$. The Poincar\'e--Bendixson theorem implies the
+existence of a periodic orbit there.
+\begin{center}
+\includegraphics[width=.29\textwidth]{lecture11/trapping-annulus.png}
+\end{center}
+\noindent\underline{Bonus: uniqueness.}\quad In $D$,
+\[
+\nabla\cdot\bar f=2-2x^2-5r^2\leq-\frac12-2x^2<0.
+\]
+By the divergence test for a doubly connected region, there is at most one
+periodic orbit in $D$. Hence the periodic orbit just obtained is unique.
+
+\newpage
+% Lecture11.pdf page 6: attached printed proof handout.
+\noindent\underline{Sketch proof of the Poincar\'e--Bendixson theorem}
+
+\medskip
+\noindent The key idea is a \underline{transversal}: a curve segment that
+nearby trajectories cross in the same direction. A short segment perpendicular
+to the flow can be placed through any non-fixed point.
+\begin{center}
+% Original screenshot: Lecture11.pdf, page 6.
+\includegraphics[width=.57\textwidth]{lecture11/transversal.png}
+\end{center}
+\noindent\fbox{Lemma}\quad If a nonperiodic trajectory meets a transversal
+several times, its successive intersections are arranged monotonically along
+the transversal.
+
+\medskip
+\noindent After two intersections, the intervening trajectory segment and
+the transversal bound a region. Uniqueness of trajectories and the Jordan
+curve theorem restrict all further crossings to one direction along the
+transversal. This separation into an inside and an outside is where
+planarity is essential.
+\begin{center}
+\includegraphics[width=.95\textwidth]{lecture11/monotone-intersections.png}
+\end{center}
+\noindent\underline{Proof sketch}
+\begin{enumerate}
+\setlength{\itemsep}{9pt}
+\item Choose $y\in\omega(x)$, then $z\in\omega(y)$. Compactness makes
+these $\omega$-limit sets nonempty, and invariance ensures they remain in
+$D$, where there are no fixed points. We aim to show that $y$ is periodic.
+\item Choose a transversal $\Sigma$ through $z$. Since $z\in\omega(y)$,
+the forward orbit of $y$ comes arbitrarily close to $z$. By following these
+nearby points forwards or backwards for a small time, obtain two intersections
+$y_1,y_2\in O^+(y)\cap\Sigma$ at distinct times.
+\item Both $y_1$ and $y_2$ lie in $\omega(x)$ by invariance. The same local
+transversal argument gives subsequences of intersections of $O^+(x)$ with
+$\Sigma$ tending to $y_1$ and to $y_2$. If $O^+(x)$ is nonperiodic, the lemma
+makes its successive intersections monotone, so they cannot have two distinct
+limits. Hence $y_1=y_2$, giving a return to the same point at distinct times;
+$y$ therefore lies on a periodic orbit. If $O^+(x)$ is already periodic,
+the conclusion is immediate.
+\end{enumerate}
+\begin{center}
+\includegraphics[width=.92\textwidth]{lecture11/proof-transversals.png}
+\end{center}
+\noindent This establishes that $\omega(x)$ contains a periodic orbit.
+To obtain the full statement, one also checks that $\omega(x)$ meets any
+local transversal in at most one point. Together with connectedness of
+$\omega$-limit sets of precompact forward orbits, this shows that $\omega(x)$
+is exactly that one periodic orbit. The handout leaves these final details
+to the reader.
+
+\begin{center}
+\textbf{End of lecture 11}
+\end{center}
+
 \end{document}
 

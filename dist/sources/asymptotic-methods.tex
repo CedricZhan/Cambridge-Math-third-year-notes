@@ -1828,5 +1828,254 @@ must allow the repeated integrations by parts and control the remainders.
     \textbf{End of lecture 7}
 \end{center}
 
+\subsection*{Oscillatory integrals (continued)}
+
+We continue to study
+\[
+    F(x)=\int_a^b f(t)e^{ix\phi(t)}\,dt,\qquad x\to+\infty,
+\]
+with real phase $\phi$. The signed local wavenumber is $x\phi'(t)$,
+while the local wavelength is $2\pi/|x\phi'(t)|$.
+For the linear phase, repeated integration by parts gives decay beyond
+all algebraic orders when all boundary terms vanish and the derivatives
+are integrable, as described above.
+
+\medskip
+\noindent\textbf{Remark on Fourier decay.}
+The board mentions the Paley--Wiener theorem in connection with how
+rapidly a Fourier transform can decay. Such restrictions require precise
+hypotheses, for example on support and analytic continuation; the
+whole-line integral alone imposes no universal prohibition on Gaussian
+decay. The photograph does not specify enough hypotheses to state the
+intended theorem (see archived photograph \texttt{source-01.jpg}).
+
+\subsection*{(b) A non-stationary, monotone phase}
+Suppose $a,b$ are finite, $\phi'(t)\neq0$ on $[a,b]$, and $f$ and
+$\phi$ have sufficient regularity for the following change of variables
+and integration by parts. Put
+\[
+    u=\phi(t),\qquad t=\phi^{-1}(u).
+\]
+Then, with oriented limits also when $\phi$ is decreasing,
+\[
+    F(x)=\int_{\phi(a)}^{\phi(b)}
+    \frac{f(\phi^{-1}(u))}{\phi'(\phi^{-1}(u))}e^{ixu}\,du.
+\]
+Equivalently, integration by parts directly in $t$ gives
+\[
+    F(x)=\frac1{ix}\left[\frac{f(t)}{\phi'(t)}e^{ix\phi(t)}\right]_a^b
+    -\frac1{ix}\int_a^b\left(\frac{f(t)}{\phi'(t)}\right)'
+    e^{ix\phi(t)}\,dt.
+\]
+If $(f/\phi')'$ is integrable, the transformed remainder tends to zero
+by the Riemann--Lebesgue lemma. Hence
+\[
+    \boxed{F(x)=\frac1{ix}
+    \left[\frac{f(t)}{\phi'(t)}e^{ix\phi(t)}\right]_a^b
+    +o(x^{-1})=O(x^{-1}).}
+\]
+When $f(a),f(b)\neq0$, the endpoints supply the possible leading term.
+An additive expansion is used because this boundary term may have zeros.
+
+\subsection*{(c) A stationary point: localisation}
+Suppose now that there is one interior stationary point $c\in(a,b)$:
+\[
+    \phi'(c)=0,\qquad \phi'(t)\neq0\quad(t\neq c).
+\]
+Near $c$, the local wavelength grows rather than shrinking to zero;
+oscillatory cancellation is less pronounced. A relatively flat
+\emph{plateau} in the phase makes this neighbourhood dominate the
+integral, although its contribution still tends to zero.
+\begin{figure}[htbp]
+    \centering
+    \pdfximage width 0.68\linewidth {figures/asymptotic-lecture8/stationary-phase.jpg}
+    \pdfrefximage\pdflastximage
+    \caption{Reduced oscillatory cancellation near $t=c$. Direct crop
+    of supplied photograph 2, archived as \texttt{source-02.jpg}.}
+    \label{fig:am-lecture8-plateau}
+\end{figure}
+
+\medskip
+\noindent\textbf{Localisation principle (Stokes and Kelvin).}
+The asymptotic expansion of an oscillatory integral is controlled by
+points of stationary phase and possibly the endpoints.
+For small fixed $\epsilon>0$, split
+\begin{align*}
+    F(x)&=\int_a^{c-\epsilon}f(t)e^{ix\phi(t)}\,dt
+    +\int_{c-\epsilon}^{c+\epsilon}f(t)e^{ix\phi(t)}\,dt
+    +\int_{c+\epsilon}^b f(t)e^{ix\phi(t)}\,dt\\
+    &=\int_{c-\epsilon}^{c+\epsilon}f(t)e^{ix\phi(t)}\,dt+O(x^{-1}).
+\end{align*}
+The two outer integrals have non-stationary phase and are $O(x^{-1})$
+under the preceding regularity assumptions.
+
+\subsection*{A non-degenerate stationary point}
+Assume in addition that $\phi''(c)\neq0$ and $f(c)\neq0$.
+Taylor expansion near $c$ gives
+\[
+    \phi(t)=\phi(c)+\frac{\phi''(c)}2(t-c)^2+\cdots,
+    \qquad f(t)=f(c)+\cdots.
+\]
+Thus the leading local contribution is obtained from
+\[
+    f(c)e^{ix\phi(c)}\int_{c-\epsilon}^{c+\epsilon}
+    \exp\!\left(\frac{ix\phi''(c)}2(t-c)^2\right)dt.
+\]
+Introduce
+\[
+    s=\sqrt{\frac{x|\phi''(c)|}{2}}(t-c),\qquad
+    \sigma=\operatorname{sgn}(\phi''(c))\in\{-1,1\},\qquad
+    L=\epsilon\sqrt{\frac{x|\phi''(c)|}{2}}.
+\]
+The quadratic model becomes
+\[
+    f(c)e^{ix\phi(c)}\sqrt{\frac{2}{x|\phi''(c)|}}
+    \int_{-L}^{L}e^{i\sigma s^2}\,ds.
+\]
+As $L\to\infty$, use the Fresnel integral (also in example sheets 1 and 2)
+\[
+    \int_{-\infty}^{\infty}e^{i\sigma s^2}\,ds
+    =\sqrt{\pi}\,e^{i\sigma\pi/4}.
+\]
+This integral is conditionally convergent. The quadratic replacement is
+a local asymptotic argument, with the non-stationary part estimated
+separately; it is not a uniform Taylor approximation on the full
+expanding $s$-interval. The stationary-phase formula is
+\[
+    \boxed{F(x)=f(c)\sqrt{\frac{2\pi}{x|\phi''(c)|}}
+    \exp\!\left(ix\phi(c)+\frac{i\pi}{4}
+    \operatorname{sgn}(\phi''(c))\right)+o(x^{-1/2}).}
+\]
+For this single nonzero contribution one may equivalently write $\sim$.
+The board's compact notation
+$f(c)e^{ix\phi(c)}\sqrt{2\pi/(-ix\phi''(c))}$ uses the square-root
+branch giving the phase factor above. The contribution is $O(x^{-1/2})$,
+larger than the non-stationary endpoint contributions of order $x^{-1}$.
+
+\subsection*{Example: the large-argument behaviour of $J_0$}
+Use the integral representation
+\[
+    J_0(r)=\frac1{2\pi}\int_0^{2\pi}e^{ir\sin t}\,dt,
+    \qquad r\to+\infty.
+\]
+Here $f=1/(2\pi)$, $\phi(t)=\sin t$, and there are two stationary points:
+\[
+\begin{array}{c|ccc}
+    c&\phi(c)&\phi''(c)&\text{leading contribution}\\ \hline
+    \pi/2&1&-1&(2\pi r)^{-1/2}e^{i(r-\pi/4)}\\
+    3\pi/2&-1&1&(2\pi r)^{-1/2}e^{-i(r-\pi/4)}
+\end{array}
+\]
+Adding their contributions gives
+\[
+    \boxed{J_0(r)=\sqrt{\frac{2}{\pi r}}
+    \cos\!\left(r-\frac\pi4\right)+o(r^{-1/2}).}
+\]
+The board writes this informally using $\sim$. Because the cosine has
+infinitely many zeros, a global ratio interpretation is inappropriate;
+the additive form specifies the asymptotic approximation.
+
+\medskip
+\noindent\textbf{Final points on stationary phase.}
+\begin{itemize}
+    \item Each non-degenerate stationary point with nonzero amplitude
+    supplies a contribution at order $x^{-1/2}$; these contributions
+    must be added and may cancel.
+    \item Non-stationary endpoints can contribute at order $x^{-1}$.
+    These terms are algebraically small, rather than exponentially
+    small as away from an isolated maximum in Laplace's method.
+    \item Use care with $\sim$ for oscillatory expressions with zeros.
+    \item Laplace's method is often easier for controlling higher-order
+    terms. This motivates deforming oscillatory integrals into a form
+    with exponential decay.
+\end{itemize}
+
+\section*{3.7 Method of steepest descent}
+Consider
+\[
+    I(x)=\int_C f(z)e^{x\phi(z)}\,dz,\qquad x\to+\infty,
+\]
+where $C$ is a contour in $\mathbb C$ and $f,\phi$ are analytic in a
+domain containing the contour and any allowed deformation of it.
+Such integrals arise in special functions and physical applications.
+Oscillatory integrals can also be put in this form, allowing
+higher-order terms to be calculated using Laplace-type reasoning.
+
+Write
+\[
+    z=p+iq,\qquad\phi(z)=u(p,q)+iv(p,q),\qquad p,q,u,v\in\mathbb R.
+\]
+Then
+\[
+    I(x)=\int_C f(z)\underbrace{e^{xu(p,q)}}_{\text{amplitude factor}}
+    \underbrace{e^{ixv(p,q)}}_{\text{oscillatory factor}}\,dz.
+\]
+The real part $u$ controls exponential growth or decay, while the
+imaginary part $v$ controls oscillation. On a curve of constant $v$,
+the phase factor is constant, suggesting the use of Laplace's method.
+
+\subsection*{Interlude: the Cauchy--Riemann equations}
+Analyticity of $\phi$ gives
+\[
+    u_p=v_q,\qquad u_q=-v_p.
+\]
+In the $(p,q)$-plane,
+\[
+    \nabla u=(u_p,u_q),\qquad\nabla v=(v_p,v_q),\qquad
+    \nabla u\cdot\nabla v=0.
+\]
+Thus the regular level curves of $u$ and $v$ are orthogonal.
+Moreover, $\nabla v$ is tangent to curves of constant $u$, and
+$\nabla u$ is tangent to curves of constant $v$.
+Along a constant-$v$ curve oriented in the direction $-\nabla u$,
+the real part $u$ decreases most rapidly per unit arclength:
+\[
+    \frac{du}{ds}=-|\nabla u|.
+\]
+The opposite orientation gives steepest ascent. These statements apply
+at regular points; at a stationary point the gradients vanish and the
+local geometry needs separate examination.
+
+\subsection*{Example: $\phi(z)=z^2$}
+Here
+\[
+    u=p^2-q^2,\qquad v=2pq.
+\]
+The constant-$u$ and constant-$v$ curves are orthogonal families of
+hyperbolas away from the stationary point at $z=0$; the zero levels
+include straight lines. The oriented red constant-$v$ curves in
+Figure~\ref{fig:am-lecture8-descent} follow decreasing $u$, from the
+regions near the real axis towards the regions near the imaginary axis.
+\clearpage
+\begin{figure}[!ht]
+    \centering
+    \pdfximage width 0.92\linewidth {figures/asymptotic-lecture8/steepest-descent.jpg}
+    \pdfrefximage\pdflastximage
+    \caption{Level curves for $\phi(z)=z^2$: blue curves have constant
+    $u=p^2-q^2$, and red curves have constant $v=2pq$. Red arrows mark
+    steepest descent of $u$. Direct crop of supplied photograph 10,
+    archived as \texttt{source-10.jpg}.}
+    \label{fig:am-lecture8-descent}
+\end{figure}
+Along the imaginary axis $z=iq$, $u=-q^2$ decreases away from the origin;
+along the real axis $z=p$, $u=p^2$ increases away from it. Thus the
+origin is a saddle of $u$, with descent directions along the imaginary
+axis and ascent directions along the real axis.
+
+\medskip
+\noindent\textit{Source photographs.}
+All ten supplied blackboard photographs are preserved in the directory
+\begin{center}
+    \texttt{figures/asymptotic-lecture8/}
+\end{center}
+They are named \texttt{source-01.jpg}--\texttt{source-10.jpg}, in the supplied order.
+Photographs 1--6 cover oscillatory integrals and stationary phase;
+photographs 7--10 introduce steepest descent and its geometry.
+The embedded figures are crops of these originals.
+
+\begin{center}
+    \textbf{End of lecture 8}
+\end{center}
+
 \end{document}
 

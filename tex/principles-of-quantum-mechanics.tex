@@ -2344,4 +2344,245 @@ where the one-particle Hamiltonian is
 \begin{center}
     \textbf{End of lecture 10}
 \end{center}
+
+\medskip
+\noindent
+\underline{Single-electron states and shell filling}
+
+The single-electron spatial states $|n\ell m\rangle\in V_{\mathrm{space}}$
+are joint eigenstates of $H$, $L^2$ and $L_3$:
+\[
+    \begin{aligned}
+        H|n\ell m\rangle&=E_n|n\ell m\rangle,\\
+        L^2|n\ell m\rangle&=\hbar^2\ell(\ell+1)|n\ell m\rangle,\\
+        L_3|n\ell m\rangle&=\hbar m|n\ell m\rangle,
+    \end{aligned}
+    \qquad
+    E_n=-\frac{m}{2}
+        \left(\frac{Ze^2}{4\pi\varepsilon_0\hbar}\right)^2
+        \frac{1}{n^2}.
+\]
+The allowed quantum numbers are
+\[
+    n=1,2,\ldots,\qquad
+    \ell=0,1,\ldots,n-1,\qquad
+    m=-\ell,-\ell+1,\ldots,\ell.
+\]
+The integer $n$ is the \underline{principal quantum number}. For fixed
+$\ell$ there are $2\ell+1$ states, so the spatial degeneracy of $E_n$ is
+\[
+    \sum_{\ell=0}^{n-1}(2\ell+1)
+        =1+3+\cdots+(2n-1)=n^2.
+\]
+Including $V_{\mathrm{spin}}$, with basis
+$\{|\uparrow\rangle,|\downarrow\rangle\}$, gives
+\underline{$2n^2$ one-electron states} at energy $E_n$.
+
+For an electrically neutral atom, $N=Z$. Fill the one-electron levels
+starting with the lowest energy, subject to the Pauli exclusion
+principle. This gives a rough picture of the periodic table and some
+qualitative insight into chemical properties. In particular, completely
+filled shells suggest relatively unreactive elements:
+\[
+    \begin{array}{c|c|c}
+        \text{filled levels} & Z & \text{element}\\ \hline
+        E_1 & 2 & \mathrm{He}\\
+        E_1,\ E_2 & 2+8=10 & \mathrm{Ne}
+    \end{array}
+\]
+Electron--electron interactions modify this simple model in real atoms.
+
+\section*{4. Perturbation Theory}
+
+Few quantum-mechanical systems can be solved exactly. In perturbation
+theory, start from a known, solvable system
+\[
+    H|n\rangle=E_n|n\rangle,
+\]
+where $\{|n\rangle\}$ is an orthonormal basis of energy eigenstates,
+and calculate the energies and eigenstates of a perturbed Hamiltonian:
+\begin{equation}
+    (H+\lambda V)|\psi\rangle=E|\psi\rangle.
+    \label{eq:pqm-perturbed-eigenvalue}
+\end{equation}
+Here $V$ is a Hermitian operator and $\lambda$ is a parameter.
+Assume that $E$ and $|\psi\rangle$ depend smoothly on $\lambda$ and
+seek them order by order in $\lambda$. Although the discussion concerns
+Hamiltonians and energies, the technique applies to any observable.
+
+\subsection*{4.1 Non-degenerate Case}
+
+Suppose that, as $\lambda\to0$,
+\[
+    |\psi\rangle\to|r\rangle,
+    \qquad E\to E_r,
+\]
+where $|r\rangle$ is the unique eigenstate with energy $E_r$:
+the unperturbed level is \underline{non-degenerate}.
+Using the unperturbed basis also for $\lambda\ne0$, write
+\[
+    |\psi\rangle
+      =\alpha|r\rangle+\sum_{j\ne r}\beta_j|j\rangle
+      =\alpha\left(|r\rangle+\sum_{j\ne r}\gamma_j|j\rangle\right),
+    \qquad \gamma_j=\frac{\beta_j}{\alpha}.
+\]
+The coefficients are power series in $\lambda$, with $\alpha\to1$
+and $\beta_j,\gamma_j\to0$ as $\lambda\to0$. We aim to determine
+the coefficients in
+\[
+    \begin{aligned}
+        E&=E_r+\lambda E'_r+\lambda^2 E''_r+\cdots,\\
+        \alpha&=1+a\lambda+\cdots,\\
+        \gamma_j&=c_j\lambda+\cdots.
+    \end{aligned}
+\]
+Here $E'_r$ and $E''_r$ denote the coefficients of $\lambda$ and
+$\lambda^2$, respectively; $E''_r$ is not the second derivative.
+
+Substitute the state expansion into
+\eqref{eq:pqm-perturbed-eigenvalue} and cancel $\alpha$:
+\[
+    (E_r+\lambda V)|r\rangle
+      +\sum_{j\ne r}\gamma_j(E_j+\lambda V)|j\rangle
+    =E\left(|r\rangle+\sum_{j\ne r}\gamma_j|j\rangle\right).
+\]
+Rearranging gives the exact equation
+\begin{equation}
+    (E-E_r)|r\rangle+\sum_{j\ne r}\gamma_j(E-E_j)|j\rangle
+      =\lambda V|r\rangle
+        +\lambda\sum_{j\ne r}\gamma_j V|j\rangle.
+    \label{eq:pqm-perturbation-rearranged}
+\end{equation}
+
+\medskip
+\noindent
+\underline{First-order energy correction}
+
+Multiplying \eqref{eq:pqm-perturbation-rearranged} by $\langle r|$ gives
+\[
+    E-E_r=\lambda\langle r|V|r\rangle
+       +\lambda\sum_{j\ne r}\gamma_j\langle r|V|j\rangle.
+\]
+This is exact. Substituting the power series,
+\[
+    \lambda E'_r+\lambda^2E''_r+\cdots
+      =\lambda\langle r|V|r\rangle
+       +\lambda^2\sum_{j\ne r}c_j\langle r|V|j\rangle+\cdots.
+\]
+Equating the coefficients of $\lambda$ yields
+\[
+    \boxed{E'_r=\langle r|V|r\rangle.}
+\]
+
+\medskip
+\noindent
+\underline{State mixing and the second-order energy correction}
+
+To obtain the second-order correction, we need $c_j$.
+Multiplying \eqref{eq:pqm-perturbation-rearranged} by $\langle i|$,
+where $i\ne r$, gives the exact relation
+\[
+    \gamma_i(E-E_i)=\lambda\langle i|V|r\rangle
+        +\lambda\sum_{j\ne r}\gamma_j\langle i|V|j\rangle.
+\]
+To leading order in $\lambda$,
+\[
+    \lambda c_i(E_r-E_i)=\lambda\langle i|V|r\rangle,
+    \qquad\Longrightarrow\qquad
+    c_i=\frac{\langle i|V|r\rangle}{E_r-E_i}.
+\]
+The denominator is nonzero because the level $E_r$ is non-degenerate.
+Thus
+\[
+    |\psi\rangle=\alpha\left[
+        |r\rangle+\lambda\sum_{j\ne r}
+        \frac{\langle j|V|r\rangle}{E_r-E_j}|j\rangle
+        +O(\lambda^2)\right],
+\]
+where $\alpha$ fixes the normalisation and phase.
+Returning to the coefficient of $\lambda^2$ in the energy equation,
+and using Hermiticity of $V$,
+\[
+    E''_r=\sum_{j\ne r}c_j\langle r|V|j\rangle
+         =\sum_{j\ne r}\frac{|\langle j|V|r\rangle|^2}{E_r-E_j}.
+\]
+Hence \underline{second-order non-degenerate perturbation theory} gives
+\[
+    \boxed{
+    E=E_r+\lambda\langle r|V|r\rangle
+        +\lambda^2\sum_{j\ne r}
+         \frac{|\langle j|V|r\rangle|^2}{E_r-E_j}
+        +O(\lambda^3).
+    }
+\]
+One should be able to quote and/or derive this result.
+
+\subsubsection*{Example: a quadratic perturbation of the harmonic oscillator}
+
+Consider
+\[
+    H=\frac{\hat p^{\,2}}{2m}+\frac12m\omega^2\hat x^{\,2}
+      =\hbar\omega\left(a^\dagger a+\frac12\right),
+    \qquad E_n=\hbar\omega\left(n+\frac12\right),
+\]
+with states $|n\rangle$, $n=0,1,\ldots$, and perturbation
+$V=m\omega^2\hat x^{\,2}$. Using
+$\hat x=\sqrt{\hbar/(2m\omega)}(a+a^\dagger)$,
+\begin{align*}
+    V&=m\omega^2\frac{\hbar}{2m\omega}
+       \left(a^2+(a^\dagger)^2+aa^\dagger+a^\dagger a\right)\\
+     &=\frac{\hbar\omega}{2}
+       \left(a^2+(a^\dagger)^2+2a^\dagger a+1\right).
+\end{align*}
+The nonzero matrix elements are
+\[
+    \begin{aligned}
+        \langle n|V|n\rangle
+            &=\frac{\hbar\omega}{2}(2n+1),\\
+        \langle n+2|V|n\rangle
+            &=\frac{\hbar\omega}{2}\sqrt{(n+1)(n+2)},\\
+        \langle n-2|V|n\rangle
+            &=\frac{\hbar\omega}{2}\sqrt{n(n-1)}
+              \qquad(n\ge2).
+    \end{aligned}
+\]
+All other $\langle m|V|n\rangle$ vanish. For $n=0,1$, there is no
+$|n-2\rangle$ contribution.
+
+The perturbed energy of the $n$th level through second order is
+\begin{align*}
+    E_n(\lambda)
+      &=E_n+\lambda\langle n|V|n\rangle
+        +\lambda^2\sum_{m\ne n}
+          \frac{|\langle m|V|n\rangle|^2}{E_n-E_m}
+        +O(\lambda^3)\\
+      &=\hbar\omega\left(n+\frac12\right)
+        +\lambda\hbar\omega\left(n+\frac12\right)\\
+      &\quad+\lambda^2\left(\frac{\hbar\omega}{2}\right)^2
+         \left[\frac{(n+1)(n+2)}{-2\hbar\omega}
+                +\frac{n(n-1)}{2\hbar\omega}\right]
+         +O(\lambda^3)\\
+      &=\hbar\omega\left(n+\frac12\right)
+          \left(1+\lambda-\frac{\lambda^2}{2}\right)
+         +O(\lambda^3).
+\end{align*}
+
+This problem can also be solved exactly. Adding $\lambda V$ replaces
+the oscillator frequency by
+\[
+    \omega'^2=\omega^2(1+2\lambda).
+\]
+For $1+2\lambda>0$, the exact energies are
+\begin{align*}
+    E_n(\lambda)
+      &=\hbar\omega'\left(n+\frac12\right)
+       =\hbar\omega\left(n+\frac12\right)(1+2\lambda)^{1/2}\\
+      &=\hbar\omega\left(n+\frac12\right)
+          \left(1+\lambda-\frac12\lambda^2+O(\lambda^3)\right),
+\end{align*}
+in agreement with the perturbative calculation.
+
+\begin{center}
+    \textbf{End of lecture 11}
+\end{center}
 \end{document}

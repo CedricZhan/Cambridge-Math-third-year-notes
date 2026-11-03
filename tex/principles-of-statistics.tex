@@ -2520,4 +2520,221 @@ distribution for some $\alpha_i>0$, or a point mass at some $p\in\Delta$.
 \textbf{End of lecture 10}
 \end{center}
 
+\noindent\underline{Objectivist approach}
+\begin{itemize}
+\item Choose a prior that is ``uninformative'' or ``flat'', or that maximises
+the influence of the data on the posterior.
+\item Construct priors that lead to Bayes estimators and credible sets with
+good frequentist properties.
+\end{itemize}
+
+\noindent\underline{Example}\quad
+Let $X_i\mid\theta\overset{\mathrm{iid}}{\sim}\operatorname{Bernoulli}(\theta)$.
+A ``flat'' prior on $\theta\in(0,1)$ is $\pi_\theta(\theta)=1$.
+What if instead we parametrise by
+\[
+\psi=\theta^2=\mathbb P_\theta(X_1=X_2=1)?
+\]
+A flat prior on $\theta$ induces a prior on $\psi$ through a change of variables:
+\[
+\pi_\psi(\psi)
+=\pi_\theta(\theta(\psi))\left|\frac{d\theta}{d\psi}\right|
+=\frac{1}{2\sqrt\psi},\qquad 0<\psi<1,
+\]
+which is decidedly not flat. Thus ``flatness'' depends on parametrisation.
+
+\medskip
+\noindent\underline{Definition (Jeffreys prior)}\quad
+The Jeffreys prior on a parameter $\theta$ is given by
+\[
+\pi_{J,\theta}(\theta)\propto\sqrt{\det I_\theta(\theta)},
+\]
+where $I_\theta(\theta)$ is the Fisher information matrix for one observation.
+
+\medskip
+\noindent\underline{Remark 1}\quad
+This prior puts more mass on values of $\theta$ where the data is more
+``informative''.
+
+\medskip
+\noindent\underline{Remark 2}\quad
+Jeffreys prior is invariant under reparametrisation.
+First consider a model with $\Theta=\mathbb R$ and a reparametrisation
+$\psi=h(\theta)$, where $h$ is a differentiable bijection with differentiable
+inverse $\theta=\theta(\psi)$. Under the usual regularity conditions,
+the Fisher information for $\psi$ is
+\[
+\begin{aligned}
+I_\psi(\psi)
+&=-\mathbb E_{\theta(\psi)}\left[
+\frac{\partial^2}{\partial\psi^2}\log f(X,\theta(\psi))\right]\\
+&=-\mathbb E_{\theta(\psi)}\left[
+\frac{\partial}{\partial\psi}\left\{
+\frac{d\theta}{d\psi}\frac{\partial}{\partial\theta}
+\log f(X,\theta(\psi))\right\}\right]\\
+&=-\mathbb E_{\theta(\psi)}\left[
+\frac{d^2\theta}{d\psi^2}\frac{\partial}{\partial\theta}
+\log f(X,\theta(\psi))
++\left(\frac{d\theta}{d\psi}\right)^2
+\frac{\partial^2}{\partial\theta^2}\log f(X,\theta(\psi))\right]\\
+&=\left(\frac{d\theta}{d\psi}\right)^2 I_\theta(\theta(\psi)),
+\end{aligned}
+\]
+since the score has mean zero. Hence the Jeffreys prior on $\psi$ is
+\[
+\pi_{J,\psi}(\psi)
+\propto\left|\frac{d\theta}{d\psi}\right|
+\sqrt{I_\theta(\theta(\psi))}.
+\]
+This is exactly what we obtain by starting from $\pi_{J,\theta}$ and applying
+a change of variables.
+
+\medskip
+\noindent\underline{Remark 3}\quad
+Often
+\[
+\int_\Theta\sqrt{\det I_\theta(\theta)}\,d\theta=\infty.
+\]
+In this case, we say that $\pi_{J,\theta}$ is an \underline{improper prior}.
+However, the posterior
+\[
+\pi(\theta\mid x_1,\ldots,x_n)
+\propto\pi_{J,\theta}(\theta)\prod_{i=1}^n f(x_i,\theta)
+\]
+can still be a probability density, provided its normalising integral is
+finite and positive.
+
+\medskip
+\noindent\underline{Example}\quad
+Let $X_i\overset{\mathrm{iid}}{\sim}N(\mu,\sigma^2)$ and parametrise by
+$\theta=(\mu,\sigma)^T$, where $\mu\in\mathbb R$ and $\sigma>0$.
+The Fisher information is
+\[
+I_\theta(\theta)=
+\begin{pmatrix}
+1/\sigma^2&0\\
+0&2/\sigma^2
+\end{pmatrix}.
+\]
+Thus the Jeffreys prior, as a density with respect to $d\mu\,d\sigma$, is
+\[
+\pi_{J,\theta}(\mu,\sigma)\propto\frac1{\sigma^2}.
+\]
+It is constant in $\mu$ for each $\sigma$, hence improper. The posterior is
+\[
+\pi(\mu,\sigma\mid x_1,\ldots,x_n)
+\propto\frac1{\sigma^n}
+\exp\left\{-\frac1{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\}
+\frac1{\sigma^2}.
+\]
+One can show that this has a finite integral over $\mu\in\mathbb R$,
+$\sigma>0$ provided $n\geq2$ and $x_1\neq x_2$.
+More generally, it is enough that $n\geq2$ and
+$\sum_{i=1}^n(x_i-\bar x_n)^2>0$.
+For fixed $\sigma$, the conditional posterior over $\mu$ is
+\[
+\mu\mid\sigma,x_1,\ldots,x_n
+\sim N\left(\bar x_n,\frac{\sigma^2}{n}\right).
+\]
+
+\subsection*{3. Frequentist properties of credible intervals}
+
+The \underline{Bernstein--von Mises phenomenon} states that, under suitable
+regularity conditions, if
+\[
+X_1,X_2,\ldots\overset{\mathrm{iid}}{\sim}P_{\theta_0}
+\]
+for some true parameter $\theta_0$, then the posterior $\pi(\theta\mid X_1,\ldots,X_n)$,
+viewed as a random distribution, is approximately
+\[
+N\left(\hat\theta_n,\frac{I_\theta(\theta_0)^{-1}}n\right),
+\qquad n\to\infty,
+\]
+where $\hat\theta_n$ is the MLE.
+Concretely, if $\hat\phi_n$ is the pdf of this normal distribution, we have
+\[
+\begin{aligned}
+&2\operatorname{TV}\bigl(\pi(\cdot\mid X_1,\ldots,X_n),\hat\phi_n\bigr)\\
+&\qquad=\int_\Theta
+\left|\pi(\theta\mid X_1,\ldots,X_n)-\hat\phi_n(\theta)\right|\,d\theta
+\xrightarrow{P_{\theta_0}}0.
+\end{aligned}
+\tag{$*$}
+\]
+
+\medskip
+\noindent\underline{Proposition}\quad
+Let $\Theta=\mathbb R$, $0<\alpha<1$, and define
+\[
+\hat C_n=\left\{\theta:|\theta-\hat\theta_n|\leq\frac{R_n}{\sqrt n}\right\},
+\]
+where $R_n$ is chosen so that
+\[
+\int_{\hat C_n}\pi(\theta\mid X_1,\ldots,X_n)\,d\theta=1-\alpha.
+\]
+If the Bernstein--von Mises phenomenon $(*)$ holds and the MLE has its usual
+asymptotic normal distribution, then
+\[
+\mathbb P_{\theta_0}(\theta_0\in\hat C_n)\longrightarrow1-\alpha.
+\]
+Thus this credible set is an asymptotic $(1-\alpha)$-confidence interval.
+
+\medskip
+\noindent\underline{Proof}\quad
+Let $h=\sqrt n(\theta-\hat\theta_n)$, let
+$\widetilde\pi_n(h\mid X_1,\ldots,X_n)$ be the posterior density of $h$,
+and let $\widetilde\phi$ be the density of
+$N(0,I_\theta(\theta_0)^{-1})$.
+By definition of $\hat C_n$,
+\[
+\int_{-R_n}^{R_n}\widetilde\pi_n(h\mid X_1,\ldots,X_n)\,dh=1-\alpha.
+\]
+But
+\[
+\begin{aligned}
+&\left|\int_{-R_n}^{R_n}\widetilde\pi_n(h\mid X_1,\ldots,X_n)\,dh
+-\int_{-R_n}^{R_n}\widetilde\phi(h)\,dh\right|\\
+&\qquad\leq\int_{-R_n}^{R_n}
+\left|\widetilde\pi_n(h\mid X_1,\ldots,X_n)-\widetilde\phi(h)\right|\,dh
+\xrightarrow{P_{\theta_0}}0
+\end{aligned}
+\]
+by $(*)$ and the change of variables.
+Write
+\[
+G(t)=\int_{-t}^t\widetilde\phi(h)\,dh,\qquad t\geq0.
+\]
+Then $G(R_n)\xrightarrow{P_{\theta_0}}1-\alpha$.
+The function $G$ has a continuous inverse on $(0,1)$, so the continuous
+mapping theorem gives
+\[
+R_n\xrightarrow{P_{\theta_0}}q:=G^{-1}(1-\alpha)>0.
+\]
+By the asymptotic normality of the MLE,
+\[
+\sqrt n(\hat\theta_n-\theta_0)
+\xrightarrow{d}\widetilde Z,
+\qquad \widetilde Z\sim N(0,I_\theta(\theta_0)^{-1}).
+\]
+Slutsky's theorem therefore gives
+\[
+\sqrt n(\hat\theta_n-\theta_0)\frac{q}{R_n}
+\xrightarrow{d}\widetilde Z.
+\]
+Consequently,
+\[
+\begin{aligned}
+\mathbb P_{\theta_0}(\theta_0\in\hat C_n)
+&=\mathbb P_{\theta_0}\left(
+-q\leq\sqrt n(\hat\theta_n-\theta_0)\frac{q}{R_n}\leq q\right)\\
+&\longrightarrow\mathbb P(-q\leq\widetilde Z\leq q)\\
+&=G(q)=1-\alpha.
+\end{aligned}
+\]
+\hfill$\square$
+
+\begin{center}
+\textbf{End of lecture 11}
+\end{center}
+
 \end{document}

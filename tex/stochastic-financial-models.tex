@@ -1732,4 +1732,153 @@ claim at time $n$, completing the backward induction.
 \begin{center}
 \textbf{End of lecture 7}
 \end{center}
+
+\subsection*{2.10 Completeness of the binomial model}
+
+Recall that
+\[
+S_n^0=(1+r)^n,\qquad S_n=S_0\prod_{i=1}^n(1+R_i),
+\]
+where $R_i=b$ with probability $p$ and $R_i=a$ with probability
+$1-p$. Assume $a<r<b$ and set $p^*=(r-a)/(b-a)$, so that
+$\mathbb P^*$ is an equivalent martingale measure.
+For a contingent claim $C=f(S_0,\ldots,S_T)$, the backward recursion
+from Section 2.9 gives
+\[
+\mathbb E^*(C\mid\mathcal F_n)=f_n(S_0,\ldots,S_n)
+\qquad\text{a.s.},
+\]
+where $\mathcal F_n=\sigma(R_1,\ldots,R_n)$, $f_T=f$, and
+\[
+\begin{aligned}
+f_n(s_0,\ldots,s_n)
+={}&(1-p^*)f_{n+1}(s_0,\ldots,s_n,(1+a)s_n)\\
+&+p^*f_{n+1}(s_0,\ldots,s_n,(1+b)s_n),\qquad n<T.
+\end{aligned}
+\]
+For $1\leq n\leq T$, define
+\[
+\Delta_n(s_0,\ldots,s_{n-1})
+=\frac{
+ f_n(s_0,\ldots,s_{n-1},(1+b)s_{n-1})
+ -f_n(s_0,\ldots,s_{n-1},(1+a)s_{n-1})
+}{(1+r)^{T-n}(b-a)s_{n-1}}.
+\]
+
+\medskip
+\noindent\textbf{Proposition 2.10.}
+The contingent claim $C=f(S_0,\ldots,S_T)$ has a replicating
+portfolio whose risky holdings are
+\[
+\Theta_n=\Delta_n(S_0,\ldots,S_{n-1}),\qquad 1\leq n\leq T.
+\]
+In particular, the binomial model is complete.
+
+\noindent\textbf{Proof.}
+Set
+\[
+V_n=\mathbb E^*\!\left(\frac{C}{S_T^0}\,\middle|\,\mathcal F_n\right)
+=\frac{f_n(S_0,\ldots,S_n)}{(1+r)^T}.
+\]
+Fix a possible price history $(s_0,\ldots,s_{n-1})$, starting from
+$s_0=S_0$, and define
+\[
+\begin{aligned}
+\Omega_0&=\{S_1=s_1,\ldots,S_{n-1}=s_{n-1}\},\\
+\Omega_a&=\Omega_0\cap\{R_n=a\},\qquad
+\Omega_b=\Omega_0\cap\{R_n=b\}.
+\end{aligned}
+\]
+For $n=1$, take $\Omega_0=\Omega$. Write
+\[
+\phi(x)=f_n(s_0,\ldots,s_{n-1},(1+x)s_{n-1}).
+\]
+On $\Omega_a$,
+\[
+V_n=\frac{\phi(a)}{(1+r)^T},\qquad
+V_{n-1}=\frac{(1-p^*)\phi(a)+p^*\phi(b)}{(1+r)^T},
+\]
+and hence
+\[
+V_n-V_{n-1}=\frac{p^*(\phi(a)-\phi(b))}{(1+r)^T}.
+\]
+For the discounted stock price $X_n=S_n/(1+r)^n$, we have on
+the same event
+\[
+X_n-X_{n-1}
+=\left(\frac{1+a}{1+r}-1\right)X_{n-1}
+=\frac{(a-r)s_{n-1}}{(1+r)^n}.
+\]
+Consequently,
+\[
+\begin{aligned}
+\Theta_n(X_n-X_{n-1})
+&=\frac{\phi(b)-\phi(a)}{(1+r)^{T-n}(b-a)s_{n-1}}
+  \frac{(a-r)s_{n-1}}{(1+r)^n}\\
+&=\frac{p^*(\phi(a)-\phi(b))}{(1+r)^T}
+=V_n-V_{n-1},
+\end{aligned}
+\]
+using $(a-r)/(b-a)=-p^*$.
+A similar calculation on $\Omega_b$ uses
+$(b-r)/(b-a)=1-p^*$ and gives
+\[
+\Theta_n(X_n-X_{n-1})
+=\frac{(1-p^*)(\phi(b)-\phi(a))}{(1+r)^T}
+=V_n-V_{n-1}.
+\]
+Since the history was arbitrary, this identity holds everywhere.
+The holdings $\Theta_n$ are $\mathcal F_{n-1}$-measurable, and
+summing the increments yields
+\[
+\frac{C}{S_T^0}=V_T
+=V_0+\sum_{n=1}^T\Theta_n(X_n-X_{n-1}).
+\]
+Thus the self-financing portfolio with initial discounted wealth
+$V_0$ and risky holdings $(\Theta_n)_{1\leq n\leq T}$ replicates $C$.
+\hfill$\square$
+
+\newpage
+\subsection*{2.11 American calls and puts}
+
+An \emph{American call} with expiry $T$ confers the right, but not
+the obligation, to buy one unit of the underlying asset
+$(S_n)_{0\leq n\leq T}$ for the strike price $K$ at any stopping
+time $\tau\leq T$. Its payoff on exercise is
+\[
+C_\tau=(S_\tau-K)^+.
+\]
+An \emph{American put} instead confers the right to sell one unit
+for $K$, with exercise payoff
+\[
+C_\tau=(K-S_\tau)^+.
+\]
+These are not simply time-$T$ claims: the holder chooses when to
+exercise. We seek to optimize the discounted exercise payoff
+$C_\tau/S_\tau^0$.
+
+Assume that the asset price model is complete and arbitrage-free.
+Then, for any two stopping times $\tau_1,\tau_2\leq T$, the
+difference of discounted payoffs
+\[
+\frac{C_{\tau_1}}{S_{\tau_1}^0}
+-\frac{C_{\tau_2}}{S_{\tau_2}^0}
+\]
+can be replicated in the market, with initial price in discounted
+units
+\[
+\mathbb E^*\!\left(\frac{C_{\tau_1}}{S_{\tau_1}^0}\right)
+-\mathbb E^*\!\left(\frac{C_{\tau_2}}{S_{\tau_2}^0}\right).
+\]
+% The final sentence is reconstructed from the complementary views
+% in the last two photographs; parts of its wording are obscured.
+It therefore suffices to maximize
+\[
+\mathbb E^*\!\left(\frac{C_\tau}{S_\tau^0}\right)
+\]
+over stopping times $\tau\leq T$.
+
+\begin{center}
+\textbf{End of lecture 8}
+\end{center}
 \end{document}
