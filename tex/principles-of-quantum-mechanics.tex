@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
+\usepackage{graphicx}
 \title{Principles of Quantum Mechanics}
 \begin{document}
 \maketitle
@@ -2403,7 +2404,7 @@ where $\{|n\rangle\}$ is an orthonormal basis of energy eigenstates,
 and calculate the energies and eigenstates of a perturbed Hamiltonian:
 \begin{equation}
     (H+\lambda V)|\psi\rangle=E|\psi\rangle.
-    \label{eq:pqm-perturbed-eigenvalue}
+    \tag{1}
 \end{equation}
 Here $V$ is a Hermitian operator and $\lambda$ is a parameter.
 Assume that $E$ and $|\psi\rangle$ depend smoothly on $\lambda$ and
@@ -2440,7 +2441,7 @@ Here $E'_r$ and $E''_r$ denote the coefficients of $\lambda$ and
 $\lambda^2$, respectively; $E''_r$ is not the second derivative.
 
 Substitute the state expansion into
-\eqref{eq:pqm-perturbed-eigenvalue} and cancel $\alpha$:
+(1) and cancel $\alpha$:
 \[
     (E_r+\lambda V)|r\rangle
       +\sum_{j\ne r}\gamma_j(E_j+\lambda V)|j\rangle
@@ -2451,14 +2452,14 @@ Rearranging gives the exact equation
     (E-E_r)|r\rangle+\sum_{j\ne r}\gamma_j(E-E_j)|j\rangle
       =\lambda V|r\rangle
         +\lambda\sum_{j\ne r}\gamma_j V|j\rangle.
-    \label{eq:pqm-perturbation-rearranged}
+    \tag{2}
 \end{equation}
 
 \medskip
 \noindent
 \underline{First-order energy correction}
 
-Multiplying \eqref{eq:pqm-perturbation-rearranged} by $\langle r|$ gives
+Multiplying (2) by $\langle r|$ gives
 \[
     E-E_r=\lambda\langle r|V|r\rangle
        +\lambda\sum_{j\ne r}\gamma_j\langle r|V|j\rangle.
@@ -2479,7 +2480,7 @@ Equating the coefficients of $\lambda$ yields
 \underline{State mixing and the second-order energy correction}
 
 To obtain the second-order correction, we need $c_j$.
-Multiplying \eqref{eq:pqm-perturbation-rearranged} by $\langle i|$,
+Multiplying (2) by $\langle i|$,
 where $i\ne r$, gives the exact relation
 \[
     \gamma_i(E-E_i)=\lambda\langle i|V|r\rangle
@@ -2584,5 +2585,292 @@ in agreement with the perturbative calculation.
 
 \begin{center}
     \textbf{End of lecture 11}
+\end{center}
+\clearpage
+\noindent
+\underline{Non-degenerate perturbation theory: recap}
+
+For the time-independent eigenvalue problem
+\[
+    (H+\lambda V)|\psi\rangle=E|\psi\rangle,
+\]
+second-order non-degenerate perturbation theory gives
+\[
+    E=E_r+\lambda\langle r|V|r\rangle
+      +\lambda^2\sum_{j\ne r}
+       \frac{|\langle j|V|r\rangle|^2}{E_r-E_j}
+      +\cdots.
+\]
+
+In general, we expect perturbation theory to be valid and useful when
+$|\lambda|$ is sufficiently small. But the corrections actually involve
+quantities such as
+\[
+    \lambda^2\frac{|\langle j|V|r\rangle|^2}{|E_r-E_j|}
+\]
+and similar expressions. The condition for accuracy is therefore that
+\[
+    |\text{energy shifts}|\ll|\text{original energy differences}|.
+\]
+\begin{center}
+    \includegraphics[width=0.76\linewidth]{figures/quantum-lecture12/level-shifts.png}
+\end{center}
+
+In general, the perturbation series may not converge, but can still be
+useful for approximate calculations as an \underline{asymptotic series}.
+In the harmonic-oscillator example above, the total potential was
+\[
+    \frac12m\omega^2(1+2\lambda)\hat x^{\,2}.
+\]
+For $\lambda<-\tfrac12$, this no longer describes a bound harmonic
+oscillator. This suggests that perturbation theory about $\lambda=0$
+converges, at best, for
+\[
+    |\lambda|<\frac12.
+\]
+
+\subsubsection*{Example: ground-state energy of helium}
+
+The unperturbed problem consists of two non-interacting electrons,
+each of charge $-e$, orbiting a nucleus of charge $+2e$. The Hamiltonian is
+\[
+    H_0=H(\hat{\mathbf x}_1,\hat{\mathbf p}_1)
+       +H(\hat{\mathbf x}_2,\hat{\mathbf p}_2),
+\]
+where
+\[
+    H(\hat{\mathbf x},\hat{\mathbf p})
+      =\frac{\hat{\mathbf p}^{\,2}}{2m}
+       -\frac{2e^2}{4\pi\varepsilon_0|\hat{\mathbf x}|}.
+\]
+The one-electron states are $|n\ell m\rangle$, with wavefunctions
+$\psi_{n\ell m}(\mathbf x)$ and energies
+\[
+    E_n=-\frac{m}{2}
+       \left(\frac{2e^2}{4\pi\varepsilon_0\hbar}\right)^2
+       \frac{1}{n^2}.
+\]
+
+The lowest-energy state for the two electrons is
+\[
+    |\Psi\rangle=|100\rangle\otimes|100\rangle\otimes|\chi\rangle,
+\]
+with the spin state
+\[
+    |\chi\rangle=\frac{1}{\sqrt2}
+       \bigl(|\uparrow\rangle|\downarrow\rangle
+             -|\downarrow\rangle|\uparrow\rangle\bigr).
+\]
+The spatial part is symmetric and the spin part is antisymmetric, so
+the complete state is antisymmetric, as required for electrons.
+The spatial two-electron wavefunction is
+\[
+    \Psi(\mathbf x_1,\mathbf x_2)
+      =\psi_{100}(\mathbf x_1)\psi_{100}(\mathbf x_2),
+\]
+where the hydrogen-like solution with $Z=2$ is
+\[
+    \psi_{100}(\mathbf x)
+       =\frac{1}{\sqrt\pi}
+        \left(\frac{1}{a_2}\right)^{3/2}
+        e^{-|\mathbf x|/a_2},
+    \qquad
+    a_2=\frac12\frac{4\pi\varepsilon_0\hbar^2}{me^2}
+       =\frac12\,(\text{Bohr radius}).
+\]
+Thus the unperturbed ground-state energy is
+\[
+    2E_1=-m\left(\frac{2e^2}{4\pi\varepsilon_0\hbar}\right)^2
+       \simeq-108.8\,\mathrm{eV},
+\]
+compared with $-13.6\,\mathrm{eV}$ for hydrogen.
+Experimentally, the ground-state energy of helium is approximately
+$-79.0\,\mathrm{eV}$, but we have neglected the electron--electron
+interaction.
+
+Treat this interaction as a perturbation, writing
+\[
+    H_{\mathrm{He}}=H_0+\lambda V,
+    \qquad
+    \lambda=\frac{e^2}{4\pi\varepsilon_0},
+    \qquad
+    V(\mathbf x_1,\mathbf x_2)=\frac{1}{|\mathbf x_1-\mathbf x_2|}.
+\]
+The first-order correction to the ground-state energy is
+\begin{align*}
+    \lambda\langle\Psi|V|\Psi\rangle
+      &=\lambda\int d^3x_1\int d^3x_2\,
+          \Psi(\mathbf x_1,\mathbf x_2)^*
+          V(\mathbf x_1,\mathbf x_2)
+          \Psi(\mathbf x_1,\mathbf x_2)\\
+      &=\lambda\int d^3x_1\int d^3x_2\,
+        \frac{|\psi_{100}(\mathbf x_1)|^2
+              |\psi_{100}(\mathbf x_2)|^2}
+             {|\mathbf x_1-\mathbf x_2|}\\
+      &\simeq34.0\,\mathrm{eV}.
+\end{align*}
+Here the normalised spin factor contributes one, since $V$ is
+independent of spin. The corrected ground-state energy is therefore
+\[
+    E_{\mathrm{He}}\simeq-108.8\,\mathrm{eV}+34.0\,\mathrm{eV}
+       =-74.8\,\mathrm{eV}.
+\]
+
+\subsection*{4.2 Degenerate Case}
+
+Consider again
+\[
+    (H+\lambda V)|\psi\rangle=E|\psi\rangle,
+\]
+and suppose that, as $\lambda\to0$,
+\[
+    E\to E_r=E_s=\cdots,
+    \qquad
+    |\psi\rangle\to\sum_r a_r|r\rangle.
+\]
+Use the labels $r,s,\ldots$ \emph{only} for the degenerate states at
+this unperturbed energy. Use $j$ \emph{only} for the other basis states
+$|j\rangle$, whose energies satisfy $E_j\ne E_r$.
+
+For general $\lambda$, expand
+\[
+    |\psi\rangle=\sum_r\alpha_r|r\rangle
+                 +\sum_j\beta_j|j\rangle.
+\]
+We must have
+\[
+    \alpha_r=a_r+O(\lambda),
+    \qquad \beta_j=O(\lambda).
+\]
+Substituting into the eigenvalue equation gives
+\begin{align*}
+    &\sum_r\alpha_r(E_r+\lambda V)|r\rangle
+     +\sum_j\beta_j(E_j+\lambda V)|j\rangle\\
+    &\hspace{2cm}
+      =E\left(\sum_r\alpha_r|r\rangle
+                 +\sum_j\beta_j|j\rangle\right).
+\end{align*}
+Rearranging,
+\begin{equation}
+    \begin{aligned}
+        &\sum_r\alpha_r(E-E_r)|r\rangle
+          +\sum_j\beta_j(E-E_j)|j\rangle\\
+        &\hspace{1cm}
+          =\lambda\sum_r\alpha_r V|r\rangle
+           +\lambda\sum_j\beta_j V|j\rangle.
+    \end{aligned}
+    \tag{$**$}
+\end{equation}
+Seek
+\[
+    E=E_r+\lambda E'+O(\lambda^2).
+\]
+The correction $E'$ is no longer associated with a specific basis
+state in our chosen degenerate set.
+
+Take the inner product of ($**$) with
+$\langle s|$:
+\[
+    (E-E_s)\alpha_s
+       =\lambda\sum_r\alpha_r\langle s|V|r\rangle
+        +\lambda\sum_j\beta_j\langle s|V|j\rangle.
+\]
+Since $E_s=E_r$, to leading order in $\lambda$ we obtain
+\[
+    \boxed{\sum_r\langle s|V|r\rangle a_r=E'a_s.}
+\]
+Thus $E'$ is an \underline{eigenvalue} of the matrix
+\[
+    \bigl(\langle s|V|r\rangle\bigr)
+\]
+within the degenerate subspace, and the $a_r$ are the components of
+the corresponding \underline{eigenvector}.
+If there are $N$ degenerate states, there are $N$ solutions for $E'$
+(counting multiplicity) and corresponding eigenvectors. The
+zeroth-order states selected by the perturbation are
+\[
+    \sum_r a_r|r\rangle.
+\]
+
+\medskip
+\noindent
+\underline{General picture}
+
+Degeneracy of $H$ reflects some symmetry. The perturbed Hamiltonian
+$H+\lambda V$ generally has less symmetry, so the energy levels split
+apart.
+\begin{center}
+    \includegraphics[width=0.52\linewidth]{figures/quantum-lecture12/degenerate-splitting.png}
+\end{center}
+
+\newpage
+\subsubsection*{Example: a particle in a two-dimensional box}
+
+Consider a particle in a square box,
+\[
+    0\le x,y\le a.
+\]
+The unperturbed states are $|pq\rangle$, with wavefunctions
+\[
+    \psi_{pq}(x,y)=\frac{2}{a}
+       \sin\frac{p\pi x}{a}\sin\frac{q\pi y}{a},
+    \qquad p,q=1,2,\ldots.
+\]
+The lowest energy level is
+\[
+    E_{11}=\frac{\hbar^2\pi^2}{ma^2},
+    \qquad\text{non-degenerate}.
+\]
+The next level is
+\[
+    E_{12}=E_{21}=\frac{5\hbar^2\pi^2}{2ma^2},
+    \qquad\text{degeneracy }2.
+\]
+
+Take the perturbation
+\[
+    V(x,y)=\frac{xy}{a^2},
+    \qquad \lambda\text{ has dimensions of energy}.
+\]
+For the lowest energy level,
+\[
+    \langle11|V|11\rangle
+      =\int_0^a dx\int_0^a dy\,
+        \frac{xy}{a^2}|\psi_{11}(x,y)|^2
+      =\frac14.
+\]
+Hence the first-order energy shift is $\lambda/4$, and
+\[
+    E_{\mathrm{ground}}(\lambda)
+      =E_{11}+\frac{\lambda}{4}+O(\lambda^2).
+\]
+
+For the degenerate level, diagonalise the matrix
+\[
+    \begin{pmatrix}
+        \langle12|V|12\rangle&\langle12|V|21\rangle\\
+        \langle21|V|12\rangle&\langle21|V|21\rangle
+    \end{pmatrix}
+      =\begin{pmatrix}\alpha&\beta\\\beta&\alpha\end{pmatrix}.
+\]
+Its eigenvalues and normalised eigenvectors are
+\[
+    \alpha\pm\beta,
+    \qquad
+    \frac{1}{\sqrt2}\begin{pmatrix}1\\\pm1\end{pmatrix}.
+\]
+Thus the two first-order energy shifts are
+$\lambda(\alpha\pm\beta)$, with energies
+\[
+    E_\pm(\lambda)=E_{12}+\lambda(\alpha\pm\beta)+O(\lambda^2),
+\]
+and the corresponding zeroth-order states are
+\[
+    |\psi_\pm^{(0)}\rangle
+       =\frac{1}{\sqrt2}\bigl(|12\rangle\pm|21\rangle\bigr).
+\]
+
+\begin{center}
+    \textbf{End of lecture 12}
 \end{center}
 \end{document}

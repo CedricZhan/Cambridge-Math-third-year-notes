@@ -1214,7 +1214,7 @@ Watson's lemma deals with the special case $\phi(t)=-t$, $a=0$, $b=T$.
 In general, we have Laplace's \emph{principle of localisation}:
 the asymptotic expansion of $I$ as $x\to\infty$ is determined by
 contributions from arbitrarily small regions around the maxima of $\phi$.
-Figure~\ref{fig:am-lecture5-localisation} illustrates this principle.
+Figure~1 illustrates this principle.
 \begin{figure}[htbp]
     \centering
     \pdfximage width 0.88\linewidth {figures/asymptotic-lecture5-localisation.jpg}
@@ -1265,7 +1265,7 @@ and
     &\equiv I_1(x)+I_2(x).
 \end{align*}
 The small region around $c$ is the region responsible for the concentration
-shown in Figure~\ref{fig:am-lecture5-localisation}.
+shown in Figure~1.
 
 First, bound $I_2$. In the monotonic regions on either side of $c$,
 \begin{align*}
@@ -1440,7 +1440,7 @@ with
     \phi'(c)=0,\quad\phi''(c)<0,\quad\phi'(b)\neq0,
     \qquad f(c)\neq0,\quad f(b)\neq0.
 \]
-Figure~\ref{fig:am-lecture6-interior-endpoint} shows the situation.
+Figure~2 shows the situation.
 The nonstationary endpoint contributes a term of order
 $e^{x\phi(b)}/x$, as in case (a), whereas the interior maximum contributes
 a term of order $e^{x\phi(c)}/\sqrt{x}$, as in case (b). Since
@@ -1472,7 +1472,7 @@ $\phi(c_3)>\phi(c_i)$ for $i=1,2,4,5$, then
     \gg\frac{e^{x\phi(c_i)}}{\sqrt{x}}
     \qquad\text{as }x\to\infty.
 \]
-This is illustrated in Figure~\ref{fig:am-lecture6-multiple-maxima}(a).
+This is illustrated in Figure~3(a).
 If instead two maxima have equal height,
 $\phi(c_1)=\phi(c_2)=\max\phi$, both contributions must be included:
 \begin{align*}
@@ -1534,7 +1534,7 @@ Consider
     \qquad f(t)=1,\quad\phi(t)=\sin^2t.
 \]
 The absolute maxima are at $t=\pi/2$ (interior) and $t=3\pi/2$
-(endpoint), as shown in Figure~\ref{fig:am-lecture6-sin-squared}.
+(endpoint), as shown in Figure~4.
 At both points,
 \[
     \phi=1,\qquad\phi'=0,\qquad\phi''=2\cos(2t)=-2.
@@ -2044,7 +2044,7 @@ Here
 The constant-$u$ and constant-$v$ curves are orthogonal families of
 hyperbolas away from the stationary point at $z=0$; the zero levels
 include straight lines. The oriented red constant-$v$ curves in
-Figure~\ref{fig:am-lecture8-descent} follow decreasing $u$, from the
+Figure~7 follow decreasing $u$, from the
 regions near the real axis towards the regions near the imaginary axis.
 \clearpage
 \begin{figure}[!ht]
@@ -2075,6 +2075,239 @@ The embedded figures are crops of these originals.
 
 \begin{center}
     \textbf{End of lecture 8}
+\end{center}
+
+\clearpage
+\section*{3.7 Method of steepest descent (contd)}
+
+% Source: figures/asymptotic-lecture9/source-01.png.
+\[
+    I(x)=\int_C f(z)e^{x\phi(z)}\,dz,
+    \qquad \text{what does }I\text{ do as }x\to\infty.
+\]
+$C$ a contour in $\mathbb C$ \& $f$ \& $\phi$ analytic in a domain
+containing $C$.
+\[
+    \phi=u+iv.
+\]
+
+\subsection*{Interlude 2: Cauchy's theorem}
+\[
+    \oint_C f e^{\phi x}\,dz=0
+\]
+if $f$ \& $\phi$ analytic in the closed domain bounded by $C$.
+
+% Source: source-02.png; the image is a direct crop, not a redraw.
+\medskip
+\noindent In particular
+\begin{center}
+    \pdfximage width 0.48\linewidth {figures/asymptotic-lecture9/cauchy-contours.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\[
+    \int_{C_1}f e^{\phi x}\,dz
+    =\int_{C_2}f e^{\phi x}\,dz.
+\]
+
+\subsection*{Steepest descent method: cases}
+\noindent\textbf{(a)} Suppose $\nabla u\neq0$ on the domain.
+
+\medskip
+\noindent\textbf{(i)} Suppose $\operatorname{Im}(\phi)=v$ is constant on $C$.
+
+Let $v=\mathrm{cst}=v_0\in\mathbb R$ on $C$.
+\[
+    \Rightarrow\quad C\text{ is a level curve of }v
+    \ \&\ \text{hence a steepest descent/ascent curve of }u.
+\]
+
+\begin{itemize}
+    \item Parametrize $C$ s.t.
+    \[
+        C=\bigl\{z\in\mathbb C;\quad
+        z(t)=p(t)+iq(t)\ \&\ a\leq t\leq b\bigr\}.
+    \]
+\end{itemize}
+\begin{align*}
+    I(x)&=e^{ixv_0}\int_a^b e^{xu}
+    \operatorname{Re}\!\left(f\frac{dz}{dt}\right)dt\\
+    &\quad+i e^{ixv_0}\int_a^b e^{xu}
+    \operatorname{Im}\!\left(f\frac{dz}{dt}\right)dt.
+\end{align*}
+
+% Sources: source-03.png and source-04.png. Source 04 repeats source 03
+% and adds the last paragraph; repeated blackboard material appears once.
+\clearpage
+\noindent\textbf{(ii)} Suppose $v$ is not constant on $C$.
+
+\begin{itemize}
+    \item Method: deform $C$, using Cauchy's thm, to a new curve $C'$
+    upon which $v$ is constant.
+    \item If $v$ is identical on $C$'s endpoints, this might work.
+\end{itemize}
+
+\noindent e.g.
+\begin{center}
+    \pdfximage width 0.80\linewidth {figures/asymptotic-lecture9/equal-endpoint-phase.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+
+\begin{itemize}
+    \item Not always possible, \& certainly not if $v$ takes different
+    values at the 2 endpoints.
+\end{itemize}
+
+If $v$ takes different values, we deform $C$ to a curve that follows
+constant-$v$ curves with bridging curves between them. And then show
+that the integrals on bridging curves don't contribute much to the
+leading order asymptotics.
+
+% Source: source-05.png.
+\medskip
+\noindent e.g.
+\begin{center}
+    \pdfximage width 0.74\linewidth {figures/asymptotic-lecture9/bridging-contour.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\[
+    v_1\neq v_2,\qquad
+    \int_C=\int_{C_1}+\underbrace{\int_{C_2}}_{
+        \substack{\text{Want to show this}\\\text{is negligible!}}}
+        +\int_{C_3}.
+\]
+
+\medskip
+\noindent How to select which direction to go along constant-$v$ curves?
+
+$u$ is monotonically increasing or decreasing along constant-$v$ curves
+we select direction we traverse so that $u$ is \underline{decreasing}
+away from the endpoints.
+
+\clearpage
+% Source: source-06.png. The C_3 estimate at the lower right is cut off
+% in the supplied screenshot. Preserve the original image and transcribe
+% only the complete, legible estimate; do not reconstruct missing symbols.
+\medskip
+\noindent e.g.
+\[
+    \int_C f(z)e^{xz^2}\,dz
+    \qquad \text{as }x\to\infty.
+\]
+\begin{center}
+    \pdfximage width 0.84\linewidth {figures/asymptotic-lecture9/source-06.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\[
+    \int_C=\int_{C_1}+\int_{C_2}+\int_{C_3},
+    \qquad
+    \int_{C_1}=O\!\left(\frac1x e^{xu(z_1)}\right).
+\]
+
+% Source: source-07.png.
+\clearpage
+\subsection*{e.g.}
+\[
+    J_0(r)=\frac1\pi\int_0^\pi e^{ir\cos t}\,dt
+    \qquad \text{as }r\to\infty
+    \qquad
+    \left(\sim\sqrt{\frac2{\pi r}}\cos\!\left(r-\frac\pi4\right)\right).
+\]
+\[
+    s=\cos t.
+\]
+\[
+    J_0=\frac1\pi\int_{-1}^1\frac1{\sqrt{1-s^2}}e^{irs}\,ds.
+\]
+Let $s=z\in\mathbb C$.
+\[
+    \phi=iz\quad\Rightarrow\quad
+    \begin{aligned}
+        u&=-q,\\
+        v&=p.
+    \end{aligned}
+\]
+Constant-$v$ curves are $p=\mathrm{cst}$.
+
+% Source: source-08.png; direct crop of its rectangular contour.
+\begin{center}
+    \pdfximage width 0.62\linewidth {figures/asymptotic-lecture9/bessel-contour.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\[
+    \pi J_0=\int_{C_1}+\int_{C_2}+\int_{C_3}.
+\]
+\begin{align*}
+    C_1:&\quad z=-1+it,\qquad t\in[0,T],\\
+    C_2:&\quad z=t+iT,\qquad t\in[-1,1],\\
+    C_3:&\quad z=1-it,\qquad t\in[-T,0].
+\end{align*}
+\begin{align*}
+    \int_{C_1}
+    &=i\int_0^T\frac{e^{ir(-1+it)}}{\sqrt{t(t+2i)}}\,dt\\
+    &=i e^{-ir}\int_0^T\frac{e^{-rt}}{\sqrt{t(t+2i)}}\,dt,
+\end{align*}
+\begin{align*}
+    \int_{C_3}
+    &=-i\int_{-T}^0\frac{e^{ir(1-it)}}{\sqrt{t(t+2i)}}\,dt
+    \qquad (t\to-t)\\
+    &=-i e^{ir}\int_0^T e^{-rt}\bigl(t(t-2i)\bigr)^{-1/2}\,dt.
+\end{align*}
+
+% Source: source-09.png.
+\[
+    \int_{C_2}=\int_{-1}^1
+    \frac{e^{irt-rT}}{\sqrt{1-(t+iT)^2}}\,dt.
+\]
+\[
+    \left|\int_{C_2}\right|
+    \leq e^{-rT}\int_{-1}^1
+    \left|\frac1{\sqrt{1-(t+iT)^2}}\right|dt
+    =O\!\left(e^{-rT}\right).
+\]
+\[
+    J_0\sim\frac2\pi\operatorname{Re}\!\left[
+        e^{ir-i\pi/2}\int_0^T e^{-rt}
+        \frac1{\sqrt{t(t-2i)}}\,dt
+    \right]
+    \qquad \text{as }r\to\infty.
+\]
+Note
+\[
+    \frac1{\sqrt{t-2i}}=\sum_{n=0}^{\infty}a_nt^n,
+    \qquad a_n=\cdots.
+\]
+Watson's lemma applies, $\alpha=-\tfrac12$, $\beta=1$.
+
+% Source: source-10.png. The board leaves a_n unevaluated above.
+\begin{align*}
+    J_0&\sim\frac2\pi\operatorname{Re}\!\left[
+        e^{ir-i\pi/2}r^{-1/2}
+        \sum_{n=0}^{\infty}\frac{a_n\Gamma(\tfrac12+n)}{r^n}
+    \right]
+    \qquad \text{as }r\to\infty\\
+    &\sim\sqrt{\frac2{\pi r}}\left[
+        \cos\!\left(r-\frac\pi4\right)
+        +\frac1{8r}\sin\!\left(r-\frac\pi4\right)\right.\\
+    &\hspace{40mm}\left.
+        -\frac9{128r^2}\cos\!\left(r-\frac\pi4\right)+\cdots
+    \right].
+\end{align*}
+
+% Source: source-11.png.
+\subsection*{Summary of procedure}
+\begin{itemize}
+    \item Deform $C$ to $C'$.
+    \item Choose $C'$ so that it follows constant-$v$ curves as much
+    as possible (using bridging curves if needed).
+    \item Choose orientation of $C'$ so that it is a steepest descent
+    curve of $u$, away from endpoints.
+    \item Show that contributions from bridging curves don't
+    contribute to the asymptotics of the integral.
+    \item Use Watson's lemma or endpoint Laplace's method.
+\end{itemize}
+
+\begin{center}
+    \textbf{End of lecture 9}
 \end{center}
 
 \end{document}

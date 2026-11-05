@@ -1881,4 +1881,216 @@ over stopping times $\tau\leq T$.
 \begin{center}
 \textbf{End of lecture 8}
 \end{center}
+
+\newpage
+\section*{3. Brownian motion}
+
+\subsection*{3.1 Definition and basic properties}
+
+A real-valued process $(B_t)_{t\geq0}$, with $t\in[0,\infty)$ and
+$B_0=0$, is called a \emph{Brownian motion} if:
+\begin{enumerate}
+    \item[(a)] For $s,t\geq0$, $B_{s+t}-B_s$ has $N(0,t)$
+    distribution and is independent of
+    \[
+    \sigma(B_r:r\leq s)=\mathcal F_s.
+    \]
+
+    \item[(b)] For all $\omega\in\Omega$, the map
+    \[
+    t\longmapsto B_t(\omega):[0,\infty)\longrightarrow\mathbb R
+    \]
+    is continuous. Say $B$ is continuous.
+\end{enumerate}
+
+Sometimes we replace $B_0=0$ by $B_0=x$. Then $B$ is a BM starting
+from $x$. We'll write $\mathbb P_x,\mathbb E_x$ as a reminder.
+
+\medskip
+\noindent\textbf{Proposition 3.1.}
+Let $B=(B_t)_{t\geq0}$ be a continuous real-valued process.
+Then the following are equivalent:
+\begin{enumerate}
+    \item[(a)] $B$ is a Brownian motion.
+
+    \item[(b)] $B$ is a zero-mean Gaussian process with covariance
+    \[
+    \mathbb E(B_sB_t)=s\wedge t.
+    \]
+\end{enumerate}
+
+\noindent\textbf{Proof.}
+Suppose (a) holds. Then $\mathbb E(B_t)=0$ for all $t$.
+Also, for $0=t_0<t_1<\cdots<t_n$,
+\[
+B_{t_1}-B_{t_0},\ldots,B_{t_n}-B_{t_{n-1}}
+\]
+are independent Gaussian random variables, with $B_{t_0}=0$.
+So $(B_{t_1},\ldots,B_{t_n})$ is also Gaussian.
+For $s\leq t$, we have
+\[
+\begin{aligned}
+\mathbb E(B_sB_t)
+&=\mathbb E(B_s^2)
+  +\underbrace{\mathbb E\bigl(B_s(B_t-B_s)\bigr)}_{=\,0}\\
+&=s=s\wedge t.
+\end{aligned}
+\]
+So (b) holds.
+
+Assume (b) holds. Then, for $s,t\geq0$ and $r\leq s$,
+\[
+\mathbb E(B_{s+t}-B_s)=0,
+\]
+and
+\[
+\mathbb E\bigl((B_{s+t}-B_s)^2\bigr)
+=(t+s)-2s+s=t.
+\]
+So $B_{s+t}-B_s\sim N(0,t)$. Also,
+\[
+\mathbb E\bigl((B_{s+t}-B_s)B_r\bigr)
+=(t+s)\wedge r-s\wedge r=0.
+\]
+Since $B$ is Gaussian, this shows that $B_{s+t}-B_s$ is independent
+of
+\[
+(B_{r_1},\ldots,B_{r_n})
+\qquad\text{for all }r_1,\ldots,r_n\leq s.
+\qquad\square
+\]
+
+\medskip
+\noindent\textbf{Exercise (Scaling property).}
+Let $B$ be a BM. Let $c>0$. Set
+\[
+B_t^{(c)}=c^{-1}B_{c^2t}.
+\]
+Then $(B_t^{(c)})_{t\geq0}$ is also a BM.
+
+\medskip
+\begin{samepage}
+\noindent\textbf{Proposition.}
+Let $B$ be a BM. Then $B$ leaves every finite interval a.s.
+
+\noindent\textbf{Proof.}
+Fix $L>0$ and consider the events
+\[
+A_n=\{|B_n-B_{n-1}|>L\}.
+\]
+\end{samepage}
+Then $A_1,A_2,\ldots$ are independent, with
+\[
+\mathbb P(A_n)=p=\mathbb P(|Z|>L)>0,
+\qquad Z\sim N(0,1).
+\]
+So
+\[
+\mathbb P\!\left(\bigcap_n A_n^c\right)
+=\prod_n(1-p)=0.
+\]
+But on $\bigcup_n A_n$, $B$ eventually jumps by $L$ between
+$n-1$ and $n$. So $B$ leaves any interval of length $<L$ eventually.
+\hfill$\square$
+
+\medskip
+
+\[
+\mathcal F_t=\sigma(B_s:s\leq t).
+\]
+Say $T:\Omega\longrightarrow[0,\infty]$ is a \emph{stopping time}
+if
+\[
+\{T\leq t\}\in\mathcal F_t
+\qquad\text{for all }t\geq0.
+\]
+Set
+\[
+\mathcal F_T
+=\left\{
+A\in\mathcal F_\infty:
+A\cap\{T\leq t\}\in\mathcal F_t
+\text{ for all }t\geq0
+\right\},
+\]
+where $\mathcal F_\infty=\sigma(B_t:t\geq0)$.
+This is what we know by time $T$.
+
+\medskip
+\noindent\textbf{Proposition (Strong Markov property).}
+Let $B$ be a BM and let $T$ be a finite-valued stopping time.
+Set
+\[
+\widehat B_t=B_{T+t}-B_T.
+\]
+Then $(\widehat B_t)_{t\geq0}$ is also a BM and it is independent
+of $\mathcal F_T$ (in particular, of $B_T$).
+
+\medskip
+\noindent\textbf{Proposition 3.5.}
+Let $(B_t)_{t\geq0}$ be a Brownian motion and let $a\in\mathbb R$.
+Define
+\[
+T_a=\inf\{t\geq0:B_t=a\}.
+\]
+Then $T_a$ is an almost surely finite stopping time.
+
+\noindent\textbf{Proof.}
+It suffices to consider the case $a>0$.
+Since $(B_t)_{t\geq0}$ is continuous, we have
+\[
+\{T_a\leq t\}
+=\{B_t=a\}
+\cup\bigcap_{\substack{r<a\\r\in\mathbb Q}}
+\quad\bigcup_{\substack{0\leq s<t\\s\in\mathbb Q}}
+\{B_s>r\}
+\in\mathcal F_t.
+\]
+Hence $T_a$ is a stopping time.
+
+Set $T=T_1\wedge T_{-1}$. Then $T$ is a stopping time and, since
+Brownian motion leaves every interval, $T<\infty$ almost surely.
+By symmetry
+\[
+\mathbb P(B_T=1)=\mathbb P(B_T=-1)=\frac12.
+\]
+
+Then, by the strong Markov property, the sequence of integers hit by
+$(B_t)_{t\geq0}$, omitting immediate repeats, is a simple symmetric
+random walk. Since the random walk is recurrent, it follows that
+$T_a<\infty$ almost surely.
+\hfill$\square$
+
+\subsection*{3.2 Wiener's theorem}
+
+\[
+W=C[0,\infty)=C([0,\infty),\mathbb R),
+\qquad
+\mathcal W=\sigma(X_t:t\geq0).
+\]
+\[
+X_t:W\longrightarrow\mathbb R,\qquad X_t(w)=w(t)
+\quad\text{(coordinate functions)}.
+\]
+
+\medskip
+\noindent\textbf{Theorem.}
+There is a unique probability measure $\mu$ on $(W,\mathcal W)$
+such that $(X_t)_{t\geq0}$ is a BM$_0$.
+
+Proved in Advanced Probability.
+
+\medskip
+
+If $B$ is any BM, we consider the $W$-valued random variable
+\[
+B(\omega)(t)=B_t(\omega)\in W.
+\]
+Then the law of $B$ on $W$ makes $(X_t)_{t\geq0}$ into a BM.
+So the construction of any BM shows existence in Wiener's theorem.
+Uniqueness in Wiener's theorem shows all BMs have the same law on $W$.
+
+\begin{center}
+\textbf{End of lecture 9}
+\end{center}
 \end{document}

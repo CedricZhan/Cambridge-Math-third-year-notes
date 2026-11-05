@@ -2529,5 +2529,314 @@ to the reader.
 \textbf{End of lecture 11}
 \end{center}
 
+\newpage
+\noindent\underline{4.4 Near-Hamiltonian flows and periodic orbits}
+
+\medskip
+\noindent Consider a perturbation of a planar Hamiltonian system:
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}f_1(x,y)+\varepsilon g_1(x,y)\\
+f_2(x,y)+\varepsilon g_2(x,y)\end{pmatrix},
+\qquad f_1=H_y,\quad f_2=-H_x.
+\]
+\begin{itemize}
+\item For $\varepsilon=0$, $\dot H=0$: trajectories lie on contours of
+$H$, and regular closed contours give periodic orbits.
+\item For $\varepsilon\ne0$,
+\[
+\dot H=H_x\dot x+H_y\dot y
+=\varepsilon(f_1g_2-f_2g_1).
+\]
+If a nonconstant periodic orbit $\Gamma$ of period $T$ exists, then
+\[
+0=\int_0^T\dot H\,dt
+=\varepsilon\int_0^T(f_1g_2-f_2g_1)\,dt.
+\]
+Thus no periodic orbit can lie wholly in a region where
+$f_1g_2-f_2g_1$ has a strict constant sign.
+\item For $0<\varepsilon\ll1$, $\dot H=O(\varepsilon)$, so trajectories
+are weakly perturbed over finite times. The family of Hamiltonian periodic
+orbits need not survive. The \underline{energy balance method} tests which
+orbits can persist.
+\end{itemize}
+
+\noindent Let $\Gamma_0$ be a regular closed orbit with $H=H_0$ and period
+$T_0$. Follow a nearby perturbed trajectory $\Gamma_\varepsilon$ for one
+return to a local transversal, taking time $T_\varepsilon$. Away from a
+separatrix, smooth dependence gives
+$\Gamma_\varepsilon=\Gamma_0+O(\varepsilon)$ and
+$T_\varepsilon=T_0+O(\varepsilon)$. Hence
+\[
+\begin{aligned}
+\Delta H(\Gamma_\varepsilon)
+&=\varepsilon\int_0^{T_\varepsilon}
+(f_1g_2-f_2g_1)(\Gamma_\varepsilon(t))\,dt\\
+&=\varepsilon M(H_0)+O(\varepsilon^2),\\
+M(H_0)&=\int_0^{T_0}(f_1g_2-f_2g_1)(\Gamma_0(t))\,dt.
+\end{aligned}
+\]
+Search for $M(H_0)=0$. A simple zero is robust and gives a nearby periodic
+orbit for sufficiently small $\varepsilon$, by the local return map and the
+implicit function theorem. A double zero is inconclusive: the neglected
+$O(\varepsilon^2)$ terms may remove it.
+\begin{center}
+\begin{minipage}{.31\textwidth}
+\centering
+\includegraphics[width=\linewidth]{lecture12/perturbed-orbit.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~1 (original crop).}
+\end{minipage}\hfill
+\begin{minipage}{.51\textwidth}
+\centering
+\includegraphics[width=\linewidth]{lecture12/energy-roots.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~2 (original crop).}
+\end{minipage}
+\end{center}
+
+\newpage
+\noindent\fbox{Example}\quad Consider
+\[
+\dot x=y,\qquad \dot y=-x+x^2+\varepsilon y(a-x),
+\]
+or, equivalently,
+\[
+\ddot x+x-x^2-\varepsilon\dot x(a-x)=0.
+\]
+For $\varepsilon=0$ the Hamiltonian is
+\[
+H(x,y)=\frac12(x^2+y^2)-\frac13x^3.
+\]
+The origin is a centre, $(1,0)$ is a saddle, and the bounded components
+of $H=H_0$ for $0<H_0<1/6$ are periodic orbits. The level $H=1/6$
+contains a homoclinic orbit to the saddle (a separatrix).
+\begin{center}
+\includegraphics[width=.48\textwidth]{lecture12/hamiltonian-contours.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~2 (original crop).}
+\end{center}
+\noindent For $\varepsilon\ne0$, $g_1=0$, $g_2=y(a-x)$, so
+\[
+\dot H=\varepsilon y^2(a-x),\qquad
+\Delta H=\varepsilon\int y^2(a-x)\,dt.
+\]
+The fixed points remain $(0,0)$ and $(1,0)$, with indices $+1$ and $-1$.
+Every periodic orbit must enclose the origin and exclude the saddle.
+Moreover, $\dot H$ must change sign along it, so it crosses $x=a$.
+
+At extrema of $x$, $\dot x=y=0$ and $\ddot x=x(x-1)$.
+At a maximum, $0<x_{\max}<1$; at a minimum, $x_{\min}<0$.
+Equality would put the trajectory at a fixed point. Consequently,
+\[
+x_{\min}<a<x_{\max}<1.
+\]
+In particular, there are no periodic orbits for $a\geq1$.
+\begin{center}
+\includegraphics[width=.43\textwidth]{lecture12/orbit-constraints.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~3 (original crop).}
+\end{center}
+
+\newpage
+\noindent\underline{Energy balance for $0<\varepsilon\ll1$}
+
+\medskip
+\noindent On the unperturbed orbit $\Gamma_0$, $y\,dt=dx$. Symmetry in
+$y$ gives the leading energy change
+\[
+\begin{aligned}
+\Delta H(\Gamma_\varepsilon)&=\varepsilon M(H_0)+O(\varepsilon^2),\\
+M(H_0)&=\oint_{\Gamma_0}y(a-x)\,dx\\
+&=2\int_{x_{\min}}^{x_{\max}}
+\left(2H_0-x^2+\frac23x^3\right)^{1/2}(a-x)\,dx.
+\end{aligned}
+\]
+Here $x_{\min}<0<x_{\max}<1$ are the two turning points of the bounded
+orbit, satisfying $H_0=H(x,0)$. The integral is generally evaluated
+numerically. The lecture reports no surviving periodic orbit for $a\leq0$
+or $a>1/7$, and a surviving periodic orbit for $0<a<1/7$, in this
+small-perturbation analysis. The leading energy change increases with $a$,
+since
+\[
+\frac{\partial M}{\partial a}
+=2\int_{x_{\min}}^{x_{\max}}
+\left(2H_0-x^2+\frac23x^3\right)^{1/2}\,dx>0.
+\]
+\begin{center}
+\includegraphics[width=.67\textwidth]{lecture12/perturbed-phase-portraits.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~3 (original crop).}
+\end{center}
+\begin{center}
+\includegraphics[width=.48\textwidth]{lecture12/energy-balance-curves.png}\\
+{\footnotesize Source: Lecture12.pdf, p.~3 (original crop).}
+\end{center}
+\noindent\underline{The leading-order homoclinic threshold.}\quad As
+$H_0\uparrow1/6$, the periodic orbit approaches the homoclinic loop, with
+$x_{\min}\to-1/2$ and $x_{\max}\to1$. On its upper branch,
+\[
+\left(\frac13-x^2+\frac23x^3\right)^{1/2}
+=\frac1{\sqrt3}(1-x)\sqrt{1+2x}.
+\]
+Thus the limiting energy balance can be evaluated exactly:
+\[
+\begin{aligned}
+M(1/6)
+&=\frac2{\sqrt3}\int_{-1/2}^1(1-x)\sqrt{1+2x}(a-x)\,dx\\
+&=\frac65\left(a-\frac17\right).
+\end{aligned}
+\]
+This gives $a=1/7$ as the leading-order threshold. Higher-order terms may
+shift the threshold for a fixed nonzero $\varepsilon$; also, the regular
+finite-period expansion above is not uniform at the separatrix.
+
+\newpage
+\noindent\underline{4.5 Stability of periodic orbits: Floquet analysis}
+
+\medskip
+\noindent Consider an autonomous flow $\dot{\bar x}=\bar f(\bar x)$ in
+$\mathbb R^n$, with a periodic orbit $\bar x=\bar X(t)$ of period $T$.
+Write a nearby solution as
+\[
+\bar x(t)=\bar X(t)+\bar\eta(t).
+\]
+Taylor expansion gives
+\[
+\dot{\bar X}+\dot{\bar\eta}
+=\bar f(\bar X+\bar\eta)
+=\bar f(\bar X)+A(t)\bar\eta+O(\|\bar\eta\|^2),
+\qquad
+A_{ij}(t)=\left.\frac{\partial f_i}{\partial x_j}\right|_{\bar X(t)}.
+\]
+In the linear limit,
+\[
+\dot{\bar\eta}=A(t)\bar\eta,\qquad A(t+T)=A(t).
+\]
+This is a linear system with periodic coefficients.
+
+\medskip
+\noindent\underline{1. Define the evolution matrix $\Phi(t)$}
+
+\medskip
+\noindent By linearity, the map from the initial perturbation to its value
+at time $t$ is represented by a matrix:
+\[
+\Phi(t):\bar\eta(0)\longmapsto\bar\eta(t),\qquad
+\boxed{\bar\eta(t)=\Phi(t)\bar\eta(0)}.
+\]
+In components, following the lecture's notation,
+\[
+\eta_i(t)=\Phi_{ij}(t)\eta_j(0),\qquad
+\Phi_{ij}(0)=\delta_{ij}\quad\Longleftrightarrow\quad\Phi(0)=I.
+\]
+Repeated indices are summed. The $j$th column of $\Phi(t)$ is the solution
+starting from the $j$th unit vector: it records how that initial direction
+of perturbation evolves.
+
+Substitute into $\dot\eta_i=A_{ik}(t)\eta_k$:
+\[
+\dot\Phi_{ij}(t)\eta_j(0)
+=A_{ik}(t)\Phi_{kj}(t)\eta_j(0),
+\qquad\text{for every }\bar\eta(0).
+\]
+Thus
+\[
+\dot\Phi_{ij}=A_{ik}(t)\Phi_{kj},\qquad
+\boxed{\dot\Phi(t)=A(t)\Phi(t),\quad\Phi(0)=I}.
+\]
+This initial-value problem determines $\Phi(t)$; no exponential formula
+is needed to define it. The component equations are coupled through the
+sum over $k$.
+
+\medskip
+\noindent\underline{2. Define the one-period matrix $B$}
+
+\medskip
+\noindent Evaluate the evolution matrix after one period:
+\[
+\boxed{B:=\Phi(T)},\qquad \bar\eta(T)=B\bar\eta(0).
+\]
+This is the \underline{monodromy matrix}. Unlike the time-dependent
+$\Phi(t)$, $B$ is one fixed matrix, describing evolution over a full period.
+Periodicity of $A$ and uniqueness imply
+\[
+\Phi(t+T)=\Phi(t)B.
+\]
+Indeed, both sides solve the same matrix differential equation and equal
+$B$ at $t=0$. Consequently,
+\[
+\Phi(T)=B,\qquad \Phi(2T)=B^2,\qquad
+\boxed{\Phi(mT)=B^m\quad(m=0,1,2,\ldots)}.
+\]
+Hence $\bar\eta(mT)=B^m\bar\eta(0)$: repeated multiplication by $B$
+determines the evolution over successive periods. These conclusions do
+not require matrices $A(s)$ and $A(t)$ to commute.
+
+\newpage
+\noindent\underline{3. Why does the lecture introduce an integral?}
+
+\medskip
+\noindent Having defined $\Phi$ and $B$, the next question is how to
+compute them. For a scalar equation,
+\[
+\dot u=a(t)u
+\quad\Longrightarrow\quad
+u(t)=\exp\!\left(\int_0^t a(s)\,ds\right)u(0).
+\]
+The lecture attempts the analogous step for the matrix equation
+$\dot\Phi=A(t)\Phi$.
+
+\medskip
+\noindent\textcolor{red!70!black}{\fbox{Correction to the lecturer's original formula}}
+
+\medskip
+\noindent Lecture12.pdf, p.~4, writes, immediately after ``integrate,
+find'',
+\[
+\Phi_{ij}(t)=B_{ik}(t)\Phi_{kj}(0),\qquad
+\widehat B(t)=\exp\!\left(\int_0^t\widehat A(t')\,dt'\right),
+\]
+with the ordinary matrix exponential defined by
+\[
+e^{\widehat C}=\sum_{k=0}^{\infty}\frac{\widehat C^{\,k}}{k!}.
+\]
+Here hats denote matrices. Since $\Phi(0)=I$, the lecture's time-dependent
+$\widehat B(t)$ must be $\Phi(t)$, and its constant $\widehat B=\widehat B(T)$
+is our monodromy matrix $B$.
+
+\medskip
+\noindent\textbf{The issue is the ordinary exponential expression for
+$\widehat B(t)$: it does not follow from the hypotheses given.}
+In general, matrices at different times need not commute. Periodicity
+$A(t+T)=A(t)$ does not imply commutation, and writing the equation in
+components does not remove the matrix multiplication or its order.
+
+\medskip
+\noindent A sufficient additional condition is
+\[
+A(s)A(t)=A(t)A(s)\qquad\text{for all }s,t.
+\]
+Under this condition the lecture's expression is valid, and
+\[
+\Phi(t)=\exp\!\left(\int_0^t A(s)\,ds\right),\qquad
+B=\exp\!\left(\int_0^T A(s)\,ds\right).
+\]
+For example, if $A$ is constant, $\Phi(t)=e^{tA}$ and $B=e^{TA}$.
+
+\medskip
+\noindent In general, the always-valid integral formulation is instead
+\[
+\boxed{\Phi(t)=I+\int_0^t A(s)\Phi(s)\,ds}.
+\]
+Equivalently, one can use a time-ordered exponential,
+\[
+\Phi(t)=\mathcal T\exp\!\left(\int_0^t A(s)\,ds\right),
+\]
+where $\mathcal T$ preserves the chronological order of the matrix factors.
+In practice, solve $\dot\Phi=A(t)\Phi$, $\Phi(0)=I$, up to time $T$ and
+then set $B=\Phi(T)$. The original conclusions $\Phi(T)=B$ and
+$\Phi(mT)=B^m$ remain valid with this definition of $B$.
+% Lecture12.pdf, page 4 ends here; the stability classification continues later.
+
+\begin{center}
+\textbf{End of lecture 12}
+\end{center}
+
 \end{document}
 

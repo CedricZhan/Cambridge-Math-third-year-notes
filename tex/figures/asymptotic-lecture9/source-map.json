@@ -1,0 +1,126 @@
+{
+  "sources": [
+    {
+      "file": "source-01.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 200733.png",
+      "sha256": "6b7e7b7595f0d9a97d300932c0c7c0c76fb2764bb0d20ca52d7180019a20600f"
+    },
+    {
+      "file": "source-02.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 201621.png",
+      "sha256": "c32febcc329a4efc06084488812a113a992b81090ef7a23c828b0077d9828bab"
+    },
+    {
+      "file": "source-03.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 202026.png",
+      "sha256": "0b9a486227c9bb4b980518f4164884547c80dc3399d9fdc591826ded3f84d42d"
+    },
+    {
+      "file": "source-04.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 202320.png",
+      "sha256": "f9bdfcee2cbae135aa668861db3309e54bda2a0ab4a67ace5d9ece6162155149"
+    },
+    {
+      "file": "source-05.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 202831.png",
+      "sha256": "9a872efbfece2cbddab89643f7fd95f43ae355f0f783f3da45db9442065c7d82"
+    },
+    {
+      "file": "source-06.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 203628.png",
+      "sha256": "b91e10a05bff8bae2b5ab970ee3ffff55da2602136f68d7639bb6f30c895e801"
+    },
+    {
+      "file": "source-07.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 204018.png",
+      "sha256": "d335ce3eba6c5b9ece047e130c6e024b8bde38b130b97238deb38c20b27d8a57"
+    },
+    {
+      "file": "source-08.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 204532.png",
+      "sha256": "360f0fa2a46b6aac268a0f93eed9fabc31d22a5eb8798daf2035a2bba252a37e"
+    },
+    {
+      "file": "source-09.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 205133.png",
+      "sha256": "38edf0f017941a1b2a32bbef02096a623026c0096674ee015c732e59355763c3"
+    },
+    {
+      "file": "source-10.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 205307.png",
+      "sha256": "8dd7fbfba3dc46b3f0daac000a91afa01abad92c86ef17fda6b156e28e267de1"
+    },
+    {
+      "file": "source-11.png",
+      "original": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-05 205630.png",
+      "sha256": "2a465ca9501c3c140efb2a9a6c91134ef010135b08bfff0b50af392ba28585f7"
+    }
+  ],
+  "crops": {
+    "cauchy-contours.png": {
+      "source": "source-02.png",
+      "box": [
+        280,
+        46,
+        591,
+        222
+      ],
+      "excluded_unrelated_text": [
+        [
+          0,
+          151,
+          61,
+          176
+        ]
+      ]
+    },
+    "equal-endpoint-phase.png": {
+      "source": "source-04.png",
+      "box": [
+        98,
+        181,
+        806,
+        346
+      ],
+      "excluded_unrelated_text": []
+    },
+    "bridging-contour.png": {
+      "source": "source-05.png",
+      "box": [
+        95,
+        26,
+        585,
+        282
+      ],
+      "excluded_unrelated_text": [
+        [
+          395,
+          74,
+          490,
+          256
+        ]
+      ]
+    },
+    "bessel-contour.png": {
+      "source": "source-08.png",
+      "box": [
+        146,
+        24,
+        560,
+        186
+      ],
+      "excluded_unrelated_text": [
+        [
+          354,
+          0,
+          414,
+          84
+        ]
+      ]
+    }
+  },
+  "source_notes": {
+    "source-03.png": "An earlier state of the board also in source-04.png; repeated text transcribed once.",
+    "source-06.png": "Lower-right C3 estimate is clipped by the original screenshot. Original embedded; missing symbols not reconstructed."
+  }
+}

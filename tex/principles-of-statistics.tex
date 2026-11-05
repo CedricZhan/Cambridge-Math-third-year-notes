@@ -2737,4 +2737,211 @@ Consequently,
 \textbf{End of lecture 11}
 \end{center}
 
+% Lecture 12: transcribed from the eight supplied blackboard photographs.
+\medskip
+\noindent\underline{Thm (Bernstein--von Mises)}\quad
+Let $\{f(\cdot,\theta):\theta\in\Theta\subset\mathbb R^d\}$ be a statistical
+model satisfying the reg. cond. for asymptotic normality of the MLE
+$\hat\theta_n$. Let $(X_i)\overset{\mathrm{iid}}{\sim}P_{\theta_0}$ for
+$\theta_0\in\operatorname{int}(\Theta)$.
+Suppose the prior $\Pi$ is positive \& continuous at $\theta_0$, and let
+\[
+\Pi_n(\theta)\propto\Pi(\theta)\cdot\prod_{i=1}^n f(X_i,\theta)
+\]
+be the (random) posterior of $\theta$ based on a sample $X_1,\ldots,X_n$.
+Suppose that $\log\Pi_n$ is concave. Let $h=\sqrt n(\theta-\hat\theta_n)$.
+Then the posterior distribution of $h$, $\widetilde\Pi_n$, has
+\[
+\int_{\mathbb R^d}\left|
+\widetilde\Pi_n(h)-
+\underbrace{\sqrt{\frac{\det I(\theta_0)}{(2\pi)^d}}
+\exp\left\{-\frac{h^T I(\theta_0)h}{2}\right\}}
+_{\text{pdf of }N(0,I(\theta_0)^{-1})}
+\right|\,dh\xrightarrow{P}0.
+\]
+
+\medskip
+\noindent\underline{Proof}\quad Let
+\[
+\begin{aligned}
+g_n(h)
+&=\log\frac{\widetilde\Pi_n(h)}{\widetilde\Pi_n(0)}
+=\log\frac{\Pi_n(\hat\theta_n+h/\sqrt n)}{\Pi_n(\hat\theta_n)}\\
+&=\underbrace{\ell_n(\hat\theta_n+h/\sqrt n)-\ell_n(\hat\theta_n)}_{\text{(I)}}
++\underbrace{\log\Pi(\hat\theta_n+h/\sqrt n)-\log\Pi(\hat\theta_n)}_{\text{(II)}}.
+\end{aligned}
+\]
+A Taylor expansion of $\ell_n$ around $\hat\theta_n$ (as in Wilks' thm) yields
+\[
+\text{(I)}=-\frac{h^T I(\theta_0)h}{2}+r_n(h),
+\]
+where one can show that for any $R<\infty$,
+\[
+\sup_{\|h\|\leq R}|r_n(h)|\xrightarrow{P}0\qquad\text{(ULLN)}.
+\]
+For (II), note by consistency of MLE,
+% User confirmed retaining R as written on the board.
+\[
+\left|\hat\theta_n+\frac{R}{\sqrt n}-\theta_0\right|\xrightarrow{P}0.
+\]
+Hence $\text{(II)}\xrightarrow{P}0$, using the fact that $\log\Pi$ is
+continuous at $\theta_0$.
+
+Hence, writing $q(h)=-\frac12h^T I(\theta_0)h$, we've shown
+\[
+\sup_{\|h\|<R}|g_n(h)-q(h)|\xrightarrow{P}0.
+\]
+Note, $g_n(h)$ is concave, and $g_n(0)=0$.
+
+\medskip
+\noindent\underline{Claim.}
+% The board omits dh in this claim; retained as confirmed.
+\[
+\int_{\mathbb R^d}\left|e^{g_n(h)}-e^{q(h)}\right|\xrightarrow{P}0.
+\]
+The BvM theorem we want to prove says that
+\[
+\int\left|\frac{e^{g_n(h)}}{Z_n}-\frac{e^{q(h)}}{Z}\right|\,dh
+\xrightarrow{P}0,
+\]
+where
+\[
+Z_n=\int e^{g_n(h)}\,dh,\qquad
+Z=\int e^{q(h)}\,dh=\sqrt{\frac{(2\pi)^d}{\det I(\theta_0)}}.
+\]
+By the triangle ineq.
+\[
+|Z_n-Z|\leq\int\left|e^{g_n(h)}-e^{q(h)}\right|\,dh\xrightarrow{P}0.
+\]
+Then,
+\[
+\begin{aligned}
+(*)&\leq\frac1{Z_n}
+\underbrace{\int\left|e^{g_n(h)}-e^{q(h)}\right|\,dh}_{=A_n}
++\left|\frac1{Z_n}-\frac1Z\right|\int e^{q(h)}\,dh
+\qquad(\Delta\text{ ineq.})\\
+&\leq\frac{A_n}{Z_n}+\frac{|Z_n-Z|}{Z_n}
+\leq\frac{2A_n}{Z_n}\xrightarrow{P}0
+\quad\text{by continuous mapping}.
+\end{aligned}
+\]
+This proves the result. It remains to show the claim holds.
+
+\medskip
+\newpage
+\noindent\underline{1. Build an envelope for $\exp(g_n)$}
+
+Since $I(\theta_0)$ is pos. def., $\exists\lambda>0$ s.t.
+\[
+h^T I(\theta_0)h\geq\lambda\|h\|^2.
+\]
+Therefore on the unit sphere $\|h\|=1$,
+\[
+q(h)\leq-\frac\lambda2.
+\]
+On an event $E_n$ with $\mathbb P(E_n)\to1$,
+\[
+g_n(u)\leq-\frac\lambda4\qquad\text{for all }\|u\|=1.
+\]
+Fix unit vector $\|u\|=1$, let $r>1$, by concavity
+\[
+\begin{aligned}
+g_n(u)&=g_n\left(\frac1r(ru)+\left(1-\frac1r\right)0\right)\\
+&\geq\frac1r g_n(ru)+\left(1-\frac1r\right)
+\underbrace{g_n(0)}_{0}\qquad\text{(concavity)}.
+\end{aligned}
+\]
+\begin{center}
+\includegraphics[width=0.26\textwidth]{figures/statistics-lecture12-concavity.png}
+\end{center}
+Hence, on $E_n$,
+\[
+g_n(ru)\leq r g_n(u)\leq-\frac{r\lambda}{4}
+\]
+and
+\[
+e^{g_n(h)}\leq\exp\left(-\frac\lambda4\|h\|\right)
+\qquad\text{for }\|h\|\geq1.
+\]
+Now for $\|h\|\leq1$ we have
+\[
+\sup_{\|h\|\leq1}|g_n(h)-q(h)|\xrightarrow{P}0,
+\qquad\text{where }q(h)=-\frac{h^T I(\theta_0)h}{2}\leq0.
+\]
+Hence on some $E'_n$ with $\mathbb P(E'_n)\to1$,
+% User authorised mathematical correction: the bound concerns g_n.
+\[
+e^{g_n(h)}\leq e^1\qquad\text{for all }\|h\|\leq1.
+\]
+On $E''_n=E_n\cap E'_n$ with $\mathbb P(E''_n)\to1$, we have
+\[
+e^{g_n(h)}\leq H(h):=
+\begin{cases}
+e&\text{for }\|h\|\leq1,\\
+e^{-\frac\lambda4\|h\|}&\text{for }\|h\|>1.
+\end{cases}
+\]
+Also $e^{q(h)}\leq H(h)$.
+
+\medskip
+\noindent\underline{2. Split the integral}
+\[
+\int\left|e^{g_n(h)}-e^{q(h)}\right|\,dh
+\leq\underbrace{\int_{\|h\|\leq R}|\,\cdot\,|}_{\text{(I)}}
++\underbrace{\int_{\|h\|>R}|\,\cdot\,|\,dh}_{\text{(II)}}.
+\]
+Since $H(h)$ is integrable, we can pick $R$ s.t.
+% The board omits dh in the following tail integral.
+\[
+2\int_{\|h\|>R}H(h)<\frac\varepsilon2.
+\]
+Hence on $E''_n$, $\text{(II)}<\frac\varepsilon2$.
+For (I) use
+\[
+\sup_{\|h\|\leq R}|g_n(h)-q(h)|\xrightarrow{P}0.
+\]
+In particular,
+\[
+\begin{aligned}
+\text{(I)}
+&=\int_{\|h\|\leq R}\left|e^{g_n(h)}-e^{q(h)}\right|\,dh\\
+&\leq\operatorname{Vol}(\{\|h\|\leq R\})\cdot
+\sup_{\|h\|\leq R}\left|e^{g_n(h)}-e^{q(h)}\right|
+\xrightarrow{P}0
+\end{aligned}
+\]
+as the function $x\mapsto\exp(x)$ is uniformly continuous on compact sets.
+So on some event $E'''_n$, with $\mathbb P(E'''_n)\to1$,
+$\text{(I)}<\frac\varepsilon2$.
+% The board omits dh inside the probability below.
+\[
+\therefore\quad
+\mathbb P\left(\int\left|e^{g_n(h)}-e^{q(h)}\right|<\varepsilon\right)
+\geq\mathbb P(E'''_n\cap E''_n)\longrightarrow1.
+\]
+\hfill$\square$
+
+\medskip
+\noindent\underline{Rmk.}\quad
+We used concavity to control tails. Without concavity need to show posterior
+concentrates on neighbourhood of $\hat\theta_n$ where quadratic approx. holds.
+
+Many log-posteriors are concave. In particular, if $f(\cdot,\theta)$ is a
+natural exponential family,
+\[
+f(x,\theta)=\exp\{\theta^T x-M(\theta)\}\,g(x),
+\]
+% User authorised mathematical correction: the log-partition Hessian is positive semidefinite.
+one can show that $\nabla^2 M(\theta)\succeq0$, hence $\log f(x,\theta)$ is concave.
+The conjugate prior
+\[
+\Pi(\theta)\propto\exp\{b^T\theta+dM(\theta)\},\qquad d\leq0,
+\]
+is also log-concave.
+
+\begin{center}
+\textbf{End of lecture 12}
+\end{center}
+
 \end{document}
+

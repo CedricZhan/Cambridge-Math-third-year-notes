@@ -1,0 +1,22 @@
+[
+  {
+    "source": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-06 014710.png",
+    "output": "level-shifts.png",
+    "crop": [
+      175,
+      299,
+      800,
+      447
+    ]
+  },
+  {
+    "source": "C:\\Users\\cedri\\Pictures\\Screenshots\\屏幕截图 2026-11-06 044119.png",
+    "output": "degenerate-splitting.png",
+    "crop": [
+      452,
+      200,
+      812,
+      286
+    ]
+  }
+]
