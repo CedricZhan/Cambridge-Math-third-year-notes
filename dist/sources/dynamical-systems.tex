@@ -3163,6 +3163,10 @@ This takes time $O(\mu)$, since the distance is $O(1)$.
 \medskip
 \noindent (C) After that, quickly move almost horizontally to another
 branch of the curve, and so on.
+At the right-hand turning point $x=1$, $\dot Y=-1/\mu<0$, so $Y$
+continues to decrease below the local minimum of $x^3/3-x$.
+Hence $Y<x^3/3-x$ and $\dot x=\mu[Y-(x^3/3-x)]<0$: the trajectory
+moves to the left and cannot be pulled back onto the right-hand branch.
 \begin{center}
 \includegraphics[width=.51\textwidth]{lecture14/relaxation-oscillation.png}\\
 {\footnotesize Source: Lecture14.pdf, p.~2 (original crop).}
