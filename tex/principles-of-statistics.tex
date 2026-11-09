@@ -3165,5 +3165,270 @@ $\forall p\in(0,1)$, as in the standard independence axiom; see
 \end{center}
 
 
+% Lecture 14: decision theory, continued.
+\newpage
+\noindent\underline{Thm 1.}\quad
+Suppose $\hat\theta=\hat\theta(X)$ is an unbiased estimator of $\theta$, so
+\[
+\mathbb E_\theta[\hat\theta]=\mathbb E[\hat\theta\mid\theta]=\theta.
+\]
+If $\hat\theta$ is also $\pi$-Bayes for a prior $\pi$ under quadratic loss,
+with $\mathbb E[\theta^2]<\infty$, then
+\[
+\mathbb P(\hat\theta=\theta)=1
+\]
+under the joint law of $(X,\theta)$.
+
+\medskip
+\noindent\underline{Proof.}\quad
+It suffices to show that
+\[
+\mathbb E[(\hat\theta-\theta)^2]
+=\mathbb E[\hat\theta^2]-2\mathbb E[\theta\hat\theta]
++\mathbb E[\theta^2]=0.
+\]
+By unbiasedness,
+\[
+\mathbb E[\theta\hat\theta]
+=\mathbb E\bigl[\theta\mathbb E[\hat\theta\mid\theta]\bigr]
+=\mathbb E[\theta^2].
+\]
+Also, since $\hat\theta$ is $\pi$-Bayes under quadratic loss,
+$\hat\theta=\mathbb E[\theta\mid X]$ almost surely. Hence
+\[
+\begin{aligned}
+\mathbb E[\theta\hat\theta]
+&=\mathbb E\bigl[\mathbb E[\theta\hat\theta\mid X]\bigr]\\
+&=\mathbb E\bigl[\hat\theta\mathbb E[\theta\mid X]\bigr]
+=\mathbb E[\hat\theta^2].
+\end{aligned}
+\]
+Thus $\mathbb E[(\hat\theta-\theta)^2]=0$, giving the result.
+\hfill$\square$
+
+\subsection*{Minimax risk}
+
+\paragraph{Def.}
+The \underline{minimax risk} is
+\[
+\inf_\delta\sup_{\theta\in\Theta}R(\delta,\theta).
+\]
+A decision rule $\delta$ is \underline{minimax} if
+$\sup_{\theta\in\Theta}R(\delta,\theta)$ attains the minimax risk.
+
+\paragraph{Ex.}
+Let $X_1,\ldots,X_n\overset{\mathrm{iid}}\sim\operatorname{Ber}(\theta)$,
+and consider $\hat\theta^{\mathrm{MLE}}=\overline X_n$ and
+$\hat\eta=\frac12$. Under quadratic loss,
+\[
+R(\hat\theta^{\mathrm{MLE}},\theta)=\frac{\theta(1-\theta)}n,
+\qquad R(\hat\eta,\theta)=\left(\frac12-\theta\right)^2.
+\]
+Hence
+\[
+\sup_{\theta\in[0,1]}R(\hat\theta^{\mathrm{MLE}},\theta)=\frac1{4n},
+\qquad
+\sup_{\theta\in[0,1]}R(\hat\eta,\theta)=\frac14.
+\]
+For $n>1$, $\hat\eta$ is therefore not minimax.
+
+\medskip
+\noindent\underline{Thm 2.}\quad
+Let $\delta_\pi$ be a decision rule satisfying
+\[
+\sup_{\theta\in\Theta}R(\delta_\pi,\theta)=R_\pi(\delta_\pi).
+\tag{$*$}
+\]
+If $\delta_\pi$ is a $\pi$-Bayes rule, then it is minimax.
+If it is the unique $\pi$-Bayes rule, then it is the unique minimax rule.
+
+\medskip
+\noindent\underline{Rmk.}\quad
+Condition $(*)$ holds, in particular, if $R(\delta_\pi,\theta)$ is
+constant in $\theta$.
+
+\medskip
+\noindent\underline{Proof.}\quad
+For any decision rule $\delta$,
+\[
+\sup_{\theta\in\Theta}R(\delta,\theta)
+\geq R_\pi(\delta)
+\geq R_\pi(\delta_\pi)
+=\sup_{\theta\in\Theta}R(\delta_\pi,\theta).
+\]
+If $\delta_\pi$ is the unique $\pi$-Bayes rule and
+$\delta\ne\delta_\pi$, the second inequality is strict.
+\hfill$\square$
+
+\paragraph{Def.}
+A prior $\pi$ is \underline{least favourable} if, for every other prior
+$\lambda$,
+\[
+R_\lambda(\delta_\lambda)\leq R_\pi(\delta_\pi),
+\]
+where $\delta_\lambda$ and $\delta_\pi$ are $\lambda$- and $\pi$-Bayes
+rules, respectively.
+
+Any prior satisfying $(*)$ for its Bayes rule is least favourable.
+Indeed, for any other prior $\lambda$,
+\[
+\begin{aligned}
+R_\lambda(\delta_\lambda)
+&\leq R_\lambda(\delta_\pi)
+\leq\sup_{\theta\in\Theta}R(\delta_\pi,\theta)
+=R_\pi(\delta_\pi).
+\end{aligned}
+\]
+
+\paragraph{Ex.}
+Let $X_1,\ldots,X_n\overset{\mathrm{iid}}\sim\operatorname{Ber}(\theta)$,
+and take a $\operatorname{Beta}(a,b)$ prior with density proportional to
+$\theta^{b-1}(1-\theta)^{a-1}$, $a,b>0$.
+The $\pi$-Bayes rule under quadratic loss is the posterior mean
+\[
+\widetilde\theta=\frac{n\overline X_n+b}{n+a+b}.
+\]
+We can compute
+\[
+R(\widetilde\theta,\theta)
+=\mathbb E_\theta[(\widetilde\theta-\theta)^2].
+\]
+For a suitable choice of $(a,b)$ this is constant in $\theta$;
+by Theorem 2 the corresponding rule is minimax.
+\hfill[Exercise sheet]
+
+\subsection*{Admissibility}
+
+\paragraph{Def.}
+A decision rule $\delta$ is \underline{inadmissible} if there exists a
+decision rule $\gamma$ such that
+\[
+R(\gamma,\theta)\leq R(\delta,\theta)
+\qquad\text{for every }\theta\in\Theta,
+\]
+and
+\[
+R(\gamma,\theta)<R(\delta,\theta)
+\qquad\text{for some }\theta\in\Theta.
+\]
+Otherwise, $\delta$ is \underline{admissible}.
+
+\medskip
+\noindent\underline{Rmks.}
+\begin{itemize}
+\item Inadmissible rules are bad: another rule dominates them.
+\item Admissibility alone does not imply that a rule is good.
+For example, constant estimators are admissible under quadratic loss
+in the usual models with mutually absolutely continuous sampling laws.
+\item Minimax rules need not be admissible.
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.43\textwidth]{figures/statistics-lecture14-minimax-inadmissible.png}
+\end{center}
+
+\medskip
+\noindent\underline{Thm 3.}\quad
+A unique $\pi$-Bayes rule $\delta_\pi$ is admissible.
+
+\medskip
+\noindent\underline{Proof.}\quad
+Suppose otherwise. Then there exists a rule $\gamma\ne\delta_\pi$ such that
+$R(\gamma,\theta)\leq R(\delta_\pi,\theta)$ for every $\theta$.
+Consequently,
+\[
+R_\pi(\gamma)
+=\int_\Theta R(\gamma,\theta)\pi(\theta)\,d\theta
+\leq\int_\Theta R(\delta_\pi,\theta)\pi(\theta)\,d\theta
+=R_\pi(\delta_\pi).
+\]
+Since $\delta_\pi$ is Bayes, equality must hold, so $\gamma$ is also
+$\pi$-Bayes. This contradicts uniqueness. \hfill$\square$
+
+\medskip
+\noindent\underline{Thm 4.}\quad
+If $\delta$ is admissible with constant risk, then it is minimax.
+
+\medskip
+\noindent\underline{Proof.}\quad
+Suppose otherwise. Then there exists a rule $\gamma$ such that
+\[
+\sup_{\theta\in\Theta}R(\gamma,\theta)
+<\sup_{\theta\in\Theta}R(\delta,\theta)
+=\inf_{\theta\in\Theta}R(\delta,\theta).
+\]
+Thus $R(\gamma,\theta)<R(\delta,\theta)$ for every $\theta$, contradicting
+the admissibility of $\delta$. \hfill$\square$
+\begin{center}
+\includegraphics[width=0.28\textwidth]{figures/statistics-lecture14-constant-risk.png}
+\end{center}
+
+We can find admissible, minimax rules by choosing a prior such that the
+unique $\pi$-Bayes rule has constant risk. This is not the only way to
+find admissible, minimax rules.
+
+\paragraph{Ex.}
+Let $X_1,\ldots,X_n\overset{\mathrm{iid}}\sim N(\theta,1)$,
+$\theta\in\mathbb R$. The MLE $\hat\theta=\overline X_n$ is unbiased
+and has positive risk $1/n$. By Theorem 1, it cannot be $\pi$-Bayes for
+any prior with finite second moment. It is nevertheless minimax and
+admissible.
+
+\medskip
+\noindent\underline{Thm 5.}\quad
+In this normal location model, $\hat\theta=\overline X_n$ is minimax
+and admissible under quadratic loss.
+
+\medskip
+\noindent\underline{Proof.}\quad
+We have
+\[
+R(\hat\theta,\theta)=\mathbb E_\theta[(\hat\theta-\theta)^2]=\frac1n,
+\]
+which is constant in $\theta$. We will show that $\hat\theta$ is
+admissible; Theorem 4 then implies that it is minimax.
+
+Consider any estimator $\widetilde\theta$ and write
+\[
+b(\theta)=\mathbb E_\theta[\widetilde\theta]-\theta.
+\]
+By the bias--variance decomposition,
+\[
+R(\widetilde\theta,\theta)
+=\mathbb E_\theta[(\widetilde\theta-\theta)^2]
+=b(\theta)^2+\operatorname{Var}_\theta(\widetilde\theta).
+\]
+The Cram\'er--Rao lower bound gives
+\[
+\operatorname{Var}_\theta(\widetilde\theta)
+\geq\frac{\left(\frac d{d\theta}\mathbb E_\theta[\widetilde\theta]\right)^2}
+{I_n(\theta)}
+=\frac{(1+b'(\theta))^2}{n}.
+\]
+Hence
+\[
+R(\widetilde\theta,\theta)
+\geq b(\theta)^2+\frac{(1+b'(\theta))^2}{n}.
+\]
+Suppose that
+\[
+R(\widetilde\theta,\theta)\leq R(\hat\theta,\theta)=\frac1n
+\qquad\text{for all }\theta\in\mathbb R.
+\]
+We will show that this forces $R(\widetilde\theta,\theta)=1/n$ for
+every $\theta$, proving admissibility. The preceding inequalities imply
+\[
+b(\theta)^2+\frac{(1+b'(\theta))^2}{n}\leq\frac1n
+\qquad\text{for all }\theta\in\mathbb R.
+\]
+We will show that this implies $b(\theta)=0$ for all $\theta\in\mathbb R$,
+which gives $R(\widetilde\theta,\theta)=1/n$.
+
+\medskip
+\noindent\emph{Proof to be continued next time.}
+
+\begin{center}
+\textbf{End of lecture 14}
+\end{center}
+
 \end{document}
 

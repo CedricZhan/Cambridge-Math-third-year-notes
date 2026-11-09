@@ -3103,4 +3103,205 @@ In fact,
 \begin{center}
     \textbf{End of lecture 13}
 \end{center}
+\clearpage
+Given a simultaneous eigenstate $|jm\rangle$, the state
+$J_\pm|jm\rangle$, provided it is non-zero, is again an eigenstate of
+$J^2$ with the same value of $j$, while its $J_3$ eigenvalue is shifted
+by $\pm\hbar$. Indeed,
+\begin{align*}
+    J_3\bigl(J_\pm|jm\rangle\bigr)
+      &=\bigl([J_3,J_\pm]+J_\pm J_3\bigr)|jm\rangle\\
+      &=\bigl(\pm\hbar J_\pm+J_\pm\hbar m\bigr)|jm\rangle\\
+      &=\hbar(m\pm1)J_\pm|jm\rangle,
+\end{align*}
+and $[J^2,J_\pm]=0$ gives
+\[
+    J^2\bigl(J_\pm|jm\rangle\bigr)
+       =\hbar^2j(j+1)J_\pm|jm\rangle.
+\]
+Compare this with the harmonic oscillator, where
+\[
+    [N,a^\dagger]=a^\dagger,\qquad [N,a]=-a,
+\]
+so $a^\dagger|n\rangle$ and $a|n\rangle$, when non-zero, have
+$N$ eigenvalues $n+1$ and $n-1$, respectively.
+
+\subsubsection*{Bounds on the magnetic quantum number}
+
+To determine when the new states vanish, take $|jm\rangle$ to be
+normalised and calculate their squared norms:
+\begin{align*}
+    \|J_+|jm\rangle\|^2
+      &=\langle jm|J_-J_+|jm\rangle\\
+      &=\langle jm|J^2-J_3^2-\hbar J_3|jm\rangle\\
+      &=\hbar^2\bigl(j(j+1)-m(m+1)\bigr)\\
+      &=\hbar^2(j-m)(j+m+1)\ge0.
+\end{align*}
+Similarly,
+\begin{align*}
+    \|J_-|jm\rangle\|^2
+      &=\langle jm|J_+J_-|jm\rangle\\
+      &=\langle jm|J^2-J_3^2+\hbar J_3|jm\rangle\\
+      &=\hbar^2\bigl(j(j+1)-m(m-1)\bigr)\\
+      &=\hbar^2(j+m)(j-m+1)\ge0.
+\end{align*}
+Since $j\ge0$, these inequalities imply, respectively,
+\[
+    -(j+1)\le m\le j,\qquad -j\le m\le j+1.
+\]
+Combining them gives
+\[
+    \boxed{-j\le m\le j.}
+\]
+
+\subsubsection*{Termination of the ladder}
+
+Starting from a normalised state $|jm\rangle$, each non-vanishing state
+$J_+^n|jm\rangle$ has $J_3$ eigenvalue $\hbar(m+n)$, subject to
+$m+n\le j$. The raising sequence must therefore terminate. If
+$J_+^k|jm\rangle$ is the last non-zero state, its raised state has
+zero norm, so the norm formula and the bound on $m$ give
+\[
+    j=m+k,\qquad k\in\mathbb Z_{\ge0}.
+\]
+Similarly, repeated lowering reaches a lowest state after some
+$k'\in\mathbb Z_{\ge0}$ steps, with
+\[
+    -j=m-k'.
+\]
+Consequently,
+\[
+    J_+^n|jm\rangle=0\quad\text{for all integers }n>k,
+    \qquad
+    J_-^n|jm\rangle=0\quad\text{for all integers }n>k'.
+\]
+Thus
+\[
+    j=m+k=-m+k',\qquad 2j=k+k'\in\mathbb Z_{\ge0}.
+\]
+The allowed angular-momentum quantum numbers are therefore
+\[
+    j=0,\frac12,1,\frac32,\ldots,
+\]
+and, for each fixed $j$, one angular-momentum multiplet consists of
+\[
+    |jm\rangle,\qquad m=j,j-1,\ldots,-j+1,-j,
+\]
+giving $2j+1$ states. There are two possibilities:
+\begin{itemize}
+    \item $j$ integral: $m=0,\pm1,\ldots,\pm j$,
+          with an odd number of states;
+    \item $j$ half-integral: $m=\pm\frac12,\pm\frac32,\ldots,\pm j$,
+          with an even number of states.
+\end{itemize}
+These correspond to $2j=k+k'$ being even or odd.
+
+The integral case is realised by orbital angular momentum. Its states
+are represented by wavefunctions $\psi_{jm}(\mathbf x)$ with angular
+dependence $Y_{jm}(\theta,\varphi)$, as discussed in \S5.1.
+Half-integral values do not arise from well-behaved scalar orbital
+wavefunctions. They occur for intrinsic angular momentum, or
+\emph{spin}, which may have either integral or half-integral quantum
+numbers.
+
+\subsubsection*{Normalised ladder states}
+
+We can choose the relative phases of the normalised states so that
+\begin{align*}
+    J_+|jm\rangle
+      &=\hbar\sqrt{(j-m)(j+m+1)}\,|j,m+1\rangle,\\
+    J_-|jm\rangle
+      &=\hbar\sqrt{(j+m)(j-m+1)}\,|j,m-1\rangle.
+\end{align*}
+All states in a multiplet can be generated from any one of them using
+the ladder operators. It is often convenient to start with the
+\emph{top state}, which has the largest $J_3$ eigenvalue and satisfies
+\[
+    J_+|jj\rangle=0.
+\]
+All other states are obtained, up to normalisation, as
+\[
+    (J_-)^n|jj\rangle,\qquad n=0,1,\ldots,2j.
+\]
+
+\subsection*{5.3 Matrix Representations}
+
+We now express the results of \S5.2 using column vectors for states
+and matrices for operators. Recall that, in an orthonormal basis,
+\[
+    |\psi\rangle\longleftrightarrow(\alpha_n),
+    \qquad \alpha_n=\langle n|\psi\rangle,
+    \qquad A_{mn}=\langle m|A|n\rangle.
+\]
+
+\subsubsection*{$j=1$}
+
+The state space of a single $j=1$ multiplet is three-dimensional.
+Choose the ordered basis
+\[
+    |1,1\rangle\longleftrightarrow
+       \begin{pmatrix}1\\0\\0\end{pmatrix},\qquad
+    |1,0\rangle\longleftrightarrow
+       \begin{pmatrix}0\\1\\0\end{pmatrix},\qquad
+    |1,-1\rangle\longleftrightarrow
+       \begin{pmatrix}0\\0\\1\end{pmatrix}.
+\]
+Then
+\[
+    J_3=\hbar\begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix},
+    \qquad
+    J_+=\hbar\sqrt2
+        \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},
+    \qquad
+    J_-=\hbar\sqrt2
+        \begin{pmatrix}0&0&0\\1&0&0\\0&1&0\end{pmatrix}.
+\]
+These follow from
+\[
+    J_3|1,1\rangle=\hbar|1,1\rangle,\qquad
+    J_3|1,0\rangle=0,\qquad
+    J_3|1,-1\rangle=-\hbar|1,-1\rangle,
+\]
+and the ladder relations above. In particular,
+\[
+    J_\pm|1,0\rangle=\hbar\sqrt2\,|1,\pm1\rangle.
+\]
+Also,
+\[
+    J_\mp|1,\pm1\rangle=\hbar\sqrt2\,|1,0\rangle.
+\]
+
+\subsubsection*{$j=s=\frac12$}
+
+The spin-$\frac12$ state space is two-dimensional. Choose
+\[
+    \left|\frac12,\frac12\right\rangle
+       =|\uparrow\rangle\longleftrightarrow
+          \begin{pmatrix}1\\0\end{pmatrix},\qquad
+    \left|\frac12,-\frac12\right\rangle
+       =|\downarrow\rangle\longleftrightarrow
+          \begin{pmatrix}0\\1\end{pmatrix}.
+\]
+The spin operators are represented by
+\[
+    S_3=\frac\hbar2\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+    \qquad
+    S_+=\hbar\begin{pmatrix}0&1\\0&0\end{pmatrix},
+    \qquad
+    S_-=\hbar\begin{pmatrix}0&0\\1&0\end{pmatrix}.
+\]
+Equivalently,
+\[
+    S_i=\frac\hbar2\sigma_i,
+\]
+where the Pauli matrices are
+\[
+    \sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+    \sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\qquad
+    \sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+
+\begin{center}
+    \textbf{End of lecture 14}
+\end{center}
 \end{document}

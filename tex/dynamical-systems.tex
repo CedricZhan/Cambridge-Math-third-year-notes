@@ -2846,5 +2846,463 @@ $\Phi(mT)=B^m$ remain valid with this definition of $B$.
 \textbf{End of lecture 12}
 \end{center}
 
+
+\newpage
+\noindent\underline{4.5 Stability of periodic orbits: Floquet analysis (continued)}
+
+\medskip
+\noindent Consider an autonomous flow $\dot{\bar x}=\bar f(\bar x)$ in
+$\mathbb R^n$, with periodic orbit $\bar x=\bar X(t)$ of period $T$.
+Perturb about this PO, $\bar x(t)=\bar X(t)+\bar\eta(t)$. Then
+\[
+\dot{\bar X}+\dot{\bar\eta}
+=\bar f(\bar X+\bar\eta)
+=\bar f(\bar X)+\bar\eta\cdot\nabla\bar f(\bar X)+O(\|\bar\eta\|^2).
+\]
+In the linear limit,
+\[
+\dot{\bar\eta}=\widehat A(t)\bar\eta,\qquad
+A_{ij}=\left.\frac{\partial f_i}{\partial x_j}\right|_{\bar X(t)},
+\qquad A_{ij}(t+T)=A_{ij}(t).
+\]
+This is a set of linear ODEs with periodic coefficients. By linearity,
+introduce a mapping from $\bar\eta(0)$ to $\bar\eta(t)$:
+\[
+\eta_i(t)=\Phi_{ij}(t)\eta_j(0),\qquad \Phi_{ij}(0)=\delta_{ij}.
+\]
+Substituting into the linear system, for every $\bar\eta(0)$,
+\[
+\dot\Phi_{ij}(t)\eta_j(0)=A_{ik}(t)\Phi_{kj}(t)\eta_j(0)
+\quad\Longrightarrow\quad \dot\Phi_{ij}=A_{ik}(t)\Phi_{kj}.
+\]
+Integrate, following the lecturer's matrix-exponential notation:
+\[
+\Phi_{ij}(t)=B_{ik}(t)\Phi_{kj}(0),\qquad
+\widehat B(t)=\exp\!\left(\int_0^t\widehat A(t')\,dt'\right),
+\qquad e^{\widehat C}=\sum_{k=0}^{\infty}\frac{\widehat C^k}{k!}.
+\]
+Set $\widehat B=\widehat B(T)$, $B_{ij}=B_{ij}(T)$. Then
+\[
+\Phi_{ij}(T)=B_{ik}\Phi_{kj}(0)=B_{ik}\delta_{kj}=B_{ij},
+\]
+\[
+\Phi_{ij}(2T)=B_{ik}\Phi_{kj}(T)=B_{ik}B_{kj}
+=(\widehat B^2)_{ij}=(\widehat\Phi(T)^2)_{ij}.
+\]
+At $t=mT$,
+\[
+\Phi_{ij}(mT)=(\widehat\Phi(T)^m)_{ij},\qquad
+\boxed{\bar\eta(mT)=\widehat\Phi(T)^m\bar\eta(0)}.
+\]
+
+\newpage
+\noindent Changing to a frame in which $\widehat\Phi(T)$ is diagonal,
+whether a perturbation grows or shrinks in an eigendirection is set by
+its eigenvalue. An eigenvalue with $|\lambda|>1$ makes the PO unstable.
+In $\mathbb R^2$, part of the perturbation is along the orbit and is
+passively advected: it neither grows nor shrinks. Thus one eigenvalue
+is always $1$.
+\begin{center}
+\includegraphics[width=.39\textwidth]{lecture13/tangential-perturbation.png}\\
+{\footnotesize Source: Lecture13.pdf, p.~2 (original crop).}
+\end{center}
+\noindent\fbox{Definition}\quad The \underline{Floquet multipliers} of a
+periodic orbit are the eigenvalues of $\widehat\Phi(T)$, denoted $\lambda_i$.
+The \underline{Floquet exponents} are
+\[
+\mu_i=\frac1T\ln\lambda_i,\qquad \lambda_i=e^{\mu_iT}.
+\]
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item[$\ast$] The PO is \underline{hyperbolic} if all transverse
+multipliers satisfy $|\lambda_i|\ne1$ (apart from the trivial multiplier
+along the orbit).
+\item[$\ast$] If all transverse $|\lambda_i|<1$, the PO is asymptotically stable.
+\item[$\ast$] If any $|\lambda_i|>1$, the PO is unstable.
+\item[$\ast$] In $\mathbb R^2$ only one multiplier can be nontrivial, so
+$\det\widehat\Phi(T)=1\cdot\lambda=\lambda$.
+\end{itemize}
+For a diagonalizable matrix $\widehat C=\widehat Q\widehat D\widehat Q^{-1}$,
+where $\widehat D=\operatorname{diag}(d_1,\ldots,d_n)$,
+\[
+\begin{aligned}
+\det e^{\widehat C}
+&=\det\sum_{k=0}^{\infty}\frac{(\widehat Q\widehat D\widehat Q^{-1})^k}{k!}
+=\det\left[\widehat Q\left(\sum_{k=0}^{\infty}\frac{\widehat D^k}{k!}\right)\widehat Q^{-1}\right]\\
+&=\det\widehat Q\,\det e^{\widehat D}\,\det\widehat Q^{-1}
+=\prod_{i=1}^ne^{d_i}=e^{\sum_i d_i}=e^{\operatorname{tr}\widehat C}.
+\end{aligned}
+\]
+The identity $\det e^{\widehat C}=e^{\operatorname{tr}\widehat C}$ also
+holds for a general square matrix.
+
+\newpage
+\noindent Thus, in the lecturer's notation,
+\[
+\det\widehat\Phi(t)
+=\det\exp\!\left(\int_0^t\widehat A(t')\,dt'\right)
+=\exp\!\left(\int_0^t\operatorname{tr}\widehat A(t')\,dt'\right).
+\]
+In two dimensions, at $t=T$,
+\[
+\lambda=\det\widehat\Phi(T)
+=\exp\!\left(\int_0^T\operatorname{tr}\widehat A(t)\,dt\right).
+\]
+Since $A_{ij}=\partial f_i/\partial x_j$,
+\[
+\operatorname{tr}\widehat A=\sum_j\frac{\partial f_j}{\partial x_j}
+=\nabla\cdot\bar f,
+\qquad
+\boxed{\lambda=\exp\!\left(\int_0^T\nabla\cdot\bar f(\bar X(t))\,dt\right)}.
+\]
+Hence in $\mathbb R^2$,
+\[
+\int_0^T\nabla\cdot\bar f\,dt
+\begin{cases}
+<0 &\Longrightarrow 0<\lambda<1,\quad\text{stable PO},\\
+>0 &\Longrightarrow \lambda>1,\quad\text{unstable PO},\\
+=0 &\Longrightarrow \lambda=1,\quad\text{non-hyperbolic PO}.
+\end{cases}
+\]
+In $\mathbb R^n$,
+\[
+\exp\!\left(\int_0^T\nabla\cdot\bar f\,dt\right)=\prod_{i=1}^n\lambda_i.
+\]
+A negative integral does not guarantee stability in higher dimensions:
+one multiplier may still have modulus greater than $1$.
+
+\medskip
+\noindent\fbox{Example}\quad Determine stability for
+\[
+\dot r=r(1-r^2),\qquad \dot\theta=\frac1r,
+\]
+using direct stability analysis and the $\lambda$ result.
+The PO is $r=1$, with $\dot\theta=1$ and $T=2\pi$.
+Let $r=1+\delta(t)$, $\theta=t+\gamma(t)$. Then
+\[
+\dot\delta=(1+\delta)[1-(1+\delta)^2]
+=-2\delta+O(\delta^2),\qquad \delta(t)=e^{-2t}\delta(0),
+\]
+\[
+1+\dot\gamma=\frac1{1+\delta}=1-\delta+O(\delta^2),
+\quad \dot\gamma=-\delta(0)e^{-2t},
+\quad \gamma(t)=\gamma(0)+\tfrac12\delta(0)(e^{-2t}-1).
+\]
+
+\newpage
+\[
+\begin{pmatrix}\delta(t)\\\gamma(t)\end{pmatrix}
+=\begin{pmatrix}e^{-2t}&0\\\tfrac12(e^{-2t}-1)&1\end{pmatrix}
+\begin{pmatrix}\delta(0)\\\gamma(0)\end{pmatrix},
+\qquad
+\widehat\Phi(T)=\begin{pmatrix}e^{-2T}&0\\\tfrac12(e^{-2T}-1)&1\end{pmatrix}.
+\]
+Thus $\lambda=\det\widehat\Phi(T)=e^{-2T}=e^{-4\pi}<1$: the PO is stable.
+Alternatively, in polar coordinates the velocity components are
+$f_r=\dot r$ and $f_\theta=r\dot\theta$, so
+\[
+\nabla\cdot\bar f
+=\frac1r\frac{\partial}{\partial r}(rf_r)
++\frac1r\frac{\partial f_\theta}{\partial\theta}
+=\frac1r\frac{\partial}{\partial r}[r^2(1-r^2)]=2-4r^2.
+\]
+On $r=1$, $\nabla\cdot\bar f=-2$, giving
+$\int_0^T\nabla\cdot\bar f\,dt=-4\pi$ and $\lambda=e^{-4\pi}$ again.
+
+\bigskip
+\noindent\underline{4.6 The van der Pol oscillator}
+
+\medskip
+\noindent One of the foundational dynamical systems. We use it to
+demonstrate the existence of limit cycles and so-called
+\underline{relaxation oscillations}.
+The van der Pol equation is
+\[
+\boxed{\ddot x+\mu(x^2-1)\dot x+x=0}.
+\]
+At small amplitudes there is negative damping, pumping energy into the
+system. At large amplitudes damping is positive and dissipates energy.
+Expect the system to live in between, but not at the constant solution $x=1$.
+This is a special case of a Li\'enard equation,
+\[
+\ddot x+f(x)\dot x+g(x)=0.
+\]
+Use the Li\'enard transformation
+\[
+y=\dot x+F(x),\qquad F(x)=\int_0^x f(s)\,ds,
+\]
+to reduce it to
+\[
+\dot x=y-F(x),\qquad \dot y=-g(x).
+\]
+For van der Pol,
+\[
+g(x)=x,\qquad F(x)=\mu\left(\frac{x^3}{3}-x\right),\qquad
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}y-\mu(x^3/3-x)\\-x\end{pmatrix}.
+\]
+
+\newpage
+\noindent Start by considering two important limits.
+
+\medskip
+\noindent\underline{(i) $0<\mu\ll1$}
+
+\medskip
+\noindent A near-Hamiltonian system, with
+\[
+H=\tfrac12(x^2+y^2),\quad f_1=y,\quad f_2=-x,\quad
+\varepsilon g_1=-F(x),\quad\varepsilon g_2=0.
+\]
+Without perturbation there is a centre at $(0,0)$. For $\mu\ne0$, look
+for a periodic orbit using the \underline{energy balance method}:
+\[
+\Delta H(H)=\oint\varepsilon g_1f_1\,dt.
+\]
+The unperturbed flow is parametrized by
+\[
+x=\sqrt{2H}\sin t,\qquad y=\sqrt{2H}\cos t,\qquad T=2\pi.
+\]
+Thus, to leading order,
+\[
+\begin{aligned}
+\Delta H(H)
+&=\mu\int_0^{2\pi}\left(x^2-\frac{x^4}{3}\right)\,dt\\
+&=\mu\int_0^{2\pi}\left(2H\sin^2t-\frac43H^2\sin^4t\right)\,dt
+=2\pi\mu\left(H-\frac{H^2}{2}\right).
+\end{aligned}
+\]
+Hence $\Delta H>0$ for $0<H<2$, and $\Delta H<0$ for $H>2$.
+The selected orbit has leading radius $r=2$, is stable, and has
+period $P=2\pi+O(\mu)$.
+
+\medskip
+\noindent\underline{(ii) $\mu\gg1$}
+
+\medskip
+\noindent Rescale $Y=y/\mu$:
+\[
+\begin{pmatrix}\dot x\\\dot Y\end{pmatrix}
+=\begin{pmatrix}\mu[Y-(x^3/3-x)]\\-x/\mu\end{pmatrix}.
+\]
+Starting at $(x_0,Y_0)$ of order $(1,1)$ away from
+$Y=x^3/3-x$, $|\dot x|\gg|\dot Y|$.
+The motion is almost horizontal and fast: an $O(1)$ distance is travelled
+with speed $O(\mu)$, taking time $O(\mu^{-1})$.
+\begin{center}
+\includegraphics[width=.52\textwidth]{lecture13/slow-fast-phase-plane.png}\\
+{\footnotesize Source: Lecture13.pdf, p.~5 (original crop).}
+\end{center}
+On approaching $Y=x^3/3-x$ to within $O(\mu^{-2})$, $\dot x$ and $\dot Y$
+become comparable (continued in the next lecture).
+\begin{center}
+\textbf{End of lecture 13}
+\end{center}
+
+\newpage
+\noindent
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}y-\mu(x^3/3-x)\\-x\end{pmatrix}.
+\]
+Start by considering two important limits.
+
+\medskip
+\noindent\underline{(i) $0<\mu\ll1$}
+
+\medskip
+\noindent A near-Hamiltonian system with
+\[
+H=\tfrac12(x^2+y^2),\quad f_1=y,\quad f_2=-x,\quad
+\varepsilon g_1=-F(x),\quad\varepsilon g_2=0.
+\]
+Without perturbation there is a centre at $(0,0)$. For $\mu\ne0$, look
+for a periodic orbit using the \underline{energy balance method}:
+\[
+\Delta H(H)=\oint\varepsilon g_1f_1\,dt.
+\]
+The unperturbed flow is parametrized by
+\[
+x=\sqrt{2H}\sin t,\qquad y=\sqrt{2H}\cos t,\qquad T=2\pi,
+\]
+so, to leading order,
+\[
+\begin{aligned}
+\Delta H(H)&=\mu\int_0^{2\pi}\left(x^2-\frac{x^4}{3}\right)\,dt\\
+&=\mu\int_0^{2\pi}\left(2H\sin^2t-\frac43H^2\sin^4t\right)\,dt
+=2\pi\mu\left(H-\frac{H^2}{2}\right).
+\end{aligned}
+\]
+Thus $\Delta H>0$ for $0<H<2$, and $\Delta H<0$ for $H>2$.
+The selected stable orbit has leading radius $r=2$ and period
+$P=2\pi+O(\mu)$.
+
+\medskip
+\noindent\underline{(ii) $\mu\gg1$}
+
+\medskip
+\noindent Rescale $Y=y/\mu$:
+\[
+\begin{pmatrix}\dot x\\\dot Y\end{pmatrix}
+=\begin{pmatrix}\mu[Y-(x^3/3-x)]\\-x/\mu\end{pmatrix}.
+\]
+(A) Starting at $(x_0,Y_0)$ of order $(1,1)$ away from
+$Y=x^3/3-x$, $|\dot x|\gg|\dot Y|$: almost horizontal, fast motion,
+taking time $O(\mu^{-1})$ to travel an $O(1)$ distance at speed $O(\mu)$.
+\begin{center}
+\includegraphics[width=.52\textwidth]{lecture14/slow-fast-phase-plane.png}\\
+{\footnotesize Source: Lecture14.pdf, p.~1 (original crop).}
+\end{center}
+
+\newpage
+\noindent (B) On approaching $Y=x^3/3-x$ to within $O(\mu^{-2})$,
+$\dot x$ and $\dot Y$ become comparable, of order $O(\mu^{-1})$.
+Travel slowly along the curve until reaching its extremum at $x=\pm1$.
+This takes time $O(\mu)$, since the distance is $O(1)$.
+
+\medskip
+\noindent (C) After that, quickly move almost horizontally to another
+branch of the curve, and so on.
+\begin{center}
+\includegraphics[width=.51\textwidth]{lecture14/relaxation-oscillation.png}\\
+{\footnotesize Source: Lecture14.pdf, p.~2 (original crop).}
+\end{center}
+This is a \underline{relaxation oscillation}: slow buildup changing to a
+fast discharge, repeated periodically. The period is set by the slow
+buildup phase:
+\[
+\begin{aligned}
+P&\simeq2\int_A^Bdt
+=2\int_{-2/3}^{2/3}\frac{dY}{\dot Y}
+=2\int_{-2}^{-1}\frac{d(x^3/3-x)}{-x/\mu}\\
+&=2\mu\int_{-2}^{-1}\frac{1-x^2}{x}\,dx
+=\boxed{\mu(3-2\ln2)}.
+\end{aligned}
+\]
+
+\medskip
+\noindent\underline{(iii) Existence of a periodic orbit for every $\mu>0$}
+
+\medskip
+\noindent Use Poincar\'e--Bendixson: show a non-equilibrium forward orbit
+$O^+(\bar x_0)$ remains in a compact set containing no fixed points.
+The only fixed point is $(0,0)$, and is unstable. Define
+\[
+H_k(x,y)=\tfrac12[x^2+(y-k)^2]=\tfrac12r_k^2,
+\]
+where $r_k$ is the distance to $(0,k)$. Its contours are circles centred
+at $(0,k)$. Along the flow,
+\[
+\dot H_k=\dot x\frac{\partial H_k}{\partial x}
++\dot y\frac{\partial H_k}{\partial y}
+=kx-xF(x)=kx-\mu x^2\left(\frac{x^2}{3}-1\right).
+\]
+In particular, for $k=0$,
+\[
+\dot H_0=\mu x^2\left(1-\frac{x^2}{3}\right)\geq0
+\qquad (|x|<\sqrt3),
+\]
+with strict inequality for $x\ne0$.
+For any $0<R_1<\sqrt3$, trajectories on the circle
+$x^2+y^2=R_1^2$ point outward except at $x=0$, where they are tangent.
+Thus the disk can only be left in forward time; it provides an inner
+boundary excluding the fixed point.
+
+\newpage
+\noindent Pick $A=(-x_0,y_0)$ and show that $O^+(A)$ cannot cross a
+suitable closed curve in $\mathbb R^2$. Choose $-x_0<-\sqrt3$ and $y_0$
+large enough that $y>F(x)$ for $x<\sqrt3$ along the trajectory (see step B).
+\begin{center}
+\includegraphics[width=.48\textwidth]{lecture14/energy-rate.png}\hfill
+\includegraphics[width=.48\textwidth]{lecture14/trapping-region.png}\\
+{\footnotesize Source: Lecture14.pdf, p.~3 (original crops).}
+\end{center}
+\noindent (A) Move along the orbit to $B=(-\sqrt3,y_B)$.
+Since $\dot H_0<0$ for $x<-\sqrt3$, $r_0(B)<r_0(A)$.
+But $\dot y=-x>0$ for $x<0$, so $y_B>y_0$.
+
+\medskip
+\noindent (B) Move further to $C=(\sqrt3,y_C)$. On $BC$,
+$\dot H_0\geq0$, so $r_0$ increases. Estimate the change in $H_0$:
+\[
+\begin{aligned}
+\Delta H_0\big|_{B\to C}
+&=\mu\int_{-\sqrt3}^{\sqrt3}
+\left(x^2-\frac{x^4}{3}\right)\frac{dt}{dx}\,dx\\
+&=\mu\int_{-\sqrt3}^{\sqrt3}
+\frac{x^2-x^4/3}{y-F(x)}\,dx\\
+&<\frac{\mu}{y_0-2\mu/3}\int_{-\sqrt3}^{\sqrt3}
+\left(x^2-\frac{x^4}{3}\right)\,dx
+=\frac{4\sqrt3\mu}{5(y_0-2\mu/3)}.
+\end{aligned}
+\]
+Indeed, $\max_{[-\sqrt3,\sqrt3]}F=2\mu/3$ and
+\[
+\frac1{y-F(x)}\leq\frac1{y-2\mu/3}<\frac1{y_0-2\mu/3},
+\qquad y>y_B>y_0>2\mu/3.
+\]
+For the positive-$x$ part, $y>y_B$ follows from
+$H_0(x,y)\geq H_0(B)$ and $x^2\leq3$, while $y$ stays positive.
+Thus
+\[
+H_0(C)=H_0(B)+\Delta H_0\big|_{B\to C}
+<H_0(A)+\frac{4\sqrt3\mu}{5(y_0-2\mu/3)}=:H_0(C^*),
+\]
+where
+\[
+\tfrac12r_0(C^*)^2
+=\tfrac12(x_0^2+y_0^2)+\frac{4\sqrt3\mu}{5(y_0-2\mu/3)}.
+\]
+Between $B$ and $C$ the orbit lies within this circle.
+
+\newpage
+\noindent (C) Continue the orbit to $D=(x_0,y_D)$. On $CD$,
+$\dot H_0<0$, so $r_0(D)<r_0(C)$. Continue the circle $r_0(C^*)$ to
+$D^*=(x_0,y_{D^*})$ on its upper half. Then $y_{D^*}>y_D$ and
+\[
+\tfrac12(x_0^2+y_{D^*}^2)
+=\tfrac12(x_0^2+y_0^2)+\frac{4\sqrt3\mu}{5(y_0-2\mu/3)},
+\]
+so
+\[
+\boxed{y_{D^*}^2=y_0^2+\frac{8\sqrt3\mu}{5(y_0-2\mu/3)}}.\tag{$*$}
+\]
+
+\medskip
+\noindent (D) Draw a (blue) circle from $D^*$ to $A'=(x_0,-y_0)$,
+centred at $(0,k)$, where
+\[
+\begin{aligned}
+k&=\tfrac12(y_{D^*}-y_0)
+=\frac{4\sqrt3\mu}{5(y_0-2\mu/3)(y_0+y_{D^*})}\\
+&<\frac{4\sqrt3\mu}{5(y_0-2\mu/3)\,2y_0}.
+\end{aligned}
+\]
+On the right-hand circular arc, $x\geq x_0>\sqrt3$. Since $F(x)$ is
+increasing for $x>1$, choosing $k<F(x_0)$ gives
+\[
+\dot H_k=x[k-F(x)]\leq x[k-F(x_0)]<0.
+\]
+A sufficient condition is
+\[
+\frac{2\sqrt3}{5(y_0-2\mu/3)y_0}
+<x_0\left(\frac{x_0^2}{3}-1\right).
+\]
+The parameters can be chosen to satisfy this condition, with $y_0$ large
+enough for the preceding orbit segments.
+Thus the orbit cannot cross the blue circular boundary outward.
+Together with the orbit segments $ABCD$ and the short joining segment
+$DD^*$ this gives the upper/right part of a boundary. By the symmetry
+$(x,y)\mapsto(-x,-y)$, complete it with its reflection, including the
+reflected arc from $A'$ back towards $A$.
+The forward orbit remains inside the resulting bounded region.
+Exclude an inner circle $r_0=R_1$, $0<R_1<\sqrt3$, which the orbit
+cannot enter in forward time; this excludes the fixed point $(0,0)$.
+The resulting compact trapping region contains no fixed points.
+By Poincar\'e--Bendixson, a periodic orbit must exist for every $\mu>0$.
+\begin{center}
+\textbf{End of lecture 14}
+\end{center}
+
 \end{document}
 
