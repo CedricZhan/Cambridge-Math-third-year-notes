@@ -2873,4 +2873,234 @@ and the corresponding zeroth-order states are
 \begin{center}
     \textbf{End of lecture 12}
 \end{center}
+\clearpage
+The diagonal matrix element is
+\begin{align*}
+    \alpha
+      &=\int_0^a dx\int_0^a dy\,
+          \frac{xy}{a^2}|\psi_{12}(x,y)|^2\\
+      &=\left(\frac2a\right)^2\frac1{a^2}
+        \left(\int_0^a x\sin^2\frac{\pi x}{a}\,dx\right)
+        \left(\int_0^a y\sin^2\frac{2\pi y}{a}\,dy\right)
+       =\frac14,
+\end{align*}
+using
+\[
+    \int_0^a x\sin^2\frac{n\pi x}{a}\,dx=\frac{a^2}{4},
+    \qquad n=1,2,\ldots.
+\]
+The off-diagonal matrix element is
+\begin{align*}
+    \beta
+      &=\int_0^a dx\int_0^a dy\,
+        \frac{xy}{a^2}\psi_{12}(x,y)\psi_{21}(x,y)\\
+      &=\left(\frac2a\right)^2\frac1{a^2}
+        \left(\int_0^a x\sin\frac{\pi x}{a}
+                            \sin\frac{2\pi x}{a}\,dx\right)^2
+       =\left(\frac4{3\pi}\right)^4,
+\end{align*}
+where
+\[
+    \int_0^a x\sin\frac{\pi x}{a}\sin\frac{2\pi x}{a}\,dx
+      =-\frac{8a^2}{9\pi^2}.
+\]
+
+Summing up, to first order the new ground-state energy is
+\[
+    E_{\mathrm{ground}}
+      =\frac{\hbar^2\pi^2}{ma^2}+\frac{\lambda}{4}+O(\lambda^2).
+\]
+The next two levels have energies
+\[
+    E_\pm=\frac{5\hbar^2\pi^2}{2ma^2}
+         +\frac{\lambda}{4}
+         \pm\lambda\left(\frac4{3\pi}\right)^4+O(\lambda^2),
+\]
+with corresponding zeroth-order states
+\[
+    \frac1{\sqrt2}\bigl(|12\rangle\pm|21\rangle\bigr).
+\]
+We expect perturbation theory to be accurate for
+\[
+    |\lambda|\ll\frac{\hbar^2\pi^2}{ma^2}.
+\]
+
+\section*{5. Angular Momentum}
+\subsection*{5.1 Recap of Orbital Angular Momentum}
+
+Consider a particle with position $\hat{\mathbf x}$ and momentum
+$\hat{\mathbf p}$. Its angular momentum about the origin is
+\[
+    \mathbf L=\hat{\mathbf x}\times\hat{\mathbf p},
+    \qquad L_i=\varepsilon_{ijk}\hat x_j\hat p_k.
+\]
+Repeated Cartesian indices are summed. From
+\[
+    [\hat x_i,\hat p_j]=i\hbar\delta_{ij},
+\]
+we find
+\[
+    [L_i,L_j]=i\hbar\varepsilon_{ijk}L_k.
+\]
+The squared angular momentum
+\[
+    L^2=L_iL_i
+\]
+satisfies
+\[
+    [L^2,L_i]=0.
+\]
+The angular-momentum commutator can be derived by first showing
+\[
+    [L_i,\hat x_j]=i\hbar\varepsilon_{ijk}\hat x_k,
+    \qquad
+    [L_i,\hat p_j]=i\hbar\varepsilon_{ijk}\hat p_k.
+\]
+
+The orbital angular-momentum eigenvalue problem has well-behaved
+solutions only for
+\[
+    \ell=0,1,2,\ldots,
+    \qquad m=0,\pm1,\pm2,\ldots,\pm\ell.
+\]
+If the Schr\"odinger equation has a spherically symmetric potential
+$V(\mathbf x)=V(r)$, seek separable solutions
+\[
+    \psi_{\ell m}(\mathbf x)=R_\ell(r)Y_{\ell m}(\theta,\varphi).
+\]
+The time-independent Schr\"odinger equation for the radial function is
+\[
+    -\frac{\hbar^2}{2m}\frac1r\frac{d^2}{dr^2}\bigl(rR_\ell\bigr)
+    +\left(\frac{\hbar^2\ell(\ell+1)}{2mr^2}+V(r)\right)R_\ell
+    =ER_\ell.
+\]
+
+\subsubsection*{Parity}
+
+Of particular importance is the behaviour under parity,
+$\mathbf x\mapsto-\mathbf x$. In spherical polar coordinates this is
+\[
+    r\mapsto r,\qquad
+    \theta\mapsto\pi-\theta,\qquad
+    \varphi\mapsto\varphi+\pi\pmod{2\pi}.
+\]
+The spherical harmonics satisfy
+\[
+    Y_{\ell m}(\pi-\theta,\varphi+\pi)
+       =(-1)^\ell Y_{\ell m}(\theta,\varphi).
+\]
+Hence
+\[
+    \psi_{\ell m}(-\mathbf x)=(-1)^\ell\psi_{\ell m}(\mathbf x).
+\]
+
+\subsubsection*{Two particles with a central interaction}
+
+An important case is a system of two particles interacting through
+a potential depending only on their relative separation:
+\begin{align*}
+    H&=\frac{\hat{\mathbf p}_1^{\,2}}{2m_1}
+       +\frac{\hat{\mathbf p}_2^{\,2}}{2m_2}
+       +V\bigl(|\hat{\mathbf x}_1-\hat{\mathbf x}_2|\bigr)\\
+     &=\frac{\hat{\mathbf P}^{\,2}}{2M}
+       +\frac{\hat{\mathbf p}^{\,2}}{2m}
+       +V\bigl(|\hat{\mathbf x}|\bigr).
+\end{align*}
+The centre-of-mass variables are
+\[
+    \hat{\mathbf X}
+       =\frac{m_1\hat{\mathbf x}_1+m_2\hat{\mathbf x}_2}{M},
+    \qquad
+    \hat{\mathbf P}=\hat{\mathbf p}_1+\hat{\mathbf p}_2,
+    \qquad M=m_1+m_2.
+\]
+The relative variables and reduced mass are
+\[
+    \hat{\mathbf x}=\hat{\mathbf x}_1-\hat{\mathbf x}_2,
+    \qquad
+    \hat{\mathbf p}
+       =\frac{m_2\hat{\mathbf p}_1-m_1\hat{\mathbf p}_2}{M},
+    \qquad m=\frac{m_1m_2}{M}.
+\]
+\begin{center}
+    \includegraphics[width=0.22\linewidth]{figures/quantum-lecture13/relative-position.png}
+\end{center}
+The centre-of-mass dynamics are those of a free particle, since there
+is no external force or potential. The relative motion is governed
+by a spherically symmetric potential. A separated wavefunction is
+\[
+    \Psi(\mathbf X,\mathbf x)
+      =e^{i\mathbf k\cdot\mathbf X}\psi_{\ell m}(\mathbf x).
+\]
+Under $\mathbf x\mapsto-\mathbf x$ at fixed $\mathbf X$,
+\[
+    \Psi\mapsto(-1)^\ell\Psi.
+\]
+Interchanging the particles, $\mathbf x_1\leftrightarrow\mathbf x_2$,
+reverses $\mathbf x=\mathbf x_1-\mathbf x_2$. For identical particles
+the centre of mass is unchanged, so the spatial wavefunction acquires
+the factor $(-1)^\ell$ under particle interchange.
+
+\subsection*{5.2 General Analysis of Angular Momentum Eigenstates}
+
+Consider Hermitian operators
+\[
+    \mathbf J=(J_1,J_2,J_3),\qquad J_i^\dagger=J_i,
+\]
+obeying
+\[
+    [J_i,J_j]=i\hbar\varepsilon_{ijk}J_k.
+\]
+Define
+\[
+    J^2=J_iJ_i,\qquad (J^2)^\dagger=J^2.
+\]
+Then
+\[
+    [J^2,J_i]=0.
+\]
+
+First observe that if $|\psi\rangle$ is normalised and
+\[
+    J^2|\psi\rangle=\lambda|\psi\rangle,
+\]
+then
+\begin{align*}
+    \lambda
+      &=\langle\psi|J^2|\psi\rangle\\
+      &=\|J_1|\psi\rangle\|^2
+        +\|J_2|\psi\rangle\|^2
+        +\|J_3|\psi\rangle\|^2\ge0.
+\end{align*}
+It is convenient to write
+\[
+    \lambda=\hbar^2j(j+1),\qquad j\ge0,
+\]
+since $j(j+1)$ is unchanged by $j\mapsto-(j+1)$.
+Label simultaneous eigenstates of $J^2$ and $J_3$ by $|jm\rangle$:
+\[
+    J^2|jm\rangle=\hbar^2j(j+1)|jm\rangle,
+    \qquad J_3|jm\rangle=\hbar m|jm\rangle.
+\]
+
+To analyse the allowed values of $j$ and $m$, define the ladder operators
+\[
+    J_\pm=J_1\pm iJ_2,\qquad (J_\pm)^\dagger=J_\mp.
+\]
+It is easy to check that
+\[
+    [J_3,J_\pm]=\pm\hbar J_\pm,
+    \qquad [J_+,J_-]=2\hbar J_3,
+    \qquad [J^2,J_\pm]=0.
+\]
+In fact,
+\[
+    J_+J_-=J^2-J_3^2+\hbar J_3,
+    \qquad
+    J_-J_+=J^2-J_3^2-\hbar J_3.
+\]
+
+\begin{center}
+    \textbf{End of lecture 13}
+\end{center}
 \end{document}

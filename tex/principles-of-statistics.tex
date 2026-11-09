@@ -2943,5 +2943,227 @@ is also log-concave.
 \textbf{End of lecture 12}
 \end{center}
 
+% Lecture 13: transcribed from the ten supplied blackboard screenshots.
+\newpage
+\subsection*{III. DECISION THEORY}
+
+Let $\{f(\cdot,\theta):\theta\in\Theta\}$ be a model with sample space
+$\mathcal X$, and let $\mathcal A$ be an \underline{action space}.
+A \underline{decision rule} is a function
+\[
+\delta:\mathcal X\longrightarrow\mathcal A.
+\]
+The \underline{loss function} $L:\mathcal A\times\Theta\to\mathbb R$
+measures the loss incurred when choosing action $a$ when the true parameter
+is $\theta$, by $L(a,\theta)$.
+
+\paragraph{Ex.}
+\begin{enumerate}
+\item \underline{Estimation}: $\mathcal A=\Theta$, with, for example,
+\[
+L(a,\theta)=(a-\theta)^2\quad\text{(``quadratic loss'')},
+\qquad L(a,\theta)=|a-\theta|\quad\text{(``absolute error'')}.
+\]
+\item \underline{Testing}:
+\[
+H_0:\theta\in\Theta_0\subseteq\Theta,
+\qquad H_1:\theta\in\Theta\setminus\Theta_0=\Theta_1.
+\]
+Take $\mathcal A=\{0,1\}$ and
+\[
+L(a,\theta)=\mathbf 1_{\{\theta\notin\Theta_a\}}
+\qquad\text{(``0--1 loss'')}.
+\]
+\end{enumerate}
+
+The \underline{risk} of a decision rule is the function
+\[
+R(\delta,\theta)
+=\int_{\mathcal X}L(\delta(x),\theta)f(x,\theta)\,dx
+=\mathbb E_\theta[L(\delta(X),\theta)].
+\]
+
+\paragraph{Ex.}
+Let $X_1,\ldots,X_n\overset{\mathrm{iid}}\sim\operatorname{Ber}(\theta)$,
+with quadratic loss. The risk is the MSE:
+\[
+R(\delta,\theta)=\mathbb E_\theta[(\delta(X)-\theta)^2].
+\]
+The MLE $\hat\theta_n=\overline X_n$ has risk
+\[
+R(\overline X_n,\theta)
+=\mathbb E_\theta[(\overline X_n-\theta)^2]
+=\frac{\theta(1-\theta)}n.
+\]
+The constant estimator $\hat\eta=\frac12$ has risk
+\[
+R(\hat\eta,\theta)=\left(\theta-\frac12\right)^2.
+\]
+\begin{center}
+\includegraphics[width=0.52\textwidth]{figures/statistics-lecture13-risks.png}
+\end{center}
+Which one is better? One way to order estimators is through the
+\underline{Bayes risk}:
+\[
+R_\pi(\delta)=\int_\Theta R(\delta,\theta)\pi(\theta)\,d\theta.
+\]
+A \underline{$\pi$-Bayes rule} minimises $R_\pi(\delta)$ over $\delta$;
+we denote it by $\delta_\pi$.
+
+\paragraph{Ex. (cont'd)}
+If $\pi$ is $\operatorname{Unif}([0,1])$, in the Bernoulli model we have
+\[
+R_\pi(\overline X_n)=\int_0^1\frac{\theta(1-\theta)}n\,d\theta
+=\frac1{6n},
+\qquad
+R_\pi(\hat\eta)=\int_0^1\left(\theta-\frac12\right)^2\,d\theta
+=\frac1{12}.
+\]
+
+Let $\mathbb E[\,\cdot\,]$ denote expectation under the law of $(X,\theta)$
+in the Bayesian model, with density $\pi(\theta)f(x,\theta)$.
+Then the Bayes risk can be written
+\[
+\begin{aligned}
+R_\pi(\delta)
+&=\mathbb E\bigl[\underbrace{\mathbb E[L(\delta(X),\theta)\mid\theta]}
+_{R(\delta,\theta)}\bigr]\\
+&=\mathbb E[L(\delta(X),\theta)]\qquad\text{(tower property)}\\
+&=\mathbb E\bigl[\mathbb E[L(\delta(X),\theta)\mid X]\bigr].
+\end{aligned}
+\]
+Here the inner conditional expectation, evaluated at $X=x$, is the
+\underline{posterior risk}:
+\[
+\mathbb E[L(\delta(X),\theta)\mid X=x]
+=\int_\Theta L(\delta(x),\theta)\pi(\theta\mid x)\,d\theta.
+\]
+We can minimise this by minimising the posterior risk pointwise for each
+$x\in\mathcal X$, as a function of $\delta(x)$.
+
+\medskip
+\noindent\underline{Lemma.}\quad
+Suppose that, for each $x\in\mathcal X$, $a_x$ uniquely minimises the
+posterior risk $\mathbb E[L(a,\theta)\mid X=x]$ as a function of $a$.
+Then $\delta_\pi(x)=a_x$ is a $\pi$-Bayes rule.
+If $\eta$ is any other $\pi$-Bayes rule, then
+\[
+\mathbb P(\delta_\pi(X)=\eta(X))=1.
+\]
+
+\medskip
+\noindent\underline{Proof.}\quad
+\[
+\begin{aligned}
+R_\pi(\delta)-R_\pi(\delta_\pi)
+&=\mathbb E\bigl[
+\underbrace{\mathbb E[L(\delta(X),\theta)\mid X]
+-\mathbb E[L(\delta_\pi(X),\theta)\mid X]}_{D\geq0}
+\bigr]\geq0.
+\end{aligned}
+\]
+Hence $\delta_\pi$ is a $\pi$-Bayes rule.
+Suppose there is an event $A$ with $\mathbb P(A)>0$ on which
+$\delta(X)\ne\delta_\pi(X)$. Since $a_x$ uniquely minimises the posterior
+risk, $D>0$ on $A$. Hence
+\[
+R_\pi(\delta)-R_\pi(\delta_\pi)=\mathbb E[D]
+\geq\varepsilon\,\mathbb P(D\geq\varepsilon)>0
+\]
+for $\varepsilon>0$ small enough, so $\delta$ cannot be a $\pi$-Bayes rule.
+Indeed,
+\[
+\{D>0\}=\bigcup_{n\geq1}\{D\geq1/n\},\qquad
+0<\mathbb P(A)\leq\sum_{n\geq1}\mathbb P(D\geq1/n),
+\]
+so $\mathbb P(D\geq1/n)>0$ for some $n$, and hence for all sufficiently
+large $n$. \hfill$\square$
+
+\medskip
+In estimation with quadratic loss, the $\pi$-Bayes rule is the
+\underline{posterior mean}
+\[
+\overline\theta=\mathbb E[\theta\mid X].
+\]
+Indeed,
+\[
+\begin{aligned}
+R_\pi(\delta)
+&=\mathbb E[(\delta(X)-\theta)^2]\\
+&=\mathbb E\bigl[\mathbb E[
+(\delta(X)-\overline\theta+\overline\theta-\theta)^2\mid X]\bigr]\\
+&=\underbrace{\mathbb E[(\delta(X)-\overline\theta)^2]}_{\geq0}
++\underbrace{\mathbb E[(\overline\theta-\theta)^2]}_{\text{does not depend on }\delta}\\
+&\quad+\underbrace{\mathbb E\bigl[\mathbb E[
+2(\delta(X)-\overline\theta)(\overline\theta-\theta)\mid X]\bigr]}_{=0}.
+\end{aligned}
+\]
+The first term is minimised by $\delta(X)=\overline\theta$, and the cross
+term vanishes because $\mathbb E[\overline\theta-\theta\mid X]=0$.
+
+\paragraph{Ex.}
+In the Bernoulli model with $\pi=\operatorname{Unif}([0,1])$,
+\[
+\overline\theta=\frac{n\overline X_n+1}{n+2}.
+\]
+We've shown this has Bayes risk no greater than either the MLE
+$\hat\theta_n^{\mathrm{MLE}}=\overline X_n$ or $\hat\eta=\frac12$,
+for all $n\geq1$.
+
+\medskip
+\noindent\underline{Thm (von Neumann--Morgenstern).}\quad
+Given a model and a prior, every decision rule induces a distribution over
+$(\delta(X),\theta)$. Suppose we have an ordering or ``preference'' between
+every pair of rules $\delta_1,\delta_2$: either $\delta_1\preceq\delta_2$
+or $\delta_2\preceq\delta_1$ (or both, written $\delta_1\sim\delta_2$).
+Suppose it depends only on the induced distribution, so that
+\[
+(\delta_1(X),\theta)\overset d=(\delta_2(X),\theta)
+\quad\Longrightarrow\quad\delta_1\sim\delta_2.
+\]
+Suppose also:
+\begin{enumerate}
+\item \underline{Transitivity}:
+\[
+\delta_1\preceq\delta_2,\quad\delta_2\preceq\delta_3
+\quad\Longrightarrow\quad\delta_1\preceq\delta_3.
+\]
+\item \underline{Continuity}: if $\delta_1\prec\delta_2\prec\delta_3$,
+then there exist $p,q\in(0,1)$ such that
+\[
+p\delta_3+(1-p)\delta_1\prec\delta_2
+\prec q\delta_3+(1-q)\delta_1.
+\]
+\item \underline{Independence}: if $\delta_1\preceq\delta_2$, then for
+every $\delta_3$ and every $p\in(0,1)$,
+\[
+p\delta_3+(1-p)\delta_1
+\preceq p\delta_3+(1-p)\delta_2.
+\]
+\end{enumerate}
+Here mixtures denote randomised choices of decision rules, with the
+indicated probabilities.
+Then there exists a loss function $L$ such that
+\[
+\delta_1\preceq\delta_2
+\quad\Longleftrightarrow\quad
+R_\pi(\delta_1)\leq R_\pi(\delta_2),
+\]
+where $R_\pi$ is the Bayes risk under $L$.
+
+\medskip
+\noindent\emph{Transcription notes.}
+In transitivity, the board's conclusion $\delta_2\preceq\delta_3$ has been
+corrected to $\delta_1\preceq\delta_3$.
+In independence, the board's $\exists p\in(0,1)$ has been corrected to
+$\forall p\in(0,1)$, as in the standard independence axiom; see
+\href{https://ocw.mit.edu/courses/14-123-microeconomic-theory-iii-spring-2015/a8b0b0de1bebe039bc3cccc15f1b756f_MIT14_123S15_decision.pdf}
+{MIT OpenCourseWare, \emph{Decision Making Under Risk}, p.~4}.
+
+\begin{center}
+\textbf{End of lecture 13}
+\end{center}
+
+
 \end{document}
 
