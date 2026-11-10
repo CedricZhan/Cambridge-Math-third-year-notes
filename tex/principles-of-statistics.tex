@@ -2069,10 +2069,10 @@ where $\Theta_0\subseteq\Theta$ is a linear subspace of dimension $p_0$.
 Taylor expand $\ell_n(\theta)$ around $\ell_n(\hat\theta_n)$
 \[
 \begin{aligned}
-2\bigl(\ell_n(\theta_0)-\ell_n(\hat\theta_n)\bigr)
-&=\underbrace{\frac{\partial\ell_n(\hat\theta_n)}{\partial\theta}}_{0}
+2\bigl(\ell_n(\hat\theta_n)-\ell_n(\theta_0)\bigr)
+&=-2\underbrace{\left(\frac{\partial\ell_n(\hat\theta_n)}{\partial\theta}\right)^T}_{0}
 (\theta_0-\hat\theta_n)\\
-&\quad+\frac n2(\theta_0-\hat\theta_n)^T
+&\quad+n(\theta_0-\hat\theta_n)^T
 J_n(\tilde\theta_n)(\theta_0-\hat\theta_n).
 \end{aligned}
 \]
