@@ -2310,5 +2310,258 @@ Watson's lemma applies, $\alpha=-\tfrac12$, $\beta=1$.
     \textbf{End of lecture 9}
 \end{center}
 
+\clearpage
+\section*{3.7 Method of steepest descent (contd)}
+
+We consider
+\[
+    I(x)=\int_C f(z)e^{x\phi(z)}\,dz,
+    \qquad x\to+\infty,
+    \qquad \phi=u+iv,\quad z=p+iq,
+\]
+where $C$ is a complex contour and $f,\phi$ are analytic in the region
+used for contour deformation.
+So far we have considered the case $\nabla u\neq0$: deform $C$ to $C'$
+following constant-$v$ curves, with steepest descent away from endpoints,
+and show that any bridging curves give negligible contributions.
+Then use endpoint Laplace's method or Watson's lemma.
+
+\medskip
+\noindent\textbf{Questions.}
+What if $C$ has no endpoints, or $\nabla u=0$, or $f=0$ at an endpoint?
+
+\subsection*{Interlude 3: critical points of an analytic phase}
+The Cauchy--Riemann equations give
+\[
+    u_p=v_q,\qquad u_q=-v_p,
+    \qquad \phi'(z)=u_p-iu_q.
+\]
+Consequently, at $z_0=p_0+iq_0$,
+\[
+    \nabla u(z_0)=0
+    \quad\Longleftrightarrow\quad
+    \nabla v(z_0)=0
+    \quad\Longleftrightarrow\quad
+    \phi'(z_0)=0.
+\]
+Since $u$ and $v$ are harmonic,
+\[
+    u_{pp}+u_{qq}=0,\qquad
+    \det D^2u=u_{pp}u_{qq}-u_{pq}^2
+    =-u_{pp}^2-u_{pq}^2=-|\phi''(z_0)|^2.
+\]
+The same determinant formula holds for $v$. Thus a
+\emph{simple saddle}, for which $\phi''(z_0)\neq0$, is a nondegenerate
+saddle of both $u$ and $v$ in the $(p,q)$ plane.
+
+\medskip
+\noindent\textit{Clarification of the board.}
+The displayed Hessian determinant is strictly negative only for a
+simple saddle. At a degenerate critical point it is zero, so the
+second-derivative test is inconclusive. For a nonconstant analytic
+phase there are still no local maxima or minima of $u$ or $v$ in the
+two-dimensional domain, by the harmonic maximum principle.
+
+\subsection*{(b) Contours through saddles}
+Suppose $\phi'(z_0)=0$, with $z_0$ not necessarily on the original contour.
+Depending on the direction of approach, $u$ can have a local maximum
+or minimum along a curve through $z_0$. Such a point may contribute
+to the asymptotics, in addition to any endpoint contributions.
+
+\medskip
+\noindent\textbf{Strategy.}
+Deform $C$ to an admissible contour $C'$ passing through the saddle
+along a steepest descent curve. Then $u$ has a local maximum at $z_0$
+\emph{on this curve}, and Laplace's method applies locally.
+
+\clearpage
+\subsection*{Local geometry at a simple saddle}
+Level curves of $u$ and $v$ intersect at a saddle, so one must select
+the correct branches for $C'$. For a simple saddle there are two local
+constant-$v$ branches and two local constant-$u$ branches through $z_0$.
+\begin{center}
+    \pdfximage width 0.55\linewidth {figures/asymptotic-lecture10/saddle-level-curves.png}
+    \leavevmode\pdfrefximage\pdflastximage
+    \hspace{0.03\linewidth}
+    \pdfximage width 0.25\linewidth {figures/asymptotic-lecture10/restricted-extrema.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\noindent The diagram is a direct crop of the supplied board: the
+constant-$v$ branches give steepest ascent or descent of $u$.
+The restrictions of $u$ to these two branches have, respectively,
+a local minimum and maximum at $z_0$.
+
+\medskip
+For the leading term we can replace $C'$ locally by its tangent line,
+\[
+    z(t)=z_0+t e^{i\theta},\qquad \theta=\text{constant}.
+\]
+Writing $\alpha=\arg\phi''(z_0)$, Taylor expansion gives
+\begin{align*}
+    \phi(z)-\phi(z_0)
+    &=\frac12\phi''(z_0)t^2e^{2i\theta}+O(t^3)\\
+    &=\frac12|\phi''(z_0)|t^2e^{i(2\theta+\alpha)}+O(t^3).
+\end{align*}
+On the exact constant-$v$ curve the phase difference is real. Thus its
+tangent directions satisfy
+\[
+    \sin(2\theta+\alpha)=0,
+    \qquad \theta_n=-\frac\alpha2+\frac{n\pi}{2},
+    \qquad n=0,1,2,3.
+\]
+These are four rays from $z_0$: $n=0,2$ give ascent and $n=1,3$
+give descent. Along either descent ray,
+\[
+    \phi(z)-\phi(z_0)\sim-\frac12|\phi''(z_0)|t^2.
+\]
+Substitute the parametrization into $I(x)$ and use Laplace's method.
+For a full passage through the saddle, oriented in the direction
+$e^{i\theta_d}$, with $f(z_0)\neq0$, the local contribution is
+\[
+    I_{z_0}(x)\sim
+    f(z_0)e^{x\phi(z_0)}e^{i\theta_d}
+    \sqrt{\frac{2\pi}{x|\phi''(z_0)|}}.
+\]
+Reversing orientation reverses its sign. Equivalently,
+\[
+    I_{z_0}(x)\sim
+    f(z_0)e^{x\phi(z_0)}
+    \sqrt{\frac{2\pi}{-x\phi''(z_0)}},
+\]
+where the square-root branch is fixed by the oriented contour.
+
+\clearpage
+\subsection*{Example: Debye integral}
+Consider
+\[
+    I(x)=\int_C \exp\!\left\{x\bigl(\operatorname{sech}w\sinh z-z\bigr)\right\}\,dz,
+    \qquad x\to+\infty,
+\]
+where $w\in\mathbb R\setminus\{0\}$ and $C$ is the Sommerfeld contour
+shown below, oriented from the lower end to the upper end.
+\begin{center}
+    \pdfximage width 0.82\linewidth {figures/asymptotic-lecture10/sommerfeld-contour.png}
+    \leavevmode\pdfrefximage\pdflastximage
+\end{center}
+\[
+    f=1,\qquad \phi(z)=\operatorname{sech}w\sinh z-z,
+    \qquad \phi'(z)=\operatorname{sech}w\cosh z-1.
+\]
+The saddle equation is $\cosh z=\cosh w$, whose solutions are
+\[
+    z=\pm w+2\pi i k,\qquad k\in\mathbb Z.
+\]
+\noindent\textit{Parameter clarification.}
+The board subsequently uses $\arg(\tanh w)=0$ and a decaying Gaussian,
+which require $w>0$. Since the integral depends on $w$ only through
+$\operatorname{sech}w$, set $a=|w|>0$; the relevant right-hand saddle is
+$z_0=a$. For the board's calculation with $w>0$, simply take $a=w$.
+
+At this saddle,
+\[
+    \phi_0:=\phi(a)=\tanh a-a,
+    \qquad \phi''(z)=\operatorname{sech}a\sinh z,
+    \qquad \phi''(a)=\tanh a>0.
+\]
+Hence $\alpha=0$ and the descent rays have directions
+\[
+    \theta=\frac\pi2,\ \frac{3\pi}2.
+\]
+The tangent line is therefore vertical, $z=a+it$. Locally,
+\[
+    \phi(a+it)=\phi_0-\frac12\tanh a\,t^2+O(t^3).
+\]
+\noindent\textit{Local approximation.}
+The tangent line itself need not be an exact constant-$v$ curve.
+It gives the same leading Gaussian term as the true descent curve.
+
+\clearpage
+\subsection*{Evaluation of the saddle contribution}
+For the upper ray, oriented away from $z_0$, $dz=i\,dt$, and for a
+small fixed $\varepsilon>0$,
+\begin{align*}
+    I_+(x)
+    &=i e^{x\phi_0}\int_0^\varepsilon
+        \exp\!\left\{-\frac{x\tanh a}{2}t^2+O(xt^3)\right\}\,dt\\
+    &\sim i e^{x\phi_0}\sqrt{\frac{2}{x\tanh a}}
+        \int_0^\infty e^{-s^2}\,ds\\
+    &=\frac{i}{2}e^{x\phi_0}\sqrt{\frac{2\pi}{x\tanh a}}.
+\end{align*}
+The lower part of the contour approaches $z_0$ from below and contributes
+the same leading term. Thus the full saddle contribution is
+\[
+    I_{z_0}(x)\sim i e^{x(\tanh a-a)}
+        \sqrt{\frac{2\pi}{x\tanh a}}.
+\]
+Once the remaining contour contributions are shown to be negligible,
+\[
+    \boxed{I(x)\sim i e^{x(\tanh a-a)}
+        \sqrt{\frac{2\pi}{x\tanh a}},\qquad a=|w|>0.}
+\]
+For $w>0$ this agrees with the result on the board.
+
+\subsection*{Exact constant-$v$ curves (board exercise)}
+Use $z=p+iq$, keeping $x$ for the large parameter. Then
+\[
+    u(p,q)=\operatorname{sech}a\sinh p\cos q-p,
+    \qquad
+    v(p,q)=\operatorname{sech}a\cosh p\sin q-q.
+\]
+Since $v(a,0)=0$, the constant-$v$ set through the saddle satisfies
+\[
+    q=0\qquad\text{or}\qquad
+    \cosh p=\cosh a\,\frac{q}{\sin q}.
+\]
+On the right-hand descent branch, select
+\[
+    p(q)=\operatorname{arcosh}\!\left(\cosh a\,\frac{q}{\sin q}\right),
+    \qquad -\pi<q<\pi,
+    \qquad p(0)=a
+\]
+by continuity. This curve has a vertical tangent at $z=a$, and
+$p(q)\to+\infty$ as $q\to\pm\pi$. Along it, $u$ decreases away from
+the saddle on either side. It is itself a Sommerfeld contour of the
+type shown in the diagram. The real-axis branch $q=0$ gives steepest
+ascent away from $a$ locally.
+Moreover, $u\to-\infty$ at both ends of this descent contour. Outside
+any fixed neighbourhood of $a$, its real phase is bounded strictly
+below $\phi_0$, so the remaining tails are exponentially smaller than
+the local Gaussian contribution. This justifies the boxed asymptotic
+formula for the indicated Sommerfeld contour.
+
+\clearpage
+\subsection*{Endpoints and multiple saddles}
+\begin{itemize}
+    \item When endpoints and saddles are both present, compare their
+    contributions: a saddle may dominate the endpoint terms.
+    \item If $f$ vanishes at an endpoint, expand to its first nonzero
+    term before using Watson's lemma. A zero usually changes the
+    algebraic power of $x$; it does not by itself remove the endpoint
+    contribution or guarantee saddle dominance.
+    \item More than one saddle may contribute. Deform through the
+    saddles accessible from the original contour, respecting analyticity
+    and convergence, and compare their exponential and algebraic factors.
+    Include all contributions of the same leading size.
+    \item A closed contour bounding a region on which the integrand
+    is analytic has integral zero by Cauchy's theorem. Thus having no
+    finite endpoints alone does not guarantee a nonzero saddle term.
+\end{itemize}
+
+\medskip
+\noindent\textit{Source photographs.}
+The ten screenshots are preserved in the directory
+\begin{center}
+    \texttt{figures/asymptotic-lecture10/}
+\end{center}
+as \texttt{source-01.png} through \texttt{source-10.png}.
+Screenshots 8 and 9 repeat the same board and
+are transcribed once. The figures above are direct crops of screenshots
+4 and 6. Clarifications and the general local saddle formula supplement
+the board calculation.
+
+\begin{center}
+    \textbf{End of lecture 10}
+\end{center}
+
 \end{document}
 

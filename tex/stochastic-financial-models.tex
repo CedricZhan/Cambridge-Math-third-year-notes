@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
+\usepackage{graphicx}
 \title{Stochastic Financial Models}
 \begin{document}
 \maketitle
@@ -2093,4 +2094,235 @@ Uniqueness in Wiener's theorem shows all BMs have the same law on $W$.
 \begin{center}
 \textbf{End of lecture 9}
 \end{center}
+
+
+\newpage
+\noindent\textbf{Recap.}
+A real-valued process $(B_t)_{t\geq0}$ starting at $0$ is a
+Brownian motion if, for all $s,t\geq0$,
+\[
+B_{t+s}-B_s\sim N(0,t)
+\quad\text{and is independent of }\mathcal F_s^B,
+\]
+and every sample path $t\mapsto B_t(\omega)$ is continuous.
+
+\subsection*{3.3 Brownian motion as a limit of random walks}
+
+A discrete-time process $(W_n)_{n\geq0}$ is a \emph{random walk}
+if
+\[
+W_0=0,\qquad W_n=Y_1+\cdots+Y_n,
+\]
+where $Y_1,Y_2,\ldots$ are independent and identically distributed.
+
+\medskip
+\noindent\textbf{Theorem (Donsker's invariance principle).}
+Let $(W_n)_{n\geq0}$ be a random walk in $\mathbb R$ whose steps
+have mean $0$ and variance $1$. Extend it to a continuous process
+by linear interpolation:
+\[
+W_{n+u}=(1-u)W_n+uW_{n+1},
+\qquad n\geq0,\quad u\in[0,1].
+\]
+For each integer $k\geq1$, set
+\[
+W_t^{(k)}=k^{-1/2}W_{kt},\qquad t\geq0.
+\]
+Then, for every bounded continuous functional
+$F:C[0,\infty)\to\mathbb R$,
+\[
+\mathbb E\bigl(F(W^{(k)})\bigr)
+\longrightarrow \mathbb E\bigl(F(B)\bigr)
+\qquad\text{as }k\to\infty,
+\]
+where $B$ is a BM$_0$.
+
+\begin{center}
+\includegraphics[width=.40\textwidth]{figures/financial-lecture10/random-walk-interpolation.png}
+\end{center}
+
+Here $C[0,\infty)$ is equipped with the topology of uniform
+convergence on compact intervals, induced by the metric
+\[
+d(w_1,w_2)=\sum_{n=1}^{\infty}2^{-n}
+\left(\sup_{t\in[0,n]}|w_1(t)-w_2(t)|\wedge1\right).
+\]
+Thus $W^{(k)}$ converges in distribution as a random continuous
+path. The finite-variance assumption on the steps is needed.
+\begin{center}
+\includegraphics[width=.85\textwidth]{figures/financial-lecture10/random-walk-limit.png}
+\end{center}
+
+\subsection*{3.4 Change of measure for Brownian motion}
+
+\noindent\textbf{Proposition.}
+Let $(B_t)_{0\leq t\leq T}$ be a BM$_0$, where $T\geq0$, and
+let $c\in\mathbb R$. Define
+\[
+\widetilde B_t=B_t+ct,\qquad 0\leq t\leq T.
+\]
+Then, for every Borel set $A\subseteq C[0,T]$,
+\[
+\boxed{\mathbb P(\widetilde B\in A)
+=\mathbb E\!\left(
+\mathbf1_{\{B\in A\}}e^{cB_T-\frac12c^2T}
+\right).}
+\]
+% board-05.png is corrected by correction.png: the indicator is
+% 1_{B in A}, not an unqualified 1_A.
+
+\begin{center}
+\includegraphics[width=.40\textwidth]{figures/financial-lecture10/brownian-drift.png}
+\end{center}
+
+\noindent\textbf{Proof.}
+The case $T=0$ is immediate, so suppose $T>0$.
+By a standard $\pi$-system argument, it suffices to prove the
+identity for sets of the form
+\[
+A=\left\{x\in C[0,T]:
+x(t_k)-x(t_{k-1})\in I_k\text{ for }k=1,\ldots,n\right\},
+\]
+where $0=t_0<t_1<\cdots<t_n=T$ and $I_1,\ldots,I_n$ are intervals.
+Both laws are supported on paths starting at $0$; on that
+subspace, these sets generate the Borel $\sigma$-algebra.
+
+First suppose $X\sim N(0,s)$, with $s>0$, and set
+$\widehat X=X+cs\sim N(cs,s)$. For any interval $I$,
+\[
+\begin{aligned}
+\mathbb P(\widehat X\in I)
+&=\int_I\frac1{\sqrt{2\pi s}}
+       \exp\!\left(-\frac{(x-cs)^2}{2s}\right)\,dx\\
+&=\int_I\frac1{\sqrt{2\pi s}}
+       e^{-x^2/(2s)}e^{cx-\frac12c^2s}\,dx\\
+&=\mathbb E\!\left(\mathbf1_{\{X\in I\}}
+       e^{cX-\frac12c^2s}\right).
+\end{aligned}
+\]
+Set
+\[
+s_k=t_k-t_{k-1},\qquad X_k=B_{t_k}-B_{t_{k-1}}.
+\]
+Then $X_1,\ldots,X_n$ are independent, with $X_k\sim N(0,s_k)$,
+and
+\[
+\widehat X_k:=\widetilde B_{t_k}-\widetilde B_{t_{k-1}}
+=X_k+cs_k.
+\]
+Consequently,
+\[
+\begin{aligned}
+\mathbb P(\widetilde B\in A)
+&=\prod_{k=1}^n\mathbb P(\widehat X_k\in I_k)\\
+&=\prod_{k=1}^n\mathbb E\!\left(
+  \mathbf1_{\{X_k\in I_k\}}e^{cX_k-\frac12c^2s_k}\right)\\
+&=\mathbb E\!\left(
+  \mathbf1_{\{B\in A\}}e^{cB_T-\frac12c^2T}\right),
+\end{aligned}
+\]
+using $\sum_{k=1}^nX_k=B_T$ and $\sum_{k=1}^ns_k=T$.
+This proves the result. \hfill$\square$
+
+\subsection*{3.5 The reflection principle}
+
+\noindent\textbf{Theorem.}
+Let $(B_t)_{t\geq0}$ be a BM$_0$, and let $a\geq0$. Set
+\[
+T=\inf\{t\geq0:B_t=a\},
+\qquad
+\widetilde B_t=
+\begin{cases}
+B_t,&t\leq T,\\
+a-(B_t-a)=2a-B_t,&t>T.
+\end{cases}
+\]
+Then $(\widetilde B_t)_{t\geq0}$ is also a BM$_0$.
+
+\begin{center}
+\includegraphics[width=.48\textwidth]{figures/financial-lecture10/reflection.png}
+\end{center}
+
+\noindent\textbf{Proof.}
+We know that $T$ is a stopping time and is almost surely finite.
+Set
+\[
+Y_t=B_{t\wedge T},\qquad Z_t=B_{T+t}-a,\qquad t\geq0.
+\]
+By the strong Markov property, $Z=(Z_t)_{t\geq0}$ is a BM$_0$
+independent of $\mathcal F_T^B$. The stopped path $Y$ is
+$\mathcal F_T^B$-measurable, so $Y$ and $Z$ are independent.
+Since $Z$ and $-Z$ have the same law,
+\[
+(Y,Z)\overset d=(Y,-Z).
+\]
+
+To reconstruct the full path, let
+\[
+\tau(y)=\inf\{t\geq0:y(t)=a\}
+\]
+and define the concatenation map
+\[
+F(y,z)(t)=
+\begin{cases}
+y(t),&t\leq\tau(y),\\
+a+z(t-\tau(y)),&t>\tau(y).
+\end{cases}
+\]
+Here $y\in C[0,\infty)$ and
+$z\in C_0[0,\infty):=\{z\in C[0,\infty):z(0)=0\}$.
+If $\tau(y)=\infty$, use the first branch for every $t$.
+The map
+\[
+F:C[0,\infty)\times C_0[0,\infty)\longrightarrow C[0,\infty)
+\]
+is measurable. Since
+\[
+B=F(Y,Z),\qquad\widetilde B=F(Y,-Z),
+\]
+$B$ and $\widetilde B$ have the same law. \hfill$\square$
+
+\newpage
+\subsection*{3.6 The maximum of Brownian motion}
+
+Set
+\[
+M_t=\sup_{0\leq s\leq t}B_s.
+\]
+For $a\geq0$ and $x\leq a$, reflection at the first hitting time
+of $a$ gives the pathwise identity
+\[
+\{M_t\geq a,\ B_t\leq x\}
+=\{\widetilde B_t\geq2a-x\}.
+\]
+Indeed, on $\{M_t\geq a\}$ the path has hit $a$ by time $t$, and
+its reflected endpoint is $2a-B_t$. Conversely, an endpoint at
+least $2a-x\geq a$ forces a hit of $a$.
+\begin{center}
+\includegraphics[width=.38\textwidth]{figures/financial-lecture10/maximum-reflection.png}
+\end{center}
+Thus
+\[
+\mathbb P(M_t\geq a,\ B_t\leq x)
+=\mathbb P(\widetilde B_t\geq2a-x)
+=\mathbb P(B_t\geq2a-x).
+\]
+In particular, for $t>0$,
+\[
+\begin{aligned}
+\mathbb P(M_t\geq a)
+&=\mathbb P(M_t\geq a,\ B_t\leq a)
+  +\mathbb P(B_t>a)\\
+&=2\mathbb P(B_t\geq a).
+\end{aligned}
+\]
+Since $B_t$ has a symmetric distribution, it follows that
+\[
+\boxed{M_t\overset d=|B_t|.}
+\]
+
+\begin{center}
+\textbf{End of lecture 10}
+\end{center}
+
 \end{document}
