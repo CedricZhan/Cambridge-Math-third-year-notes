@@ -3431,5 +3431,169 @@ which gives $R(\widetilde\theta,\theta)=1/n$.
 \textbf{End of lecture 14}
 \end{center}
 
+\noindent\underline{Proof of Theorem 5 (continued).}\quad
+The risk bound gives $|b(\theta)|\leq 1/\sqrt n$ and
+$|1+b'(\theta)|\leq 1$. Hence $b'(\theta)\leq 0$, so $b$ is
+non-increasing.
+\begin{center}
+\includegraphics[width=0.48\textwidth]{figures/statistics-lecture15-bias-bound.png}
+\end{center}
+
+By the mean value theorem on $[k,2k]$ and $[-2k,-k]$, there are
+$\theta_k^+\in(k,2k)$ and $\theta_k^-\in(-2k,-k)$ such that
+$|b'(\theta_k^\pm)|\leq 2/(k\sqrt n)$. Thus $b'(\theta_k^\pm)\to 0$.
+The risk bound implies
+\[
+0\leq b(\theta_k^\pm)^2
+\leq \frac{1-(1+b'(\theta_k^\pm))^2}{n}\longrightarrow 0.
+\]
+For each fixed $\theta$, eventually $\theta_k^-<\theta<\theta_k^+$, so
+\[
+b(\theta_k^+)\leq b(\theta)\leq b(\theta_k^-).
+\]
+Both bounds tend to zero. Thus $b(\theta)=0$ for all $\theta$,
+and the Cram\'er--Rao bound forces $R(\widetilde\theta,\theta)=1/n$.
+This proves admissibility and, by Theorem 4, minimaxity. \hfill$\square$
+
+\subsection*{James--Stein Phenomenon}
+
+Consider one observation $X\sim N(\theta,I_p)$, where
+$\theta=(\theta_1,\ldots,\theta_p)^{\mathsf T}\in\mathbb R^p$.
+Under quadratic loss $L(\hat\theta,\theta)=\|\hat\theta-\theta\|^2$,
+the MLE $\hat\theta=X$ has risk
+\[
+R(\hat\theta,\theta)=\mathbb E_\theta[\|X-\theta\|^2]=p.
+\]
+For $p\geq 3$ it is dominated by the \underline{James--Stein estimator}
+\[
+\hat\theta_{\mathrm{JS}}
+=\left(1-\frac{p-2}{\|X\|^2}\right)X.
+\]
+The factor can be negative for small $\|X\|$. The value at $X=0$ can
+be set to zero since this event has probability zero.
+
+\medskip
+\noindent\underline{Lemma (Stein).}\quad
+Let $X\sim N(\mu,1)$. If $g\colon\mathbb R\to\mathbb R$ is bounded,
+locally absolutely continuous, and $\mathbb E[|g'(X)|]<\infty$, then
+\[
+\mathbb E[(X-\mu)g(X)]=\mathbb E[g'(X)].
+\]
+
+\noindent\underline{Proof.}\quad
+Write $\phi_\mu(x)=(2\pi)^{-1/2}e^{-(x-\mu)^2/2}$. Since
+$\phi_\mu'(x)=-(x-\mu)\phi_\mu(x)$, integration by parts gives
+\[
+\begin{aligned}
+\mathbb E[(X-\mu)g(X)]
+&=-\int_{\mathbb R}g(x)\phi_\mu'(x)\,dx\\
+&=-[g(x)\phi_\mu(x)]_{-\infty}^{\infty}
+  +\int_{\mathbb R}g'(x)\phi_\mu(x)\,dx
+=\mathbb E[g'(X)].
+\end{aligned}
+\]
+The boundary term vanishes because $g$ is bounded. \hfill$\square$
+
+\paragraph{Rmk.}
+If the identity holds for every smooth $g$ of compact support, then
+$X\sim N(\mu,1)$.
+
+\medskip
+\noindent\underline{Thm 6.}\quad
+If $X\sim N(\theta,I_p)$ and $p\geq 3$, then
+$R(\hat\theta_{\mathrm{JS}},\theta)<p$ for every $\theta\in\mathbb R^p$.
+Hence the MLE is inadmissible under quadratic loss.
+
+\medskip
+\noindent\underline{Proof.}\quad
+Expanding the squared error gives
+\[
+\begin{aligned}
+R(\hat\theta_{\mathrm{JS}},\theta)
+&=\mathbb E_\theta\left[
+  \left\|X-\theta-\frac{p-2}{\|X\|^2}X\right\|^2\right]\\
+&=p+(p-2)^2\mathbb E_\theta\left[\frac{1}{\|X\|^2}\right]
+ -2(p-2)\mathbb E_\theta\left[\frac{X^{\mathsf T}(X-\theta)}{\|X\|^2}\right].
+\end{aligned}
+\]
+The inverse squared norm is integrable because the Gaussian density is
+bounded, $\int_0^1 r^{p-3}\,dr<\infty$, and $\|X\|^{-2}\leq 1$
+outside the unit ball. The cross term is integrable by Cauchy--Schwarz.
+
+For each $j$, let $X_{-j}$ denote the vector of coordinates other than
+$X_j$, and, conditional on $X_{-j}$, set
+\[
+g_j(x)=\frac{x}{x^2+\|X_{-j}\|^2},
+\qquad
+g_j'(x)=\frac{x^2+\|X_{-j}\|^2-2x^2}{(x^2+\|X_{-j}\|^2)^2}.
+\]
+Almost surely $\|X_{-j}\|>0$, so $g_j$ and $g_j'$ are bounded for
+fixed $X_{-j}$. Since $X_j\sim N(\theta_j,1)$ independently of
+$X_{-j}$, Stein's lemma gives
+\[
+\mathbb E_\theta\left[\left.
+  \frac{X_j(X_j-\theta_j)}{\|X\|^2}\right|X_{-j}\right]
+=\mathbb E_\theta[g_j'(X_j)\mid X_{-j}].
+\]
+Taking expectations and summing over $j$ yields
+\[
+\begin{aligned}
+\mathbb E_\theta\left[\frac{X^{\mathsf T}(X-\theta)}{\|X\|^2}\right]
+&=\sum_{j=1}^p
+  \mathbb E_\theta\left[\frac{\|X\|^2-2X_j^2}{\|X\|^4}\right]\\
+&=(p-2)\mathbb E_\theta\left[\frac{1}{\|X\|^2}\right].
+\end{aligned}
+\]
+Thus
+\[
+R(\hat\theta_{\mathrm{JS}},\theta)
+=p-(p-2)^2\mathbb E_\theta\left[\frac{1}{\|X\|^2}\right]<p.
+\qquad\square
+\]
+
+\medskip
+\noindent\underline{Rmks.}
+\begin{itemize}
+\item The risk improvement is especially large when $\theta$ is close
+to zero. The exercise sheet gives an explicit upper bound on
+$R(\hat\theta_{\mathrm{JS}},\theta)$ in terms of $\|\theta\|$.
+\item With $n$ iid observations $X_1,\ldots,X_n\sim N(\theta,I_p)$,
+the MLE $\overline X_n$ has risk $p/n$. Applying Theorem 6 to
+$\sqrt n\,\overline X_n\sim N(\sqrt n\,\theta,I_p)$ and rescaling gives
+\[
+\begin{aligned}
+\hat\theta_{\mathrm{JS}}
+&=\left(1-\frac{p-2}{n\|\overline X_n\|^2}\right)\overline X_n,\\
+R(\hat\theta_{\mathrm{JS}},\theta)
+&=\frac pn-\frac{(p-2)^2}{n^2}
+  \mathbb E_\theta\left[\frac{1}{\|\overline X_n\|^2}\right]
+<\frac pn \qquad (p\geq 3).
+\end{aligned}
+\]
+\item Admissibility depends on the loss. For the single-coordinate loss
+$L(\hat\theta,\theta)=(\hat\theta_1-\theta_1)^2$, $X_1$ is admissible
+in the one-observation model. Indeed, fixing $\theta_{-1}$ and averaging
+any proposed dominating estimator of $\theta_1$ over the independent
+$X_{-1}$ yields, by Jensen's inequality, a dominating estimator based
+on $X_1$ alone if the improvement is strict at that $\theta_{-1}$.
+This contradicts Theorem 5 with $n=1$.
+\item Brown (1966, Theorem 3.1.1) extends the inadmissibility phenomenon
+to best invariant estimators in location models of dimension at least
+three under convex loss and additional regularity and non-singularity
+conditions. Shrinkage estimators will be discussed further next time.
+\item The James--Stein estimator is itself dominated by its positive-part
+version
+\[
+\hat\theta_{\mathrm{JS}}^+
+=\left(1-\frac{p-2}{\|X\|^2}\right)_+X,
+\qquad a_+=\max\{a,0\}.
+\]
+\item The James--Stein estimator is connected to empirical Bayes.
+\end{itemize}
+
+\begin{center}
+\textbf{End of lecture 15}
+\end{center}
+
 \end{document}
 

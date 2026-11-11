@@ -3304,4 +3304,134 @@ where the Pauli matrices are
 \begin{center}
     \textbf{End of lecture 14}
 \end{center}
+Recall that the angular-momentum states $|jm\rangle$ form a multiplet
+of $2j+1$ states for each integral or half-integral $j$. For spin
+$\frac12$, the Pauli matrices above are Hermitian, traceless $2\times2$
+matrices satisfying
+\[
+    \sigma_1^2=\sigma_2^2=\sigma_3^2=\mathbf 1,\qquad
+    \sigma_1\sigma_2=-\sigma_2\sigma_1=i\sigma_3
+\]
+and cyclic permutations of the second relation. In index notation,
+\[
+    \sigma_i\sigma_j=\delta_{ij}\mathbf 1+i\epsilon_{ijk}\sigma_k.
+\]
+The commutator $[\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k$
+gives $[S_i,S_j]=i\hbar\epsilon_{ijk}S_k$. The symmetric product
+$\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}\mathbf 1$
+is special to the spin-$\frac12$ representation.
+
+Writing $\boldsymbol{\sigma}=(\sigma_1,\sigma_2,\sigma_3)$ and
+$\mathbf S=\frac{\hbar}{2}\boldsymbol{\sigma}$, we have
+\[
+    (\mathbf a\cdot\boldsymbol{\sigma})
+    (\mathbf b\cdot\boldsymbol{\sigma})
+    =(\mathbf a\cdot\mathbf b)\mathbf 1
+      +i(\mathbf a\times\mathbf b)\cdot\boldsymbol{\sigma}
+\]
+for constant vectors $\mathbf a,\mathbf b$, or operator-valued
+vectors whose components commute with each $S_i$.
+For any real unit vector $\mathbf n$ this yields
+\[
+    (\mathbf n\cdot\boldsymbol{\sigma})^2=\mathbf 1,\qquad
+    (\mathbf n\cdot\mathbf S)^2=\frac{\hbar^2}{4}\mathbf 1.
+\]
+Since $\mathbf n\cdot\mathbf S$ is traceless, its two eigenvalues are
+$\pm\frac{\hbar}{2}$ for every direction $\mathbf n$. Also,
+\[
+    \boldsymbol{\sigma}^2=\sigma_1^2+\sigma_2^2+\sigma_3^2
+    =3\mathbf 1,\qquad
+    \mathbf S^2=\frac{3\hbar^2}{4}\mathbf 1
+    =\hbar^2\frac12\left(\frac12+1\right)\mathbf 1.
+\]
+
+\subsection*{5.4 Implications of Angular Momentum and Spin}
+
+\subsubsection*{(a) Orbital, spin and total angular momentum}
+
+The internal states $|r\rangle$ introduced earlier are spin states
+$|s,r\rangle$ with $r=-s,-s+1,\ldots,s$. The spin operators satisfy
+\[
+    [S_i,\hat x_j]=[S_i,\hat p_j]=0,
+\]
+consistent with the product basis
+$|\mathbf x\rangle\otimes|r\rangle$ for a particle of spin $s$.
+The operators $\hat{\mathbf x}$, $\mathbf S^2$ and $S_3$ form a
+complete commuting set. Orbital angular momentum $\mathbf L$ has
+nontrivial commutators with position and momentum.
+
+The total angular momentum is $\mathbf J=\mathbf L+\mathbf S$.
+Since $[S_i,L_j]=0$, the separate relations
+\[
+    [S_i,S_j]=i\hbar\epsilon_{ijk}S_k,\qquad
+    [L_i,L_j]=i\hbar\epsilon_{ijk}L_k
+\]
+give $[J_i,J_j]=i\hbar\epsilon_{ijk}J_k$.
+
+\subsubsection*{(b) Interactions and observations}
+
+A magnetic dipole moment $\boldsymbol{\mu}$ in a magnetic field
+$\mathbf B$ has interaction energy $-\boldsymbol{\mu}\cdot\mathbf B$.
+The energy is lowest when the dipole is aligned with the field and
+highest when it is anti-aligned. A particle of charge $q$ and mass
+$m$ in an orbit with angular momentum $\mathbf L$ has
+\[
+    \boldsymbol{\mu}=\frac{q}{2m}\mathbf L,
+    \qquad
+    H_{\mathrm{int}}=-\gamma\,\mathbf L\cdot\mathbf B,
+    \qquad
+    \gamma=\frac{q}{2m}.
+\]
+
+For hydrogen, or a particle in another spherically symmetric
+potential, choose simultaneous eigenstates of the zero-field
+Hamiltonian $H$, $\mathbf L^2$ and $L_3$. At fixed radial quantum
+number and $\ell$, their energy $E$ is independent of $m$. A weak
+magnetic field along the 3-direction gives, to first order in $B$,
+\[
+    H\longmapsto H-\gamma B L_3.
+\]
+The same states are eigenstates of this Hamiltonian, with energies
+\[
+    E-\gamma B\hbar m,\qquad m=-\ell,-\ell+1,\ldots,\ell.
+\]
+The splitting of the orbital multiplet into $2\ell+1$ levels is
+the \emph{Zeeman effect}.
+
+The corresponding spin interaction is
+\[
+    H_{\mathrm{spin}}=-\gamma'\mathbf S\cdot\mathbf B,
+\]
+where $\gamma'$ can differ from $\gamma$. For a spin-$\frac12$
+particle with degenerate spin states at zero field, the shifts
+for $S_3=\pm\hbar/2$ are $\mp\gamma'B\hbar/2$. This Zeeman doublet
+provides experimental evidence for spin $\frac12$. If only spin
+degrees of freedom are relevant, $H_{\mathrm{spin}}$ can be used
+as the Hamiltonian in the background field.
+
+\begin{enumerate}
+    \item[(i)] In the Stern--Gerlach experiment, an inhomogeneous
+    magnetic field produces different forces on different spin
+    projections, separating the beams in space.
+
+    \item[(ii)] The orbital and spin magnetic moments of the
+    electron lead to a spin--orbit term proportional to
+    $\mathbf L\cdot\mathbf S$ in the Hamiltonian. It is of the same
+    order as the first relativistic correction to the kinetic
+    energy. Expanding in momentum gives
+    \[
+        \sqrt{m^2c^4+p^2c^2}-mc^2
+        =\frac{p^2}{2m}-\frac{p^4}{8m^3c^2}
+         +O\!\left(\frac{p^6}{m^5c^4}\right).
+    \]
+    These effects contribute to the small energy splittings called
+    \emph{fine structure}.
+
+    \item[(iii)] A splitting also occurs in hydrogen with no
+    external magnetic field and with $L=0$.
+\end{enumerate}
+
+\begin{center}
+    \textbf{End of lecture 15}
+\end{center}
 \end{document}
