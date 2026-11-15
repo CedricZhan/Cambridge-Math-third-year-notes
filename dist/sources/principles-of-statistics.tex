@@ -3595,5 +3595,144 @@ version
 \textbf{End of lecture 15}
 \end{center}
 
+\subsection*{The James--Stein Phenomenon More Generally}
+
+Suppose $\mathbb E_\theta[X]=\theta\in\mathbb R^p$ and
+$\operatorname{Var}_\theta(X)=I_p$. Consider the shrinkage estimator
+$\hat\theta_\lambda=\lambda X$ for a fixed $\lambda\in[0,1]$.
+Since $\mathbb E_\theta[X-\theta]=0$, the cross term in the quadratic
+risk vanishes:
+\[
+\begin{aligned}
+R(\hat\theta_\lambda,\theta)
+&=\mathbb E_\theta[\|\lambda X-\theta\|^2]\\
+&=\lambda^2\mathbb E_\theta[\|X-\theta\|^2]+(1-\lambda)^2\|\theta\|^2\\
+&=\lambda^2\operatorname{tr}(\operatorname{Var}_\theta(X))
+  +(1-\lambda)^2\|\theta\|^2\\
+&=\underbrace{\lambda^2p}_{\text{variance}}
+  +\underbrace{(1-\lambda)^2\|\theta\|^2}_{\text{squared bias}}.
+\end{aligned}
+\]
+The risk at $\lambda=1$ is $p$. To optimise the bias--variance
+trade-off, complete the square:
+\[
+R(\hat\theta_\lambda,\theta)
+=(p+\|\theta\|^2)
+\left(\lambda-\frac{\|\theta\|^2}{p+\|\theta\|^2}\right)^2
++\frac{p\|\theta\|^2}{p+\|\theta\|^2}.
+\]
+Thus $\lambda^*=\|\theta\|^2/(p+\|\theta\|^2)$ attains the minimum risk
+$p\|\theta\|^2/(p+\|\theta\|^2)<p$. The estimator $\lambda^*X$ is an
+\underline{oracle estimator} because it requires knowledge of $\|\theta\|$.
+
+In practice we estimate $\lambda^*$ from $X$. Since
+$\mathbb E_\theta[\|X\|^2]=\|\theta\|^2+p$, the James--Stein shrinkage
+factor satisfies the heuristic approximation
+\[
+\lambda_{\mathrm{JS}}
+=\frac{\|X\|^2-(p-2)}{\|X\|^2}
+\approx\frac{\|\theta\|^2}{\|\theta\|^2+p}.
+\]
+For $X\sim N(\theta,I_p)$, as $p\to\infty$ we have
+\[
+\lambda_{\mathrm{JS}}=\lambda^*+O_{\mathbb P}(p^{-1/2}).
+\]
+
+\section*{IV. MULTIVARIATE ANALYSIS}
+
+\subsection*{1. Classification Problems}
+
+Consider a regression problem with input $X$ taking values in
+$\mathcal X$ and binary output $Y\in\{0,1\}$. Write
+\[
+\pi_j=\mathbb P(Y=j),\qquad X\mid Y=j\sim f_j,\qquad j\in\{0,1\},
+\]
+where $f_0,f_1$ are densities on $\mathcal X$. The
+\underline{regression function} is
+\[
+\eta(x)=\mathbb P(Y=1\mid X=x)=\mathbb E[Y\mid X=x]
+=\frac{\pi_1 f_1(x)}{\pi_1f_1(x)+\pi_0f_0(x)},
+\]
+where the last equality follows from Bayes' rule.
+
+Given the joint distribution of $(X,Y)$ and an input $X=x$, we wish
+to predict $Y$. In the corresponding decision problem, $Y$ takes
+the role of $\theta$, and the decision rule
+$\delta\colon\mathcal X\to\{0,1\}$ is called a \underline{classifier}.
+Under zero--one loss $L(a,y)=\mathbf{1}_{\{a\ne y\}}$, its Bayes risk is
+\[
+R_\pi(\delta)
+=\pi_0\mathbb E_{f_0}[\mathbf{1}_{\{\delta(X)\ne 0\}}]
+ +\pi_1\mathbb E_{f_1}[\mathbf{1}_{\{\delta(X)\ne 1\}}]
+=\mathbb P(\delta(X)\ne Y).
+\]
+A \underline{Bayes classifier} minimises the posterior risk at each $x$:
+\[
+\delta_\pi(x)\in\operatorname*{arg\,min}_{a\in\{0,1\}}
+\mathbb E[\mathbf{1}_{\{a\ne Y\}}\mid X=x].
+\]
+
+\medskip
+\noindent\underline{Prop 1.}\quad A Bayes classifier is given by
+\[
+\delta_\pi(x)=
+\begin{cases}
+1,&\pi_1f_1(x)\geq\pi_0f_0(x),\\
+0,&\pi_1f_1(x)<\pi_0f_0(x).
+\end{cases}
+\]
+If $\pi_0f_0(x)>0$, the first condition is equivalent to
+$\pi_1f_1(x)/(\pi_0f_0(x))\geq 1$.
+If $\mathbb P(\pi_1f_1(X)=\pi_0f_0(X))=0$, any other Bayes classifier
+$\delta$ satisfies $\mathbb P(\delta(X)=\delta_\pi(X))=1$.
+
+\noindent\underline{Proof.}\quad See the exercise sheet.
+
+\medskip
+\noindent\underline{Example 1.}\quad Suppose $\mathcal X=\mathbb R^p$ and
+$X\mid Y=j\sim N(\mu_j,\Sigma)$ for $j\in\{0,1\}$, with a common
+positive definite covariance matrix $\Sigma$ and positive class priors.
+
+\begin{center}
+\includegraphics[width=0.34\textwidth]{figures/principles-of-statistics/lecture16-gaussian-classes.png}
+\end{center}
+
+The log-posterior odds are
+\[
+\begin{aligned}
+b(x)
+&=\log\frac{\pi_1f_1(x)}{\pi_0f_0(x)}\\
+&=\log\frac{\pi_1}{\pi_0}
++\frac12\bigl(\mu_0^{\mathsf T}\Sigma^{-1}\mu_0
+             -\mu_1^{\mathsf T}\Sigma^{-1}\mu_1\bigr)
++x^{\mathsf T}\Sigma^{-1}(\mu_1-\mu_0).
+\end{aligned}
+\]
+The Bayes classifier selects $1$ if $b(x)\geq0$ and $0$ if $b(x)<0$.
+When $\mu_0\ne\mu_1$, the decision boundary $b(x)=0$ is a hyperplane.
+
+In practice, we observe labelled pairs $(x_i,y_i)_{i=1}^n$ and estimate
+the class probabilities and means empirically. For $j\in\{0,1\}$, write
+\[
+n_j=\sum_{i=1}^n\mathbf{1}_{\{y_i=j\}},\qquad
+\hat\pi_j=\frac{n_j}{n},\qquad
+\hat\mu_j=\frac{1}{n_j}\sum_{i:y_i=j}x_i.
+\]
+When both classes are represented and $n>2$, the pooled covariance
+estimator is
+\[
+\hat\Sigma=\frac{1}{n-2}\sum_{j=0}^1\sum_{i:y_i=j}
+(x_i-\hat\mu_j)(x_i-\hat\mu_j)^{\mathsf T}.
+\]
+It is unbiased for $\Sigma$ under the common covariance model.
+Plugging $\hat\pi_j$, $\hat\mu_j$, and $\hat\Sigma$ into the Bayes
+classifier gives \underline{Linear Discriminant Analysis} when
+$\hat\Sigma$ is invertible.
+
+\begin{center}
+\textbf{End of lecture 16}
+\end{center}
+
+
 \end{document}
 

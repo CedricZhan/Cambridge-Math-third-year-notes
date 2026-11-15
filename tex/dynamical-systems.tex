@@ -3308,5 +3308,158 @@ By Poincar\'e--Bendixson, a periodic orbit must exist for every $\mu>0$.
 \textbf{End of lecture 14}
 \end{center}
 
+\newpage
+\noindent\underline{\S 5.\quad Bifurcations}
+
+\medskip
+\noindent\underline{\S 5.1\quad Introduction}
+
+\medskip
+\noindent\underline{Definition (Bifurcation).}
+Consider a system $\dot{\mathbf x}=\mathbf f(\mathbf x;\mu)$ that depends
+continuously on a parameter $\mu$. A \emph{bifurcation} is a change in the
+topological structure of the flow as $\mu$ passes through a critical
+value $\mu_c$, called a \emph{bifurcation point}. The parameter is often
+shifted so that $\mu_c=0$.
+
+\begin{itemize}
+\item A \emph{local bifurcation} concerns a change in the flow near a
+fixed point. This can include a change in the stability of the fixed point.
+\item At a local bifurcation of a fixed point, at least one eigenvalue of
+the linearization satisfies $\operatorname{Re}\lambda_i=0$. A hyperbolic
+fixed point persists under small parameter changes, with the same local
+topological structure.
+\end{itemize}
+
+\noindent For a planar linearization $\dot{\mathbf x}=A\mathbf x$,
+small changes in $\mu$ give small changes in $\operatorname{tr} A$ and
+$\det A$. For example, crossing $\det A=0$ can change a saddle into a
+node.
+\begin{center}
+\includegraphics[scale=.82]{lecture15/trace-determinant.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~1 (original crop).}
+\end{center}
+
+\medskip
+\noindent\underline{Example (Hopf bifurcation).}
+Consider
+\[
+\begin{pmatrix}\dot x\\ \dot y\end{pmatrix}
+=\begin{pmatrix}
+\mu x+y-x(x^2+y^2)\\
+-x+\mu y-y(x^2+y^2)
+\end{pmatrix}.
+\]
+The origin is the only fixed point, with eigenvalues $\mu\pm i$.
+In polar coordinates,
+\[
+\dot r=r(\mu-r^2),\qquad \dot\theta=-1.
+\]
+For $\mu<0$, the origin is a stable focus. At $\mu=0$, it is still
+asymptotically stable since $\dot r=-r^3$, and the linearization is
+non-hyperbolic. For $\mu>0$, it is an unstable focus surrounded by a
+stable limit cycle at $r=\sqrt{\mu}$. This is a Hopf bifurcation at $\mu=0$.
+\begin{center}
+\includegraphics[scale=.60]{lecture15/hopf-phase-portraits.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~2 (original crop).}
+\end{center}
+
+\newpage
+\noindent\underline{\S 5.2\quad One-dimensional bifurcations}
+
+\medskip
+\noindent Consider $\dot x=f(x;\mu)$ with a non-hyperbolic fixed point
+at $x=0$ when $\mu=0$. Thus $f(0;0)=0$ and $f_x(0;0)=0$. The
+linearization at $\mu=0$ has eigenvalue $\lambda=f_x(0;0)=0$.
+Such scalar equations also arise in higher-dimensional systems with a
+simple zero eigenvalue and all other eigenvalues off the imaginary axis,
+leading to stationary bifurcations.
+
+\medskip
+\noindent\underline{(i) Saddle-node bifurcation.}
+For $\dot x=\mu-x^2$, the fixed points and flow are as follows.
+\begin{itemize}
+\item $\mu<0$: there are no fixed points and $\dot x<0$ everywhere.
+\item $\mu=0$: $x=0$ attracts from the right and repels from the left.
+\item $\mu>0$: $x=\sqrt{\mu}$ is stable and $x=-\sqrt{\mu}$ is unstable,
+since $f_x=-2x$.
+\end{itemize}
+\begin{center}
+\includegraphics[scale=.73]{lecture15/saddle-node-phase-lines.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~2 (original crop).}
+\end{center}
+\begin{center}
+\includegraphics[scale=.81]{lecture15/saddle-node-branches.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~3 (original crop).}
+\end{center}
+
+\noindent More generally, assuming $f$ is smooth, Taylor expansion gives
+\[
+\begin{aligned}
+f(x;\mu)
+&= A\mu+B\mu x+Cx^2+O\bigl(\mu^2+|x|^3\bigr),\\
+A&=f_\mu(0;0),\qquad B=f_{x\mu}(0;0),\qquad C=\tfrac12 f_{xx}(0;0).
+\end{aligned}
+\]
+The generic saddle-node conditions are $A\ne0$ and $C\ne0$.
+Completing the square and setting $z=x+B\mu/(2C)$ gives
+\[
+\dot z=A\mu+Cz^2+O\bigl(\mu^2+|z|^3\bigr).
+\]
+With $y=-Cz$ and $\widehat\mu=-AC\mu$, the leading terms give the
+saddle-node normal form
+\[
+\boxed{\dot y=\widehat\mu-y^2}.
+\]
+\begin{center}
+\includegraphics[scale=.64]{lecture15/saddle-node-vector-field.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~3 (original crop).}
+\end{center}
+
+\newpage
+\noindent\underline{(ii) Transcritical bifurcation.}
+If $f(0;\mu)=0$ for every $\mu$ near zero, then $f_\mu(0;0)=0$.
+The leading terms are $B\mu x+Cx^2$, with $B,C\ne0$ in the
+transcritical case. With $y=-Cx$ and $\widehat\mu=B\mu$, the leading
+terms give the normal form
+\[
+\boxed{\dot y=\widehat\mu y-y^2}.
+\]
+The fixed points are $y=0$ and $y=\widehat\mu$. The derivatives of the
+vector field at these points are $\widehat\mu$ and $-\widehat\mu$,
+respectively. Thus for $\widehat\mu<0$ the zero branch is stable and
+the other branch is unstable. For $\widehat\mu>0$ their stabilities are
+reversed. The two branches intersect and exchange stability at
+$\widehat\mu=0$.
+\begin{center}
+\includegraphics[scale=.66]{lecture15/transcritical-vector-field.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~4 (original crop).}
+\end{center}
+\begin{center}
+\includegraphics[scale=.90]{lecture15/transcritical-branches.png}\\
+{\footnotesize Source: Lecture15.pdf, p.~4 (original crop).}
+\end{center}
+
+\medskip
+\noindent\underline{(iii) Pitchfork bifurcation.}
+If the equation is invariant under the reflection $x\mapsto-x$, the
+vector field is odd in $x$, so $f(0;\mu)=0$ and $f_{xx}(0;0)=0$.
+The first terms to retain are
+\[
+f(x;\mu)= B\mu x+Dx^3+
+O\bigl(\mu^2|x|+|\mu||x|^3+|x|^5\bigr),
+\qquad D=\tfrac16 f_{xxx}(0;0).
+\]
+For $B,D\ne0$, let $y=\sqrt{|D|}\,x$ and $\widehat\mu=B\mu$.
+The leading terms give the pitchfork normal form
+\[
+\boxed{\dot y=\widehat\mu y-ay^3,\qquad a=-\operatorname{sgn}(D)\in\{-1,1\}}.
+\]
+
+\begin{center}
+\textbf{End of lecture 15}
+\end{center}
+
+
 \end{document}
 

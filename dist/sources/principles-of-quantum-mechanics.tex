@@ -3344,6 +3344,9 @@ $\pm\frac{\hbar}{2}$ for every direction $\mathbf n$. Also,
     \mathbf S^2=\frac{3\hbar^2}{4}\mathbf 1
     =\hbar^2\frac12\left(\frac12+1\right)\mathbf 1.
 \]
+Writing $\frac34=\frac12(\frac12+1)$ makes the general form of the
+eigenvalue, $\hbar^2s(s+1)$, explicit and identifies this as a spin-$\frac12$
+system.
 
 \subsection*{5.4 Implications of Angular Momentum and Spin}
 
@@ -3434,4 +3437,142 @@ as the Hamiltonian in the background field.
 \begin{center}
     \textbf{End of lecture 15}
 \end{center}
+
+\noindent\textit{Recall from \S5.4(b)(iii).}
+In hydrogen with $L=0$ and no external field, there is a very weak
+interaction proportional to $\mathbf I\cdot\mathbf S$ between the proton
+spin $\mathbf I$ and the electron spin $\mathbf S$. This hyperfine
+interaction produces two closely spaced energy levels. Transitions
+between them produce electromagnetic radiation of wavelength
+$21\,\mathrm{cm}$. The line is observed from interstellar hydrogen
+and is used, for example, to study the spiral structure of our galaxy.
+
+\subsection*{5.5 Addition of Angular Momentum}
+
+Set $\hbar=1$ in this section. For a multiplet of angular momentum $j$,
+the standard relations are
+\begin{align*}
+    \mathbf J^2|j,m\rangle &= j(j+1)|j,m\rangle,\\
+    J_3|j,m\rangle &= m|j,m\rangle,\\
+    J_\pm|j,m\rangle &=
+        \sqrt{(j\mp m)(j\pm m+1)}\,|j,m\pm1\rangle.
+\end{align*}
+
+\paragraph{Product basis.}
+Consider two independent systems with angular momentum operators
+$\mathbf J^{(1)}$, $\mathbf J^{(2)}$ acting on $V^{(1)}$, $V^{(2)}$,
+respectively. For $i=1,2$, the standard basis states $|j_i,m_i\rangle$
+are joint eigenstates of $(\mathbf J^{(i)})^2$ and $J_3^{(i)}$.
+The combined state space and its product basis are
+\begin{align*}
+    V &= V^{(1)}\otimes V^{(2)},\\
+    |m_1;m_2\rangle &=
+        |j_1,m_1\rangle\otimes|j_2,m_2\rangle
+        = |m_1\rangle|m_2\rangle,
+\end{align*}
+where $j_1,j_2$ are fixed. Each $m_i$ runs from $-j_i$ to $j_i$
+in unit steps, so $\dim V=(2j_1+1)(2j_2+1)$. The total angular momentum is
+\[
+    \mathbf J = \mathbf J^{(1)}\otimes\mathbf 1
+                  + \mathbf 1\otimes\mathbf J^{(2)}
+              \equiv \mathbf J^{(1)}+\mathbf J^{(2)}.
+\]
+In particular,
+\begin{align*}
+    J_3|m_1;m_2\rangle
+    &= (J_3^{(1)}|m_1\rangle)|m_2\rangle
+       + |m_1\rangle(J_3^{(2)}|m_2\rangle)\\
+    &= M|m_1;m_2\rangle,\qquad M=m_1+m_2.
+\end{align*}
+Thus $M$ runs from $-(j_1+j_2)$ to $j_1+j_2$ in unit steps.
+
+\paragraph{Coupled basis.}
+We seek a basis of joint eigenstates $|J,M\rangle$ of $\mathbf J^2$
+and $J_3$. At fixed $M$,
+\[
+    |J,M\rangle = \sum_{m_1+m_2=M}
+        C^J_{m_1m_2}\,|m_1;m_2\rangle,\qquad
+    C^J_{m_1m_2} = \langle m_1;m_2|J,M\rangle.
+\]
+The two tasks are to determine the allowed $J$ values and to find
+these \emph{Clebsch--Gordan coefficients} for given $j_1,j_2$.
+
+\paragraph{Highest-weight states.}
+The top state of a multiplet satisfies
+\[
+    J_+|J,M\rangle=0 \quad\Longleftrightarrow\quad M=J.
+\]
+Once the top state is known, applying $J_-$ generates the rest of
+its multiplet. The largest possible $M$ is $j_1+j_2$, and its
+eigenspace is one-dimensional. Choosing the overall phase gives
+\[
+    |j_1+j_2,j_1+j_2\rangle=|j_1\rangle|j_2\rangle.
+\]
+For $j_1+j_2>0$, applying $J_-=J_-^{(1)}+J_-^{(2)}$ and using
+the ladder formula on the coupled and product states gives
+\begin{align*}
+    &\sqrt{2(j_1+j_2)}\,|j_1+j_2,j_1+j_2-1\rangle\\
+    &\qquad = \sqrt{2j_1}\,|j_1-1\rangle|j_2\rangle
+             + \sqrt{2j_2}\,|j_1\rangle|j_2-1\rangle.
+\end{align*}
+A term corresponding to lowering a spin-zero factor is omitted.
+The normalised state is therefore
+\begin{align*}
+    &|j_1+j_2,j_1+j_2-1\rangle\\
+    &\qquad = \sqrt{\frac{j_1}{j_1+j_2}}\,|j_1-1\rangle|j_2\rangle
+             + \sqrt{\frac{j_2}{j_1+j_2}}\,|j_1\rangle|j_2-1\rangle.
+\end{align*}
+Repeated lowering gives the remaining $|j_1+j_2,M\rangle$ states down
+to $M=-(j_1+j_2)$. The displayed states give, for instance,
+$C^{j_1+j_2}_{j_1j_2}=1$ and, for $j_1>0$,
+$C^{j_1+j_2}_{j_1-1,j_2}=\sqrt{j_1/(j_1+j_2)}$.
+
+When both $j_i>0$, the $M=j_1+j_2-1$ eigenspace has two product
+basis states, $|j_1-1\rangle|j_2\rangle$ and
+$|j_1\rangle|j_2-1\rangle$. The normalised combination orthogonal
+to the state already found is
+\begin{align*}
+    &|j_1+j_2-1,j_1+j_2-1\rangle\\
+    &\qquad = \sqrt{\frac{j_1}{j_1+j_2}}\,|j_1\rangle|j_2-1\rangle
+             - \sqrt{\frac{j_2}{j_1+j_2}}\,|j_1-1\rangle|j_2\rangle.
+\end{align*}
+The two terms cancel under $J_+$, so this is the top state of a
+new multiplet with $J=j_1+j_2-1$. Its other states follow by
+applying $J_-$.
+
+\paragraph{Example.}
+Take $j_1=j_2=\tfrac12$. There are four product states, with
+$m_i=\pm\tfrac12$. Use $|\uparrow\rangle=|\tfrac12\rangle$ and
+$|\downarrow\rangle=|-\tfrac12\rangle$ for the one-spin states,
+and write $|\uparrow\downarrow\rangle=|\uparrow\rangle|\downarrow\rangle$,
+and similarly for the other products.
+Starting from $|1,1\rangle=|\uparrow\uparrow\rangle$, apply
+$J_-=J_-^{(1)}+J_-^{(2)}$ twice:
+\begin{align*}
+    \sqrt{2}\,|1,0\rangle
+        &= |\downarrow\uparrow\rangle+|\uparrow\downarrow\rangle,\\
+    \sqrt{2}\,|1,-1\rangle
+        &= \frac{1}{\sqrt{2}}\bigl(
+            |\downarrow\downarrow\rangle+|\downarrow\downarrow\rangle
+           \bigr)
+         = \sqrt{2}\,|\downarrow\downarrow\rangle.
+\end{align*}
+This gives the symmetric $J=1$ triplet. The orthogonal normalised
+combination at $M=0$, unique up to phase, gives the antisymmetric
+$J=0$ singlet:
+\[
+    |0,0\rangle = \frac{1}{\sqrt{2}}\bigl(
+        |\uparrow\downarrow\rangle-|\downarrow\uparrow\rangle
+    \bigr).
+\]
+In the diagram, the vertical arrows are applications of $J_-$, and
+the horizontal arrow marks the orthogonal combination at $M=0$.
+\begin{center}
+    \includegraphics[width=0.44\linewidth]{figures/quantum-lecture16/spin-half-multiplets.png}
+\end{center}
+
+\begin{center}
+    \textbf{End of lecture 16}
+\end{center}
+
 \end{document}

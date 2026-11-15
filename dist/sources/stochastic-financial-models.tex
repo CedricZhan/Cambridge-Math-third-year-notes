@@ -2325,4 +2325,163 @@ Since $B_t$ has a symmetric distribution, it follows that
 \textbf{End of lecture 10}
 \end{center}
 
+\clearpage
+\subsubsection*{Moment generating function of the maximum}
+
+For a BM$_0$, let $M_t=\sup_{0\le s\le t}B_s$. By the reflection
+principle, $M_t\overset d=|B_t|$. Write $\Phi$ for the standard
+normal distribution function. For $u\in\mathbb R$, completing the square gives
+\[
+\begin{aligned}
+\mathbb E(e^{uM_1})
+&=2\int_0^\infty \frac{e^{ux-x^2/2}}{\sqrt{2\pi}}\,dx\\
+&=2e^{u^2/2}\int_{-u}^\infty\frac{e^{-y^2/2}}{\sqrt{2\pi}}\,dy
+=2e^{u^2/2}\Phi(u).
+\end{aligned}
+\]
+By Brownian scaling, $M_t\overset d=\sqrt t\,M_1$, so for $t>0$,
+\[
+\boxed{\mathbb E(e^{uM_t})=2e^{u^2t/2}\Phi(u\sqrt t).}
+\]
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/191309.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/191500.png}
+\end{center}@
+
+\subsection*{3.7 Density of hitting times}
+
+\noindent\textbf{Proposition.}
+Let $B$ be a BM$_0$, let $a>0$, and set
+$T_a=\inf\{t\geq0:B_t=a\}$. The density of $T_a$ on $(0,\infty)$ is
+\[
+f_a(t)=\frac{a}{\sqrt{2\pi t^3}}\exp\!\left(-\frac{a^2}{2t}\right).
+\]
+
+\noindent\textbf{Proof.}
+Path continuity gives $\{T_a\leq t\}=\{M_t\geq a\}$. By reflection
+and Brownian scaling, for $t>0$,
+\[
+\mathbb P(T_a\leq t)
+=2\mathbb P(B_t\geq a)
+=2\mathbb P(B_1\geq a/\sqrt t)
+=2\int_{a/\sqrt t}^\infty\frac{e^{-z^2/2}}{\sqrt{2\pi}}\,dz.
+\]
+Differentiating the moving lower limit gives
+\[
+f_a(t)=-2\frac{e^{-a^2/(2t)}}{\sqrt{2\pi}}\,
+             \frac{d}{dt}\left(\frac{a}{\sqrt t}\right)
+=\frac{a}{\sqrt{2\pi t^3}}e^{-a^2/(2t)}.
+\]
+The distribution function tends to $0$ as $t\downarrow0$ and to
+$1$ as $t\to\infty$. \hfill$\square$
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192249.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192255.png}
+\end{center}@
+
+\subsection*{3.8 Relation to the heat equation}
+
+For $t>0$, the Brownian transition density is
+\[
+p(t,x,y)=\frac{1}{\sqrt{2\pi t}}
+             \exp\!\left(-\frac{(x-y)^2}{2t}\right).
+\]
+As a function of $y$ it is the density of $N(x,t)$, and it satisfies
+$\partial_t p=\tfrac12\partial_{xx}p$. Given $f\in C_b(\mathbb R)$
+and a BM$_0$ $B$, define
+\[
+u(x,t)=\mathbb E[f(x+B_t)]
+      =\int_{\mathbb R}p(t,x,y)f(y)\,dy,\qquad t>0.
+\]
+Differentiating under the integral for $t>0$ gives
+\[
+\partial_t u(x,t)=\int_{\mathbb R}\partial_t p(t,x,y)f(y)\,dy
+=\frac12\int_{\mathbb R}\partial_{xx}p(t,x,y)f(y)\,dy
+=\frac12\partial_{xx}u(x,t).
+\]
+Since $B_t\to0$ almost surely as $t\downarrow0$, continuity of $f$
+and bounded convergence give $u(x,t)\to f(x)$ for every $x$.
+Thus $u$ solves the Cauchy problem for the heat equation with initial
+data $f$.
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192804.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/193353.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/193806.png}
+\end{center}@
+
+\subsection*{3.9 Transition density for killed Brownian motion}
+
+\noindent\textbf{Proposition.}
+Let $B$ be a BM$_x$ with $x<a$, and set $T_a=\inf\{t\geq0:B_t=a\}$.
+For every bounded measurable $f$ and $t>0$,
+\[
+\mathbb E_x[f(B_t)\mathbf1_{\{t<T_a\}}]
+=\int_{-\infty}^a p^a(t,x,y)f(y)\,dy,
+\qquad
+p^a(t,x,y)=p(t,x,y)-p(t,x,2a-y),\quad y<a.
+\]
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194233.png}
+\end{center}@
+
+\noindent\textbf{Proof.}
+It suffices to compare the two finite measures on $(-\infty,a)$
+on half-lines $(-\infty,b]$ with $b<a$. Set $M_t=\sup_{0\le s\le t}B_s$.
+Reflecting at the first hit of $a$ gives
+\[
+\begin{aligned}
+\mathbb P_x(B_t\le b,\ t<T_a)
+&=\mathbb P_x(B_t\le b)-\mathbb P_x(B_t\le b,\ M_t\ge a)\\
+&=\mathbb P_x(B_t\le b)-\mathbb P_x(B_t\ge 2a-b)\\
+&=\int_{-\infty}^b \bigl[p(t,x,y)-p(t,x,2a-y)\bigr]\,dy.
+\end{aligned}
+\]
+In the last line, the reflected endpoint is changed from $z$ to
+$y=2a-z$. \hfill$\square$
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194802.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194916.png}
+\end{center}@
+
+\subsubsection*{Killed Brownian motion with drift}
+
+Fix $c\in\mathbb R$. For $B$ a BM$_x$ with $x<a$, define
+$\widetilde B_t=B_t+ct$ and
+$\widetilde T_a=\inf\{t\geq0:\widetilde B_t=a\}$. The change of
+measure on paths up to time $t$ yields
+\[
+\begin{aligned}
+\mathbb E_x[f(\widetilde B_t)\mathbf1_{\{t<\widetilde T_a\}}]
+&=\mathbb E_x\!\left[f(B_t)\mathbf1_{\{t<T_a\}}
+                      e^{c(B_t-x)-c^2t/2}\right]\\
+&=\int_{-\infty}^a \widetilde p^a(t,x,y)f(y)\,dy,
+\end{aligned}
+\]
+for bounded measurable $f$ of compact support, where
+\[
+\widetilde p^a(t,x,y)=p^a(t,x,y)e^{c(y-x)-c^2t/2},\qquad y<a.
+\]
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195343.png}\par\smallskip
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195520.png}
+\end{center}@
+
+\section*{4. Continuous martingales}
+
+\noindent\textbf{Definition.}
+A process $(X_t)_{t\geq0}$ is a continuous martingale with respect to
+$(\mathcal F_t)_{t\geq0}$ if it is adapted, $X_t$ is integrable
+for each $t\geq0$, and
+\[
+\mathbb E(X_t\mid\mathcal F_s)=X_s\quad\text{a.s.},\qquad 0\leq s\leq t.
+\]
+In addition, $t\mapsto X_t(\omega)$ is continuous for every $\omega$.
+\begin{center}
+\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195734.png}
+\end{center}@
+
+\begin{center}
+\textbf{End of lecture 11}
+\end{center}
+
 \end{document}
