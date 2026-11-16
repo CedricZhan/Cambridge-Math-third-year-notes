@@ -3854,17 +3854,16 @@ maximum likelihood (ordinary least squares, with full-rank design and
 positive residual degrees of freedom) and test the null hypothesis that
 the coefficient of $X$ is zero.
 
-Now consider any triple $(X,Y,Z)$ with finite second moments. Define
-the population least-squares residual for $X$ on $Z$ using an intercept:
+Now consider any triple $(X,Y,Z)$ with finite second moments. First
+centre each variable by subtracting its mean. Write $X,Y,Z$ for the
+centred variables, so $\mathbb E[X]=\mathbb E[Y]=0$ and
+$\mathbb E[Z]=0$. Define
 \[
-(a_{X\mid Z},\beta_{X\mid Z})
-\in\operatorname*{arg\,min}_{a,\beta}\mathbb E[(X-a-\beta Z)^2],
-\qquad R_{X\mid Z}=X-a_{X\mid Z}-\beta_{X\mid Z}Z.
+\beta_{X\mid Z}
+\in\operatorname*{arg\,min}_{\beta}\mathbb E[(X-\beta Z)^2],
+\qquad R_{X\mid Z}=X-\beta_{X\mid Z}Z.
 \]
-Define $(a_{Y\mid Z},\beta_{Y\mid Z})$ and $R_{Y\mid Z}$ similarly.
-Since $a_{X\mid Z}=\mathbb E[X]-\beta_{X\mid Z}\mathbb E[Z]$, the same
-residual is obtained by regressing the centred $X$ on the centred $Z$
-through the origin, and likewise for $Y$.
+Define $\beta_{Y\mid Z}$ and $R_{Y\mid Z}$ similarly.
 
 \medskip
 \noindent\underline{Def.}\quad When both residual variances are positive,
@@ -3875,10 +3874,10 @@ the \underline{partial correlation} of $X$ and $Y$ given $Z$ is
 
 \begin{samepage}
 When $(X,Y,Z)$ is jointly Gaussian with positive definite covariance,
-Prop 2 shows that $\mathbb E[X\mid Z]$ and $\mathbb E[Y\mid Z]$ are
-affine in $Z$. They are therefore the population least-squares
-predictors, giving $R_{X\mid Z}=X-\mathbb E[X\mid Z]$ and
-$R_{Y\mid Z}=Y-\mathbb E[Y\mid Z]$.
+Prop 2 and the zero means give
+$\beta_{X\mid Z}Z=\mathbb E[X\mid Z]$ and
+$\beta_{Y\mid Z}Z=\mathbb E[Y\mid Z]$, so
+$R_{X\mid Z}=X-\mathbb E[X\mid Z]$ and $R_{Y\mid Z}=Y-\mathbb E[Y\mid Z]$.
 By Prop 2, the conditional covariance matrix of $(X,Y)$ given $Z=z$
 is constant in $z$. Taking conditional expectations of the residual
 products and squares thus gives
