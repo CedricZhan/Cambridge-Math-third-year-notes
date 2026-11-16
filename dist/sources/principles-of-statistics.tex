@@ -3817,21 +3817,35 @@ Y\mid W=w\sim N\!\left(
 \]
 
 \noindent\underline{Proof.}\quad Let $M=\Sigma_{12}\Sigma_{22}^{-1}$.
-Then
+By symmetry of the covariance matrix,
+$M^{\mathsf T}=\Sigma_{22}^{-1}\Sigma_{21}$ and hence
+$\Sigma_{22}M^{\mathsf T}=\Sigma_{21}$. Thus
 \[
 \operatorname{Cov}(W,Y-MW)=\Sigma_{21}-\Sigma_{22}M^{\mathsf T}=0.
 \]
 Since $W$ and $Y-MW$ are jointly Gaussian and uncorrelated, they are
-independent. In particular, $Y-MW\sim N(\tilde\mu,\tilde\Sigma)$ with
+independent. The Gaussian vector $Y-MW$ has mean
+$\tilde\mu=\mathbb E[Y-MW]=\mu_1-M\mu_2$. To compute its covariance,
+write $Y-MW=(I_d,-M)\binom{Y}{W}$ and use
+$\operatorname{Var}(AU)=A\operatorname{Var}(U)A^{\mathsf T}$
+for a fixed matrix $A$. Multiply the two rightmost matrices first:
 \[
 \begin{aligned}
-\tilde\mu&=\mathbb E[Y-MW]=\mu_1-M\mu_2,\\
 \tilde\Sigma
-&=\begin{pmatrix}I&-M\end{pmatrix}\Sigma
-  \begin{pmatrix}I\\-M^{\mathsf T}\end{pmatrix}\\
-&=\Sigma_{11}-M\Sigma_{21}-\Sigma_{12}M^{\mathsf T}
-  +M\Sigma_{22}M^{\mathsf T}\\
-&=\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}.
+=\operatorname{Var}(Y-MW)
+&=\begin{pmatrix}I_d&-M\end{pmatrix}
+  \begin{pmatrix}
+  \Sigma_{11}&\Sigma_{12}\\
+  \Sigma_{21}&\Sigma_{22}
+  \end{pmatrix}
+  \begin{pmatrix}I_d\\-M^{\mathsf T}\end{pmatrix}\\[4pt]
+&=\begin{pmatrix}I_d&-M\end{pmatrix}
+  \begin{pmatrix}
+  \Sigma_{11}-\Sigma_{12}M^{\mathsf T}\\
+  \underbrace{\Sigma_{21}-\Sigma_{22}M^{\mathsf T}}_{=\,0}
+  \end{pmatrix}\\[4pt]
+&=\Sigma_{11}-\Sigma_{12}M^{\mathsf T}\\
+&=\boxed{\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}}.
 \end{aligned}
 \]
 Writing $Y=MW+(Y-MW)$, we see that given $W=w$, $Y$ has distribution
