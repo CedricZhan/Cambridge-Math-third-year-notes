@@ -3105,39 +3105,6 @@ become comparable (continued in the next lecture).
 \begin{pmatrix}\dot x\\\dot y\end{pmatrix}
 =\begin{pmatrix}y-\mu(x^3/3-x)\\-x\end{pmatrix}.
 \]
-Start by considering two important limits.
-
-\medskip
-\noindent\underline{(i) $0<\mu\ll1$}
-
-\medskip
-\noindent A near-Hamiltonian system with
-\[
-H=\tfrac12(x^2+y^2),\quad f_1=y,\quad f_2=-x,\quad
-\varepsilon g_1=-F(x),\quad\varepsilon g_2=0.
-\]
-Without perturbation there is a centre at $(0,0)$. For $\mu\ne0$, look
-for a periodic orbit using the \underline{energy balance method}:
-\[
-\Delta H(H)=\oint\varepsilon g_1f_1\,dt.
-\]
-The unperturbed flow is parametrized by
-\[
-x=\sqrt{2H}\sin t,\qquad y=\sqrt{2H}\cos t,\qquad T=2\pi,
-\]
-so, to leading order,
-\[
-\begin{aligned}
-\Delta H(H)&=\mu\int_0^{2\pi}\left(x^2-\frac{x^4}{3}\right)\,dt\\
-&=\mu\int_0^{2\pi}\left(2H\sin^2t-\frac43H^2\sin^4t\right)\,dt
-=2\pi\mu\left(H-\frac{H^2}{2}\right).
-\end{aligned}
-\]
-Thus $\Delta H>0$ for $0<H<2$, and $\Delta H<0$ for $H>2$.
-The selected stable orbit has leading radius $r=2$ and period
-$P=2\pi+O(\mu)$.
-
-\medskip
 \noindent\underline{(ii) $\mu\gg1$}
 
 \medskip
@@ -3401,6 +3368,9 @@ f(x;\mu)
 A&=f_\mu(0;0),\qquad B=f_{x\mu}(0;0),\qquad C=\tfrac12 f_{xx}(0;0).
 \end{aligned}
 \]
+The constant term $f(0;0)$ vanishes because $x=0$ is a fixed point at $\mu=0$.
+The coefficient $f_x(0;0)$ vanishes because it is the only eigenvalue of the
+one-dimensional linearization and is real, so non-hyperbolicity forces it to be zero.
 The generic saddle-node conditions are $A\ne0$ and $C\ne0$.
 Completing the square and setting $z=x+B\mu/(2C)$ gives
 \[
@@ -3444,6 +3414,12 @@ $\widehat\mu=0$.
 \noindent\underline{(iii) Pitchfork bifurcation.}
 If the equation is invariant under the reflection $x\mapsto-x$, the
 vector field is odd in $x$, so $f(0;\mu)=0$ and $f_{xx}(0;0)=0$.
+For fixed $\mu$, differentiating $f(-x;\mu)=-f(x;\mu)$ twice with respect to $x$ gives
+\[
+f_x(-x;\mu)=f_x(x;\mu),\qquad f_{xx}(-x;\mu)=-f_{xx}(x;\mu).
+\]
+Setting $x=0$ gives $f_{xx}(0;\mu)=0$, in particular at $\mu=0$.
+Thus the Taylor expansion has no $x^2$ term.
 The first terms to retain are
 \[
 f(x;\mu)= B\mu x+Dx^3+

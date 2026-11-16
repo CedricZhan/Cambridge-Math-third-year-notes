@@ -3733,6 +3733,172 @@ $\hat\Sigma$ is invertible.
 \textbf{End of lecture 16}
 \end{center}
 
+\subsection*{2. Correlation \& Partial Correlation}
+
+Let $X=(X^{(1)},\ldots,X^{(p)})^{\mathsf T}$ be a random vector in
+$\mathbb R^p$ with mean $\mu$ and covariance matrix $\Sigma$.
+
+\medskip
+\noindent\underline{Def.}\quad For coordinates $X^{(i)}$ and $X^{(k)}$
+with positive variances, their \underline{correlation coefficient} is
+\[
+\begin{aligned}
+\rho_{ik}
+&=\operatorname{Corr}(X^{(i)},X^{(k)})\\
+&=\frac{\mathbb E[(X^{(i)}-\mu_i)(X^{(k)}-\mu_k)]}
+        {\sqrt{\operatorname{Var}(X^{(i)})\operatorname{Var}(X^{(k)})}}
+ =\frac{\Sigma_{ik}}{\sqrt{\Sigma_{ii}\Sigma_{kk}}}.
+\end{aligned}
+\]
+By Cauchy--Schwarz, $|\Sigma_{ik}|\leq\sqrt{\Sigma_{ii}\Sigma_{kk}}$,
+so $\rho_{ik}\in[-1,1]$. The equality condition gives
+$|\rho_{ik}|=1$ only if $X^{(i)}-\mu_i=c(X^{(k)}-\mu_k)$ almost surely
+for some constant $c$, or equivalently $X^{(i)}=m+cX^{(k)}$ almost surely
+for constants $m,c$.
+
+Given iid copies $X_1,\ldots,X_n$ of $X$, write
+$\overline X=n^{-1}\sum_{j=1}^nX_j$. We estimate $\rho_{ik}$ by
+\[
+\hat\rho_{ik}=\frac{\hat\Sigma_{ik}}{\sqrt{\hat\Sigma_{ii}\hat\Sigma_{kk}}},
+\qquad
+\hat\Sigma=\frac1n\sum_{j=1}^n(X_j-\overline X)(X_j-\overline X)^{\mathsf T}.
+\]
+Here $\hat\Sigma$ is the sample covariance with divisor $n$, and
+$\hat\rho_{ik}$ is defined when the two sample variances are positive.
+In the model $X\sim N(\mu,\Sigma)$ with $\Sigma$ positive definite,
+$\hat\Sigma$ is the MLE of $\Sigma$ whenever $\hat\Sigma$ is positive
+definite, which holds almost surely if $n>p$. By invariance of the MLE,
+$\hat\rho_{ik}$ is then the MLE of $\rho_{ik}$.
+
+Exercise Sheet 1, Q9 gives $\hat\Sigma\xrightarrow{\mathbb P}\Sigma$,
+even when $X$ is non-Gaussian. Slutsky's lemma then gives
+$\hat\rho_{ik}\xrightarrow{\mathbb P}\rho_{ik}$.
+If $X^{(i)}$ and $X^{(k)}$ have finite fourth moments, the multivariate
+central limit theorem for the relevant sample moments and the delta
+method yield
+\[
+\sqrt n(\hat\rho_{ik}-\rho_{ik})\xrightarrow{d}N(0,\tau^2).
+\]
+When $\tau^2>0$, this provides a basis for asymptotic inference without
+assuming a parametric model.
+
+\medskip
+\noindent\underline{Def.}\quad Given random vectors $X,Y,Z$ with
+joint density, $X$ and $Y$ are \underline{conditionally independent}
+given $Z$, written $X\perp\!\!\!\perp Y\mid Z$, if
+\[
+f_{X,Y\mid Z}(x,y\mid z)=f_{X\mid Z}(x\mid z)f_{Y\mid Z}(y\mid z)
+\]
+for $P_Z$-almost every $z$ and almost every $(x,y)$.
+Equivalently, there exists a function $m$ such that
+$f_{X\mid Y,Z}(x\mid y,z)=m(x,z)$ almost everywhere where
+$f_{Y,Z}(y,z)>0$. In this case $m(x,z)=f_{X\mid Z}(x\mid z)$ for
+$P_Z$-almost every $z$ and almost every $x$.
+
+\medskip
+\noindent\underline{Prop 2.}\quad Suppose $Y\in\mathbb R^d$ and
+$W\in\mathbb R^p$ satisfy
+\[
+\begin{pmatrix}Y\\ W\end{pmatrix}
+\sim N_{d+p}\!\left(
+\begin{pmatrix}\mu_1\\ \mu_2\end{pmatrix},
+\underbrace{\begin{pmatrix}
+\Sigma_{11}&\Sigma_{12}\\
+\Sigma_{21}&\Sigma_{22}
+\end{pmatrix}}_{\Sigma}
+\right),
+\]
+where $\Sigma$ is positive definite. Then
+\[
+Y\mid W=w\sim N\!\left(
+\mu_1+\Sigma_{12}\Sigma_{22}^{-1}(w-\mu_2),
+\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+\right).
+\]
+
+\noindent\underline{Proof.}\quad Let $M=\Sigma_{12}\Sigma_{22}^{-1}$.
+Then
+\[
+\operatorname{Cov}(W,Y-MW)=\Sigma_{21}-\Sigma_{22}M^{\mathsf T}=0.
+\]
+Since $W$ and $Y-MW$ are jointly Gaussian and uncorrelated, they are
+independent. In particular, $Y-MW\sim N(\tilde\mu,\tilde\Sigma)$ with
+\[
+\begin{aligned}
+\tilde\mu&=\mathbb E[Y-MW]=\mu_1-M\mu_2,\\
+\tilde\Sigma
+&=\begin{pmatrix}I&-M\end{pmatrix}\Sigma
+  \begin{pmatrix}I\\-M^{\mathsf T}\end{pmatrix}\\
+&=\Sigma_{11}-M\Sigma_{21}-\Sigma_{12}M^{\mathsf T}
+  +M\Sigma_{22}M^{\mathsf T}\\
+&=\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}.
+\end{aligned}
+\]
+Writing $Y=MW+(Y-MW)$, we see that given $W=w$, $Y$ has distribution
+$N(Mw+\tilde\mu,\tilde\Sigma)$, as required.\hfill$\square$
+
+In this Gaussian setting, let $Y$ and $X$ be scalar and take
+$W=(X,Z^{\mathsf T})^{\mathsf T}$ with $Z\in\mathbb R^p$.
+Prop 2 gives the normal linear regression model
+\[
+Y=\underbrace{\mu_1-\Sigma_{12}\Sigma_{22}^{-1}\mu_2}_{\text{intercept}}
++\underbrace{\Sigma_{12}\Sigma_{22}^{-1}}_{\text{coefficients}}
+\begin{pmatrix}X\\ Z\end{pmatrix}+\varepsilon,
+\]
+where $\varepsilon\sim
+N(0,\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21})$ is independent
+of $(X,Z)$. The coefficient of $X$ is zero if and only if
+$X\perp\!\!\!\perp Y\mid Z$. Given iid copies $(X_i,Y_i,Z_i)$, one way
+to test conditional independence is to estimate the coefficients by
+maximum likelihood (ordinary least squares, with full-rank design and
+positive residual degrees of freedom) and test the null hypothesis that
+the coefficient of $X$ is zero.
+
+Now consider any triple $(X,Y,Z)$ with finite second moments. Define
+the population least-squares residual for $X$ on $Z$ using an intercept:
+\[
+(a_{X\mid Z},\beta_{X\mid Z})
+\in\operatorname*{arg\,min}_{a,\beta}\mathbb E[(X-a-\beta Z)^2],
+\qquad R_{X\mid Z}=X-a_{X\mid Z}-\beta_{X\mid Z}Z.
+\]
+Define $(a_{Y\mid Z},\beta_{Y\mid Z})$ and $R_{Y\mid Z}$ similarly.
+Since $a_{X\mid Z}=\mathbb E[X]-\beta_{X\mid Z}\mathbb E[Z]$, the same
+residual is obtained by regressing the centred $X$ on the centred $Z$
+through the origin, and likewise for $Y$.
+
+\medskip
+\noindent\underline{Def.}\quad When both residual variances are positive,
+the \underline{partial correlation} of $X$ and $Y$ given $Z$ is
+\[
+\rho_{XY\mid Z}=\operatorname{Corr}(R_{X\mid Z},R_{Y\mid Z}).
+\]
+
+\begin{samepage}
+When $(X,Y,Z)$ is jointly Gaussian with positive definite covariance,
+Prop 2 shows that $\mathbb E[X\mid Z]$ and $\mathbb E[Y\mid Z]$ are
+affine in $Z$. They are therefore the population least-squares
+predictors, giving $R_{X\mid Z}=X-\mathbb E[X\mid Z]$ and
+$R_{Y\mid Z}=Y-\mathbb E[Y\mid Z]$.
+By Prop 2, the conditional covariance matrix of $(X,Y)$ given $Z=z$
+is constant in $z$. Taking conditional expectations of the residual
+products and squares thus gives
+\[
+\begin{aligned}
+\rho_{XY\mid Z}
+&=\frac{\mathbb E[(X-\mathbb E[X\mid Z])(Y-\mathbb E[Y\mid Z])]}
+ {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}\\
+&=\frac{\operatorname{Cov}(X,Y\mid Z)}
+ {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}.
+\end{aligned}
+\]
+Thus in the Gaussian model the partial correlation equals the
+correlation of $X$ and $Y$ in their conditional distribution given $Z=z$
+for every $z$.
+
+\begin{center}
+\textbf{End of lecture 17}
+\end{center}
+\end{samepage}
 
 \end{document}
 

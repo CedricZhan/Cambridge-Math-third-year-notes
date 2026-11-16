@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \input{preamble}
 \usepackage{graphicx}
+\usepackage{tikz}
 \title{Principles of Quantum Mechanics}
 \begin{document}
 \maketitle
@@ -3573,6 +3574,230 @@ the horizontal arrow marks the orthogonal combination at $M=0$.
 
 \begin{center}
     \textbf{End of lecture 16}
+\end{center}
+
+\noindent\textit{Recall from \S5.5.}
+With $\hbar=1$ and $j_1,j_2$ fixed, the Clebsch--Gordan
+coefficients expand the coupled state as
+\[
+    |J,M\rangle=\sum_{m_1+m_2=M}
+        C^J_{m_1m_2}\,|m_1\rangle|m_2\rangle.
+\]
+
+\paragraph{Example with $j_1=1$ and $j_2=\tfrac12$.}
+There are $(2j_1+1)(2j_2+1)=6$ product states. Starting at the
+unique state with $M=\tfrac32$ and applying $J_-$ successively,
+with normalisation at each step, gives
+\begin{align*}
+    |\tfrac32,\tfrac32\rangle &= |1\rangle|\tfrac12\rangle,\\
+    |\tfrac32,\tfrac12\rangle &=
+        \sqrt{\tfrac23}\,|0\rangle|\tfrac12\rangle
+        +\tfrac{1}{\sqrt3}\,|1\rangle|-\tfrac12\rangle,\\
+    |\tfrac32,-\tfrac12\rangle &=
+        \sqrt{\tfrac23}\,|0\rangle|-\tfrac12\rangle
+        +\tfrac{1}{\sqrt3}\,|-1\rangle|\tfrac12\rangle,\\
+    |\tfrac32,-\tfrac32\rangle &= |-1\rangle|-\tfrac12\rangle.
+\end{align*}
+The normalised state orthogonal to $|\tfrac32,\tfrac12\rangle$
+in the $M=\tfrac12$ eigenspace is the top state of the
+$J=\tfrac12$ multiplet. Applying $J_-$ once gives its second state:
+\begin{align*}
+    |\tfrac12,\tfrac12\rangle &=
+        \sqrt{\tfrac23}\,|1\rangle|-\tfrac12\rangle
+        -\tfrac{1}{\sqrt3}\,|0\rangle|\tfrac12\rangle,\\
+    |\tfrac12,-\tfrac12\rangle &=
+        \tfrac{1}{\sqrt3}\,|0\rangle|-\tfrac12\rangle
+        -\sqrt{\tfrac23}\,|-1\rangle|\tfrac12\rangle.
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}[
+    x=1.65cm,y=0.72cm,>=stealth,
+    state/.style={circle,draw,inner sep=0pt,minimum size=5pt},
+    lower/.style={state,fill=black}
+]
+    \node at (0,0) {$M\;\backslash\;J$};
+    \node at (1,0) {$\tfrac32$};
+    \node at (2,0) {$\tfrac12$};
+    \foreach \row/\value in {1/{\tfrac32},2/{\tfrac12},
+            3/{-\tfrac12},4/{-\tfrac32}}
+        \node at (0,-\row) {$\value$};
+    \node[state] (a1) at (1,-1) {};
+    \foreach \row in {2,3,4}
+        \node[lower] (a\row) at (1,-\row) {};
+    \node[state] (b2) at (2,-2) {};
+    \node[lower] (b3) at (2,-3) {};
+    \draw[->] (a1) -- node[left] {$J_-$} (a2);
+    \draw[->] (a2) -- node[left] {$J_-$} (a3);
+    \draw[->] (a3) -- node[left] {$J_-$} (a4);
+    \draw[->] (b2) -- node[right] {$J_-$} (b3);
+    \draw[->] (a2) -- node[above] {$\perp$} (b2);
+\end{tikzpicture}
+\end{center}
+
+\paragraph{General construction.}
+Write $J_{\max}=j_1+j_2$ and $J_{\min}=|j_1-j_2|$. Starting from
+$J_{\max}$, each new top state is the unique normalised state
+(up to phase) orthogonal to the states already constructed at the
+same $M$. The open circles denote top states and the filled circles
+denote the other states. A vertical arrow applies $J_-$, while a
+horizontal arrow marked $\perp$ indicates the orthogonality condition
+with respect to all preceding states in that row.
+
+\begin{center}
+\begin{tikzpicture}[
+    x=1.75cm,y=0.71cm,>=stealth,
+    state/.style={circle,draw,inner sep=0pt,minimum size=5pt},
+    lower/.style={state,fill=black}
+]
+    \node at (0,0) {$M\;\backslash\;J$};
+    \foreach \col/\value in {1/{J_{\max}},2/{J_{\max}-1},
+            3/{J_{\max}-2},4/{\cdots},5/{J_{\min}}}
+        \node at (\col,0) {$\value$};
+    \foreach \row/\value in {1/{J_{\max}},2/{J_{\max}-1},
+            3/{J_{\max}-2},4/{\vdots},5.3/{-J_{\max}+1},6.3/{-J_{\max}}}
+        \node[anchor=east] at (0.48,-\row) {$\value$};
+    \node[state] (a1) at (1,-1) {};
+    \node[lower] (a2) at (1,-2) {};
+    \node[lower] (a3) at (1,-3) {};
+    \node[state] (b2) at (2,-2) {};
+    \node[lower] (b3) at (2,-3) {};
+    \node[state] (c3) at (3,-3) {};
+    \draw[->] (a1) -- node[left] {$J_-$} (a2);
+    \draw[->] (a2) -- node[left] {$J_-$} (a3);
+    \draw[->] (b2) -- node[right] {$J_-$} (b3);
+    \draw[->] (a2) -- node[above] {$\perp$} (b2);
+    \draw[->] (b3) -- node[above] {$\perp$} (c3);
+    \foreach \col in {1,2,3}
+        \node at (\col,-4) {$\vdots$};
+    \node at (4,-4) {$\ddots$};
+    \node[state,label=right:{$M=J_{\min}$}] at (5,-3.75) {};
+    \node at (5,-4.2) {$\vdots$};
+    \node[lower,label=right:{$M=-J_{\min}$}] at (5,-4.85) {};
+    \node[lower] (a5) at (1,-5.3) {};
+    \node[lower] (a6) at (1,-6.3) {};
+    \node[lower] at (2,-5.3) {};
+    \draw[->] (a5) -- node[left] {$J_-$} (a6);
+\end{tikzpicture}
+\end{center}
+The diagram cuts out intermediate rows and columns. If $J_{\min}=0$,
+the last multiplet consists of a single state at $M=0$.
+
+The process stops at $J_{\min}$ because the multiplets then account
+for every product state. Using $2J+1=(J+1)^2-J^2$ gives
+\begin{align*}
+    \sum_{J=J_{\min}}^{J_{\max}}(2J+1)
+    &=(j_1+j_2+1)^2-(j_1-j_2)^2\\
+    &=(2j_1+1)(2j_2+1).
+\end{align*}
+Thus the allowed values are $J=J_{\max},J_{\max}-1,\ldots,J_{\min}$,
+with one multiplet for each $J$.
+
+\section*{6. Transformations \& Symmetries}
+
+\subsection*{6.1 Introduction \& an Example}
+
+Given a unitary operator $U$, a transformation of a quantum system
+can be described either by transforming the states,
+\[
+    |\psi\rangle\mapsto U|\psi\rangle,\qquad
+    \langle\phi|\mapsto\langle\phi|U^\dagger,
+\]
+or by transforming the operators, $A\mapsto U^\dagger A U$.
+Both descriptions preserve $\langle\phi|\psi\rangle$ and yield
+the same transformed matrix element,
+\[
+    \langle\phi|A|\psi\rangle
+        \mapsto \langle\phi|U^\dagger A U|\psi\rangle.
+\]
+A change of picture applies compensating transformations to both
+states and operators, preserving the matrix elements.
+
+A time-independent transformation is a \emph{symmetry} of the
+system if
+\[
+    U^\dagger H U=H
+    \qquad\Longleftrightarrow\qquad [U,H]=0.
+\]
+In the Schr\"odinger picture, if $|\psi(t)\rangle$ solves the
+Schr\"odinger equation, then $U|\psi(t)\rangle$ also solves it.
+In the Heisenberg picture, if $A(t)$ solves the Heisenberg equation,
+then $U^\dagger A(t)U$ also solves it.
+
+\paragraph{Groups of transformations.}
+Let $G$ be a group of transformations with a unitary representation
+$U(g)$ for $g\in G$. Then
+\begin{align*}
+    U(g_1)U(g_2)&=U(g_1g_2),\\
+    U(1_G)&=\mathbf 1,\\
+    U(g^{-1})&=U(g)^{-1}=U(g)^\dagger.
+\end{align*}
+For spatial translations, rotations and reflections, we know
+the geometric action $\mathbf x\mapsto g(\mathbf x)$, and similarly
+the action on momentum. In the position representation used here,
+\[
+    U(g)|\mathbf x\rangle=|g(\mathbf x)\rangle,\qquad
+    U(g)^\dagger\hat{\mathbf x}U(g)=g(\hat{\mathbf x}).
+\]
+To relate the two descriptions, apply the operator identity to a
+position eigenstate:
+\begin{align*}
+    \hat{\mathbf x}\bigl(U(g)|\mathbf x\rangle\bigr)
+        &=U(g)g(\hat{\mathbf x})|\mathbf x\rangle\\
+        &=g(\mathbf x)\,U(g)|\mathbf x\rangle.
+\end{align*}
+Thus $U(g)|\mathbf x\rangle$ has position eigenvalue $g(\mathbf x)$.
+For a general state $|\psi\rangle\mapsto U(g)|\psi\rangle$, the new
+position-space wavefunction is
+\begin{align*}
+    \langle\mathbf x|U(g)|\psi\rangle
+        &=\bigl(U(g)^\dagger|\mathbf x\rangle\bigr)^\dagger|\psi\rangle\\
+        &=\langle g^{-1}(\mathbf x)|\psi\rangle
+         =\psi\bigl(g^{-1}(\mathbf x)\bigr).
+\end{align*}
+
+\paragraph{Translation in one dimension.}
+For $g_a(x)=x+a$, write $U(a)=U(g_a)$. Then
+\[
+    U(a)|x\rangle=|x+a\rangle,\qquad
+    U(a)^\dagger\hat x U(a)=\hat x+a\mathbf 1 .
+\]
+As in Chapter 1, the momentum operator generates translations:
+\[
+    U(a)=\exp\!\left(-\frac{ia\hat p}{\hbar}\right).
+\]
+Since $g_a^{-1}(x)=x-a$, the transformed wavefunction is
+$\psi(x-a)$. For $a>0$, its graph is shifted to the right by $a$.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.9cm,>=stealth]
+    \foreach \panel/\shift/\formula in {0/0/{\psi(x)},6.2/0.9/{\psi(x-a)}} {
+        \begin{scope}[xshift=\panel cm]
+            \draw[->] (-2.25,0) -- (2.05,0) node[right] {$x$};
+            \draw[->] (0,-0.6) -- (0,1.6);
+            \node[below] at (0,0) {$0$};
+            \node at (-1.55,1.35) {$\formula$};
+            \ifdim\shift pt>0pt
+                \draw[dashed] (\shift,0) -- (\shift,1.27);
+                \node[below] at (\shift,0) {$a$};
+            \fi
+            \begin{scope}[xshift=\shift cm]
+                \draw[thick] (-2.1,-0.45)
+                    .. controls (-1.9,-0.42) and (-1.77,0.58) .. (-1.52,0.58)
+                    .. controls (-1.27,0.58) and (-1.18,-0.18) .. (-1,-0.18)
+                    .. controls (-0.83,-0.18) and (-0.82,0.15) .. (-0.65,0.15)
+                    .. controls (-0.49,0.15) and (-0.48,-0.25) .. (-0.32,-0.25)
+                    .. controls (-0.16,-0.25) and (-0.15,1.27) .. (0,1.27)
+                    .. controls (0.18,1.27) and (0.29,0.65) .. (0.55,0.42);
+            \end{scope}
+        \end{scope}
+    }
+    \draw[->] (2.36,0.85) -- node[above] {$a$} (3.66,0.85);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \textbf{End of lecture 17}
 \end{center}
 
 \end{document}
