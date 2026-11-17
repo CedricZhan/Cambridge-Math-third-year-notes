@@ -2344,9 +2344,10 @@ By Brownian scaling, $M_t\overset d=\sqrt t\,M_1$, so for $t>0$,
 \boxed{\mathbb E(e^{uM_t})=2e^{u^2t/2}\Phi(u\sqrt t).}
 \]
 \begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/191309.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/191500.png}
-\end{center}@
+\includegraphics[width=.23\textwidth]{figures/financial-lecture11/normal-tail.png}\par\smallskip
+{\small By symmetry, the standard normal area to the left of $u$
+equals the area to the right of $-u$.}
+\end{center}
 
 \subsection*{3.7 Density of hitting times}
 
@@ -2375,9 +2376,9 @@ f_a(t)=-2\frac{e^{-a^2/(2t)}}{\sqrt{2\pi}}\,
 The distribution function tends to $0$ as $t\downarrow0$ and to
 $1$ as $t\to\infty$. \hfill$\square$
 \begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192249.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192255.png}
-\end{center}@
+\includegraphics[width=.29\textwidth]{figures/financial-lecture11/first-hitting-time.png}\par\smallskip
+{\small A Brownian path first reaches level $a$ at time $T_a$.}
+\end{center}
 
 \subsection*{3.8 Relation to the heat equation}
 
@@ -2404,10 +2405,9 @@ and bounded convergence give $u(x,t)\to f(x)$ for every $x$.
 Thus $u$ solves the Cauchy problem for the heat equation with initial
 data $f$.
 \begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/192804.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/193353.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/193806.png}
-\end{center}@
+\includegraphics[width=.25\textwidth]{figures/financial-lecture11/heat-initial-data.png}\par\smallskip
+{\small The heat equation evolves from the initial profile $f$ at $t=0$.}
+\end{center}
 
 \subsection*{3.9 Transition density for killed Brownian motion}
 
@@ -2421,9 +2421,13 @@ For every bounded measurable $f$ and $t>0$,
 p^a(t,x,y)=p(t,x,y)-p(t,x,2a-y),\quad y<a.
 \]
 \begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194233.png}
-\end{center}@
+\includegraphics[width=.29\textwidth]{figures/financial-lecture11/killed-path.png}\hspace{1em}
+\includegraphics[width=.25\textwidth]{figures/financial-lecture11/absorbing-boundary.png}\par\smallskip
+{\small A path stops at its first hit of $a$. The absorbing boundary corresponds
+to $u(a,t)=0$ for the heat equation on $x<a$.}
+\end{center}
 
+\newpage
 \noindent\textbf{Proof.}
 It suffices to compare the two finite measures on $(-\infty,a)$
 on half-lines $(-\infty,b]$ with $b<a$. Set $M_t=\sup_{0\le s\le t}B_s$.
@@ -2439,9 +2443,10 @@ Reflecting at the first hit of $a$ gives
 In the last line, the reflected endpoint is changed from $z$ to
 $y=2a-z$. \hfill$\square$
 \begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194802.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/194916.png}
-\end{center}@
+\includegraphics[width=.29\textwidth]{figures/financial-lecture11/killed-reflection.png}\par\smallskip
+{\small Reflection at the first hit of $a$ maps endpoints at or below $b$
+to endpoints at or above $2a-b$.}
+\end{center}
 
 \subsubsection*{Killed Brownian motion with drift}
 
@@ -2461,11 +2466,6 @@ for bounded measurable $f$ of compact support, where
 \[
 \widetilde p^a(t,x,y)=p^a(t,x,y)e^{c(y-x)-c^2t/2},\qquad y<a.
 \]
-\begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195343.png}\par\smallskip
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195520.png}
-\end{center}@
-
 \section*{4. Continuous martingales}
 
 \noindent\textbf{Definition.}
@@ -2476,10 +2476,6 @@ for each $t\geq0$, and
 \mathbb E(X_t\mid\mathcal F_s)=X_s\quad\text{a.s.},\qquad 0\leq s\leq t.
 \]
 In addition, $t\mapsto X_t(\omega)$ is continuous for every $\omega$.
-\begin{center}
-\includegraphics[width=.84\textwidth]{figures/financial-lecture11/195734.png}
-\end{center}@
-
 \begin{center}
 \textbf{End of lecture 11}
 \end{center}
