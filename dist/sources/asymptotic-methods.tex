@@ -2719,5 +2719,177 @@ and Airy sketch above are cropped from boards 7 and 10.
     \textbf{End of lecture 11}
 \end{center}
 
+\clearpage
+\section*{4. Approximating Solutions of ODEs}
+
+We will consider two problems.
+\begin{enumerate}
+    \item Constructing local solutions near irregular singular points of an ODE.
+    \item Constructing global solutions to ODEs with a small or large parameter.
+\end{enumerate}
+
+\subsection*{4.1 Review of second-order linear ODEs}
+
+Consider
+\begin{equation}
+    y''+p(x)y'+q(x)y=0.
+    \tag{$*$}
+\end{equation}
+To construct a local solution near $x=x_0$, first classify the point.
+\begin{itemize}
+    \item If both $p$ and $q$ are analytic at $x_0$, it is an
+    \emph{ordinary point}. There are two linearly independent power-series
+    solutions of the form
+    \[
+        y=\sum_{n=0}^{\infty}a_n(x-x_0)^n.
+    \]
+    \item If $x_0$ is singular and both $(x-x_0)p(x)$ and $(x-x_0)^2q(x)$
+    extend analytically to $x_0$, it is a \emph{regular singular point}.
+    There is at least one Frobenius solution of the form
+    \[
+        y=\sum_{n=0}^{\infty}b_n(x-x_0)^{n+\sigma}.
+    \]
+    \item If either of these weighted coefficients fails to extend
+    analytically to $x_0$, it is an \emph{irregular singular point}.
+\end{itemize}
+
+\noindent For example, $x=0$ is a regular singular point of
+\[
+    y''+\frac1x y'+\left(\frac1x-\frac1{x^2}\right)y=0,
+\]
+and an irregular singular point of $y''+(7/x^2)y'+y=0$.
+
+\medskip
+\noindent\textbf{The point at infinity.}
+Set $x=1/X$ and $Y(X)=y(1/X)$. To classify $x=\infty$, classify $X=0$
+in the transformed equation
+\[
+    Y''+P(X)Y'+Q(X)Y=0,\qquad
+    P(X)=\frac{2}{X}-\frac{p(1/X)}{X^2},\qquad
+    Q(X)=\frac{q(1/X)}{X^4}.
+\]
+For the Airy equation $y''=xy$, the transformed coefficient is
+$Q(X)=-X^{-5}$, so $X=0$ and hence $x=\infty$ are irregular singular points.
+
+\medskip
+\noindent\textbf{Canonical form.}
+Substitute $y=uv$ into $(*)$ to obtain
+\[
+    vu''+(2v'+pv)u'+(v''+pv'+qv)u=0.
+\]
+Choose $v=\exp(-\tfrac12\int p(x)\,dx)$ so that $2v'+pv=0$.
+Dividing by $v$ gives the canonical form
+\[
+    u''-Q(x)u=0,\qquad
+    Q(x)=-\frac{v''+pv'+qv}{v}
+        =\frac{p'}2+\frac{p^2}{4}-q.
+\]
+
+\subsection*{4.2 The Liouville--Green approximation}
+
+Write the equation in canonical form as
+\begin{equation}
+    y''=Q(x)y.
+    \tag{$**$}
+\end{equation}
+Suppose $x=x_0$ is an irregular singular point, $Q'$ is continuous
+near the point on the side under consideration, and
+\[
+    Q(x)\sim\frac{Q_0}{(x-x_0)^b},\qquad b>2,\qquad x\to x_0.
+\]
+Set $y=e^{S(x)}$. Then $(**)$ becomes
+\[
+    S''+(S')^2=Q.
+\]
+Seek $S\sim\sum_{n=0}^{\infty}S_n(x)$, with the coefficients absorbed
+into the $S_n$. Require successive terms to be asymptotically smaller
+and require the ordering to persist after one and two differentiations.
+
+\medskip
+\noindent\textbf{Leading order.}
+Keeping $S_0$ gives $S_0''+(S_0')^2\sim Q$. Assume
+$S_0''\ll(S_0')^2$ and choose
+\[
+    (S_0')^2=Q,\qquad S_0=\pm\int\sqrt{Q(x)}\,dx.
+\]
+The consistency check is
+\[
+    |S_0''|=\left|\frac{Q'}{2\sqrt Q}\right|\ll |Q|
+        =|(S_0')^2|,\qquad x\to x_0.
+\]
+\emph{Exercise.} Check this balance by evaluating the ratio
+$|Q'|/(2|Q|^{3/2})$ for $Q(x)=Q_0/(x-x_0)^b$. For a general $Q$,
+check the ratio using $Q'$ itself.
+
+\medskip
+\noindent\textbf{Next order.}
+Substituting $S_0+S_1$ and cancelling $(S_0')^2=Q$ leaves the balance
+\[
+    S_1''+(S_1')^2+2S_0'S_1'\sim -S_0''.
+\]
+Require $S_1\ll S_0$, $S_1'\ll S_0'$ and
+$S_1''\ll 2S_0'S_1'$. The remaining terms give
+\[
+    2S_0'S_1'=-S_0'',\qquad
+    S_1'=-\frac14\frac{Q'}{Q},\qquad
+    S_1=-\frac14\ln Q+\text{constant}.
+\]
+\emph{Exercise.} Check the remaining ordering assumptions.
+Exponentiating the two-term approximation to $S$ gives the
+\emph{Liouville--Green approximation}
+\[
+    y_{\mathrm{LG}}(x)=Q(x)^{-1/4}
+        \left(Ae^{\int\sqrt{Q(x)}\,dx}
+              +Be^{-\int\sqrt{Q(x)}\,dx}\right),
+\]
+where $A$ and $B$ are constants and the powers use consistent branches.
+
+\medskip
+\noindent\textbf{Example 1.}
+Consider $y''-(a^2/x^3)y=0$ with $a>0$ as $x\to0^+$.
+The origin is an irregular singular point. Here
+\[
+    (S_0')^2=\frac{a^2}{x^3},\qquad
+    S_0=\pm\frac{2a}{\sqrt x},\qquad
+    S_1=\frac34\ln x+\text{constant}.
+\]
+The checks give
+\[
+    \frac{S_1}{S_0}=O(\sqrt x\,|\ln x|),\qquad
+    \frac{S_1'}{S_0'}=O(\sqrt x),\qquad
+    \frac{S_1''}{S_0'S_1'}=O(\sqrt x),
+    \qquad x\to0^+.
+\]
+The resulting approximation is
+\[
+    y_{\mathrm{LG}}(x)=Ax^{3/4}e^{-2a/\sqrt x}
+                      +Bx^{3/4}e^{2a/\sqrt x}.
+\]
+
+\medskip
+\noindent\textbf{Example 2. The Airy equation.}
+For $y''=xy$, the approximation as $x\to+\infty$ is
+\[
+    y_{\mathrm{LG}}(x)=Ax^{-1/4}e^{-2x^{3/2}/3}
+                      +Bx^{-1/4}e^{2x^{3/2}/3}.
+\]
+The decaying branch corresponds to $\operatorname{Ai}(x)$ with
+$A=1/(2\sqrt{\pi})$, and the growing branch corresponds to
+$\operatorname{Bi}(x)$.
+
+For $x<0$, take $\sqrt{Q}=i\sqrt{|x|}$. Absorb the constant phase
+from $Q^{-1/4}$ into the coefficients. As $x\to-\infty$ the
+approximation is
+\[
+    y_{\mathrm{LG}}(x)=C|x|^{-1/4}e^{2i|x|^{3/2}/3}
+                      +D|x|^{-1/4}e^{-2i|x|^{3/2}/3}.
+\]
+\emph{Exercise.} Find $C$ and $D$ so that this expression recovers
+the asymptotic approximation to $\operatorname{Ai}(x)$ in Section 3.8.
+
+\begin{center}
+    \textbf{End of lecture 12}
+\end{center}
+
 \end{document}
 

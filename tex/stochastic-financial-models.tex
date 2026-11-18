@@ -2466,7 +2466,7 @@ for bounded measurable $f$ of compact support, where
 \[
 \widetilde p^a(t,x,y)=p^a(t,x,y)e^{c(y-x)-c^2t/2},\qquad y<a.
 \]
-\section*{4. Continuous martingales}
+\section*{Continuous martingales}
 
 \noindent\textbf{Definition.}
 A process $(X_t)_{t\geq0}$ is a continuous martingale with respect to
@@ -2478,6 +2478,152 @@ for each $t\geq0$, and
 In addition, $t\mapsto X_t(\omega)$ is continuous for every $\omega$.
 \begin{center}
 \textbf{End of lecture 11}
+\end{center}
+
+\section*{4. Black--Scholes model}
+
+\subsection*{4.1 Black--Scholes pricing formula}
+
+A \emph{Black--Scholes model} is a pair of processes $(S_t^0)_{t\geq0}$
+and $(S_t)_{t\geq0}$ of the form
+\[
+S_t^0=e^{rt},\qquad S_t=S_0e^{\sigma B_t+\mu t},
+\]
+where $B$ is a BM$_0$, $r,\mu\in\mathbb R$, and
+$\sigma,S_0\in(0,\infty)$. We interpret $S^0$ as a riskless bond with
+interest rate $r$ and $S$ as a risky asset with log-price drift $\mu$
+and volatility $\sigma$. Throughout, we use $\mathcal F_t=\mathcal F_t^B$.
+
+The process $Z_t=e^{\sigma B_t-\frac12\sigma^2t}$ is a martingale.
+Since $B_t\sim N(0,t)$, we have
+$\mathbb E[e^{\sigma B_t}]=e^{\frac12\sigma^2t}$, so $Z_t$ is
+integrable with mean $1$. It is also adapted. For $0\leq s<t$,
+the increment $B_t-B_s$ has the same law as $B_{t-s}$ and is
+independent of $\mathcal F_s$. Thus for $A\in\mathcal F_s$,
+\[
+\begin{aligned}
+\mathbb E[Z_t\mathbf1_A]
+&=\mathbb E\!\left[Z_s\mathbf1_A
+   e^{\sigma(B_t-B_s)-\frac12\sigma^2(t-s)}\right]\\
+&=\mathbb E[Z_s\mathbf1_A]\,
+  \mathbb E\!\left[e^{\sigma B_{t-s}-\frac12\sigma^2(t-s)}\right]\\
+&=\mathbb E[Z_s\mathbf1_A].
+\end{aligned}
+\]
+Here $Z_s\mathbf1_A$ is $\mathcal F_s$-measurable, and the second
+expectation in the product is $1$.
+
+The \emph{discounted asset price} is
+\[
+e^{-rt}S_t=S_0e^{\sigma B_t+(\mu-r)t}.
+\]
+For the special choice $\mu^*=r-\frac12\sigma^2$, it equals $S_0Z_t$
+and hence is a martingale.
+
+\noindent\textbf{Proposition 4.1.}
+Let $(S_t^0,S_t)_{t\geq0}$ be a Black--Scholes model with interest rate
+$r$, drift $\mu$ and volatility $\sigma$. Fix $T\in(0,\infty)$ and
+consider the equivalent probability measure $\mathbb P^*$ given by
+\[
+\frac{d\mathbb P^*}{d\mathbb P}
+=e^{\lambda B_T-\frac12\lambda^2T},
+\qquad
+\sigma\lambda=\mu^*-\mu=r-\frac12\sigma^2-\mu.
+\]
+Then under $\mathbb P^*$ the discounted asset price
+$(e^{-rt}S_t)_{0\leq t\leq T}$ is a martingale.
+
+\noindent\textbf{Proof.}
+By the change of measure for Brownian motion, $(B_t)_{0\leq t\leq T}$
+is a Brownian motion with drift $\lambda$ under $\mathbb P^*$.
+Set $B_t^*=B_t-\lambda t$. Then $B^*$ is a BM$_0$ under $\mathbb P^*$
+and has the same natural filtration as $B$. Since
+\[
+\sigma B_t^*+\mu^*t
+=\sigma B_t-\sigma\lambda t+\mu^*t
+=\sigma B_t+\mu t,
+\]
+we have
+\[
+e^{-rt}S_t=S_0e^{\sigma B_t^*+\mu^*t-rt}
+=S_0e^{\sigma B_t^*-\frac12\sigma^2t}.
+\]
+This is a martingale under $\mathbb P^*$ by the exponential martingale
+calculation above. \hfill$\square$
+
+A \emph{time-$T$ contingent claim} is a nonnegative
+$\mathcal F_T$-measurable random variable $C$, interpreted as a
+contracted payment to an investor at time $T$. For example, a European
+call with strike $K$ and maturity $T$ has payoff $C=(S_T-K)^+$.
+
+Assume investors are free to trade in the asset and the bond. The
+\emph{Black--Scholes price} at time $0$ of the claim $C$ is defined by
+\[
+V_0=\mathbb E^*[e^{-rT}C],
+\]
+where $\mathbb E^*$ denotes expectation under $\mathbb P^*$. For
+$C=S_T$, one can buy the asset at time $0$ at cost $S_0$. The
+martingale property gives $V_0=\mathbb E^*[e^{-rT}S_T]=S_0$.
+
+A \emph{simple replicable claim} is a claim $C$ of the form
+\[
+e^{-rT}C=C_0+\sum_{k=1}^n\theta_k(X_{t_k}-X_{t_{k-1}}),
+\qquad X_t=e^{-rt}S_t,
+\]
+where $C_0$ is constant, $0=t_0\leq\cdots\leq t_n=T$, and each
+$\theta_k$ is a bounded $\mathcal F_{t_{k-1}}$-measurable random
+variable. The claim can be hedged in the market for an initial cost
+of $C_0$.
+\begin{center}
+\includegraphics[width=.35\textwidth]{figures/financial-lecture12/trading-times.jpg}\par\smallskip
+{\small Trading takes place at the partition times up to maturity $T$.}
+\end{center}
+
+\noindent\textbf{Exercise.}
+Describe what the investor does to replicate $C$.
+
+Since $X$ is a $\mathbb P^*$-martingale, each summand has zero
+expectation under $\mathbb P^*$. Therefore
+\[
+V_0=\mathbb E^*[e^{-rT}C]
+=C_0+\sum_{k=1}^n\mathbb E^*[\theta_k(X_{t_k}-X_{t_{k-1}})]
+=C_0.
+\]
+The Brownian martingale representation theorem gives the approximation
+of contingent claims by simple replicable claims in probability. For a
+European call the pricing formula reads
+\[
+V_0=e^{-rT}\mathbb E^*[(S_T-K)^+].
+\]
+
+\noindent\textbf{Proposition 4.2.}
+Let $F$ be a continuous function on $(0,\infty)$ of polynomial growth.
+For $t\in[0,T]$ and $s\in(0,\infty)$, set
+\[
+V(t,s)=e^{-r(T-t)}\mathbb E^*[F(S_T)\mid S_t=s].
+\]
+This is the time-$t$ value of the time-$T$ payoff $F(S_T)$ given
+$S_t=s$.
+\begin{center}
+\includegraphics[width=.25\textwidth]{figures/financial-lecture12/conditioning.jpg}\par\smallskip
+{\small The asset price is observed at time $t$ and the payoff is made at $T$.}
+\end{center}
+
+The function $V$ is continuous on $[0,T]\times(0,\infty)$,
+is $C^{1,2}$ on $[0,T)\times(0,\infty)$, and satisfies the
+\emph{Black--Scholes PDE} with terminal condition
+\[
+\partial_tV+\tfrac12\sigma^2s^2\partial_{ss}V+rs\partial_sV-rV=0,
+\qquad V(T,s)=F(s).
+\]
+In particular, $V(0,S_0)=e^{-rT}\mathbb E^*[F(S_T)]=V_0$.
+\begin{center}
+\includegraphics[width=.25\textwidth]{figures/financial-lecture12/terminal-value.jpg}\par\smallskip
+{\small The terminal condition at $T$ determines the value backward in time.}
+\end{center}
+
+\begin{center}
+\textbf{End of lecture 12}
 \end{center}
 
 \end{document}
