@@ -3436,6 +3436,435 @@ The leading terms give the pitchfork normal form
 \textbf{End of lecture 15}
 \end{center}
 
+\newpage
+\noindent In the pitchfork normal form, write the rescaled variables as
+$x$ and $\mu$, so that $\dot x=\mu x-ax^3$.
+\begin{itemize}
+\item $a=1$ gives a \emph{supercritical pitchfork}. The zero branch is
+stable for $\mu<0$ and unstable for $\mu>0$. For $\mu>0$ there are two
+additional stable fixed points $x=\pm\sqrt{\mu}$.
+\item $a=-1$ gives a \emph{subcritical pitchfork}. The zero branch is
+stable for $\mu<0$ and unstable for $\mu>0$. For $\mu<0$ there are two
+additional unstable fixed points $x=\pm\sqrt{-\mu}$.
+\end{itemize}
+Indeed, the derivative of the vector field is $\mu$ at $x=0$ and
+$-2\mu$ on either nonzero branch. At $\mu=0$, the cubic term makes
+the origin attracting in the supercritical case and repelling in the
+subcritical case.
+\begin{center}
+\includegraphics[width=.77\textwidth]{lecture16/pitchfork-vector-fields.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~2 (supercritical vector fields).}
+\end{center}
+\begin{center}
+\includegraphics[width=.77\textwidth]{lecture16/pitchfork-branches.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~2 (pitchfork branches).}
+\end{center}
+The saddle-node, transcritical and pitchfork are common one-dimensional
+local bifurcations. The saddle-node is generic when $A,C\ne0$ in the
+Taylor expansion above. A transcritical bifurcation requires the
+additional condition $A=0$, and the reflection symmetry in the pitchfork
+case forces $A=C=0$.
+
+\newpage
+\noindent\underline{\S 5.2.1\quad Structural stability of one-dimensional bifurcations}
+
+\medskip
+\noindent A bifurcation is \emph{structurally stable} if it persists
+under small smooth perturbations of $f(x;\mu)$.
+
+\medskip
+\noindent\underline{(i) Saddle-node.}
+Adding a small constant $\varepsilon$ to $\dot x=\mu-x^2$ merely
+shifts the bifurcation to $\mu=-\varepsilon$. Adding $\varepsilon x$
+instead gives
+\[
+\dot x=\mu+\varepsilon x-x^2
+      =\left(\mu+\frac{\varepsilon^2}{4}\right)
+       -\left(x-\frac{\varepsilon}{2}\right)^2.
+\]
+Shifting $x$ and $\mu$ recovers the normal form. More generally,
+the critical point is the simultaneous solution of $f=f_x=0$.
+Because $f_\mu f_{xx}\ne0$ there, the implicit function theorem
+gives a nearby critical point under a small smooth perturbation,
+and the nondegeneracy conditions persist. Thus the saddle-node
+is structurally stable.
+\begin{center}
+\includegraphics[width=.40\textwidth]{lecture16/saddle-node-constant-perturbation.png}
+\hfill
+\includegraphics[width=.48\textwidth]{lecture16/saddle-node-linear-perturbation.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~3 (constant and linear perturbations).}
+\end{center}
+
+\noindent\underline{(ii) Transcritical.}
+Adding a small constant to the transcritical normal form gives
+\[
+\dot x=\varepsilon+\mu x-x^2,\qquad
+x_\pm=\frac{\mu\pm\sqrt{\mu^2+4\varepsilon}}{2}.
+\]
+For $\varepsilon>0$ the two branches exist for all $\mu$,
+with $x_+$ stable and $x_-$ unstable. For $\varepsilon<0$ the
+branches meet at saddle-nodes at $\mu=\pm2\sqrt{-\varepsilon}$ and
+there are no fixed points between those parameter values.
+At $\varepsilon=0$ the branches cross and exchange stability.
+Thus the transcritical bifurcation is structurally unstable.
+
+\newpage
+\begin{center}
+\includegraphics[width=.94\textwidth]{lecture16/transcritical-perturbed-vector-fields.png}\\
+\includegraphics[width=.94\textwidth]{lecture16/transcritical-perturbed-branches.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~3 (perturbed transcritical bifurcation).}
+\end{center}
+
+\noindent\underline{(iii) Pitchfork.}
+Adding a small constant to the supercritical pitchfork gives
+$\dot x=\varepsilon+\mu x-x^3$. If $\varepsilon\ne0$, the reflection
+symmetry is broken. One attracting branch persists while a pair of
+fixed points appears at a saddle-node. The fold satisfies
+$\mu=3x^2$ and $\varepsilon=-2x^3$, so it lies on opposite sides
+of the $x=0$ axis for opposite signs of $\varepsilon$.
+Thus the pitchfork is structurally unstable.
+\begin{center}
+\includegraphics[width=.86\textwidth]{lecture16/pitchfork-perturbed-branches.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~4 (perturbed pitchfork).}
+\end{center}
+
+\newpage
+\noindent\underline{\S 5.3\quad Bifurcations in $\mathbb R^2$}
+
+\medskip
+\noindent Suppose the origin is a non-hyperbolic fixed point of
+$\dot{\mathbf x}=\mathbf f(\mathbf x;\mu)$ at the critical parameter.
+The linearization $A$ there gives four cases.
+\begin{enumerate}
+\item $\lambda_1=0$, $\lambda_2\ne0$. A simple zero eigenvalue can give a
+\emph{stationary bifurcation}, reduced to one dimension using a centre
+manifold.
+\item $\lambda_{1,2}=\pm i\omega$, $\omega\ne0$. A pair of imaginary
+eigenvalues can give an \emph{oscillatory} (Hopf) bifurcation.
+\item $\lambda_1=\lambda_2=0$ and $A=0$. This is the semisimple double-zero
+case.
+\item $\lambda_1=\lambda_2=0$ and $A$ is similar to
+$\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)$.
+This is the linearization for a Takens--Bogdanov bifurcation.
+\end{enumerate}
+\begin{center}
+\includegraphics[width=.40\textwidth]{lecture16/planar-bifurcation-loci.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~4 (trace--determinant diagram).}
+\end{center}
+
+\medskip
+\noindent\underline{\S 5.4\quad The centre manifold}
+
+\medskip
+\noindent\underline{Motivation.} Consider
+\begin{equation}
+\dot x=xy-\mu x,\qquad \dot y=-y+x^2.
+\tag{$\star$}\label{eq:centre-pitchfork}
+\end{equation}
+The origin is always a fixed point. For $\mu>0$ the system also has
+fixed points $(\pm\sqrt{\mu},\mu)$. At the origin the linearization
+is $\operatorname{diag}(-\mu,-1)$, so it becomes non-hyperbolic at
+$\mu=0$. The origin is a saddle for $\mu<0$ and attracting for
+$\mu>0$, and the two nonzero fixed points are saddles.
+
+\noindent For $|\mu|\ll1$ and small $(x,y)$, $y$ is the fast variable.
+For instance, if $|x|,|y|=O(|\mu|)$, then $\dot x=O(\mu^2)$ and
+$\dot y=O(|\mu|)$. The motion approaches the vicinity of the
+nullcline $y=x^2$, and $x$ then varies slowly. Substituting $y\simeq x^2$
+gives $\dot x\simeq x(-\mu+x^2)$, the subcritical pitchfork normal form
+with parameter $-\mu$.
+
+\newpage
+\begin{center}
+\includegraphics[width=.33\textwidth]{lecture16/fast-motion.png}
+\hspace{.07\textwidth}
+\includegraphics[width=.30\textwidth]{lecture16/subcritical-branches.png}\\[.5em]
+\includegraphics[width=.65\textwidth]{lecture16/planar-pitchfork-portraits.png}\\
+{\footnotesize Source: Lecture16.pdf, p.~5 (fast motion, fixed-point branches and phase portraits).}
+\end{center}
+
+\noindent\underline{Centre manifold theorem.}
+Let the origin be a non-hyperbolic fixed point of a smooth system, and
+let $E^s$, $E^u$ and $E^c$ be the real invariant subspaces of the
+linearization corresponding to eigenvalues with negative, positive
+and zero real parts, respectively. These subspaces are formed from
+the corresponding generalized eigenspaces. There exist local invariant
+manifolds $W^s$, $W^u$ and $W^c$ through the origin, tangent there to
+$E^s$, $E^u$ and $E^c$ and of the corresponding dimensions.
+The stable and unstable manifolds are locally unique. The centre
+manifold is generally nonunique.
+\begin{center}
+\textbf{End of lecture 16}
+\end{center}
+
+\newpage
+\noindent\underline{Example (Finding a centre manifold in $\mathbb R^2$).}
+Consider
+\[
+\dot x=f(x,y),\qquad \dot y=-\lambda y+g(x,y),\qquad \lambda>0,
+\]
+where $f$ and $g$ vanish to second order at the origin. The centre
+subspace is the $x$-axis and the stable subspace is the $y$-axis.
+Write $W^c$ locally as $y=h(x)$, where $h(0)=h'(0)=0$. Invariance
+requires $\dot y=h'(x)\dot x$, giving
+\[
+-\lambda h(x)+g(x,h(x))=h'(x)f(x,h(x)).
+\]
+Substitute the Taylor expansion $h(x)=a_2x^2+a_3x^3+\cdots$
+and match coefficients to approximate the centre manifold.
+
+\medskip
+\noindent\underline{Example (The planar pitchfork at $\mu=0$).}
+In \eqref{eq:centre-pitchfork}, $\dot x=xy$ and $\dot y=-y+x^2$
+at $\mu=0$. The invariance equation becomes
+\[
+x^2-h(x)=h'(x)xh(x).
+\]
+If $h(x)=a_2x^2+a_3x^3+a_4x^4+O(x^5)$, this yields
+\[
+(1-a_2)x^2-a_3x^3-a_4x^4+O(x^5)=2a_2^2x^4+O(x^5).
+\]
+Hence $a_2=1$, $a_3=0$, $a_4=-2$, and
+$h(x)=x^2-2x^4+O(x^5)$.
+
+\medskip
+\noindent\underline{\S 5.5\quad Extended centre manifold}
+
+\medskip
+\noindent To study a bifurcation of $\dot{\mathbf x}=\mathbf f(\mathbf x;\mu)$,
+adjoin $\dot\mu=0$ and work near $(\mathbf x,\mu)=(\mathbf 0,0)$.
+The extra zero eigenvalue raises the dimension of the centre subspace
+and centre manifold by one. Each slice $\mu=\mathrm{const}$ is invariant.
+In a planar system whose extended centre subspace is the $x$--$\mu$
+plane and whose transverse direction is stable or unstable, write
+\[
+y=h(x,\mu),\qquad h(0,0)=0,\qquad h_x(0,0)=h_\mu(0,0)=0.
+\]
+Tangency fixes these first derivatives, and invariance yields
+$\dot y=h_x\dot x$ since $\dot\mu=0$. If the centre subspace is
+tilted, the linear terms in $h$ must instead match that subspace.
+
+\newpage
+\noindent\underline{Example (The extended planar pitchfork).}
+For \eqref{eq:centre-pitchfork} with $\dot\mu=0$, the linearization in
+$(y,x,\mu)$ is $\operatorname{diag}(-1,0,0)$. Write
+\[
+h(x,\mu)=a_{20}x^2+a_{11}x\mu+a_{02}\mu^2+O(\rho^3),
+\qquad \rho=|x|+|\mu|.
+\]
+Invariance gives
+\[
+-h+x^2=h_x\,x(h-\mu).
+\]
+The right-hand side begins at degree three. At degree two,
+$a_{20}=1$ and $a_{11}=a_{02}=0$, so
+\[
+h=x^2+O(\rho^3),\qquad
+\dot x=-\mu x+x^3+O(\rho^4).
+\]
+This recovers the one-dimensional subcritical pitchfork.
+\begin{center}
+\includegraphics[width=.40\textwidth]{lecture17/extended-centre-manifold.png}\\
+{\footnotesize Source: Lecture17.pdf, p.~3 (extended centre manifold).}
+\end{center}
+
+\noindent\underline{Example (A stationary bifurcation with tilted $E^c$).}
+Consider
+\[
+\dot x=\mu+x^2+xy+y^2,\qquad \dot y=2\mu-y+x^2+xy.
+\]
+At $\mu=0$ the origin is a non-hyperbolic fixed point. With
+$\dot\mu=0$, the extended linearization in $(x,y,\mu)$ is
+\[
+A=\begin{pmatrix}0&0&1\\0&-1&2\\0&0&0\end{pmatrix}.
+\]
+The zero eigenvalue has algebraic multiplicity two. The vector
+$(1,0,0)^{\mathsf T}$ is a zero eigenvector, and
+$(0,2,1)^{\mathsf T}$ is a generalized eigenvector mapping to it
+under $A$. Thus $E^c=\{y=2\mu\}$. Tangency gives
+\[
+h=2\mu+a_{20}x^2+a_{11}x\mu+a_{02}\mu^2+O(\rho^3).
+\]
+The invariance equation is
+\[
+2\mu-h+x^2+xh=h_x(\mu+x^2+xh+h^2).
+\]
+The degree-two terms obey
+\[
+(1-a_{20})x^2+(2-a_{11})x\mu-a_{02}\mu^2
+=2a_{20}x\mu+a_{11}\mu^2.
+\]
+Therefore $a_{20}=1$, $a_{11}=a_{02}=0$, and
+$h=2\mu+x^2+O(\rho^3)$.
+
+\newpage
+\noindent Substituting this graph into the $x$ equation gives
+\[
+\dot x=\mu+x^2+2x\mu+4\mu^2+O(\rho^3).
+\]
+The terms $2x\mu$ and $4\mu^2$ are smaller than the leading
+parameter term near the bifurcation. Since the coefficients of
+$\mu$ and $x^2$ are both nonzero, the reduction has a saddle-node
+bifurcation with leading normal form $\dot x=\mu+x^2$.
+\begin{center}
+\includegraphics[width=.49\textwidth]{lecture17/reduced-saddle-node.png}\\
+{\footnotesize Source: Lecture17.pdf, p.~4 (reduced saddle-node).}
+\end{center}
+
+\noindent\underline{Example (The Lorenz equations).}
+For $\sigma,b>0$, consider
+\[
+\dot x=\sigma(y-x),\qquad \dot y=rx-y-xz,\qquad \dot z=-bz+xy.
+\]
+At the origin the linearization is
+\[
+A=\begin{pmatrix}-\sigma&\sigma&0\\r&-1&0\\0&0&-b\end{pmatrix}.
+\]
+At $r=1$ its eigenvalues are $0,-b,-(1+\sigma)$, with corresponding
+eigenvectors $(1,1,0)^{\mathsf T}$, $(0,0,1)^{\mathsf T}$ and
+$(-\sigma,1,0)^{\mathsf T}$. Thus the centre subspace is
+$\{x=y,\ z=0\}$ and the stable subspace is $\{x+\sigma y=0\}$.
+
+\noindent With $\mu=r-1$, $v=y-x$ and $\dot\mu=0$, the extended system
+becomes
+\[
+\dot x=\sigma v,\qquad \dot\mu=0,\qquad
+\dot v=-(1+\sigma)v+x(\mu-z),\qquad
+\dot z=-bz+x^2+xv.
+\]
+The extended centre subspace is $\{v=z=0\}$. Write the centre
+manifold as $v=V(x,\mu)$, $z=Z(x,\mu)$ with both functions and their
+first derivatives vanishing at the origin. Its dynamics follow from
+$\dot x=\sigma V(x,\mu)$, and its graph is determined by the
+invariance equations
+\[
+\begin{aligned}
+\sigma V V_x &=-(1+\sigma)V+x(\mu-Z),\\
+\sigma V Z_x &=-bZ+x^2+xV.
+\end{aligned}
+\]
+\begin{center}
+\textbf{End of lecture 17}
+\end{center}
+
+\newpage
+\noindent Let $V_k$ and $Z_k$ denote the degree-$k$ terms of $V$ and $Z$
+in $(x,\mu)$ for the extended Lorenz system. Both expansions begin
+at degree two, so $V V_x$ and $V Z_x$ begin at degree three.
+Matching degree-two terms gives
+\[
+V_2=\frac{x\mu}{1+\sigma},\qquad Z_2=\frac{x^2}{b}.
+\]
+At degree three, the first invariance equation gives
+\[
+\sigma V_2(V_2)_x=-(1+\sigma)V_3-xZ_2,\qquad
+V_3=-\frac{x^3}{b(1+\sigma)}-\frac{\sigma x\mu^2}{(1+\sigma)^3}.
+\]
+The $x\mu^2$ term is smaller than $x\mu$ near the bifurcation.
+The reduced dynamics to leading order are
+\[
+\dot x\simeq\frac{\sigma}{1+\sigma}x\left(\mu-\frac{x^2}{b}\right)
+=\frac{\sigma}{b(1+\sigma)}x(b\mu-x^2).
+\]
+Rescaling time and taking $b\mu$ as the new parameter gives the
+supercritical pitchfork normal form. In these planar and
+three-dimensional examples, the stationary bifurcation reduces
+to a one-dimensional normal form.
+\begin{center}
+\includegraphics[width=.41\textwidth]{lecture18/lorenz-pitchfork.png}\\
+{\footnotesize Source: Lecture18.pdf, p.~2 (Lorenz pitchfork).}
+\end{center}
+
+\medskip
+\noindent\underline{\S 5.6\quad Oscillatory (Hopf) bifurcations in $\mathbb R^2$}
+
+\medskip
+\noindent At $\mu=0$, a conjugate pair $\lambda_{1,2}=\pm i\omega$,
+with $\omega\ne0$, gives a two-dimensional centre subspace. A generic
+Hopf bifurcation occurs when the pair crosses the imaginary axis
+transversely and the cubic radial coefficient is nonzero. Its
+leading polar normal form is
+\[
+\boxed{\dot r=(\mu-ar^2)r,\qquad \dot\theta=\omega,\qquad a=\pm1.}
+\]
+The origin is a stable focus for $\mu<0$ and an unstable focus for
+$\mu>0$. A periodic orbit of radius $r=\sqrt{\mu/a}$ exists when
+$\mu/a>0$. Its radial stability is determined by the derivative
+$-2\mu$ of the radial vector field there.
+\begin{center}
+\includegraphics[width=.36\textwidth]{lecture18/hopf-locus.png}\\
+{\footnotesize Source: Lecture18.pdf, p.~3 (crossing the Hopf locus).}
+\end{center}
+
+\newpage
+\begin{itemize}
+\item For $a=1$ the Hopf bifurcation is \emph{supercritical}. As $\mu$
+increases through zero, a stable periodic orbit is created around the
+now unstable focus.
+\item For $a=-1$ the Hopf bifurcation is \emph{subcritical}. An unstable
+periodic orbit surrounds the stable focus for $\mu<0$ and disappears
+as the focus loses stability.
+\end{itemize}
+\begin{center}
+\includegraphics[width=.83\textwidth]{lecture18/hopf-bifurcations.png}\\
+{\footnotesize Source: Lecture18.pdf, p.~3 (Hopf bifurcation diagrams and phase portraits).}
+\end{center}
+
+\noindent\underline{Deriving the Hopf normal form.}
+Consider
+\[
+\begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+=\begin{pmatrix}\mu&-\omega\\\omega&\mu\end{pmatrix}
+\begin{pmatrix}x\\y\end{pmatrix}
++\begin{pmatrix}f(x,y)\\g(x,y)\end{pmatrix},
+\]
+where $f,g$ vanish to second order in $(x,y)$ and $\omega\ne0$.
+The linear eigenvalues are $\mu\pm i\omega$. At $\mu=0$, use
+$z=x+iy$ to write $\dot z=i\omega z+F(z,\bar z)$, where
+$F=f+ig$. At quadratic order,
+\[
+\dot z=i\omega z+a_1z^2+a_2z\bar z+a_3\bar z^2+O(|z|^3).
+\]
+The coefficients $\alpha_j$ in the near-identity transformation
+$\zeta=z+\alpha_1z^2+\alpha_2z\bar z+\alpha_3\bar z^2$ can be
+chosen to eliminate all the quadratic terms, giving
+$\dot\zeta=i\omega\zeta+O(|\zeta|^3)$.
+
+\newpage
+\noindent Repeating the procedure at cubic order eliminates all cubic
+terms except the resonant monomial $z^2\bar z=|z|^2z$. Renaming the
+transformed variable $z$, the cubic truncation is
+\[
+\dot z=i\omega z+\nu |z|^2z,\qquad
+\dot r=\operatorname{Re}(\nu)r^3,\qquad
+\dot\theta=\omega+\operatorname{Im}(\nu)r^2.
+\]
+At each order the monomial $z^p\bar z^q$ is resonant exactly when
+$p-q=1$. This accounts for the surviving cubic term and, at higher
+orders, the form $zF(|z|^2)$.
+
+\noindent The sign of $\operatorname{Re}(\nu)$ is the sign of the
+cubic radial coefficient
+\[
+\begin{aligned}
+\gamma=\frac1{16}\Big[&
+f_{xxx}+f_{xyy}+g_{xxy}+g_{yyy}\\
+&+\frac1\omega\big(
+f_{xy}(f_{xx}+f_{yy})-g_{xy}(g_{xx}+g_{yy})
+-f_{xx}g_{xx}+f_{yy}g_{yy}\big)
+\Big]_{(x,y,\mu)=(0,0,0)}.
+\end{aligned}
+\]
+For $\gamma<0$ the Hopf bifurcation is supercritical, and for
+$\gamma>0$ it is subcritical. Applying the transformations with
+$\mu$ retained gives the parameter-dependent normal form from the
+local Taylor expansion. At $\mu=0$, successive transformations
+give the formal normal form $\dot z=zF(|z|^2)$ with $F(0)=i\omega$.
+This form is useful when $\operatorname{Re}(\nu)=0$ and
+higher-order radial terms are needed.
+\begin{center}
+\textbf{End of lecture 18}
+\end{center}
 
 \end{document}
 
