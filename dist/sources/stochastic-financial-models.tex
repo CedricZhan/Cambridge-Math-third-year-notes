@@ -2626,4 +2626,152 @@ In particular, $V(0,S_0)=e^{-rT}\mathbb E^*[F(S_T)]=V_0$.
 \textbf{End of lecture 12}
 \end{center}
 
+\subsection*{Proof of Proposition 4.2}
+
+In the Black--Scholes model, $S_t^0=e^{rt}$ and
+$S_t=S_0e^{\sigma B_t^*+\mu^*t}$ under $\mathbb P^*$, where $B^*$ is a
+BM$_0$ and $\mu^*=r-\frac12\sigma^2$. The discounted stock price
+$(e^{-rt}S_t)_{0\leq t\leq T}$ is a $\mathbb P^*$-martingale, and the
+time-$0$ price of $F(S_T)$ is $V(0,S_0)=e^{-rT}\mathbb E^*[F(S_T)]$.
+Write the Black--Scholes operator as
+\[
+\mathcal LV=\partial_tV+\tfrac12\sigma^2s^2\partial_{ss}V
++rs\partial_sV-rV.
+\]
+We show that $\mathcal LV=0$ for $0\leq t<T$ and $s>0$, with
+$V(T,s)=F(s)$.
+
+For $t<T$, put $u=T-t$. Under $\mathbb P^*$, we have
+\[
+S_T=S_t e^{\sigma(B_T^*-B_t^*)+\mu^*u}.
+\]
+The increment $B_T^*-B_t^*$ is independent of $S_t$ and has law $N(0,u)$.
+Consequently,
+\[
+\begin{aligned}
+V(t,s)
+&=e^{-ru}\mathbb E^*\!\left[F\!\left(se^{\sigma(B_T^*-B_t^*)+\mu^*u}\right)\right]\\
+&=\int_{\mathbb R}v(t,s,x)F(e^x)\,dx,
+\end{aligned}
+\]
+where, using the Brownian transition density,
+\[
+v(t,s,x)=e^{-ru}p(\sigma^2u,\log s+\mu^*u,x),
+\qquad
+p(a,y,x)=\frac{1}{\sqrt{2\pi a}}e^{-(x-y)^2/(2a)}.
+\]
+
+Let $\dot p$ denote the derivative in the first argument and let $p'$
+and $p''$ denote derivatives in the second argument. Evaluating $p$
+and its derivatives at $(\sigma^2u,\log s+\mu^*u,x)$ gives
+\[
+\begin{aligned}
+\partial_t v &= e^{-ru}(rp-\sigma^2\dot p-\mu^*p'),\\
+s\partial_s v &= e^{-ru}p',\\
+s\partial_s(s\partial_s v)
+&=s^2\partial_{ss}v+s\partial_s v=e^{-ru}p''.
+\end{aligned}
+\]
+Since $\dot p=\frac12 p''$ and $\mu^*+\frac12\sigma^2=r$, it follows that
+\[
+\begin{aligned}
+\partial_t v
+&=rv-\tfrac12\sigma^2s^2\partial_{ss}v
+  -\left(\mu^*+\tfrac12\sigma^2\right)s\partial_s v\\
+&=rv-\tfrac12\sigma^2s^2\partial_{ss}v-rs\partial_s v.
+\end{aligned}
+\]
+Thus $\mathcal Lv=0$ for each $x$. The Gaussian decay of the kernel
+and the polynomial growth of $F$ justify differentiation under the
+integral on compact subsets with $t<T$ and $s>0$, so $\mathcal LV=0$.
+For the terminal condition, the argument of $F$ can be written as
+$se^{\sigma\sqrt u\,Z+\mu^*u}$ with $Z\sim N(0,1)$. For any $s_0>0$,
+continuity of $F$ and dominated convergence using its polynomial growth
+give $V(t,s)\to F(s_0)$ as $(t,s)\to(T,s_0)$ with $t<T$.
+At $t=T$, the payoff is $F(s)$ when $S_T=s$. \hfill$\square$
+
+\subsection*{4.4 Black--Scholes formula for the price of a European call}
+
+The Black--Scholes price of a European call with strike $K>0$ and
+maturity $T>0$ is
+\[
+EC(S_0,K,\sigma,r,T)=\mathbb E^*[e^{-rT}(S_T-K)^+].
+\]
+
+\noindent\textbf{Proposition 4.3 (Black--Scholes formula).}
+We have
+\[
+EC(S_0,K,\sigma,r,T)=S_0\Phi(d_+)-Ke^{-rT}\Phi(d_-),
+\]
+where
+\[
+\Phi(d)=\int_{-\infty}^d\frac{e^{-y^2/2}}{\sqrt{2\pi}}\,dy,
+\qquad
+d_\pm=\frac{\log(S_0/K)+rT}{\sigma\sqrt T}\pm\frac{\sigma\sqrt T}{2}.
+\]
+
+\noindent\textbf{Proof.}
+Under $\mathbb P^*$, $B_T^*/\sqrt T$ is standard normal and
+$e^{-rT}S_T=S_0e^{\sigma B_T^*-\frac12\sigma^2T}$. Put
+$\varphi(y)=(2\pi)^{-1/2}e^{-y^2/2}$. The discounted call payoff is
+positive exactly when $B_T^*/\sqrt T>a$, where
+\[
+S_0e^{\sigma\sqrt T\,a-\frac12\sigma^2T}=Ke^{-rT}.
+\]
+Taking logarithms gives
+\[
+\log(S_0/K)+\sigma\sqrt T\,a-\tfrac12\sigma^2T=-rT,
+\qquad
+a=\frac{\sigma\sqrt T}{2}-\frac{\log(S_0/K)+rT}{\sigma\sqrt T}=-d_-.
+\]
+Completing the square gives
+$e^{\sigma\sqrt T\,y-\frac12\sigma^2T}\varphi(y)
+=\varphi(y-\sigma\sqrt T)$. Writing
+$\overline\Phi(y)=1-\Phi(y)=\Phi(-y)$, we obtain
+\[
+\begin{aligned}
+EC
+&=\int_a^\infty
+  \bigl(S_0e^{\sigma\sqrt T\,y-\frac12\sigma^2T}-Ke^{-rT}\bigr)\varphi(y)\,dy\\
+&=S_0\int_a^\infty\varphi(y-\sigma\sqrt T)\,dy
+  -Ke^{-rT}\int_a^\infty\varphi(y)\,dy\\
+&=S_0\overline\Phi(a-\sigma\sqrt T)-Ke^{-rT}\overline\Phi(a)\\
+&=S_0\Phi(d_+)-Ke^{-rT}\Phi(d_-),
+\end{aligned}
+\]
+since $-a+\sigma\sqrt T=d_+$. \hfill$\square$
+
+\subsubsection*{European put and put--call parity}
+
+The Black--Scholes price of the European put with the same strike and
+maturity is
+\[
+EP(S_0,K,\sigma,r,T)=\mathbb E^*[e^{-rT}(S_T-K)^-],
+\]
+where $(S_T-K)^-=(K-S_T)^+$. The difference of the call and put payoffs
+equals the payoff of a long forward contract with delivery price $K$,
+\[
+(S_T-K)^+-(S_T-K)^-=S_T-K.
+\]
+By the discounted-stock martingale property,
+$\mathbb E^*[e^{-rT}(S_T-K)]=S_0-Ke^{-rT}$. Hence \emph{put--call parity}
+gives
+\[
+EC-EP=S_0-Ke^{-rT},
+\qquad
+EC+Ke^{-rT}=EP+S_0.
+\]
+Substituting the call formula and collecting terms yields
+\[
+\begin{aligned}
+EP(S_0,K,\sigma,r,T)
+&=S_0\Phi(d_+)-Ke^{-rT}\Phi(d_-)+Ke^{-rT}-S_0\\
+&=Ke^{-rT}\overline\Phi(d_-)-S_0\overline\Phi(d_+).
+\end{aligned}
+\]
+
+\begin{center}
+\textbf{End of lecture 13}
+\end{center}
+
 \end{document}

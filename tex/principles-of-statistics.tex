@@ -3868,16 +3868,17 @@ maximum likelihood (ordinary least squares, with full-rank design and
 positive residual degrees of freedom) and test the null hypothesis that
 the coefficient of $X$ is zero.
 
-Now consider any triple $(X,Y,Z)$ with finite second moments. First
-centre each variable by subtracting its mean. Write $X,Y,Z$ for the
-centred variables, so $\mathbb E[X]=\mathbb E[Y]=0$ and
-$\mathbb E[Z]=0$. Define
+For any $(X,Y,Z)$ with finite second moments, regress $X$ and $Y$ on $Z$
+with an intercept. For $U=X,Y$, define
 \[
-\beta_{X\mid Z}
-\in\operatorname*{arg\,min}_{\beta}\mathbb E[(X-\beta Z)^2],
-\qquad R_{X\mid Z}=X-\beta_{X\mid Z}Z.
+(\alpha_{U\mid Z},\beta_{U\mid Z})
+\in\operatorname*{arg\,min}_{\alpha,\beta}
+   \mathbb E[(U-\alpha-\beta^{\mathsf T}Z)^2],
+\qquad
+R_{U\mid Z}=U-\alpha_{U\mid Z}-\beta_{U\mid Z}^{\mathsf T}Z.
 \]
-Define $\beta_{Y\mid Z}$ and $R_{Y\mid Z}$ similarly.
+The intercept satisfies $\alpha_{U\mid Z}=\mu_U-\beta_{U\mid Z}^{\mathsf T}\mu_Z$,
+so $\mathbb E[R_{U\mid Z}]=0$ for arbitrary means.
 
 \medskip
 \noindent\underline{Def.}\quad When both residual variances are positive,
@@ -3888,30 +3889,176 @@ the \underline{partial correlation} of $X$ and $Y$ given $Z$ is
 
 \begin{samepage}
 When $(X,Y,Z)$ is jointly Gaussian with positive definite covariance,
-Prop 2 and the zero means give
-$\beta_{X\mid Z}Z=\mathbb E[X\mid Z]$ and
-$\beta_{Y\mid Z}Z=\mathbb E[Y\mid Z]$, so
-$R_{X\mid Z}=X-\mathbb E[X\mid Z]$ and $R_{Y\mid Z}=Y-\mathbb E[Y\mid Z]$.
-By Prop 2, the conditional covariance matrix of $(X,Y)$ given $Z=z$
-is constant in $z$. Taking conditional expectations of the residual
-products and squares thus gives
+Prop 2 gives the affine conditional mean, which is also the least-squares
+predictor, with $\beta_{U\mid Z}=\Sigma_{ZZ}^{-1}\Sigma_{ZU}$. Thus
 \[
-\begin{aligned}
-\rho_{XY\mid Z}
-&=\frac{\mathbb E[(X-\mathbb E[X\mid Z])(Y-\mathbb E[Y\mid Z])]}
- {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}\\
-&=\frac{\operatorname{Cov}(X,Y\mid Z)}
- {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}.
-\end{aligned}
+R_{U\mid Z}=U-\mathbb E[U\mid Z],\qquad U=X,Y.
 \]
-Thus in the Gaussian model the partial correlation equals the
-correlation of $X$ and $Y$ in their conditional distribution given $Z=z$
-for every $z$.
+The conditional covariance matrix of $(X,Y)$ is constant in $Z$ by Prop 2.
+Taking expectations of the conditional residual products and squares gives
+\[
+\rho_{XY\mid Z}
+=\frac{\operatorname{Cov}(X,Y\mid Z)}
+ {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}.
+\]
+Thus the partial correlation equals the correlation in the conditional
+distribution given $Z=z$. If $X\perp\!\!\!\perp Y\mid Z$, the residuals are
+conditionally independent as well, since each is obtained by a shift
+fixed by $Z$. Their conditional covariance is zero, so $\rho_{XY\mid Z}=0$.
 
 \begin{center}
 \textbf{End of lecture 17}
 \end{center}
 \end{samepage}
+
+\medskip
+\noindent\underline{Recall.}\quad For jointly Gaussian $(Y,W)$ with
+positive definite block covariance $\Sigma$, Prop 2 gives
+\[
+Y\mid W=w\sim N\!\left(
+\mu_1+\Sigma_{12}\Sigma_{22}^{-1}(w-\mu_2),
+\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+\right),
+\]
+with conditional covariance independent of $w$. For scalar $X,Y$ and
+$W=(X,Z^{\mathsf T})^{\mathsf T}$, $Z\in\mathbb R^p$, this gives the
+normal linear model with intercept $\mu_1-\Sigma_{12}\Sigma_{22}^{-1}\mu_2$,
+coefficient row $\Sigma_{12}\Sigma_{22}^{-1}$ and independent Gaussian
+error with variance $\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$.
+In this model, $X\perp\!\!\!\perp Y\mid Z$ if and only if the coefficient
+$\beta_X$ of $X$ is zero.
+
+Recall that $\rho_{XY\mid Z}=\operatorname{Corr}(R_{X\mid Z},R_{Y\mid Z})$
+uses the population linear regression residuals. In the Gaussian model,
+the conditional means are affine in $Z$, so $R_{U\mid Z}=U-\mathbb E[U\mid Z]$
+for $U=X,Y$. The conditional variances are constant in $Z$ and equal the
+residual variances. The conditional residual product also has constant
+expectation given $Z$. Taking its expectation gives
+\[
+\begin{aligned}
+\rho_{XY\mid Z}
+&=\frac{\mathbb E[R_{X\mid Z}R_{Y\mid Z}]}
+        {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}\\
+&=\frac{\mathbb E[R_{X\mid Z}R_{Y\mid Z}\mid Z]}
+        {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}
+ =\frac{\operatorname{Cov}(X,Y\mid Z)}
+        {\sqrt{\operatorname{Var}(X\mid Z)\operatorname{Var}(Y\mid Z)}}.
+\end{aligned}
+\]
+In particular, conditional independence implies $\rho_{XY\mid Z}=0$
+in the Gaussian model.
+
+\subsubsection*{Testing Conditional Independence}
+
+Suppose $(X_i,Y_i,Z_i)_{i=1}^n$ are iid copies of $(X,Y,Z)$
+from the joint Gaussian model above. Form the vectors and matrix
+\[
+\underline X=\begin{pmatrix}X_1\\ \vdots\\ X_n\end{pmatrix},\quad
+\underline Y=\begin{pmatrix}Y_1\\ \vdots\\ Y_n\end{pmatrix},\quad
+\underline Z=\begin{pmatrix}Z_1^{\mathsf T}\\ \vdots\\ Z_n^{\mathsf T}\end{pmatrix},
+\quad
+\underline 1=\begin{pmatrix}1\\ \vdots\\ 1\end{pmatrix}\in\mathbb R^n.
+\]
+We wish to test $H_0\colon X\perp\!\!\!\perp Y\mid Z$, equivalently
+$H_0\colon\beta_X=0$. Assume $n>p+2$ and the full design matrix
+$\underline W=(\underline 1,\underline X,\underline Z)$ has rank $p+2$.
+
+\medskip
+\noindent\underline{Procedure 1.}\quad Regress $\underline Y$ onto the
+columns of $\underline W$ and perform an $F$-test for $\beta_X=0$.
+Let $P$ and $Q$ be the orthogonal projections onto
+$\operatorname{col}(\underline 1,\underline Z)$ and
+$\operatorname{col}(\underline W)$, respectively. The statistic is
+\[
+F=\frac{\|(Q-P)\underline Y\|^2}
+        {\frac{1}{n-p-2}\|(I-Q)\underline Y\|^2}.
+\]
+Under $H_0$, $F\sim F_{1,n-p-2}$.
+
+\medskip
+\noindent\underline{Procedure 2.}\quad Estimate the partial correlation by
+\[
+\hat\rho_{XY\mid Z}
+=\frac{\bigl((I-P)\underline X\bigr)^{\mathsf T}(I-P)\underline Y}
+        {\|(I-P)\underline X\|\,\|(I-P)\underline Y\|}.
+\]
+The vectors $(I-P)\underline X$ and $(I-P)\underline Y$ are the residuals
+from regressing $\underline X$ and $\underline Y$ on the columns of
+$(\underline 1,\underline Z)$. Each residual vector has sample mean zero.
+Their sample correlation is the MLE of $\rho_{XY\mid Z}$ in the Gaussian
+model, obtained by plugging the sample covariance into the population
+partial correlation formula. Reject $H_0$ for large values of
+$|\hat\rho_{XY\mid Z}|$.
+
+\medskip
+\noindent\underline{Prop 3.}\quad The two procedures are equivalent because
+\[
+F=(n-p-2)\frac{\hat\rho_{XY\mid Z}^{\,2}}
+                  {1-\hat\rho_{XY\mid Z}^{\,2}},
+\]
+which is increasing in $|\hat\rho_{XY\mid Z}|$. In particular, the
+right-hand side has distribution $F_{1,n-p-2}$ under $H_0$.
+
+\medskip
+\noindent\underline{Cor.}\quad When $p=0$, the regression on the
+intercept alone gives $\hat\rho_{XY\mid Z}=\hat\rho_{XY}$, the ordinary
+sample correlation. Under $X\perp\!\!\!\perp Y$ in the Gaussian model,
+\[
+(n-2)\frac{\hat\rho_{XY}^{\,2}}{1-\hat\rho_{XY}^{\,2}}\sim F_{1,n-2}.
+\]
+
+\noindent\underline{Proof of Prop 3.}\quad The projections $P$ and $Q$
+are symmetric and idempotent, with $QP=PQ=P$. Thus $Q-P$ is a
+rank-one orthogonal projection and $(I-Q)(Q-P)=0$. Since
+$I-P=(I-Q)+(Q-P)$, the squared norms add, and hence
+\[
+\begin{aligned}
+\|(I-P)\underline Y\|^2
+&=\|(I-Q)\underline Y\|^2+\|(Q-P)\underline Y\|^2,\\
+\frac{\|(Q-P)\underline Y\|^2}{\|(I-Q)\underline Y\|^2}
+&=\frac{\|(Q-P)\underline Y\|^2/\|(I-P)\underline Y\|^2}
+        {1-\|(Q-P)\underline Y\|^2/\|(I-P)\underline Y\|^2}.
+\end{aligned}
+\]
+It remains to identify $\|(Q-P)\underline Y\|^2/\|(I-P)\underline Y\|^2$
+with $\hat\rho_{XY\mid Z}^{\,2}$. By the definition of
+$\hat\rho_{XY\mid Z}$ and the symmetry and idempotence of $I-P$, this
+amounts to showing
+\[
+\|(Q-P)\underline Y\|^2
+=\frac{\bigl(\underline X^{\mathsf T}(I-P)\underline Y\bigr)^2}
+        {\|(I-P)\underline X\|^2}.
+\]
+Since $(Q-P)(I-P)\underline X=(I-P)\underline X$, the rank-one
+projection $Q-P$ is $vv^{\mathsf T}$, where
+\[
+v=\frac{(I-P)\underline X}{\|(I-P)\underline X\|}.
+\]
+Consequently $\|(Q-P)\underline Y\|^2=(v^{\mathsf T}\underline Y)^2$,
+which gives the required identity.\hfill$\square$
+
+\medskip
+\noindent\underline{Remark.}\quad For a general distribution with finite
+second moments, $X\perp\!\!\!\perp Y\mid Z$ gives
+$\operatorname{Cov}(X,Y\mid Z)=0$. It also gives zero covariance between
+the conditional-mean residuals $X-\mathbb E[X\mid Z]$ and
+$Y-\mathbb E[Y\mid Z]$, by taking expectations. For the linear regression
+residuals, write $m_U(Z)=\mathbb E[R_{U\mid Z}\mid Z]$ for $U=X,Y$.
+The law of total covariance gives
+\[
+\operatorname{Cov}(R_{X\mid Z},R_{Y\mid Z})
+=\mathbb E[\operatorname{Cov}(X,Y\mid Z)]
+ +\operatorname{Cov}(m_X(Z),m_Y(Z)).
+\]
+If the conditional means are nonlinear, the second term can be nonzero
+even under $H_0$. With nonsingular design covariance and positive
+residual variances, the sample partial correlation converges in
+probability to the population linear-residual correlation, which in
+this case can be nonzero.
+
+\begin{center}
+\textbf{End of lecture 18}
+\end{center}
 
 \end{document}
 

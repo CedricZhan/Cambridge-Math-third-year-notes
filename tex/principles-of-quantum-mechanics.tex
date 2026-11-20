@@ -3800,4 +3800,179 @@ $\psi(x-a)$. For $a>0$, its graph is shifted to the right by $a$.
     \textbf{End of lecture 17}
 \end{center}
 
+\noindent\textit{Recall from \S6.1.}
+The spatial translation $U(a)=\exp(-ia\hat p/\hbar)$ is the operator
+$T(a)$ from Chapter 1. In the position representation,
+$\hat p=-i\hbar\,\partial/\partial x$, so
+\begin{align*}
+    (U(a)\psi)(x)
+        &=\exp\!\left(-a\frac{\partial}{\partial x}\right)\psi(x)\\
+        &=\psi(x)-a\psi'(x)+\frac{a^2}{2!}\psi''(x)-\cdots\\
+        &=\psi(x-a).
+\end{align*}
+The middle line is the Taylor series about $x$ when it converges to
+$\psi(x-a)$. The operator $\hat p$ is the \emph{generator of translations}.
+
+\subsection*{6.2 Generators \& Conservation Laws}
+
+Let $g_\alpha$, with $\alpha\in\mathbb R$, be a one-parameter subgroup
+of a continuous group $G$. The group law and the infinitesimal action
+on a quantity $A$ are
+\begin{align*}
+    g_\alpha g_\beta &= g_\beta g_\alpha = g_{\alpha+\beta},
+    \qquad g_0=1_G,\\
+    g_\alpha(A) &= A+\alpha f(A)+O(\alpha^2).
+\end{align*}
+Writing $U(\alpha)=U(g_\alpha)$, the corresponding unitary operators
+satisfy
+\begin{align*}
+    U(\alpha)U(\beta) &= U(\beta)U(\alpha)=U(\alpha+\beta),
+    \qquad U(0)=\mathbf 1,\\
+    U(\alpha)^\dagger A U(\alpha)&=g_\alpha(A).
+\end{align*}
+
+\paragraph{The generator.}
+Define
+\[
+    Q=i\hbar\left.\frac{\partial U(\alpha)}{\partial\alpha}\right|_{\alpha=0},
+    \qquad
+    U(\delta\alpha)=\mathbf 1-\frac{i}{\hbar}\,\delta\alpha\, Q
+        +O((\delta\alpha)^2).
+\]
+By the group law and unitarity, $U(-\delta\alpha)=U(\delta\alpha)^{-1}
+=U(\delta\alpha)^\dagger$. Expanding the two sides gives
+\begin{align*}
+    U(-\delta\alpha)
+        &=\mathbf 1+\frac{i}{\hbar}\,\delta\alpha\, Q
+            +O((\delta\alpha)^2),\\
+    U(\delta\alpha)^\dagger
+        &=\mathbf 1+\frac{i}{\hbar}\,\delta\alpha\, Q^\dagger
+            +O((\delta\alpha)^2).
+\end{align*}
+Hence $Q=Q^\dagger$, so $Q$ is an observable. Now use
+$U(\alpha+\delta\alpha)=U(\alpha)U(\delta\alpha)
+=U(\delta\alpha)U(\alpha)$. Comparing the terms linear in $\delta\alpha$
+gives
+\[
+    [Q,U(\alpha)]=0,
+    \qquad
+    \frac{\partial U(\alpha)}{\partial\alpha}
+        =-\frac{i}{\hbar}Q U(\alpha).
+\]
+With $U(0)=\mathbf 1$, the solution is
+\[
+    U(\alpha)=\exp\!\left(-\frac{i\alpha Q}{\hbar}\right).
+\]
+Thus $Q$ generates the whole one-parameter family.
+
+To find $Q$ from the action on observables, expand the conjugation:
+\begin{align*}
+    U(\alpha)^\dagger A U(\alpha)
+        &=\left(\mathbf 1+\frac{i\alpha Q}{\hbar}+\cdots\right)
+          A\left(\mathbf 1-\frac{i\alpha Q}{\hbar}+\cdots\right)\\
+        &=A+\frac{i\alpha}{\hbar}[Q,A]+O(\alpha^2).
+\end{align*}
+Comparing with $g_\alpha(A)$ yields
+\[
+    [Q,A]=-i\hbar f(A).
+\]
+Knowing $Q$ therefore gives the infinitesimal change of any observable.
+Conversely, these equations determine $Q$ up to an operator commuting
+with every observable under consideration. In an irreducible
+representation this freedom is an additive scalar multiple of $\mathbf 1$.
+
+\paragraph{Noether's theorem.}
+The whole one-parameter family is a symmetry of the Hamiltonian if
+\[
+    [U(\alpha),H]=0\quad\text{for all }\alpha
+    \qquad\Longleftrightarrow\qquad [Q,H]=0.
+\]
+Differentiation at $\alpha=0$ gives the forward implication, and the
+exponential form of $U(\alpha)$ gives the converse. In the
+Schr\"odinger picture, $H$ and $Q$ admit joint eigenstates, and time
+evolution preserves each eigenspace of $Q$:
+\[
+    Q|\psi(0)\rangle=q|\psi(0)\rangle
+    \qquad\Longrightarrow\qquad Q|\psi(t)\rangle=q|\psi(t)\rangle.
+\]
+In the Heisenberg picture, for $Q$ with no explicit time dependence,
+\[
+    \frac{dQ}{dt}=-\frac{i}{\hbar}[Q,H]=0.
+\]
+A continuous unitary symmetry has a conserved Hermitian generator,
+called the \emph{Noether charge}.
+
+\paragraph{Example of simultaneous translations of several particles.}
+For particles labelled by $r$ in three dimensions, the position and
+momentum components obey
+\[
+    [\hat x_i^{(r)},\hat p_j^{(s)}]
+        =i\hbar\delta_{ij}\delta_{rs}\mathbf 1.
+\]
+A translation by $a$ along a fixed axis $k$ acts on every particle as
+\begin{align*}
+    g_a(\hat x_i^{(r)})&=\hat x_i^{(r)}+a\delta_{ik}\mathbf 1,
+    & g_a(\hat p_i^{(r)})&=\hat p_i^{(r)},\\
+    f(\hat x_i^{(r)})&=\delta_{ik}\mathbf 1,
+    & f(\hat p_i^{(r)})&=0.
+\end{align*}
+The generator must obey $[Q,\hat x_i^{(r)}]=-i\hbar\delta_{ik}\mathbf 1$
+and $[Q,\hat p_i^{(r)}]=0$ for all $r$. By the canonical commutation
+relations, these are satisfied by the total momentum component
+\[
+    Q=\hat P_k=\sum_r\hat p_k^{(r)}.
+\]
+For an arbitrary displacement $\mathbf a$, the unitary operator is
+\[
+    U(\mathbf a)=\exp\!\left(-\frac{i}{\hbar}\,
+        \mathbf a\cdot\hat{\mathbf P}\right),
+    \qquad \hat{\mathbf P}=\sum_r\hat{\mathbf p}^{(r)}.
+\]
+The kinetic terms and potentials depending only on the differences
+$\hat{\mathbf x}^{(r)}-\hat{\mathbf x}^{(s)}$ are invariant under
+simultaneous translations. For such a Hamiltonian, Noether's theorem
+gives conservation of total momentum $\hat{\mathbf P}$.
+
+\subsection*{6.3 Angular Momentum \& Rotations}
+
+Rotations in three dimensions form a non-Abelian group:
+$g_1g_2\ne g_2g_1$ in general. Rotations $g_\theta$ through an angle
+$\theta$ about a fixed unit axis $\mathbf n$ form an Abelian
+one-parameter subgroup. For a scalar $A$, $g_\theta(A)=A$ and $f(A)=0$.
+For a vector $\mathbf V=(V_1,V_2,V_3)$,
+\[
+    g_\theta(\mathbf V)=\mathbf V+\theta\,\mathbf n\times\mathbf V
+        +O(\theta^2),
+    \qquad f(\mathbf V)=\mathbf n\times\mathbf V.
+\]
+The corresponding unitary operator has the expansion
+\[
+    U(\theta\mathbf n)=\mathbf 1-\frac{i\theta}{\hbar}Q+O(\theta^2).
+\]
+For a single particle, both $\hat{\mathbf x}$ and $\hat{\mathbf p}$
+transform as vectors, so
+\[
+    [Q,\hat{\mathbf x}]=-i\hbar\,\mathbf n\times\hat{\mathbf x},
+    \qquad
+    [Q,\hat{\mathbf p}]=-i\hbar\,\mathbf n\times\hat{\mathbf p}.
+\]
+The orbital angular momentum $\mathbf L=\hat{\mathbf x}\times\hat{\mathbf p}$
+satisfies
+\[
+    [L_i,\hat x_j]=i\hbar\sum_k\epsilon_{ijk}\hat x_k,
+    \qquad
+    [L_i,\hat p_j]=i\hbar\sum_k\epsilon_{ijk}\hat p_k.
+\]
+Thus $Q=\mathbf n\cdot\mathbf L$ produces the required commutators.
+For example,
+\[
+    [\mathbf n\cdot\mathbf L,\hat x_j]
+        =i\hbar\sum_{i,k}n_i\epsilon_{ijk}\hat x_k
+        =-i\hbar(\mathbf n\times\hat{\mathbf x})_j.
+\]
+
+\begin{center}
+    \textbf{End of lecture 18}
+\end{center}
+
 \end{document}
